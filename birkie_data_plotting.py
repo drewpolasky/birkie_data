@@ -1,10 +1,12 @@
-#random code for palying with birkie results data
+#random scritps for playing with birkie results data
+#python 2 - if using python 3, will have to change in int divides for bib -> wave number
 import math
 import matplotlib.pyplot as plt
 from scipy import stats
 import numpy
 import sys
-
+import datetime
+from bisect import bisect
 
 
 def main():
@@ -14,10 +16,11 @@ def main():
     length = 'birkie'       #kortie or birkie 
     allResults = readIn(length, tech)
     #print(allResults)
-    resultsByYear(tech, length, allResults)
+    #resultsByYear(tech, length, allResults)
     #allResults = readIn(length, 'skate')
     #resultsByYear('skate', length, allResults)
-    resultsByWave(tech, length, allResults)
+    #resultsByWave(tech, length, allResults)
+    getWavePlacement(allResults, 2019, tech,length,2, 'Andrew Polasky')
 
 def resultsByWave(tech, length, allResults):
     waveTimes = {}
@@ -43,7 +46,7 @@ def resultsByWave(tech, length, allResults):
         prevWaveAvg = 0
         for wave in waves:    
             if len(waves[wave]) > 10:
-                print wave 
+                print(wave)
                 waveAvg = sum(waves[wave]) / float(len(waves[wave]))
                 waveGap = math.floor(waveAvg - prevWaveAvg)
                 if prevWaveAvg != 0:
@@ -58,7 +61,7 @@ def resultsByWave(tech, length, allResults):
                     minT = 7000
                 x = numpy.linspace(minT, maxT, 200)
                 plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
-        print year, waveGaps
+        print(year, waveGaps)
         if year != 2008 and year != 2016:
             threeGap.append(waveGaps[0])
         plt.legend(prop = {'size':10})
@@ -75,7 +78,7 @@ def resultsByWave(tech, length, allResults):
             plt.show()
         else:
             plt.clf()
-    print sum(threeGap) / float(len(threeGap))
+    print(sum(threeGap) / float(len(threeGap)))
 
 def resultsByYear(tech, length, allResults):    #graphs histogram of results by year
     yearTimes = {}
@@ -99,7 +102,7 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plotTimes = {}
     for year in yearTimes:
         plotTimes[year] = stats.kde.gaussian_kde(yearTimes[year])
-    print maxT
+    print(maxT)
 
     x = numpy.linspace(minT, maxT, 200)
     for year in plotTimes:
@@ -115,6 +118,40 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.title(length + " " + tech + " Finish Times by year")
     plt.savefig(length + " " + tech + " Finish Times by year " + str(year) + '.png')
     plt.show()
+
+def getWavePlacement(allResults, year, tech, length, wave, skier):
+    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave
+    if tech == 'classic' and wave <10:
+        wave+=10
+    waveTimes = []
+    for racer in allResults[year]:
+        bib = int(racer[5])
+        racer_wave = bib / 1000
+        if racer[0] == skier:
+            targetTime = racer[4].strip(' ')
+            targetTime = datetime.datetime.strptime(targetTime, '%H:%M:%S.%f').time()
+            #print(targetTime)
+        elif racer_wave == wave:
+            waveTime = racer[4].strip(' ')
+            waveTime = datetime.datetime.strptime(waveTime, '%H:%M:%S.%f')
+            #print(waveTime.time().isoformat())
+            waveTimes.append(waveTime.time())
+    waveTimes = sorted(waveTimes) 
+    place = bisect(waveTimes, targetTime)
+    print('place in wave '+str(wave)+' for '+str(skier)+':') 
+    print(place+1) 
+    print('out of: ')
+    print(len(waveTimes))       #if the wave is the wave the skier is in, this will be off by one
+
+def parseTime(time):
+    #deprecated in favor of datetime
+    time = racer[4]
+    time = time.split(':')
+    hours = float(time[0])
+    minutes = float(time[1])
+    seconds = float(time[2][0:2])
+    seconds += 3600 * hours + 60 * minutes
+    return seconds
 
 
 def readIn(distance, technique, path='yearly_data/', start_year = 2008, end_year=2019):
