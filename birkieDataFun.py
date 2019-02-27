@@ -10,9 +10,10 @@ import sys
 def main():
     #tech = sys.argv[1]
     #length = sys.argv[2]
-    tech = "skate"      #skate or classic
+    tech = "classic"      #skate or classic
     length = 'birkie'       #kortie or birkie 
     allResults = readIn(length, tech)
+    #print(allResults)
     resultsByYear(tech, length, allResults)
     #allResults = readIn(length, 'skate')
     #resultsByYear('skate', length, allResults)
@@ -89,32 +90,20 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
             seconds += 3600 * hours + 60 * minutes
             times.append(float(seconds))
         yearTimes[year] = times
-    times2009 = stats.kde.gaussian_kde(yearTimes[2009])
-    times2010 = stats.kde.gaussian_kde(yearTimes[2010])
-    times2011 = stats.kde.gaussian_kde(yearTimes[2011])
-    times2012 = stats.kde.gaussian_kde(yearTimes[2012])
     if tech == 'skate':
         maxT = 28000    
         minT = 5000
     if tech == 'classic':
         maxT = 32000        
         minT = 7000
-    times2013 = stats.kde.gaussian_kde(yearTimes[2013])
-    times2014 = stats.kde.gaussian_kde(yearTimes[2014])
-    times2015 = stats.kde.gaussian_kde(yearTimes[2015])
-    times2016 = stats.kde.gaussian_kde(yearTimes[2016])
-    times2018 = stats.kde.gaussian_kde(yearTimes[2018])
+    plotTimes = {}
+    for year in yearTimes:
+        plotTimes[year] = stats.kde.gaussian_kde(yearTimes[year])
     print maxT
+
     x = numpy.linspace(minT, maxT, 200)
-    plt.plot(x,times2009(x), 'm-', label = '2009 results', linewidth = 1.5 )
-    plt.plot(x,times2010(x), 'b-', label = '2010 results', linewidth = 1.5)
-    plt.plot(x,times2011(x), 'r-', label = '2011 results', linewidth = 1.5 )
-    plt.plot(x,times2012(x), 'g-', label = '2012 results', linewidth = 1.5 )
-    plt.plot(x,times2013(x), 'y-', label = '2013 results', linewidth = 1.5 )
-    plt.plot(x,times2014(x), 'c-', label = '2014 results', linewidth = 1.5 )
-    plt.plot(x,times2015(x), 'k-', label = '2015 results', linewidth = 1.5 )
-    plt.plot(x,times2016(x), 'v-', label = '2016 results', linewidth = 1.5 )
-    plt.plot(x,times2018(x), 'r+', label = '2018 results', linewidth = 1.5 )
+    for year in plotTimes:
+        plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
     plt.legend(prop = {'size':10})
     plt.xlim([minT -200,maxT + 200])
     times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00"]
@@ -128,14 +117,15 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.show()
 
 
-def readIn(distance, technique):
-    years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018]
+def readIn(distance, technique, path='yearly_data/', start_year = 2008, end_year=2019):
+    years = list(range(start_year, end_year+1))
+    years.remove(2017)      
     allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
     for year in years:
         yearResults = []
         event = distance + " " + technique + " " + str(year) + ".csv"
         try:    
-            dataIn = open(event, 'r')
+            dataIn = open(path+event, 'r')
             for line in dataIn:
                 l = line.split(',')
                 if l[0] != "Name":

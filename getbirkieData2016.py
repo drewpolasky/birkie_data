@@ -52,7 +52,7 @@ def main():
     eventIDs['kortie classic 2009'] = 40
 
     eventIDs = {}
-    year = 2016
+    year = 2019
     eventIDs['birkie classic '+str(year)] = 2
     eventIDs['birkie skate '+str(year)] = 1
     eventIDs['kortie skate '+str(year)] = 3
