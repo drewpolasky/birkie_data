@@ -10,19 +10,21 @@ from bisect import bisect
 
 
 def main():
-    #tech = sys.argv[1]
-    #length = sys.argv[2]
-    tech = "classic"      #skate or classic
-    length = 'birkie'       #kortie or birkie 
+    tech = sys.argv[1]
+    length = sys.argv[2]
+    wave = int(sys.argv[3])
+    year = int(sys.argv[4])
+    #tech = "classic"      #skate or classic
+    #length = 'birkie'       #kortie or birkie 
     allResults = readIn(length, tech)
-    #print(allResults)
-    #resultsByYear(tech, length, allResults)
+    #print(allResults[2019])
+    resultsByYear(tech, length, allResults)
     #allResults = readIn(length, 'skate')
     #resultsByYear('skate', length, allResults)
-    #resultsByWave(tech, length, allResults)
-    getWavePlacement(allResults, 2019, tech,length,2, 'Andrew Polasky')
+    resultsByWave(tech, length, allResults, year)
+    getWavePlacement(allResults, year, tech,length,wave, 'Andrew Polasky')
 
-def resultsByWave(tech, length, allResults):
+def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
     for year in allResults:
@@ -36,7 +38,7 @@ def resultsByWave(tech, length, allResults):
             seconds += 3600 * hours + 60 * minutes  
             
             bib = int(racer[5])
-            wave = bib / 1000
+            wave = math.floor(bib / 1000)
             
             if wave in waves:
                 waves[wave].append(seconds)
@@ -62,8 +64,8 @@ def resultsByWave(tech, length, allResults):
                 x = numpy.linspace(minT, maxT, 200)
                 plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
         print(year, waveGaps)
-        if year != 2008 and year != 2016:
-            threeGap.append(waveGaps[0])
+        #if year != 2008 and year != 2016:
+        #    threeGap.append(waveGaps[0])
         plt.legend(prop = {'size':10})
         plt.xlim([minT -200,maxT + 200])
         plt.ylim([0,.00065])
@@ -73,12 +75,13 @@ def resultsByWave(tech, length, allResults):
         xticksValues = [7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 23400, 25200]
         plt.xticks(xticksValues, times)
         plt.title(length + " " + tech + " Finish Times by wave for " + str(year))
-        if year == 2018:
+        if year == plot_year:
+            plt.grid(True)
             plt.savefig(length + " " + tech + " Finish Times by wave for " + str(year) + '.png')
             plt.show()
         else:
             plt.clf()
-    print(sum(threeGap) / float(len(threeGap)))
+    #print(sum(threeGap) / float(len(threeGap)))
 
 def resultsByYear(tech, length, allResults):    #graphs histogram of results by year
     yearTimes = {}
@@ -126,7 +129,7 @@ def getWavePlacement(allResults, year, tech, length, wave, skier):
     waveTimes = []
     for racer in allResults[year]:
         bib = int(racer[5])
-        racer_wave = bib / 1000
+        racer_wave = math.floor(bib / 1000)
         if racer[0] == skier:
             targetTime = racer[4].strip(' ')
             targetTime = datetime.datetime.strptime(targetTime, '%H:%M:%S.%f').time()
