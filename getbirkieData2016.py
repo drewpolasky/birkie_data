@@ -7,9 +7,8 @@
 #2015 prince haakon: 110
 
 from lxml import html
-import requests
-import BeautifulSoup
-import urllib2
+from bs4 import BeautifulSoup
+import urllib.request as request
 import time
 import re
 
@@ -52,7 +51,7 @@ def main():
     eventIDs['kortie classic 2009'] = 40
 
     eventIDs = {}
-    year = 2019
+    year = 2020
     eventIDs['birkie classic '+str(year)] = 2
     eventIDs['birkie skate '+str(year)] = 1
     eventIDs['kortie skate '+str(year)] = 3
@@ -67,12 +66,12 @@ def main():
     
     for event in eventIDs:
         results = []
-        print event
+        print(event)
         eventID = eventIDs[event]
-        print eventID
+        print(eventID)
         #page = BeautifulSoup.BeautifulSoup(urllib2.urlopen('http://results.birkie.com/index.php?event_id=' + str(eventID)).read())
         for i in range(50):
-            page = BeautifulSoup.BeautifulSoup(urllib2.urlopen('http://birkie.pttiming.com/results/'+str(year)+'/index.php?pageNum_rsOverall=' + str(i) + '&totalRows_rsOverall=3837&page=1150&r_page=division&divID=' + str(eventID)))
+            page = BeautifulSoup(request.urlopen('http://birkie.pttiming.com/results/'+str(year)+'/index.php?pageNum_rsOverall=' + str(i) + '&totalRows_rsOverall=3837&page=1150&r_page=division&divID=' + str(eventID)),features='lxml')
             tables = page.findAll("table")
             racers = tables[3].findAll("tr")
             #print racers[3]
@@ -90,11 +89,12 @@ def main():
                     result.append(data[5].contents[0].encode('ascii', 'ignore'))    #city
                     result.append(data[0].contents[0].encode('ascii', 'ignore'))      #overall place
                     result.append(data[6].contents[0].encode('ascii', 'ignore'))      #finish time
+                    result = [i.decode('utf-8') for i in result]
                     result = [re.sub(r'&nbsp;',' ',i) for i in result]
                     result = [re.sub(r' +',' ',i) for i in result]
                     result = [re.sub(r',',' ',i) for i in result]
                     results.append(result)       
-                print result[0]        
+                print(result[0])     
             except IndexError:
                 pass
 

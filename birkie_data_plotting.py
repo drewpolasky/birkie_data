@@ -18,16 +18,17 @@ def main():
     #length = 'birkie'       #kortie or birkie 
     allResults = readIn(length, tech)
     #print(allResults[2019])
-    resultsByYear(tech, length, allResults)
+    #resultsByYear(tech, length, allResults)
     #allResults = readIn(length, 'skate')
     #resultsByYear('skate', length, allResults)
-    resultsByWave(tech, length, allResults, year)
-    getWavePlacement(allResults, year, tech,length,wave, 'Andrew Polasky')
+    #resultsByWave(tech, length, allResults, year)
+    getWavePlacement(allResults, year, tech,length,wave, 'AndrewPolasky')
 
 def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
-    for year in allResults:
+    cutoffs = {2019:[191,210,227,244,268,304]}
+    for year in [plot_year]:
         waves = {}
         for racer in allResults[year]:
             time = racer[4]
@@ -63,6 +64,10 @@ def resultsByWave(tech, length, allResults, plot_year):
                     minT = 7000
                 x = numpy.linspace(minT, maxT, 200)
                 plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
+
+        if year in cutoffs:
+            for i in range(len(cutoffs[year])):
+                plt.axvline(cutoffs[year][i]*60, linestyle = 'dashed')
         print(year, waveGaps)
         #if year != 2008 and year != 2016:
         #    threeGap.append(waveGaps[0])
@@ -77,7 +82,7 @@ def resultsByWave(tech, length, allResults, plot_year):
         plt.title(length + " " + tech + " Finish Times by wave for " + str(year))
         if year == plot_year:
             plt.grid(True)
-            plt.savefig(length + " " + tech + " Finish Times by wave for " + str(year) + '.png')
+            plt.savefig('graphs/' + length + "_" + tech + " FinishTimesbyWave_" + str(year) + '.png')
             plt.show()
         else:
             plt.clf()
@@ -118,8 +123,9 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.ylim([0,.00015])
     plt.ylabel("Frequency")
     plt.xlabel("Finishing times")
+    plt.grid(True)
     plt.title(length + " " + tech + " Finish Times by year")
-    plt.savefig(length + " " + tech + " Finish Times by year " + str(year) + '.png')
+    plt.savefig('graphs/'+length + "_" + tech + " FinishTimesbyYear_" + str(year) + '.png')
     plt.show()
 
 def getWavePlacement(allResults, year, tech, length, wave, skier):
@@ -157,7 +163,7 @@ def parseTime(time):
     return seconds
 
 
-def readIn(distance, technique, path='yearly_data/', start_year = 2008, end_year=2019):
+def readIn(distance, technique, path='yearly_data/', start_year = 2010, end_year=2020):
     years = list(range(start_year, end_year+1))
     years.remove(2017)      
     allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
