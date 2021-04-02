@@ -1,5 +1,4 @@
 #random scritps for playing with birkie results data
-#python 2 - if using python 3, will have to change in int divides for bib -> wave number
 import math
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -21,13 +20,13 @@ def main():
     #resultsByYear(tech, length, allResults)
     #allResults = readIn(length, 'skate')
     #resultsByYear('skate', length, allResults)
-    #resultsByWave(tech, length, allResults, year)
+    resultsByWave(tech, length, allResults, year)
     getWavePlacement(allResults, year, tech,length,wave, 'AndrewPolasky')
 
 def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
-    cutoffs = {2019:[191,210,227,244,268,304]}
+    cutoffs = {'skate':{2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}}       #wave placement cutoff times, to the nearest minute
     for year in [plot_year]:
         waves = {}
         for racer in allResults[year]:
@@ -65,9 +64,9 @@ def resultsByWave(tech, length, allResults, plot_year):
                 x = numpy.linspace(minT, maxT, 200)
                 plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
 
-        if year in cutoffs:
-            for i in range(len(cutoffs[year])):
-                plt.axvline(cutoffs[year][i]*60, linestyle = 'dashed')
+        if year in cutoffs[tech]:
+            for i in range(len(cutoffs[tech][year])):
+                plt.axvline(cutoffs[tech][year][i]*60, linestyle = 'dashed')
         print(year, waveGaps)
         #if year != 2008 and year != 2016:
         #    threeGap.append(waveGaps[0])
@@ -165,7 +164,7 @@ def parseTime(time):
 
 def readIn(distance, technique, path='yearly_data/', start_year = 2010, end_year=2020):
     years = list(range(start_year, end_year+1))
-    years.remove(2017)      
+    years.remove(2017)           
     allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
     for year in years:
         yearResults = []

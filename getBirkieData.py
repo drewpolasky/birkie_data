@@ -7,12 +7,20 @@
 #2015 prince haakon: 110
 
 from lxml import html
+from lxml import etree
 import requests
-import BeautifulSoup
-import urllib2
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+from selenium import webdriver
 import time
+import re
+import pandas as pd
 
 def main():
+    #get_searchable_results()
+    get_2021_data()
+
+def get_searchable_results():
     results = []
     eventIDs = {'birkie skate 2015': 114, 'birkie classic 2015': 115,'kortie skate 2015': 112,'kortie classic 2015': 113,'prince haakon 2015': 110}
     eventIDs['birkie classic 2014'] = 103
@@ -55,12 +63,12 @@ def main():
     #eventID = eventIDs[event]
     for event in eventIDs:
         results = []
-        print event
+        print(event)
         eventID = eventIDs[event]
-        print eventID
+        print(eventID)
         page = BeautifulSoup.BeautifulSoup(urllib2.urlopen('http://results.birkie.com/index.php?event_id=' + str(eventID)).read())
         tables = page.findAll("tbody")
-        print tables
+        print(tables)
         racers = tables[2].findAll("tr")
         for e in range(len(racers) - 3):
             data = racers[e+2].findAll("td")
@@ -73,7 +81,7 @@ def main():
             result.append(data[0].contents[0].encode('ascii', 'ignore'))      #overall place
             result.append(data[6].contents[0].encode('ascii', 'ignore'))      #finish time
             results.append(result)       
-        print results[0]        
+        print(results[0])       
 
         numPages = 50               #doesn't matter if page number is larger than number of pages of results
         for i in range(numPages):
@@ -100,6 +108,72 @@ def main():
         out.write("Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City/State \n")
         for r in results:
             out.write("%s, %s, %s, %s, %s, %s, %s \n" %(r[0],r[5],r[2],r[3],r[6],r[1],r[4]))
+
+def get_2021_data():
+    #the 2021 data is (at least currently) in a different format from the previous year, so will need new code for scraping.
+    #there's also the added complication of the different days results, due to COVID
+    #https://runsignup.com/Race/Results/107357#resultSetId-239900;perpage:5000
+    #https://runsignup.com/Race/Results/107357#resultSetId-239915;perpage:5000
+    eventIDs = eventIds_2021()
+
+    for event in eventIDs:
+        results = []
+        print(event)
+        eventID = eventIDs[event]
+        #print(eventID)
+        driver = webdriver.Firefox()
+        driver.get('https://runsignup.com/Race/Results/107357#resultSetId-' + str(eventID)+';perpage:5000')
+        table = driver.find_element_by_id('resultsTable')
+        time.sleep(5)
+        table_html = table.get_attribute('innerHTML')
+
+        tree = etree.HTML(table_html)
+        header = [element.text for element in tree[0][0][0]]
+        #print(header)
+        day_results = []
+
+        for row in iter(tree[0][1]):
+            entry = [element.text for element in row]
+
+            #I think because of the name formatting in the table, the names aren't coming through, so working around with regex
+            firstName = re.findall(r'firstName(.*?)<', etree.tostring(row).decode('utf-8'))[0][2:]
+            lastName = re.findall(r'lastName(.*?)<', etree.tostring(row).decode('utf-8'))[0][2:]
+
+            entry[2] = firstName+' '+lastName
+            day_results.append(entry)
+
+        day_frame = pd.DataFrame(day_results, columns=header)
+        day_frame.to_csv('yearly_data/2021/'+event+'.csv')
+        driver.quit()
+
+
+def eventIds_2021():
+    eventIDs = {}
+    eventIDs['birkie classic 2021 sunday elite'] = 239915
+    eventIDs['birkie classic 2021 sunday'] = 239914
+    eventIDs['kortie classic 2021 sunday elite'] = 239917
+    eventIDs['kortie classic 2021 sunday'] = 239916
+    eventIDs['haakon classic 2021 sunday'] = 239918
+
+    eventIDs['birkie skate 2021 saturday elite'] = 239901
+    eventIDs['birkie skate 2021 saturday'] = 239911
+    eventIDs['kortie skate 2021 saturday elite'] = 239903
+    eventIDs['kortie skate 2021 saturday'] = 239912
+    eventIDs['haakon skate 2021 saturday'] = 239913
+
+    eventIDs['birkie classic 2021 friday'] = 239908
+    eventIDs['kortie classic 2021 friday'] = 239909
+    eventIDs['haakon classic 2021 friday'] = 239910
+
+    eventIDs['birkie skate 2021 thursday'] = 239905
+    eventIDs['kortie skate 2021 thursday'] = 239906
+    eventIDs['haakon skate 2021 thursday'] = 239907
+
+    eventIDs['birkie skate 2021 wednesday'] = 239900
+    eventIDs['kortie skate 2021 wednesday'] = 239902
+    eventIDs['haakon skate 2021 wednesday'] = 239904
+
+    return eventIDs
 
 
 main()
