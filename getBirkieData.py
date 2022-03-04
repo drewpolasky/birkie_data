@@ -18,7 +18,7 @@ import pandas as pd
 
 def main():
     #get_searchable_results()
-    get_2021_data()
+    get_2022_data()
 
 def get_searchable_results():
     results = []
@@ -109,6 +109,47 @@ def get_searchable_results():
         for r in results:
             out.write("%s, %s, %s, %s, %s, %s, %s \n" %(r[0],r[5],r[2],r[3],r[6],r[1],r[4]))
 
+def get_2022_data():
+    #and once again, they compeletely changed the formatting of the results, meaning new code is needed
+    #link: skate: https://my.raceresult.com/189471/results#10_3C2D41
+    eventIDs = eventIds_2022()
+
+    for event in eventIDs:
+        results = []
+        print(event)
+        eventID = eventIDs[event]
+        #print(eventID)
+        driver = webdriver.Firefox()
+        driver.get('https://my.raceresult.com/189471/'+str(eventID))
+        time.sleep(2)       #seems to take a couple seconds sometimes for the showall button to come up
+        ids = driver.find_elements_by_xpath('//*[@id]')
+        
+        #for ii in ids:
+        #    print(ii.get_attribute('id'))    # id name as string
+        driver.find_element_by_id("cookieChoiceDismiss").click()
+        elements = driver.find_elements_by_css_selector(".aShowAll")
+        elements[-1].click()  #click the show all results button to get everyone on one page
+
+        table = driver.find_element_by_id("tb_1Data")
+        time.sleep(2)
+        #driver.find_element_by_class_name("aShowAll").click()
+        table_html = table.get_attribute('innerHTML')
+        tree = etree.HTML(table_html)
+        header = [ 'Ovr', 'Sex', 'Div', 'Bib', 'Name', 'City, State, Nation', 'Age', 'Gender', 'Time', 'Pace']
+        results = []
+        for page in iter(tree):
+            for skier in page:
+                result = []
+                for element in skier:
+                    result.append(element.text)
+                result = result[1:-1]
+                results.append(result)
+
+        day_frame = pd.DataFrame(results, columns=header)
+        day_frame.to_csv('yearly_data/2022/'+event+'.csv')
+        driver.quit()
+
+
 def get_2021_data():
     #the 2021 data is (at least currently) in a different format from the previous year, so will need new code for scraping.
     #there's also the added complication of the different days results, due to COVID
@@ -146,7 +187,6 @@ def get_2021_data():
         day_frame.to_csv('yearly_data/2021/'+event+'.csv')
         driver.quit()
 
-
 def eventIds_2021():
     eventIDs = {}
     eventIDs['birkie classic 2021 sunday elite'] = 239915
@@ -175,5 +215,15 @@ def eventIds_2021():
 
     return eventIDs
 
+def eventIds_2022():
+    eventIDs = {}
+    eventIDs['birkie classic 2022'] = "#11_C0D558"
+    eventIDs['kortie classic 2022'] = "#8_1706C5"
+
+    eventIDs['birkie skate 2022'] = "#10_3C2D41"
+    eventIDs['kortie skate 2022'] = "#7_9C7CB5"
+    eventIDs['haakon skate 2022'] = "#9_5D9B23"
+
+    return eventIDs
 
 main()

@@ -1,0 +1,457 @@
+Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City, State 
+Davis Isom, 1, 1, 1 M 0-99 , 1:00:56.4 , 10130,  St Paul  MN USA 
+Robert Stieber, 2, 2, 2 M 0-99 , 1:03:17.3 , 10487,  Medford  WI USA 
+Mary P Lincoln, 3, 1, 1 F 0-99 , 1:06:07.9 , 10395,  Saint Paul  MN USA 
+Sophia Jacobson, 4, 2, 2 F 0-99 , 1:07:30.6 , 10528,  Shakopee  MN USA 
+Ryan Miller, 5, 3, 3 M 0-99 , 1:08:36.0 , 10494,  Richfield  MN USA 
+Ben Dohlby, 6, 4, 4 M 0-99 , 1:08:45.8 , 10049,  Pewaukee  WI USA 
+Addie Fabel, 7, 3, 3 F 0-99 , 1:08:51.6 , 10008,  Saint Paul  MN USA 
+Emily Laabs, 8, 4, 4 F 0-99 , 1:09:26.8 , 10160,  Stillwater  MN USA 
+Joseph Heilmann, 9, 5, 5 M 0-99 , 1:09:31.4 , 10275,  New Prague  MN USA 
+Bill Kopanda, 10, 6, 6 M 0-99 , 1:10:37.9 , 10059,  Verona  WI USA 
+Bart Myrda, 11, 7, 7 M 0-99 , 1:11:47.5 , 10047,  Palos Heights  IL USA 
+Erik Shelerud, 12, 8, 8 M 0-99 , 1:11:53.9 , 10169,  Byron  MN USA 
+Lillian Zippel, 13, 5, 5 F 0-99 , 1:11:57.2 , 10352,  Milwaukee  WI USA 
+Jackson Leise, 14, 9, 9 M 0-99 , 1:12:30.6 , 10210,  Red Wing  MN USA 
+Evan Leonidas, 15, 10, 10 M 0-99 , 1:12:38.8 , 10172,  Duluth  MN USA 
+William Adams, 16, 11, 11 M 0-99 , 1:12:43.9 , 10574,  Westport  CT USA 
+Michael Trantow, 17, 12, 12 M 0-99 , 1:13:14.9 , 10423,  Rochester  MN USA 
+Benjamin Trantow, 18, 13, 13 M 0-99 , 1:13:16.9 , 10052,  Rochester  MN USA 
+Joe Cable, 19, 14, 14 M 0-99 , 1:14:06.7 , 10262,  Marshfield  WI USA 
+Simon Long, 20, 15, 15 M 0-99 , 1:14:23.2 , 10526,  Duluth  MN USA 
+Josie Boelter, 21, 6, 6 F 0-99 , 1:15:18.1 , 10280,  Sartell  MN USA 
+William Zippel, 22, 16, 16 M 0-99 , 1:15:26.6 , 10577,  Milwaukee  WI USA 
+Colin Willemsen, 23, 17, 17 M 0-99 , 1:18:20.4 , 10108,  Duluth  MN USA 
+Pete Willemsen, 24, 18, 18 M 0-99 , 1:18:32.3 , 10463,  Duluth  MN USA 
+Joie Brannon, 25, 7, 7 F 0-99 , 1:18:42.9 , 10272,  Osceola  WI USA 
+Ryan Schubitzke, 26, 19, 19 M 0-99 , 1:18:48.8 , 10495,  Cloquet  MN USA 
+Greg Green, 27, 20, 20 M 0-99 , 1:18:49.2 , 10191,  Calumet  MI USA 
+Robert MacInnes, 28, 21, 21 M 0-99 , 1:18:59.5 , 10486,  Houghton  MI USA 
+Maddie Kjome, 29, 8, 8 F 0-99 , 1:19:56.0 , 10371,  Maple Grove  MN USA 
+Maggie Dabkowska, 30, 9, 9 F 0-99 , 1:20:10.1 , 10374,  Inverness  IL USA 
+Brittany Resch, 31, 10, 10 F 0-99 , 1:20:27.4 , 10081,  Minneapolis  MN USA 
+Benjamin Bredenberg, 32, 22, 22 M 0-99 , 1:20:50.6 , 10051,  Fergus Falls  MN USA 
+Finnian Olsen, 33, 23, 23 M 0-99 , 1:21:15.9 , 10176,  Chaska  MN USA 
+Eric Welch, 34, 24, 24 M 0-99 , 1:21:23.3 , 10166,  Rochester  MN USA 
+William Rosenthal, 35, 25, 25 M 0-99 , 1:21:42.9 , 10576,  Stevens Point  WI USA 
+Neil Fider, 36, 26, 26 M 0-99 , 1:21:55.6 , 10447,  Minneapolis  MN USA 
+Maxwell Smitten, 37, 27, 27 M 0-99 , 1:22:17.3 , 10404,  Marine On St. Croix  MN USA 
+Rachel Parks, 38, 11, 11 F 0-99 , 1:22:53.7 , 10470,  Clayton  MO USA 
+John Garrett, 39, 28, 28 M 0-99 , 1:23:39.6 , 10267,  Hayward  WI USA 
+Lindsay Nichols, 40, 12, 12 F 0-99 , 1:23:49.0 , 10356,  St Croix Falls  WI USA 
+Anne Marie Rogers, 41, 13, 13 F 0-99 , 1:23:53.2 , 10038,  Georgetown  ON Can 
+Jessica Rogers, 42, 14, 14 F 0-99 , 1:23:54.5 , 10248,  Georgetown  ONTARIO Can 
+Carrie Brand, 43, 15, 15 F 0-99 , 1:24:02.7 , 10091,  Carbondale  CO USA 
+Madzia Myrda, 44, 16, 16 F 0-99 , 1:24:23.8 , 10373,  Palos Heights  IL USA 
+Lang Jacobson, 45, 29, 29 M 0-99 , 1:24:27.0 , 10337,  Eau Claire  WI USA 
+Steven Wert, 46, 30, 30 M 0-99 , 1:24:30.0 , 10541,  New Germany  MN USA 
+Henry Huron, 47, 31, 31 M 0-99 , 1:24:41.7 , 10202,  St. Paul  MN USA 
+Tim Carlson, 48, 32, 32 M 0-99 , 1:24:51.3 , 10560,  Minnetonka  MN USA 
+Charlie Lindell, 49, 33, 33 M 0-99 , 1:25:16.7 , 10097,  Sartell  MN USA 
+Ella Boelter, 50, 17, 17 F 0-99 , 1:25:34.6 , 10153,  Sartell  MN USA 
+Alex Scaffidi, 51, 18, 18 F 0-99 , 1:26:19.7 , 10015,  Amherst Junction  WI USA 
+Tom Kissner, 52, 34, 34 M 0-99 , 1:26:24.8 , 10564,  Pewaukee  WI USA 
+Molly Brannon, 53, 19, 19 F 0-99 , 1:26:25.3 , 10435,  Osceola  WI USA 
+Paula Larsen, 54, 20, 20 F 0-99 , 1:27:28.6 , 10460,  Delafield  WI USA 
+Natalie Bennett, 55, 21, 21 F 0-99 , 1:27:31.9 , 10443,  Blaine  MN USA 
+Janessa Bennett, 56, 22, 22 F 0-99 , 1:27:35.1 , 10224,  Blaine  MN USA 
+Liana Teter, 57, 23, 23 F 0-99 , 1:28:12.1 , 10350,  Rhinelander  WI USA 
+Meghan Rogers, 58, 24, 24 F 0-99 , 1:28:18.2 , 10411,  Georgetown  ONTARIO Can 
+Brian Rogers, 59, 35, 35 M 0-99 , 1:28:22.9 , 10073,  Georgetown  ONTARIO Can 
+Dave McDougall, 60, 36, 36 M 0-99 , 1:28:35.7 , 10123,  Red Wing  MN USA 
+Samantha Bryant, 61, 25, 25 F 0-99 , 1:28:45.1 , 10500,  Salt Lake City  UT USA 
+Rob Bryant, 62, 37, 37 M 0-99 , 1:28:48.8 , 10481,  Salt Lake City  UT USA 
+Jamie Haskell, 63, 26, 26 F 0-99 , 1:29:15.9 , 10220,  Bemidji  MN USA 
+Sarah Hinck, 64, 27, 27 F 0-99 , 1:29:16.1 , 10508,  Traverse City  MI USA 
+Lexi Deford, 65, 28, 28 F 0-99 , 1:29:36.6 , 10349,  Mequon  WI USA 
+Angela Schroeder, 66, 29, 29 F 0-99 , 1:29:49.1 , 10029,  Madison  WI USA 
+Dlee Dreyer, 67, 30, 30 F 0-99 , 1:30:00.3 , 10141,  Minneapolis  MN USA 
+Kristel Glorvigen Pitko, 68, 31, 31 F 0-99 , 1:30:39.8 , 10329,  Edina  MN USA 
+Noel Salisbury, 69, 38, 38 M 0-99 , 1:31:00.1 , 10450,  Plymouth  MN USA 
+Kathy Trombly-Ferrin, 70, 32, 32 F 0-99 , 1:31:01.2 , 10306,  Scandia  MN USA 
+Stephanie Bixler, 71, 33, 33 F 0-99 , 1:31:08.5 , 10532,  Rice Lake  WI USA 
+Chris Bixler, 72, 39, 39 M 0-99 , 1:31:24.5 , 10098,  Rice Lake  WI USA 
+Tessa Schwinn, 73, 34, 34 F 0-99 , 1:32:15.7 , 10555,  Sartell  MN USA 
+Karen Teter, 74, 35, 35 F 0-99 , 1:32:30.8 , 10291,  Rhinelander  WI USA 
+Roberta Eriksson, 75, 36, 36 F 0-99 , 1:33:24.8 , 10489,  Madison  WI USA 
+Kari Nemeth, 76, 37, 37 F 0-99 , 1:34:10.1 , 10292,  Sartell  MN USA 
+Susan Weum, 77, 38, 38 F 0-99 , 1:34:15.9 , 10546,  Roseville  MN USA 
+Mia Kraker, 78, 39, 39 F 0-99 , 1:34:27.1 , 10414,  Duluth  MN USA 
+Mark Fabel, 79, 40, 40 M 0-99 , 1:35:32.0 , 10387,  Saint Paul  MN USA 
+Kelsey Grant-Jenkins, 80, 40, 40 F 0-99 , 1:35:47.2 , 10315,  Helena  MT USA 
+Kasia Myrda, 81, 41, 41 F 0-99 , 1:35:49.2 , 10297,  Palos Heights  IL USA 
+Joseph Leise, 82, 41, 41 M 0-99 , 1:36:08.5 , 10277,  Red Wing  MN USA 
+Elsa Murray, 83, 42, 42 F 0-99 , 1:36:24.1 , 10156,  Eau Claire  WI USA 
+Brittany Barrette, 84, 43, 43 F 0-99 , 1:36:27.5 , 10079,  Peshtigo  WI USA 
+Matt Borgman, 85, 42, 42 M 0-99 , 1:36:36.7 , 10398,  Wilmette  IL USA 
+Bob D. Richards, 86, 43, 43 M 0-99 , 1:37:07.2 , 10062,  Houghton  MI USA 
+Kateri Salk-Gundersen, 87, 44, 44 F 0-99 , 1:37:18.4 , 10298,  Waterloo  ONTARIO Can 
+Andrea Dodson, 88, 45, 45 F 0-99 , 1:38:30.8 , 10023,  Mendota Heights  MN USA 
+Michael Hase, 89, 44, 44 M 0-99 , 1:38:40.5 , 10418,  Eau Claire  WI USA 
+Shawn Bretting, 90, 45, 45 M 0-99 , 1:39:01.6 , 10522,  Marengo  WI USA 
+Jodie Carlson, 91, 46, 46 F 0-99 , 1:39:13.5 , 10260,  St. Paul  MN USA 
+James Kraker, 92, 46, 46 M 0-99 , 1:39:22.3 , 10216,  Excelsior  MN USA 
+Matthew Huron, 93, 47, 47 M 0-99 , 1:39:26.5 , 10399,  St. Paul  MN USA 
+Bill Smitten, 94, 48, 48 M 0-99 , 1:39:38.6 , 10060,  Marine On St. Croix  MN USA 
+Claire Schleusner, 95, 47, 47 F 0-99 , 1:40:08.5 , 10106,  Rochester  MN USA 
+Angela Engel, 96, 48, 48 F 0-99 , 1:40:11.4 , 10027,  Abbotsford  WI USA 
+Olga Moshchuk, 97, 49, 49 F 0-99 , 1:40:18.4 , 10452,  Kirkland  WA USA 
+Mari Bohacek, 98, 50, 50 F 0-99 , 1:40:19.7 , 10381,  Afton  MN USA 
+Eve Graves, 99, 51, 51 F 0-99 , 1:40:32.1 , 10174,  Duluth  MN USA 
+Elizabeth Shelerud, 100, 52, 52 F 0-99 , 1:40:54.9 , 10151,  Byron  MN USA 
+Maxwell Heuermann, 101, 49, 49 M 0-99 , 1:41:18.3 , 10403,  Saint Paul  MN USA 
+Peter Holmes, 102, 50, 50 M 0-99 , 1:41:28.1 , 10465,  Edina  MN USA 
+Louise Kretzschmar, 103, 53, 53 F 0-99 , 1:41:30.8 , 10364,  Mellen  WI USA 
+Nathan Hjort, 104, 51, 51 M 0-99 , 1:41:36.2 , 10445,  Duluth  MN USA 
+Margie Hockenberry, 105, 54, 54 F 0-99 , 1:41:56.0 , 10379,  Flossmoor  IL USA 
+Andrew Kissner, 106, 52, 52 M 0-99 , 1:42:21.2 , 10024,  Eagle  WI USA 
+Roma Deshazo, 107, 55, 55 F 0-99 , 1:43:15.9 , 10491,  Salt Lake City  UT USA 
+Dana Warpinski, 108, 56, 56 F 0-99 , 1:44:13.5 , 10117,  Green Bay  WI USA 
+Chad Murray, 109, 53, 53 M 0-99 , 1:44:13.5 , 10094,  Eau Claire  WI USA 
+Tammy Dinsmore, 110, 57, 57 F 0-99 , 1:44:44.8 , 10547,  Glens Falls  NY USA 
+Berit Nelson, 111, 58, 58 F 0-99 , 1:44:47.5 , 10053,  St. Paul  MN USA 
+Emily Ranta, 112, 59, 59 F 0-99 , 1:44:51.0 , 10162,  Duluth  MN USA 
+Jared Hromatka, 113, 54, 54 M 0-99 , 1:45:00.2 , 10225,  Minneapolis  MN USA 
+James Korb, 114, 55, 55 M 0-99 , 1:45:29.4 , 10215,  Richland Center  WI USA 
+Keriann Cooper, 115, 60, 60 F 0-99 , 1:45:29.8 , 10320,  Minneapolis  MN USA 
+Daniel Sommer, 116, 56, 56 M 0-99 , 1:45:34.8 , 10119,  Mcfarland  WI USA 
+Elizabeth Smitten, 117, 61, 61 F 0-99 , 1:45:59.3 , 10152,  Marine On St. Croix  MN USA 
+Kristina Smitten, 118, 62, 62 F 0-99 , 1:46:00.1 , 10335,  Marine On St. Croix  MN USA 
+Jody Leise, 119, 63, 63 F 0-99 , 1:46:11.9 , 10261,  Red Wing  MN USA 
+Marian Wilkerson, 120, 64, 64 F 0-99 , 1:46:23.8 , 10382,  Bayside  WI USA 
+Sarah Montroll, 121, 65, 65 F 0-99 , 1:46:43.1 , 10511,  Burlington  VT USA 
+Betsy Watson, 122, 66, 66 F 0-99 , 1:47:32.2 , 10057,  Minneapolis  MN USA 
+Lindsay Holsen, 123, 67, 67 F 0-99 , 1:47:56.9 , 10355,  Appleton  WI USA 
+Melinda Rosenberger, 124, 68, 68 F 0-99 , 1:47:58.3 , 10413,  Eleva  WI USA 
+Jeanne Roudabush, 125, 69, 69 F 0-99 , 1:47:58.4 , 10228,  Eden Prairie  MN USA 
+Darren Zetek, 126, 57, 57 M 0-99 , 1:48:14.2 , 10122,  Rhinelander  WI USA 
+Ted Manthe, 127, 58, 58 M 0-99 , 1:48:42.6 , 10549,  Mankato  MN USA 
+Brian Hamilton, 128, 59, 59 M 0-99 , 1:49:04.9 , 10071,  Verona  WI USA 
+Jeffrey Peller, 129, 60, 60 M 0-99 , 1:49:16.9 , 10229,  Naperville  IL USA 
+Gretchen Hudacek, 130, 70, 70 F 0-99 , 1:49:46.3 , 10195,  Fall Creek  WI USA 
+Karah Stangret, 131, 71, 71 F 0-99 , 1:50:00.1 , 10289,  Ramsey  MN USA 
+Kathryn Jensen, 132, 72, 72 F 0-99 , 1:50:00.8 , 10302,  Minneapolis  MN USA 
+Ann Knox-Bauer, 133, 73, 73 F 0-99 , 1:50:57.8 , 10033,  Medford  WI USA 
+Fritz Kramer, 134, 61, 61 M 0-99 , 1:51:18.9 , 10179,  Plymouth  MN USA 
+Lise Lunge-Larsen, 135, 74, 74 F 0-99 , 1:51:19.9 , 10360,  Duluth  MN USA 
+Alex Aune, 136, 62, 62 M 0-99 , 1:51:21.5 , 10014,  Medina  MN USA 
+Shannon Slates Mortimer, 137, 75, 75 F 0-99 , 1:51:41.5 , 10519,  West Allis  WI USA 
+Sam Barrette, 138, 63, 63 M 0-99 , 1:51:55.5 , 10499,  Oconomowoc  WI USA 
+Jerelyn Koosmann, 139, 76, 76 F 0-99 , 1:52:01.1 , 10246,  Mellen  WI USA 
+Jennifer Smith, 140, 77, 77 F 0-99 , 1:52:17.1 , 10241,  Maple Grove  MN USA 
+Claire Mance, 141, 78, 78 F 0-99 , 1:52:32.1 , 10105,  Madison  WI USA 
+Matthew Stuht, 142, 64, 64 M 0-99 , 1:52:48.8 , 10401,  Campbellsport  WI USA 
+Tim Whitcomb, 143, 65, 65 M 0-99 , 1:52:50.0 , 10561,  Shakopee  MN USA 
+Sheila Owens, 144, 79, 79 F 0-99 , 1:53:04.4 , 10523,  Edina  MN USA 
+Michael Cranston, 145, 66, 66 M 0-99 , 1:53:16.1 , 10416,  Duluth  MN USA 
+Mark Boushele, 146, 67, 67 M 0-99 , 1:53:20.5 , 10385,  Neenah  WI USA 
+Don Quick, 147, 68, 68 M 0-99 , 1:53:21.3 , 10142,  Hayward  WI USA 
+Richard Reese, 148, 69, 69 M 0-99 , 1:53:33.6 , 10477,  Menomonee Falls  WI USA 
+Amy Plato, 149, 80, 80 F 0-99 , 1:53:56.8 , 10020,  Grafton  WI USA 
+Mark Oswood, 150, 70, 70 M 0-99 , 1:55:03.7 , 10388,  Shoreview  MN USA 
+John Argoudelis, 151, 71, 71 M 0-99 , 1:55:11.4 , 10264,  Plainfield  IL USA 
+Christine Dieck-Hillegas, 152, 81, 81 F 0-99 , 1:55:16.6 , 10101,  Neenah  WI USA 
+Victoria Mintz, 153, 82, 82 F 0-99 , 1:55:19.8 , 10573,  Middleton  WI USA 
+Sarah Lawn, 154, 83, 83 F 0-99 , 1:55:36.2 , 10510,  Verona  WI USA 
+Rob Weum, 155, 72, 72 M 0-99 , 1:55:49.7 , 10484,  Roseville  MN USA 
+Seanne Buckwalter, 156, 84, 84 F 0-99 , 1:55:53.4 , 10517,  Mantorville  MN USA 
+Eric Lind, 157, 73, 73 M 0-99 , 1:55:56.8 , 10165,  Saint Paul  MN USA 
+Leo Dunsirn, 158, 74, 74 M 0-99 , 1:56:00.0 , 10348,  Shorewood  WI USA 
+Nancy Berlin, 159, 85, 85 F 0-99 , 1:56:04.7 , 10437,  Red Wing  MN USA 
+Todd Dunsirn, 160, 75, 75 M 0-99 , 1:56:09.0 , 10562,  Shorewood  WI USA 
+Mike Rieth, 161, 76, 76 M 0-99 , 1:56:22.1 , 10430,  St. Paul  MN USA 
+Teri Schilling, 162, 86, 86 F 0-99 , 1:56:28.4 , 10551,  Forest Lake  MN USA 
+Kelly Higgins, 163, 87, 87 F 0-99 , 1:56:29.0 , 10312,  Madison  WI USA 
+Margo Anderst, 164, 88, 88 F 0-99 , 1:56:40.4 , 10380,  Forest Lake  MN USA 
+Debbie Larson, 165, 89, 89 F 0-99 , 1:56:42.2 , 10135,  Forest Lake  MN USA 
+Jenny Haslerud, 166, 90, 90 F 0-99 , 1:56:44.7 , 10245,  Woodbury  MN USA 
+John Schweiss, 167, 77, 77 M 0-99 , 1:56:45.5 , 10270,  St. Paul  MN USA 
+Michael Neumaier, 168, 78, 78 M 0-99 , 1:57:34.9 , 10421,  St. Charles  IL USA 
+Debbie Bruell, 169, 91, 91 F 0-99 , 1:57:41.2 , 10134,  Carbondale  CO USA 
+Carol Walburg, 170, 92, 92 F 0-99 , 1:57:55.6 , 10088,  Mpls  MN USA 
+Rebecca Halvorson, 171, 93, 93 F 0-99 , 1:58:01.4 , 10474,  Minneapolis  MN USA 
+Charles Howenstine, 172, 79, 79 M 0-99 , 1:58:25.5 , 10096,  Stevensville  MI USA 
+Maya Gurarie, 173, 94, 94 F 0-99 , 1:58:27.4 , 10405,  Boulder  CO USA 
+Gina Oesterreich, 174, 95, 95 F 0-99 , 1:58:52.4 , 10187,  Stillwater  MN USA 
+Judy Jensen, 175, 96, 96 F 0-99 , 1:59:05.4 , 10282,  Truckee  CA USA 
+Koni Adams, 176, 97, 97 F 0-99 , 1:59:17.2 , 10328,  Pewaukee  WI USA 
+Lars Gundersen, 177, 80, 80 M 0-99 , 1:59:22.2 , 10339,  La Crosse  WI USA 
+Sarah Oyler, 178, 98, 98 F 0-99 , 1:59:39.7 , 10512,  Minneapolis  MN USA 
+Aurora Gundersen, 179, 99, 99 F 0-99 , 2:00:26.8 , 10043,  Shorewood  WI USA 
+Catherine Whitcomb, 180, 100, 100 F 0-99 , 2:00:32.9 , 10093,  Rochester  MN USA 
+Steven Boe, 181, 81, 81 M 0-99 , 2:01:05.7 , 10539,  Hayward  WI USA 
+Hugh Hoffman, 182, 82, 82 M 0-99 , 2:01:19.1 , 10205,  Orono  MN USA 
+Katy Holmes, 183, 101, 101 F 0-99 , 2:01:23.8 , 10309,  Edina  MN USA 
+Jonathan Degrote, 184, 83, 83 M 0-99 , 2:01:27.8 , 10273,  Minneapolis  MN USA 
+Erick Sorenson, 185, 84, 84 M 0-99 , 2:01:29.2 , 10167,  Townsend  MT USA 
+Nancy Omdahl, 186, 102, 102 F 0-99 , 2:01:30.0 , 10439,  Eden Prairie  MN USA 
+John Siqveland, 187, 85, 85 M 0-99 , 2:01:30.3 , 10271,  Saint Paul  MN USA 
+Collette Larue, 188, 103, 103 F 0-99 , 2:01:57.1 , 10109,  Green Bay  WI USA 
+Luke Geadelmann, 189, 86, 86 M 0-99 , 2:01:59.8 , 10367,  Minnetrista  MN USA 
+Kelly Geadelmann, 190, 104, 104 F 0-99 , 2:02:01.0 , 10311,  Minnetrista  MN USA 
+Karn Merriman, 191, 105, 105 F 0-99 , 2:02:05.6 , 10295,  Slinger  WI USA 
+Adam Cernohous, 192, 87, 87 M 0-99 , 2:02:27.7 , 10005,  River Falls  WI USA 
+Nancy Warpinski, 193, 106, 106 F 0-99 , 2:02:33.8 , 10442,  Green Bay  WI USA 
+Robert Warpinski Jr, 194, 88, 88 M 0-99 , 2:02:35.9 , 10488,  Green Bay  WI USA 
+Bob Bach, 195, 89, 89 M 0-99 , 2:02:37.4 , 10061,  Plymouth  MN USA 
+Martin Feeney, 196, 90, 90 M 0-99 , 2:03:17.3 , 10391,  Elmhurst  IL USA 
+Brittany Nguyen, 197, 107, 107 F 0-99 , 2:04:00.3 , 10080,  Chicago  IL USA 
+Ann Szalkowski, 198, 108, 108 F 0-99 , 2:04:04.6 , 10034,  Blue Mounds  WI USA 
+Jane Dunlap, 199, 109, 109 F 0-99 , 2:04:14.3 , 10222,  Saint Paul  MN USA 
+Morgan Williams, 200, 110, 110 F 0-99 , 2:04:33.5 , 10436,  Chattanooga  TN USA 
+Lisa Whitcomb, 201, 111, 111 F 0-99 , 2:04:41.6 , 10359,  Shakopee  MN USA 
+Rob Whitcomb, 202, 91, 91 M 0-99 , 2:05:07.7 , 10485,  Shakopee  Mn  MN USA 
+Amy Okan, 203, 112, 112 F 0-99 , 2:05:41.7 , 10019,  Centerville  MN USA 
+Dan Behler, 204, 92, 92 M 0-99 , 2:05:47.4 , 10113,  Madison  WI USA 
+Jennifer Ferrante, 205, 113, 113 F 0-99 , 2:06:10.1 , 10237,  Westport  CT USA 
+Victoria Losinski, 206, 114, 114 F 0-99 , 2:06:10.6 , 10572,  River Falls  WI USA 
+Michael Clay, 207, 93, 93 M 0-99 , 2:06:51.1 , 10415,  Cumberland  WI USA 
+David Thymian, 208, 94, 94 M 0-99 , 2:06:54.7 , 10129,  Mounds View  MN USA 
+Marybeth Gabler, 209, 115, 115 F 0-99 , 2:07:25.7 , 10397,  Bayside  WI USA 
+Joseph Gilmore, 210, 95, 95 M 0-99 , 2:07:28.2 , 10274,  Fridley  MN USA 
+Emily Orsted, 211, 116, 116 F 0-99 , 2:07:37.1 , 10161,  Whitewater  WI USA 
+Joy Dommers, 212, 117, 117 F 0-99 , 2:07:44.8 , 10281,  Bend  OR USA 
+Natalie Brooks, 213, 118, 118 F 0-99 , 2:08:27.7 , 10444,  Oshkosh  WI USA 
+Melanie Buyarski, 214, 119, 119 F 0-99 , 2:08:28.1 , 10412,  Oshkosh  WI USA 
+Sharon Jensen, 215, 120, 120 F 0-99 , 2:08:33.8 , 10520,  Lino Lakes  MN USA 
+Marsha Bergan, 216, 121, 121 F 0-99 , 2:08:36.0 , 10389,  Iowa City  IA USA 
+Joe Schaaf, 217, 96, 96 M 0-99 , 2:08:44.9 , 10263,  Scandia  MN USA 
+Sally Weyer, 218, 122, 122 F 0-99 , 2:08:48.7 , 10498,  Iowa City  IA USA 
+Jen Markworth, 219, 123, 123 F 0-99 , 2:09:03.1 , 10231,  Minneapolis  MN USA 
+Leo Barnhill, 220, 97, 97 M 0-99 , 2:09:17.3 , 10347,  Minneapolis  MN USA 
+Karl Klessig, 221, 98, 98 M 0-99 , 2:09:22.2 , 10294,  Cleveland  WI USA 
+Michelle Lenhart, 222, 124, 124 F 0-99 , 2:09:40.5 , 10426,  St. Paul  MN USA 
+Jamie Zarda, 223, 125, 125 F 0-99 , 2:09:56.5 , 10221,  Neenah  WI USA 
+Annika Strack, 224, 126, 126 F 0-99 , 2:10:04.1 , 10040,  Hainesville  IL USA 
+Mike Vlasak, 225, 99, 99 M 0-99 , 2:11:09.6 , 10431,  St. Paul  MN USA 
+Emilie Anderson, 226, 127, 127 F 0-99 , 2:11:43.3 , 10157,  Minneapolis  MN USA 
+Brian Karlen, 227, 100, 100 M 0-99 , 2:11:56.0 , 10072,  Marathon  WI USA 
+Anja Curiskis, 228, 128, 128 F 0-99 , 2:12:00.5 , 10030,  Minneapolis  MN USA 
+Deborah McGrath, 229, 129, 129 F 0-99 , 2:12:06.6 , 10137,  Batavia  IL USA 
+Jennifer Stangret, 230, 130, 130 F 0-99 , 2:12:15.7 , 10242,  Ramsey  MN USA 
+Kirsten Johnson, 231, 131, 131 F 0-99 , 2:12:24.2 , 10324,  Minneapolis  MN USA 
+Raymond Langer, 232, 101, 101 M 0-99 , 2:12:46.2 , 10472,  Saint Paul  MN USA 
+Kathy Muhs, 233, 132, 132 F 0-99 , 2:13:00.1 , 10305,  Monona  WI USA 
+Lucille Pham, 234, 133, 133 F 0-99 , 2:13:16.1 , 10365,  Minneapolis  MN USA 
+Stacey Laschen, 235, 134, 134 F 0-99 , 2:13:18.2 , 10529,  North Barrington  IL USA 
+Caroline Palmer, 236, 102, 102 M 0-99 , 2:13:20.5 , 10393,  Edina  MN  
+Margaret Isom, 237, 135, 135 F 0-99 , 2:13:28.3 , 10377,  St Paul  MN USA 
+Nancy Wagner, 238, 136, 136 F 0-99 , 2:13:49.6 , 10441,  St. Paul  MN USA 
+James H Bolitho, 239, 103, 103 M 0-99 , 2:13:55.9 , 10214,  Verona  WI USA 
+Dean Munn, 240, 104, 104 M 0-99 , 2:14:02.6 , 10132,  Indianapolis  IN USA 
+Susan Huschke, 241, 137, 137 F 0-99 , 2:14:18.1 , 10544,  Eden Prairie  MN USA 
+David James, 242, 105, 105 M 0-99 , 2:14:34.6 , 10128,  Crested Butte  CO USA 
+Beth Venit, 243, 138, 138 F 0-99 , 2:15:22.9 , 10055,  Washington  DC USA 
+Maya Pham, 244, 139, 139 F 0-99 , 2:15:39.5 , 10406,  Minneapolis  MN USA 
+Mitchell Havemann, 245, 106, 106 M 0-99 , 2:15:40.5 , 10433,  Woodstock  IL USA 
+Kristin Havemann, 246, 140, 140 F 0-99 , 2:15:47.2 , 10332,  Woodstock  IL USA 
+Iris Kemler Cattaneo, 247, 141, 141 F 0-99 , 2:15:56.2 , 10207,  Rochester  MN USA 
+Sherry Trantow, 248, 142, 142 F 0-99 , 2:16:12.8 , 10525,  Rochester  MN USA 
+Michael Fagnant, 249, 107, 107 M 0-99 , 2:16:15.9 , 10417,  Rhinelander  WI USA 
+Matthew Schleicher, 250, 108, 108 M 0-99 , 2:16:16.5 , 10400,  Neenah  WI USA 
+Donna Olson, 251, 143, 143 F 0-99 , 2:16:22.7 , 10143,  Plymouth  MN USA 
+Abby Breitenfeldt, 252, 144, 144 F 0-99 , 2:17:34.4 , 10002,  Minneapolis  MN USA 
+Theresa Bolwerk, 253, 145, 145 F 0-99 , 2:17:54.8 , 10556,  Waupaca  WI USA 
+Emily Bakken, 254, 146, 146 F 0-99 , 2:18:05.2 , 10159,  Fontana  WI USA 
+Richard Beedle, 255, 109, 109 M 0-99 , 2:18:20.0 , 10475,  Eden Prairie  MN USA 
+Judy Rowley, 256, 147, 147 F 0-99 , 2:18:25.9 , 10283,  Hayward  WI USA 
+Kenai Weinhold, 257, 148, 148 F 0-99 , 2:18:29.7 , 10318,  Stewartville  MN USA 
+Nicole Storey, 258, 149, 149 F 0-99 , 2:18:59.7 , 10449,  Cedarville  MI USA 
+Leanne Storey, 259, 150, 150 F 0-99 , 2:19:01.1 , 10346,  Pickford  MI USA 
+Gary Rutledge, 260, 110, 110 M 0-99 , 2:19:08.5 , 10183,  Ankeny  IA USA 
+Tom Burgess, 261, 111, 111 M 0-99 , 2:19:35.0 , 10563,  Hayward  WI USA 
+Mike Joyce, 262, 112, 112 M 0-99 , 2:19:37.9 , 10429,  Brookfield  WI USA 
+Jennifer Johnson Kaplan, 263, 151, 151 F 0-99 , 2:20:12.5 , 10238,  Trempealeau  WI USA 
+Hunter Denison, 264, 113, 113 M 0-99 , 2:20:40.8 , 10206,  Rice Lake  WI USA 
+Sarah Foley, 265, 152, 152 F 0-99 , 2:21:17.0 , 10507,  Los Angeles  CA USA 
+Corabel Silerio, 266, 153, 153 F 0-99 , 2:21:30.2 , 10110,  Chicago  IL USA 
+Richard E. Davis, 267, 114, 114 M 0-99 , 2:21:36.3 , 10476,  Denver  CO USA 
+Liza Eaton, 268, 154, 154 F 0-99 , 2:21:36.9 , 10361,  Denver  CO USA 
+Sean Coe, 269, 115, 115 M 0-99 , 2:21:44.1 , 10515,  Plymouth  MN USA 
+Stephanie Podbelski, 270, 155, 155 F 0-99 , 2:21:50.0 , 10534,  North Oaks  MN USA 
+Rob Hermann, 271, 116, 116 M 0-99 , 2:21:54.4 , 10482,  Waukesha  WI USA 
+Katherine Smith, 272, 156, 156 F 0-99 , 2:22:24.8 , 10299,  Minneapolis  MN USA 
+Rebecca Cooper, 273, 157, 157 F 0-99 , 2:22:31.3 , 10473,  Minneapolis  MN USA 
+Christopher Bakken, 274, 117, 117 M 0-99 , 2:22:34.9 , 10102,  Fontana  WI USA 
+Tracy Brown, 275, 158, 158 F 0-99 , 2:22:37.9 , 10568,  Mahtomedi  MN USA 
+Mary Webster, 276, 159, 159 F 0-99 , 2:22:38.8 , 10396,  Minneapolis  MN USA 
+Hal Schulz, 277, 118, 118 M 0-99 , 2:22:45.4 , 10197,  Oshkosh  WI USA 
+Joshua Bakken, 278, 119, 119 M 0-99 , 2:22:56.4 , 10279,  Fontana  WI USA 
+Brenden Cooper, 279, 120, 120 M 0-99 , 2:23:00.0 , 10066,  Minneapolis  MN USA 
+Madeline London, 280, 160, 160 F 0-99 , 2:23:20.4 , 10372,  Winneconne  WI USA 
+Elle Titus, 281, 161, 161 F 0-99 , 2:23:27.5 , 10154,  Cable  WI USA 
+Jennifer Titus, 282, 162, 162 F 0-99 , 2:23:53.3 , 10243,  Cable  WI USA 
+Kirstin Tracy, 283, 163, 163 F 0-99 , 2:23:58.4 , 10326,  Eagan  MN USA 
+Brian Tracy, 284, 121, 121 M 0-99 , 2:23:59.5 , 10075,  Eagan  MN USA 
+Eiel Bach, 285, 122, 122 M 0-99 , 2:24:04.6 , 10147,  Minnetonka  MN USA 
+Christa Berg, 286, 164, 164 F 0-99 , 2:24:38.7 , 10099,  Bovey  MN USA 
+Dennis Seefeldt, 287, 123, 123 M 0-99 , 2:25:07.6 , 10139,  Scandia  MN USA 
+Pat Greven, 288, 165, 165 F 0-99 , 2:25:09.1 , 10455,  Portage  WI USA 
+Karin Silet, 289, 166, 166 F 0-99 , 2:25:28.7 , 10293,  Madison  WI USA 
+Gabrielle Kellman, 290, 167, 167 F 0-99 , 2:25:29.1 , 10180,  Crested Butte Volorado  CO USA 
+Kristin Davis, 291, 168, 168 F 0-99 , 2:25:30.7 , 10331,  Madison  WI USA 
+Dan Eutizzi, 292, 124, 124 M 0-99 , 2:26:03.4 , 10114,  Waukesha  WI USA 
+Deirdre Palmer, 293, 169, 169 F 0-99 , 2:26:04.3 , 10138,  Edina  MN USA 
+Laura Harrigan, 294, 170, 170 F 0-99 , 2:26:15.8 , 10341,  Cedarburg  WI USA 
+Peggy Edquist, 295, 171, 171 F 0-99 , 2:26:21.5 , 10462,  West Bend  WI USA 
+Katherine Stevenson, 296, 172, 172 F 0-99 , 2:26:38.4 , 10300,  Shorewood  WI USA 
+Cara Benson, 297, 173, 173 F 0-99 , 2:27:17.3 , 10083,  Mahtomedi  MN USA 
+Garrett Bates, 298, 125, 125 M 0-99 , 2:27:17.5 , 10181,  Pine Island  MN USA 
+Kathy Bates, 299, 174, 174 F 0-99 , 2:27:17.6 , 10303,  Pine Island  MN USA 
+Heidi Fickling, 300, 175, 175 F 0-99 , 2:27:37.4 , 10200,  Edwards  CO USA 
+Oriana Nelson, 301, 176, 176 F 0-99 , 2:27:38.6 , 10453,  Williston  ND USA 
+Adam Nelson, 302, 126, 126 M 0-99 , 2:27:43.9 , 10006,  Williston  ND USA 
+Michelle Balk, 303, 177, 177 F 0-99 , 2:28:11.0 , 10424,  Spooner  WI USA 
+Julieann Scheinoha, 304, 178, 178 F 0-99 , 2:28:13.2 , 10288,  Milwaukee  WI USA 
+Julia Langer, 305, 179, 179 F 0-99 , 2:28:39.2 , 10284,  Saint Paul  MN USA 
+Deano Tomchek, 306, 127, 127 M 0-99 , 2:28:49.7 , 10133,  Green Bay  WI USA 
+Bassam Khawaja, 307, 128, 128 M 0-99 , 2:29:12.4 , 10048,  Minneapolis  MN USA 
+Taylor Groenke, 308, 180, 180 F 0-99 , 2:29:12.8 , 10548,  Minneapolis  MN USA 
+Troy Groenke, 309, 129, 129 M 0-99 , 2:29:14.3 , 10569,  Minneapolis  MN USA 
+Marie Broberg, 310, 181, 181 F 0-99 , 2:29:26.5 , 10384,  Crystal Lake  IL USA 
+Addie Prochnow, 311, 182, 182 F 0-99 , 2:30:26.2 , 10009,  Grafton  WI USA 
+Brigid Gallagher, 312, 183, 183 F 0-99 , 2:30:44.3 , 10077,  Shorewood  WI USA 
+Megan Schleicher, 313, 184, 184 F 0-99 , 2:30:51.7 , 10409,  Appleton  WI USA 
+Anne Helsley-Marchbanks, 314, 185, 185 F 0-99 , 2:31:09.8 , 10037,  Madison  WI USA 
+Kelly Zimmer, 315, 186, 186 F 0-99 , 2:31:10.9 , 10314,  Madison  WI USA 
+Rachel Kraker, 316, 187, 187 F 0-99 , 2:31:13.7 , 10469,  Excelsior  MN USA 
+Christopher Boelter, 317, 130, 130 M 0-99 , 2:31:22.2 , 10103,  Sartell  MN USA 
+Jim Jensen, 318, 131, 131 M 0-99 , 2:31:38.1 , 10250,  Lino Lakes  MN USA 
+Phil Peterson, 319, 132, 132 M 0-99 , 2:31:49.2 , 10466,  Reedsburg  WI USA 
+Jennifer Boelter, 320, 188, 188 F 0-99 , 2:31:52.1 , 10236,  Sartell  MN USA 
+Steven Storey, 321, 133, 133 M 0-99 , 2:31:52.8 , 10540,  Pickford  MI USA 
+Susan Denuccio, 322, 189, 189 F 0-99 , 2:31:58.1 , 10542,  Minneapolis  MN USA 
+Emily Slater, 323, 190, 190 F 0-99 , 2:32:00.5 , 10163,  Pickford  MI USA 
+Heather Beresford, 324, 191, 191 F 0-99 , 2:32:05.7 , 10198,  Greeneville  WI USA 
+Julie Prochnow, 325, 192, 192 F 0-99 , 2:32:25.3 , 10287,  Grafton  WI USA 
+Jake Majewski, 326, 134, 134 M 0-99 , 2:32:35.8 , 10212,  Mundelein  IL USA 
+Shelley Majewski, 327, 193, 193 F 0-99 , 2:33:02.8 , 10524,  Mundelein  IL USA 
+Magnus Nilsson, 328, 135, 135 M 0-99 , 2:33:43.3 , 10375,  Rosemount  MN USA 
+Alec Smith, 329, 136, 136 M 0-99 , 2:33:45.4 , 10013,  Omaha  NE USA 
+John Fennig, 330, 137, 137 M 0-99 , 2:33:58.4 , 10266,  North Oaks  MN USA 
+Donna Stone, 331, 194, 194 F 0-99 , 2:34:07.2 , 10144,  Rhinelander  WI USA 
+Tom Stone, 332, 138, 138 M 0-99 , 2:34:22.1 , 10567,  Rhinelander  WI USA 
+Natasha Tennessen, 333, 195, 195 F 0-99 , 2:34:24.8 , 10550,  Minneapolis  MN USA 
+Grace Wooldridge, 334, 196, 196 F 0-99 , 2:34:33.7 , 10190,  Minnetonka  MN USA 
+Linda Hagen, 335, 197, 197 F 0-99 , 2:34:40.1 , 10353,  Duluth  MN USA 
+Alan Hills, 336, 139, 139 M 0-99 , 2:34:53.9 , 10012,  Stoughton  WI USA 
+Sarah Drilias, 337, 198, 198 F 0-99 , 2:34:54.5 , 10506,  Milwaukee  WI USA 
+Anna Korb, 338, 199, 199 F 0-99 , 2:35:32.6 , 10035,  Richland Center  WI USA 
+Jenifer Anderson, 339, 200, 200 F 0-99 , 2:36:13.5 , 10234,  White Bear Lake  MN USA 
+Patrick Gastonguay, 340, 140, 140 M 0-99 , 2:36:28.6 , 10456,  Burnsville  MN USA 
+Jack Rokser, 341, 141, 141 M 0-99 , 2:36:32.1 , 10208,  Chippewa Falls  WI USA 
+Lisa Bakken, 342, 201, 201 F 0-99 , 2:37:01.6 , 10357,  Fontana  WI USA 
+Shannon Roloff, 343, 202, 202 F 0-99 , 2:37:30.9 , 10518,  Wausau  WI USA 
+Veronica Roloff, 344, 203, 203 F 0-99 , 2:38:04.9 , 10571,  Wausau  WI USA 
+Susan Franz, 345, 204, 204 F 0-99 , 2:38:06.9 , 10543,  Roscoe  IL USA 
+Patrick O'Leary, 346, 142, 142 M 0-99 , 2:38:08.7 , 10457,  Mendota Heights  MN USA 
+Stacie O'Leary, 347, 205, 205 F 0-99 , 2:38:09.8 , 10530,  Mendota Heights  MN USA 
+Chandon Williams, 348, 206, 206 F 0-99 , 2:38:35.0 , 10095,  Madison  WI USA 
+Sarah Kaufman, 349, 207, 207 F 0-99 , 2:39:32.2 , 10509,  Wauwatosa  WI USA 
+Enni Gregas, 350, 208, 208 F 0-99 , 2:39:42.7 , 10164,  Bessemer  MI USA 
+Lillian Okan, 351, 209, 209 F 0-99 , 2:39:51.2 , 10351,  Centerville  MN USA 
+Jill Lein, 352, 210, 210 F 0-99 , 2:40:45.4 , 10249,  White Bear Lake  MN USA 
+Francis Young, 353, 211, 211 F 0-99 , 2:41:11.1 , 10178,  Winona  MN USA 
+Drake Rosenwinkel, 354, 143, 143 M 0-99 , 2:41:11.1 , 10146,  Madison Lake  MN USA 
+Joseph Kramer, 355, 144, 144 M 0-99 , 2:41:17.8 , 10276,  Plymouth  MN USA 
+Kathy Young, 356, 212, 212 F 0-99 , 2:41:21.7 , 10307,  Winona  MN USA 
+Kirsten Oliver, 357, 213, 213 F 0-99 , 2:41:49.5 , 10325,  Madison  WI USA 
+Tom Oliver, 358, 145, 145 M 0-99 , 2:41:57.4 , 10566,  Madison  WI USA 
+Winnifred Aitch, 359, 214, 214 F 0-99 , 2:42:01.4 , 10578,  Milwaukee  WI USA 
+Caroline Bach, 360, 215, 215 F 0-99 , 2:42:17.2 , 10090,  Minnetonka  MN USA 
+Bridget Rewitzer, 361, 216, 216 F 0-99 , 2:42:41.3 , 10076,  Minneapolis  MN USA 
+Elizabeth MacInnes, 362, 217, 217 F 0-99 , 2:43:00.2 , 10150,  Houghton  MI USA 
+Clare Sedlacek, 363, 218, 218 F 0-99 , 2:44:12.8 , 10107,  Plymouth  WI USA 
+Emily Andersen, 364, 219, 219 F 0-99 , 2:44:46.3 , 10158,  Rochester  MN USA 
+Kristin Nussdorfer, 365, 220, 220 F 0-99 , 2:44:53.3 , 10334,  Sparta  WI USA 
+Linda Kane, 366, 221, 221 F 0-99 , 2:45:12.3 , 10354,  Saint Paul  MN USA 
+Jennifer London, 367, 222, 222 F 0-99 , 2:45:13.1 , 10239,  Hinsdale  IL USA 
+Laura Guenther, 368, 223, 223 F 0-99 , 2:45:30.4 , 10340,  White Bear Lake  MN USA 
+Nicole Hines, 369, 224, 224 F 0-99 , 2:46:10.4 , 10448,  Chanhassen  MN USA 
+Rachael Teeter, 370, 225, 225 F 0-99 , 2:46:42.4 , 10467,  Appleton  WI USA 
+Lisa Ohnstad, 371, 226, 226 F 0-99 , 2:47:07.0 , 10358,  Minneapolis  MN USA 
+Joan Rudiger, 372, 227, 227 F 0-99 , 2:47:09.4 , 10255,  Lakeville  MN USA 
+Sofie Urberg-Carlson, 373, 228, 228 F 0-99 , 2:47:22.1 , 10527,  Minneapolis  MN USA 
+Bradley Urberg Carlson, 374, 146, 146 M 0-99 , 2:47:23.3 , 10063,  Minneapolis  MN USA 
+Heather Luecke, 375, 229, 229 F 0-99 , 2:47:33.8 , 10199,  Waukesha  WI USA 
+Leah Holmes, 376, 230, 230 F 0-99 , 2:47:35.5 , 10345,  Rochester  MN USA 
+Jean Butterfield, 377, 231, 231 F 0-99 , 2:47:39.5 , 10226,  Milton  MA USA 
+Jenny Funk, 378, 232, 232 F 0-99 , 2:47:56.4 , 10244,  Middleton  WI USA 
+Carla Newcomer, 379, 233, 233 F 0-99 , 2:47:58.7 , 10085,  Mcfarland  WI USA 
+John Kivlin, 380, 147, 147 M 0-99 , 2:48:18.3 , 10269,  Lake Geneva  WI USA 
+Laurie Haugland, 381, 234, 234 F 0-99 , 2:48:27.1 , 10343,  Chicago  IL USA 
+Sandra Pearson, 382, 235, 235 F 0-99 , 2:48:47.5 , 10502,  Germantown  WI USA 
+Meg McMonigal, 383, 236, 236 F 0-99 , 2:48:48.8 , 10407,  Minneapolis  MN USA 
+Kevin Kramer, 384, 148, 148 M 0-99 , 2:49:00.0 , 10322,  Plymouth  MN USA 
+Lori Kramer, 385, 237, 237 F 0-99 , 2:49:30.0 , 10363,  Plymouth  MN USA 
+Herb Schulte, 386, 149, 149 M 0-99 , 2:50:02.9 , 10203,  Edina  MN USA 
+Dawn Gardner, 387, 238, 238 F 0-99 , 2:50:41.3 , 10131,  Prior Lake  MN USA 
+Amy Seay, 388, 239, 239 F 0-99 , 2:51:21.3 , 10021,  Sussex  WI USA 
+Kathy Cable, 389, 240, 240 F 0-99 , 2:53:09.5 , 10304,  Eau Claire  WI USA 
+Evelyn Anderson, 390, 241, 241 F 0-99 , 2:54:05.4 , 10175,  Minneapolis  MN USA 
+Rick Jelak, 391, 150, 150 M 0-99 , 2:54:09.2 , 10479,  Radisson  WI USA 
+Milo Johnson, 392, 151, 151 M 0-99 , 2:54:38.6 , 10432,  Minneapolis  MN USA 
+Ozmo Johnson, 393, 152, 152 M 0-99 , 2:55:10.7 , 10454,  Minneapolis  MN USA 
+James Cooper, 394, 153, 153 M 0-99 , 2:55:21.4 , 10213,  Minneapolis  MN USA 
+Beth Cutler, 395, 242, 242 F 0-99 , 2:55:32.0 , 10054,  Morton Grove  IL USA 
+Lois Mertes, 396, 243, 243 F 0-99 , 2:55:34.2 , 10362,  Appleton  WI USA 
+Barbara Nelsen, 397, 244, 244 F 0-99 , 2:55:55.8 , 10045,  Eagan  MN USA 
+Daniel Barrett Sr, 398, 154, 154 M 0-99 , 2:55:59.3 , 10118,  Forest Lake  MN USA 
+Carrie Richards, 399, 245, 245 F 0-99 , 2:58:42.3 , 10092,  Houghton  MI USA 
+Ann Clancy-Klemme, 400, 246, 246 F 0-99 , 2:58:47.7 , 10031,  Chassell  MI USA 
+Diogo Freire, 401, 155, 155 M 0-99 , 2:59:16.3 , 10140,  Brooklyn  NY USA 
+Georgia Kaftan, 402, 247, 247 F 0-99 , 3:00:24.3 , 10186,  Cambridge  WI USA 
+Andy Sorenson, 403, 156, 156 M 0-99 , 3:01:12.4 , 10025,  White Bear Lake  MN USA 
+Mary Kirby, 404, 248, 248 F 0-99 , 3:03:03.0 , 10394,  Lakeville  MN USA 
+Barbara Ross, 405, 249, 249 F 0-99 , 3:03:06.5 , 10046,  Lakeville  MN USA 
+Mary Jane Sorenson, 406, 250, 250 F 0-99 , 3:03:18.6 , 10392,  Duluth  MN USA 
+Stephanie Donovan, 407, 251, 251 F 0-99 , 3:04:06.4 , 10533,  Byron  MN USA 
+Michon Proper, 408, 252, 252 F 0-99 , 3:04:17.3 , 10428,  Stewartville  MN USA 
+Samantha Prigge, 409, 253, 253 F 0-99 , 3:04:17.4 , 10501,  Byron  MN USA 
+Terry Duffy, 410, 254, 254 F 0-99 , 3:04:24.3 , 10552,  Stone Lake  WI USA 
+Brenden Ojibway, 411, 157, 157 M 0-99 , 3:05:34.6 , 10067,  Barneveld  WI USA 
+Juliana Vievering, 412, 255, 255 F 0-99 , 3:06:34.2 , 10285,  Minneapolis  MN USA 
+Steven Arens, 413, 158, 158 M 0-99 , 3:07:15.4 , 10538,  Hinsdale  IL USA 
+Ginny Jacobs, 414, 256, 256 F 0-99 , 3:10:14.0 , 10188,  Edina  MN USA 
+Brett Bergquist, 415, 159, 159 M 0-99 , 3:10:47.8 , 10069,  West Bend  WI USA 
+Ryan Thompson, 416, 160, 160 M 0-99 , 3:11:18.4 , 10496,  Cumberland  WI USA 
+Rob Thompson, 417, 161, 161 M 0-99 , 3:11:21.4 , 10483,  Cumberland  WI USA 
+Scott Dunnewind, 418, 162, 162 M 0-99 , 3:12:28.5 , 10514,  Minnetonka  MN USA 
+Cyprine Odada, 419, 257, 257 F 0-99 , 3:12:45.3 , 10112,  Nairobi  NAIROBI Ken 
+Michael Swanson, 420, 163, 163 M 0-99 , 3:12:46.0 , 10422,  Hartford  CT USA 
+Jeneen Ablan, 421, 258, 258 F 0-99 , 3:13:23.1 , 10232,  La Crescent  MN USA 
+Margaret Woulfe Arens, 422, 259, 259 F 0-99 , 3:13:32.8 , 10378,  Hinsdale  IL USA 
+Lauris Strautmanis, 423, 164, 164 M 0-99 , 3:14:45.5 , 10344,  St. Paul  MN USA 
+Lyndsie Standerwick, 424, 260, 260 F 0-99 , 3:16:57.7 , 10368,  Minneapolis  MN USA 
+Courtney Elford, 425, 261, 261 F 0-99 , 3:20:34.7 , 10111,  Minneapolis  MN USA 
+Danielle Pederson, 426, 262, 262 F 0-99 , 3:21:38.0 , 10120,  Stevens Point  WI USA 
+Eve Commerford, 427, 263, 263 F 0-99 , 3:22:53.5 , 10173,  Minneapolis  MN USA 
+Larry Kramer, 428, 165, 165 M 0-99 , 3:22:53.7 , 10338,  Shorewood  WI USA 
+Andrea Corcoran, 429, 264, 264 F 0-99 , 3:23:13.6 , 10022,  Charlewtown  MA USA 
+Steve Koller, 430, 166, 166 M 0-99 , 3:24:36.6 , 10537,  Milwaukee  WI USA 
+Kelly Barnhill, 431, 265, 265 F 0-99 , 3:24:56.0 , 10310,  Minneapolis  MN USA 
+Rita Mitchell, 432, 266, 266 F 0-99 , 3:25:55.6 , 10480,  Milwaukee  WI USA 
+James Mitchell, 433, 167, 167 M 0-99 , 3:27:13.6 , 10217,  Milwaukee  WI USA 
+Carol Wickboldt, 434, 267, 267 F 0-99 , 3:27:40.2 , 10089,  Clayton  WI USA 
+Ken Butler, 435, 168, 168 M 0-99 , 3:28:17.3 , 10316,  Duluth  MN USA 
+Christopher Jensen, 436, 169, 169 M 0-99 , 3:28:18.3 , 10104,  La Luz  NM USA 
+Michelle Stone, 437, 268, 268 F 0-99 , 3:29:32.6 , 10427,  Amery  WI USA 
+Jackie Caithamer, 438, 269, 269 F 0-99 , 3:30:17.7 , 10209,  Spooner  WI USA 
+Angela Burke, 439, 270, 270 F 0-99 , 3:36:08.1 , 10026,  Whitefish Bay  WI USA 
+Sean Medlock, 440, 170, 170 M 0-99 , 3:36:46.0 , 10516,  Pleasant Prairie  WI USA 
+Cara Medlock, 441, 271, 271 F 0-99 , 3:36:58.6 , 10084,  Pleasant Prairie  WI USA 
+Jennifer Malek, 442, 272, 272 F 0-99 , 3:37:01.1 , 10240,  Whitefish Bay  WI USA 
+Eileen Burke, 443, 273, 273 F 0-99 , 3:37:01.2 , 10148,  Whitefish Bay  WI USA 
+Rick Chamberlin, 444, 171, 171 M 0-99 , 3:38:12.9 , 10478,  Sauk City  WI USA 
+Amy Chamberlin, 445, 274, 274 F 0-99 , 3:38:16.4 , 10017,  Sauk City  WI USA 
+Joanne Ziarek, 446, 275, 275 F 0-99 , 3:41:22.7 , 10258,  New Berlin  WI USA 
+Terry Zietlow, 447, 172, 172 M 0-99 , 3:48:29.0 , 10554,  New Richmond  WI USA 
+Sara Posorske, 448, 276, 276 F 0-99 , 3:51:51.4 , 10505,  Westfield  IN USA 
+Adam Posorske, 449, 173, 173 M 0-99 , 3:51:51.8 , 10007,  Westfield  IN USA 
+Meg Posorske, 450, 277, 277 F 0-99 , 3:51:52.1 , 10408,  Oshkosh  WI USA 
+Joan Menke-Schaenzer, 451, 278, 278 F 0-99 , 3:52:38.6 , 10253,  Pentwater  MI USA 
+Brian Schaenzer, 452, 174, 174 M 0-99 , 3:52:43.3 , 10074,  Pentwater  MI USA 
+Eva Rosenthal, 453, 279, 279 F 0-99 , 3:53:43.2 , 10171,  La Grange  IL USA 
+Susan Schaenzer, 454, 280, 280 F 0-99 , 3:54:22.9 , 10545,  Eagan  MN USA 
+Annette Swanson, 455, 281, 281 F 0-99 , 4:02:03.2 , 10039,  St Paul  MN USA 
+Nancy Sreenan, 456, 282, 282 F 0-99 , 4:19:53.3 , 10440,  Evanston  IL USA 

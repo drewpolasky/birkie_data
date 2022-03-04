@@ -1,0 +1,381 @@
+Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City, State 
+Gabriel Winchester, 1, 1, 1, 00:45:45.7, 10170, Hayward, WI USA 
+Megan Bettendorf, 2, 1, 1, 00:47:46.2, 10353, Duluth, MN USA 
+Dylan Winchester, 3, 2, 2, 00:47:47.4, 10143, Hayward, WI USA 
+Soren Davidson, 4, 3, 3, 00:47:49.9, 10450, Minneapolis, MN USA 
+Seth Kemp, 5, 4, 4, 00:49:47.8, 10441, Duluth, MN USA 
+Charlotte Brown, 6, 2, 2, 00:49:51.3, 10111, St Paul, MN USA 
+Lucia Wyland, 7, 3, 3, 00:50:11.3, 10319, Grand Rapids, MN USA 
+Trevor Caflisch, 8, 5, 5, 00:50:55.3, 10492, Hastings, MN USA 
+Ethan Bremner, 9, 6, 6, 00:52:34.7, 10162, Ely, MN USA 
+Ryan Stewart, 10, 7, 7, 00:52:37.8, 10420, Eden Prairie, MN USA 
+Lisa Wyland, 11, 4, 4, 00:53:28.6, 10312, Grand Rapids, MN USA 
+Cody Nelson, 12, 8, 8, 00:54:49.4, 10122, Hudson, WI USA 
+Andrew Kissner, 13, 9, 9, 00:55:12.2, 10026, Pewaukee, WI USA 
+Christopher Kestly, 14, 10, 10, 00:57:47.0, 10117, Brooklyn Park, MN USA 
+Luke Dragseth, 15, 11, 11, 00:57:51.2, 10322, Whitefish Bay, WI USA 
+Mark Zimmer, 16, 12, 12, 00:58:47.7, 10337, St. Louis Park, MN USA 
+Jacob Rochell-Share, 17, 13, 13, 00:59:07.6, 10191, Minneapolis, MN USA 
+Lindy Dalberg, 18, 5, 5, 00:59:15.4, 10309, Ely, MN USA 
+Vicky Hubert, 19, 6, 6, 00:59:21.3, 10495, Faribault, MN USA 
+Brian McNamara, 20, 14, 14, 00:59:40.3, 10078, St. Paul, MN USA 
+Matthew Rees, 21, 15, 15, 00:59:56.8, 10349, Chippewa Falls, WI USA 
+Justine Jones, 22, 7, 7, 01:00:25.4, 10250, Stillwater, MN USA 
+Bob Wheeler, 23, 16, 16, 01:01:15.2, 10069, Minneapolis, MN USA 
+Erin Larson, 24, 8, 8, 01:01:29.5, 10161, Ashland, WI USA 
+Mason Craker, 25, 17, 17, 01:01:42.9, 10345, Eau Claire, WI USA 
+Laura Culhane, 26, 9, 9, 01:01:47.9, 10294, Pewaukee, WI USA 
+Duncan Meyer, 27, 18, 18, 01:02:24.9, 10142, Waterloo, IA USA 
+Joseph Miller, 28, 19, 19, 01:02:29.6, 10240, Prior Lake, MN USA 
+Jamilah Maronde, 29, 10, 10, 01:02:31.7, 10198, Chicago, IL USA 
+Steve Chase, 30, 20, 20, 01:02:36.2, 10455, Victoria, MN USA 
+Cullan Meyer, 31, 21, 21, 01:02:45.1, 10126, Waterloo, IA USA 
+Peter McIntosh, 32, 22, 22, 01:02:45.5, 10391, Fort Worth, TX USA 
+Erik Shelerud, 33, 23, 23, 01:02:46.5, 10157, Rochester, MN USA 
+Lucy McNatt, 34, 11, 11, 01:02:58.2, 10320, Needham, MA USA 
+Alice House, 35, 12, 12, 01:05:11.6, 10008, Madison, WI USA 
+Steven Anderson, 36, 24, 24, 01:05:30.7, 10459, White Bear Lake, MN USA 
+Liam Fritz, 37, 25, 25, 01:05:58.1, 10304, White Bear Lake, MN USA 
+Amelia Shankwitz, 38, 13, 13, 01:06:37.2, 10015, Minneapolis, MN USA 
+Brigitte Maronde, 39, 14, 14, 01:06:52.9, 10082, Chicago, IL USA 
+Emily Brande, 40, 15, 15, 01:07:34.6, 10151, Laramie, WY USA 
+Marcella Manivel, 41, 16, 16, 01:08:13.0, 10328, White Bear Lake, MN USA 
+Cecilia Adams, 42, 17, 17, 01:08:53.5, 10108, Westport, CT USA 
+Jody Lemons, 43, 18, 18, 01:09:07.8, 10227, Evanston, IL USA 
+Jonathan Pitzen, 44, 26, 26, 01:09:19.6, 10236, Glendale, WI USA 
+Zachary Trafton, 45, 27, 27, 01:09:32.6, 10502, Hartland, WI USA 
+Paisley Canning, 46, 19, 19, 01:10:09.7, 10380, Ames, IA USA 
+Alex Scaffidi, 47, 20, 20, 01:10:15.5, 10007, Amherst Junction, WI USA 
+Haley Penning, 48, 21, 21, 01:10:28.5, 10175, Hayward, WI USA 
+Teresa Schweizer, 49, 22, 22, 01:10:46.7, 10478, Minneapolis, MN USA 
+Audrey Scott, 50, 23, 23, 01:10:47.4, 10051, Mahtomedi, MN USA 
+William Curry, 51, 28, 28, 01:11:02.6, 10500, Hartland, WI USA 
+Hannah Mader, 52, 24, 24, 01:11:03.6, 10177, Minnetonka, MN USA 
+Karen Parker, 53, 25, 25, 01:11:51.7, 10253, Middleton, WI USA 
+Annaclaire Crowley, 54, 26, 26, 01:12:24.0, 10036, Oconomowoc, WI USA 
+Chris Bixler, 55, 29, 29, 01:12:34.9, 10112, Rice Lake, Wi, WI USA 
+Rosa Bixler, 56, 27, 27, 01:12:35.1, 10414, Rice Lake, WI USA 
+Shelly Dohlby, 57, 28, 28, 01:12:36.9, 10447, Pewaukee, WI USA 
+Stephanie Bixler, 58, 29, 29, 01:12:39.7, 10451, Rice Lake, WI USA 
+Jeff Dohlby, 59, 30, 30, 01:12:41.2, 10209, Pewaukee, WI USA 
+Karen Fischberg, 60, 30, 30, 01:12:42.3, 10251, Dousman, WI USA 
+Bill Konieczki, 61, 31, 31, 01:13:30.0, 10065, Stevens Point, WI USA 
+Sam Herro, 62, 32, 32, 01:14:22.7, 10424, Holmen, WI USA 
+Carson McNatt, 63, 33, 33, 01:14:26.1, 10102, Needham, MA USA 
+Willemijn Van Deursen, 64, 31, 31, 01:14:41.6, 10499, Rochester, MN USA 
+Amy Ehrgott, 65, 32, 32, 01:14:46.6, 10017, Oconomowoc, WI USA 
+Sam Barrette, 66, 34, 34, 01:14:53.1, 10423, Oconomowoc, WI USA 
+Ingrid Roof, 67, 33, 33, 01:15:09.4, 10186, Saint Paul, MN USA 
+Flannery Meekin, 68, 34, 34, 01:15:18.1, 10165, St. Paul, MN USA 
+Ben Haland, 69, 35, 35, 01:15:49.5, 10058, Afton, MN USA 
+Jennifer Smith, 70, 35, 35, 01:15:53.5, 10218, Maple Grove, MN USA 
+Kathleen Shankwitz, 71, 36, 36, 01:16:27.9, 10262, Minneapolis, MN USA 
+Levente O'Keeffe, 72, 36, 36, 01:16:49.6, 10303, Eagan, MN USA 
+Claire Weissman, 73, 37, 37, 01:17:50.8, 10119, St Paul, MN USA 
+Ellie Quam, 74, 38, 38, 01:18:39.6, 10503, Stillwater, MN USA 
+Gabby Law, 75, 39, 39, 01:18:39.8, 10169, White Bear Lake, MN USA 
+Anne Quam, 76, 40, 40, 01:18:42.0, 10504, Stillwater, MN USA 
+Steven Quam, 77, 37, 37, 01:18:43.3, 10505, Stillwater, MN USA 
+Jonah Giese, 78, 38, 38, 01:19:09.8, 10235, Eau Claire, WI USA 
+Erik-Jan Van Deursen, 79, 39, 39, 01:19:38.1, 10160, Rochester, MN USA 
+Sara Melius, 80, 41, 41, 01:20:39.8, 10428, Minnetrista, MN USA 
+Wil McLellan, 81, 40, 40, 01:21:09.5, 10498, La Crescent, MN USA 
+Abigail Massell, 82, 42, 42, 01:21:17.7, 10003, St Paul, MN USA 
+William Klobucar, 83, 41, 41, 01:22:04.1, 10501, Beloit, WI USA 
+Barton Guo, 84, 42, 42, 01:22:34.9, 10057, Eau Claire, WI USA 
+Thomas Mundl, 85, 43, 43, 01:22:39.3, 10483, Wausau, WI USA 
+Seth Heidorn, 86, 44, 44, 01:22:43.0, 10440, Minneapolis, MN USA 
+Marie Crowley, 87, 43, 43, 01:22:44.7, 10336, Oconomowoc, WI USA 
+A James White, 88, 45, 45, 01:23:20.1, 10518, West Bend, WI USA 
+Maya Peske, 89, 44, 44, 01:24:06.6, 10351, Sussex, WI USA 
+Greg Palmeter, 90, 46, 46, 01:24:12.0, 10174, Hartland, WI USA 
+Marian Wikerson, 91, 45, 45, 01:24:49.9, 10335, Bayside, WI USA 
+George Maling, 92, 47, 47, 01:24:56.8, 10172, Bayside, WI USA 
+Matthew Soper, 93, 48, 48, 01:25:09.9, 10350, Chicago, IL USA 
+Daniel Roth, 94, 49, 49, 01:25:13.6, 10129, Mantorville, MN USA 
+Jamie Hogberg, 95, 46, 46, 01:25:15.5, 10196, Madison, WI USA 
+Grace Neumiller, 96, 47, 47, 01:25:16.1, 10516, Mahtomedi, MN USA 
+Kelsey Halverson, 97, 48, 48, 01:25:21.1, 10275, Lake Elmo, MN USA 
+Jillian Olson, 98, 49, 49, 01:25:22.8, 10221, Mahtomedi, MN USA 
+Ross Blanshan, 99, 50, 50, 01:25:40.6, 10415, Minneapolis, MN USA 
+Taylor Foltz, 100, 50, 50, 01:25:55.5, 10476, Watertown, WI USA 
+Katie Tabbert, 101, 51, 51, 01:26:04.0, 10269, Hartland, WI USA 
+Kent Kumlien, 102, 51, 51, 01:26:16.2, 10277, Nashotah, WI USA 
+April Damitz, 103, 52, 52, 01:26:30.1, 10046, Galesville, WI USA 
+Jamie Tjornehoj, 104, 53, 53, 01:26:31.8, 10197, Hudson, WI USA 
+Ralf Dobek, 105, 52, 52, 01:26:35.7, 10398, Mchenry, IL USA 
+Matt Frank, 106, 53, 53, 01:26:48.8, 10347, Eau Claire, WI USA 
+Aaron Hjort, 107, 54, 54, 01:26:50.3, 10001, Duluth, MN USA 
+Christina Leaf, 108, 54, 54, 01:27:00.0, 10115, Minneapolis, MN USA 
+Catherine Lundgren, 109, 55, 55, 01:27:08.2, 10106, Grafton, WI USA 
+Thomas Frisque, 110, 55, 55, 01:27:52.4, 10481, Larsen, WI USA 
+Lars Arneson, 111, 56, 56, 01:28:00.5, 10293, Stoughton, WI USA 
+Caitlin Anderson, 112, 56, 56, 01:28:33.6, 10088, Ramsey, MN USA 
+Alison Nielcen, 113, 57, 57, 01:28:53.9, 10009, Iron River, WI USA 
+Kurt Schroeter, 114, 57, 57, 01:29:03.8, 10291, Northfield, MN USA 
+Laura Hughes, 115, 58, 58, 01:29:10.6, 10296, Madison, WI USA 
+Cara Fitzgerald, 116, 59, 59, 01:29:21.9, 10092, Middleton, WI USA 
+Franklin Phraner, 117, 58, 58, 01:29:32.5, 10167, Alameda, CA USA 
+Mason Cleveland, 118, 59, 59, 01:29:45.1, 10344, Merrill, WI USA 
+Nicholas Wadle, 119, 60, 60, 01:30:01.9, 10374, Beloit, WI USA 
+Steven Martin, 120, 61, 61, 01:30:45.7, 10460, Waukesha, WI USA 
+Michael Johns, 121, 62, 62, 01:30:47.9, 10359, Minneapolis, MN USA 
+Anna Schoeneberger, 122, 60, 60, 01:31:04.7, 10035, Minneapolis, MN USA 
+John Scambler, 123, 63, 63, 01:31:06.8, 10232, Oconomowoc, WI USA 
+Richard Bostwick, 124, 64, 64, 01:31:19.2, 10509, Janesville, WI USA 
+Brian Campbell, 125, 65, 65, 01:31:36.9, 10075, North St Paul, MN USA 
+Steve Craker, 126, 66, 66, 01:31:39.7, 10456, Eau Claire, WI USA 
+Kristopher Lambert, 127, 67, 67, 01:32:00.3, 10289, Minneapolis, MN USA 
+Britta Phillips, 128, 61, 61, 01:32:09.9, 10083, Bend, OR USA 
+Claire Rutherford, 129, 62, 62, 01:32:12.6, 10118, Iowa City, IA USA 
+Linda Barnes, 130, 63, 63, 01:32:53.4, 10306, Washburn, WI USA 
+Caroline Bejarano, 131, 64, 64, 01:32:55.9, 10098, Falcon Heights, MN USA 
+Karn Merriman, 132, 65, 65, 01:33:22.6, 10258, Slinger, WI USA 
+Anders Davidson, 133, 68, 68, 01:33:25.4, 10020, Minneapolis, MN USA 
+Benjamin Vrakas, 134, 69, 69, 01:33:26.5, 10062, Elm Grove, WI USA 
+Andrea Adams, 135, 66, 66, 01:33:37.0, 10021, Jackson, WI USA 
+Julie Klug, 136, 67, 67, 01:33:43.2, 10246, Mercer, WI USA 
+Patrick Seeb, 137, 70, 70, 01:34:18.9, 10384, St Paul, MN USA 
+Audrey Heidorn, 138, 68, 68, 01:34:18.9, 10050, Minneapolis, MN USA 
+Thomas Isetts, 139, 69, 69, 01:34:34.6, 10482, Milwaukee, WI USA 
+Annette Cook, 140, 70, 70, 01:34:36.8, 10042, Hudson, WI USA 
+Natalie Rigelman-Hedberg, 141, 71, 71, 01:34:37.5, 10375, Lakeville, MN USA 
+Michael Lauber, 142, 71, 71, 01:34:38.7, 10361, Milwaukee, WI USA 
+Andrew Kaczmarek, 143, 72, 72, 01:34:39.4, 10025, Milwaukee, WI USA 
+Roxann Ferguson, 144, 72, 72, 01:34:39.7, 10416, Lakeville, MN USA 
+Catherine Anderson, 145, 73, 73, 01:35:48.5, 10104, Marshfield, WI USA 
+James Grandt, 146, 73, 73, 01:35:50.8, 10193, Janesville, WI USA 
+Meghan Murphy, 147, 74, 74, 01:35:56.7, 10355, Milwaukee, WI USA 
+Kate Laing, 148, 75, 75, 01:36:05.8, 10259, Excelsior, MN USA 
+Shawna Holmes, 149, 76, 76, 01:36:33.6, 10444, Washburn, WI USA 
+Richard Rasch, 150, 74, 74, 01:36:35.9, 10404, St Paul, MN USA 
+Sarah Olson, 151, 77, 77, 01:36:45.5, 10432, Eagan, MN USA 
+Conor Ophelan, 152, 75, 75, 01:36:59.6, 10124, St. Paul, MN USA 
+Brian Kastner, 153, 76, 76, 01:37:17.2, 10077, Mosinee, WI USA 
+Steve Hughes, 154, 77, 77, 01:37:41.0, 10457, Madison, WI USA 
+Evelyn Kehtel, 155, 78, 78, 01:37:49.8, 10164, Duluth, MN USA 
+Hunter Denison, 156, 78, 78, 01:38:12.6, 10184, Rice Lake, WI USA 
+Richard Roof, 157, 79, 79, 01:38:26.6, 10405, Saint Paul, MN USA 
+Ray Schindler, 158, 80, 80, 01:38:54.5, 10401, Hayward, WI USA 
+Frances Young, 159, 79, 79, 01:39:04.0, 10166, Winona, MN USA 
+John Fennig, 160, 81, 81, 01:39:13.6, 10230, North Oaks, MN USA 
+Sophie Kurschner, 161, 80, 80, 01:39:40.0, 10449, Saint Paul, MN USA 
+Shannon Teska, 162, 81, 81, 01:39:53.2, 10443, Kewaskum, WI USA 
+Kerrie Walters, 163, 82, 82, 01:40:00.5, 10278, Minneapolis, MN USA 
+Katie Barnes, 164, 83, 83, 01:40:15.2, 10267, Sioux Falls, SD USA 
+Gail Waldron, 165, 84, 84, 01:40:15.8, 10171, Birchwood, WI USA 
+Jens Arneson, 166, 82, 82, 01:40:24.2, 10219, Stoughton, WI USA 
+Joe Halvorson, 167, 83, 83, 01:40:26.7, 10228, Inver Grove Hgts, MN USA 
+Iris Kemler Cattaneo, 168, 85, 85, 01:40:31.2, 10187, Rochester, MN USA 
+Lisa Luetmer, 169, 86, 86, 01:40:39.4, 10310, Rochester, MN USA 
+Joe Schaaf, 170, 84, 84, 01:40:54.5, 10229, Scandia, MN USA 
+Amber Shanahan, 171, 87, 87, 01:41:16.8, 10014, Hudson, WI USA 
+Melissa Puzia, 172, 88, 88, 01:41:27.0, 10358, Hayward, WI USA 
+Michelle Lenhart, 173, 89, 89, 01:41:28.9, 10367, St Paul, MN USA 
+Caroline Duncombe, 174, 90, 90, 01:41:32.9, 10099, St Paul, MN USA 
+Craig Adams, 175, 85, 85, 01:41:36.0, 10125, Hartland, WI USA 
+Benjamin Adams, 176, 86, 86, 01:41:39.9, 10059, Hartland, WI USA 
+Debra Baglow, 177, 91, 91, 01:41:48.3, 10137, Anola, MB Can 
+Megan Kania, 178, 92, 92, 01:41:50.1, 10354, Sussex, WI USA 
+Laura Gardner, 179, 93, 93, 01:41:57.5, 10295, Catonsville, MD USA 
+Harry Halvorson, 180, 87, 87, 01:41:57.5, 10179, Inver Grove Hgts, MN USA 
+Wendy Haesemeyer, 181, 94, 94, 01:42:05.6, 10497, Hudson, WI USA 
+Kathleen Young, 182, 95, 95, 01:42:08.6, 10263, Winona, MN USA 
+Traci Guzzo, 183, 96, 96, 01:42:44.0, 10489, Onalaska, WI USA 
+Hanneke Van Deursen, 184, 97, 97, 01:42:45.8, 10178, Rochester, MN USA 
+Maren Wilder, 185, 98, 98, 01:42:52.3, 10331, Rochester, MN USA 
+Phil Peterson, 186, 88, 88, 01:42:55.7, 10393, Reedsburg, WI USA 
+Stephen Webster, 187, 89, 89, 01:43:02.9, 10454, Green Bay, WI USA 
+Ray Michels, 188, 90, 90, 01:43:41.9, 10400, Cross Plains, WI USA 
+Scott Hall, 189, 91, 91, 01:43:42.6, 10437, Black Earth, WI USA 
+Holly Huso, 190, 99, 99, 01:43:44.5, 10183, Minneapolis, MN USA 
+Michael Robinson, 191, 92, 92, 01:43:51.8, 10363, Norwalk, CT USA 
+Laura Kundrat, 192, 100, 100, 01:44:01.7, 10297, St Cloud, MN USA 
+Janet Brandt, 193, 101, 101, 01:44:58.0, 10203, Red Wing, MN USA 
+Emily Wulfkuhle, 194, 102, 102, 01:45:05.7, 10154, Geneva, IL USA 
+Bria Zeuli, 195, 103, 103, 01:45:40.3, 10073, Hudson, WI USA 
+Michael Kundrat, 196, 93, 93, 01:45:52.2, 10360, Marion, OH USA 
+Kathy Muhs, 197, 104, 104, 01:45:56.3, 10266, Monona, WI USA 
+Emily Hodel, 198, 105, 105, 01:46:01.2, 10153, St. Paul, MN USA 
+Siri Bendtsen, 199, 106, 106, 01:46:01.7, 10448, Stevens Point, WI USA 
+Sarah Guhl, 200, 107, 107, 01:46:10.5, 10430, Andover, MN USA 
+Kari Gunderson, 201, 108, 108, 01:46:40.9, 10255, Cedar Rapids, IA USA 
+Caitlin King, 202, 109, 109, 01:46:45.5, 10089, St Paul, MN USA 
+Kristin Dahl, 203, 110, 110, 01:46:52.2, 10287, St Paul, MN USA 
+Catherine Genin, 204, 111, 111, 01:47:06.3, 10105, Madison, WI USA 
+Katie Schoenke, 205, 112, 112, 01:47:16.9, 10268, Rice Lake, WI USA 
+Katherine Pike, 206, 113, 113, 01:47:21.3, 10260, Madison, WI USA 
+Betsy Pike, 207, 114, 114, 01:47:21.9, 10064, Des Moines, IA USA 
+Jaclyn Beise, 208, 115, 115, 01:47:22.3, 10190, Rice Lake, WI USA 
+Carolyn Ruse, 209, 116, 116, 01:47:40.6, 10116, Madison, WI USA 
+Bob McCarthy, 210, 94, 94, 01:47:49.3, 10068, Caledonia, MN USA 
+Catherine Queiser, 211, 117, 117, 01:47:49.9, 10107, Dallas, WI USA 
+Angela Goddard, 212, 118, 118, 01:48:19.7, 10028, Saint Paul, MN USA 
+Nancy Wagner, 213, 119, 119, 01:48:20.6, 10371, St Paul, MN USA 
+Salle Beckwith, 214, 120, 120, 01:49:47.8, 10422, Hayward, WI USA 
+Heidi Speight, 215, 121, 121, 01:49:49.6, 10182, Madison, WI USA 
+James Slocum, 216, 95, 95, 01:49:57.3, 10194, Bayfield, WI USA 
+Richard Beedle, 217, 96, 96, 01:50:05.4, 10402, Eden Prairie, MN USA 
+Jon Ollinger, 218, 97, 97, 01:50:43.7, 10234, Brookfield, WI USA 
+Danielle Pederson, 219, 122, 122, 01:50:45.2, 10130, Stevens Point, WI USA 
+Bob Jackson, 220, 98, 98, 01:51:30.5, 10067, St Paul, MN USA 
+Kurt Klomberg, 221, 99, 99, 01:51:57.7, 10290, Horicon, WI USA 
+Sara Ecker, 222, 123, 123, 01:52:01.8, 10427, Trempealeau, WI USA 
+Lindsy Loesel, 223, 124, 124, 01:52:07.3, 10308, Galesville, WI USA 
+Robert Kreuser, 224, 100, 100, 01:52:11.1, 10408, Colgate, WI USA 
+Jennifer Carlson, 225, 125, 125, 01:52:30.9, 10215, Centuria, WI USA 
+Debbie Michels, 226, 126, 126, 01:52:53.4, 10135, Cross Plains, WI USA 
+Mary Hall, 227, 127, 127, 01:53:00.1, 10341, Black Earth, WI USA 
+Sandra Law, 228, 128, 128, 01:53:05.6, 10426, White Bear Lake, MN USA 
+Gerald Cohen, 229, 101, 101, 01:53:11.9, 10517, Princeton, NJ USA 
+Brett Roecker, 230, 102, 102, 01:53:16.9, 10072, Oconomowoc, WI USA 
+Steve Robertson, 231, 103, 103, 01:53:21.6, 10458, Verona, WI USA 
+Mathea Diedrich, 232, 129, 129, 01:53:53.8, 10346, De Forest, WI USA 
+Dana Diedrich, 233, 130, 130, 01:53:55.7, 10128, De Forest, WI USA 
+Rochelle Mitchell, 234, 131, 131, 01:53:58.2, 10412, Hudson, WI USA 
+Julie Turnbull, 235, 132, 132, 01:54:38.3, 10247, Edina, MN USA 
+Lyndsay Riffe, 236, 133, 133, 01:54:43.3, 10323, Milwaukee, WI USA 
+Jenifer Anderson, 237, 134, 134, 01:54:49.7, 10213, White Bear Lake, MN USA 
+Richard Clifford, 238, 104, 104, 01:55:09.7, 10403, Lake Bluff, IL USA 
+Katherine Smith, 239, 135, 135, 01:55:14.2, 10261, Minneapolis, MN USA 
+Deirdre Worrell, 240, 136, 136, 01:55:21.9, 10139, Hudson, WI USA 
+Jacalyn Evenson, 241, 137, 137, 01:55:23.1, 10188, Mounds View, MN USA 
+Randi Arnar, 242, 138, 138, 01:55:29.7, 10399, Minnetrista, MN USA 
+Mary Mollie Kee Olsen, 243, 139, 139, 01:55:30.4, 10342, Chaska, MN USA 
+Megan Beacom, 244, 140, 140, 01:55:36.0, 10352, Minneapolis, MN USA 
+Emmy Waldhart, 245, 141, 141, 01:55:39.7, 10156, Minneapolis, MN USA 
+Nicole Ryden, 246, 142, 142, 01:55:45.2, 10376, Minneapolis, MN USA 
+Leah Cournoyer, 247, 143, 143, 01:55:46.6, 10301, Minneapolis, MN USA 
+Stewart Kerr, 248, 105, 105, 01:55:59.8, 10461, Lake Forest, IL USA 
+Anakah Denison, 249, 144, 144, 01:56:04.9, 10019, Rice Lake, WI USA 
+Sheila Ramamurthy, 250, 145, 145, 01:56:09.0, 10445, Houston, TX USA 
+Brian Wifler, 251, 106, 106, 01:56:25.4, 10080, Minneapolis, MN USA 
+Erika Maas, 252, 146, 146, 01:56:41.0, 10158, Eau Claire, WI USA 
+Kim Ellis, 253, 147, 147, 01:56:41.3, 10281, Altoona, WI USA 
+Michael Peterson, 254, 107, 107, 01:56:50.9, 10362, De Forest, WI USA 
+Korri Wistrcill, 255, 148, 148, 01:57:01.5, 10283, Minneapolis, MN USA 
+Clare O'Brien, 256, 149, 149, 01:57:02.4, 10121, Minneapolis, MN USA 
+Elizabeth Gray, 257, 150, 150, 01:57:07.2, 10145, Minneapolis, MN USA 
+Margaret Rehberger, 258, 151, 151, 01:57:14.4, 10333, Pewaukee, WI USA 
+Ashley Weber, 259, 152, 152, 01:57:35.7, 10048, Pewaukee, WI USA 
+David Costanzo, 260, 108, 108, 01:58:02.1, 10131, Shoreview, MN USA 
+Sue Hughes, 261, 153, 153, 01:58:15.4, 10464, Madison, WI USA 
+Sheila Waldoch, 262, 154, 154, 01:58:27.2, 10446, North Branch, MN USA 
+Roxanne Bartsh, 263, 155, 155, 01:58:29.9, 10417, Zumbrota, MN USA 
+Andrew Denison, 264, 109, 109, 01:58:45.7, 10024, Rice Lake, WI USA 
+Joyce McCarthy, 265, 156, 156, 01:58:48.3, 10243, Caledonia, MN USA 
+Rachel Baka, 266, 157, 157, 01:59:06.4, 10396, Milwaukee, WI USA 
+Kristin Tjornehoj, 267, 158, 158, 01:59:09.7, 10288, Hudson, WI USA 
+Anna Adams, 268, 159, 159, 01:59:30.5, 10032, Hartland, WI USA 
+Ruth Harden, 269, 160, 160, 02:00:00.1, 10419, New Brighton, MN USA 
+Jennifer Hass, 270, 161, 161, 02:00:22.9, 10216, Hortonville, WI USA 
+Brooke Draxler, 271, 162, 162, 02:00:47.6, 10085, Amery, WI USA 
+Scott Gerike, 272, 110, 110, 02:00:50.1, 10436, St Paul, MN USA 
+Annika Strack, 273, 163, 163, 02:00:53.4, 10044, Hainesville, IL USA 
+Julieann Scheinoha, 274, 164, 164, 02:00:56.3, 10248, Milwaukee, WI USA 
+Brenda Bergquist, 275, 165, 165, 02:01:05.7, 10070, Woodville, WI USA 
+Linda Brand, 276, 166, 166, 02:01:50.8, 10307, Excelsior, MN USA 
+Abby Roche, 277, 167, 167, 02:02:00.7, 10002, Minneapolis, MN USA 
+Dawn Folkestad, 278, 168, 168, 02:02:08.1, 10132, Eau Claire, WI USA 
+Philip Waldhart, 279, 111, 111, 02:02:16.6, 10394, Eau Claire, WI USA 
+Ken Butler, 280, 112, 112, 02:02:25.9, 10276, Duluth, MN USA 
+Paul Waldhart, 281, 113, 113, 02:02:27.0, 10388, Eau Claire, WI USA 
+Robin Kruse, 282, 169, 169, 02:02:37.8, 10411, Ellsworth, WI USA 
+Mackenzie Zirk, 283, 170, 170, 02:02:55.5, 10325, Portland, OR USA 
+Kelly Navarro, 284, 171, 171, 02:03:02.7, 10273, Riverside, IL USA 
+Ellen Sullivan, 285, 172, 172, 02:03:29.7, 10148, Chicago, IL USA 
+Carol Klement, 286, 173, 173, 02:03:31.5, 10095, Waukesha, WI USA 
+Michelle Buelow, 287, 174, 174, 02:03:32.5, 10365, Shorewood, WI USA 
+Emily Hall, 288, 175, 175, 02:03:35.2, 10152, Tacoma, WA USA 
+Melissa Mosedale, 289, 176, 176, 02:03:49.6, 10357, Minneapolis, MN USA 
+Lisa Whitehill, 290, 177, 177, 02:03:55.3, 10311, Hopkins, MN USA 
+Sue Gador, 291, 178, 178, 02:04:13.4, 10462, West Bend, WI USA 
+Robert Hess, 292, 114, 114, 02:04:19.0, 10407, Arlington Heights, IL USA 
+Kris Eiring, 293, 179, 179, 02:04:22.1, 10284, Madison, WI USA 
+Kris Rick, 294, 180, 180, 02:04:24.7, 10285, Cedarburg, WI USA 
+Barbara Borkovec, 295, 181, 181, 02:04:37.0, 10054, Antigo, WI USA 
+Scott Lewis, 296, 115, 115, 02:04:59.5, 10438, Racine, WI USA 
+Anne Baka, 297, 182, 182, 02:05:05.8, 10037, Milwaukee, WI USA 
+Cele Bull, 298, 183, 183, 02:05:29.8, 10109, Lake Bluff, IL USA 
+Teresa Bell, 299, 184, 184, 02:06:10.4, 10477, Wayzata, MN USA 
+Dan Leman, 300, 116, 116, 02:06:15.5, 10127, Glen Ellyn, IL USA 
+Jeff Laschen, 301, 117, 117, 02:06:21.6, 10210, Woodbury, MN USA 
+Claire Zajac, 302, 185, 185, 02:06:25.5, 10120, Hudson, WI USA 
+Carolyn Queiser, 304, 187, 187, 02:06:55.3, 10100, Dallas, WI USA 
+Amanda Queiser, 305, 188, 188, 02:06:56.3, 10013, Dallas, WI USA 
+Barbara Holzhauer, 306, 189, 189, 02:07:17.9, 10055, Mequon, WI USA 
+Jason Woods, 307, 118, 118, 02:07:31.0, 10205, Savage, MN USA 
+Sarah Larson, 308, 190, 190, 02:08:15.5, 10431, Rochester, MN USA 
+Patricia Liquard, 309, 191, 191, 02:08:21.9, 10382, St Paul, MN USA 
+Timothy Larson, 310, 119, 119, 02:08:22.6, 10486, Rochester, MN USA 
+Sylvia Greene, 311, 192, 192, 02:08:56.0, 10473, Madison, WI USA 
+Joan Rudiger, 312, 193, 193, 02:08:57.9, 10224, Lakeville, MN USA 
+Maisy Brighouse Glueck, 313, 194, 194, 02:09:02.4, 10327, Madison, WI USA 
+Lynn Glueck, 314, 195, 195, 02:09:08.3, 10324, Madison, WI USA 
+Dennis Schultz, 315, 120, 120, 02:09:49.6, 10140, Franklin, WI USA 
+Erika Nelson, 316, 196, 196, 02:09:52.5, 10159, Duluth, MN USA 
+Jim Nelson, 317, 121, 121, 02:09:55.3, 10223, Eveleth, MN USA 
+Anne Ela, 318, 197, 197, 02:11:54.6, 10038, Milwaukee, WI USA 
+Carol McDonough, 319, 198, 198, 02:13:19.7, 10511, Palos Heights, IL USA 
+Karen Gredvig, 320, 199, 199, 02:13:35.3, 10252, Woodbury, MN USA 
+Heather Olson, 321, 200, 200, 02:14:31.3, 10181, Lindstrom, WI USA 
+Susan Denuccio, 322, 201, 201, 02:15:16.4, 10467, Minneapolis, MN USA 
+Dawn Gardner, 323, 202, 202, 02:15:36.0, 10133, Prior Lake, MN USA 
+Joanna Watson, 324, 203, 203, 02:16:34.0, 10225, Madison, WI USA 
+Karin Alwin, 325, 204, 204, 02:17:13.2, 10257, Waunakee, WI USA 
+Patty Riske, 326, 205, 205, 02:18:44.4, 10385, Athens, WI USA 
+Allison Riske, 327, 206, 206, 02:18:51.2, 10012, River Falls, WI USA 
+Louise Jeanne, 328, 207, 207, 02:19:10.5, 10318, Madison, WI USA 
+Suzanne Nachbor, 329, 208, 208, 02:19:20.1, 10471, Plymouth, MN USA 
+Carol Marefka, 330, 209, 209, 02:19:30.6, 10096, Burlington, WI USA 
+Kathryn Johnson, 331, 210, 210, 02:19:52.1, 10264, Woodbury, MN USA 
+Joanne Ziarek, 332, 211, 211, 02:20:23.6, 10226, New Berlin, WI USA 
+Julia Magnasco, 333, 212, 212, 02:20:25.7, 10244, Milwaukee, WI USA 
+Barb Newby, 334, 213, 213, 02:20:39.9, 10053, Brookfield, WI USA 
+Brock Beilke, 335, 122, 122, 02:21:06.5, 10507, Hayward, WI USA 
+Amy Beilke, 336, 214, 214, 02:21:10.8, 10506, Hayward, WI USA 
+Curtiss Beilke, 337, 123, 123, 02:21:21.7, 10508, Hayward, WI USA 
+Liam Rafferty, 338, 124, 124, 02:22:42.6, 10305, Minneapolis, MN USA 
+Jane Kircher, 339, 215, 215, 02:24:02.9, 10201, Shorewood, WI USA 
+Lori Kramer, 340, 216, 216, 02:24:14.0, 10316, Plymouth, MN USA 
+Lucy Ross, 341, 217, 217, 02:24:15.2, 10321, Oakdale, MN USA 
+Tracy Guo, 342, 218, 218, 02:25:12.8, 10490, Eau Claire, WI USA 
+Jim Kircher, 343, 125, 125, 02:26:12.7, 10222, Sorewoodh, WI USA 
+Brett Bergquist, 344, 126, 126, 02:26:45.9, 10071, West Bend, WI USA 
+Naomi Woods, 345, 219, 219, 02:27:41.7, 10372, Eau Claire, WI USA 
+Beth Norris, 346, 220, 220, 02:29:07.1, 10063, East Troy, WI USA 
+Ryan Thompson, 347, 127, 127, 02:30:14.5, 10421, Cumberland, WI USA 
+Rob Thompson, 348, 128, 128, 02:30:24.2, 10406, Cumberland, WI USA 
+Oceanna Clifford, 349, 221, 221, 02:31:05.0, 10379, Chicago, IL USA 
+Kevin Kernahan, 350, 129, 129, 02:31:05.9, 10279, Chicago, IL USA 
+Martin Burkel, 351, 130, 130, 02:32:36.6, 10339, Bayfield, WI USA 
+Anthony Winn, 352, 131, 131, 02:35:52.5, 10045, Holmen, WI USA 
+Sarah Winn, 353, 222, 222, 02:35:56.0, 10434, Holmen, WI USA 
+Marvin Stevenson, 354, 132, 132, 02:39:46.0, 10340, Rochester Hills, MI USA 
+Tammy Jefson, 355, 223, 223, 02:40:12.7, 10475, Madison, WI USA 
+Kelly Ewert, 356, 224, 224, 02:43:09.3, 10270, Rice Lake, WI USA 
+Tomi Lemmon, 357, 225, 225, 02:43:42.1, 10488, La Crosse, WI USA 
+Brian Bergquist, 358, 133, 133, 02:44:50.7, 10074, Woodville, WI USA 
+Bjorn Del'Haye, 359, 134, 134, 02:46:16.0, 10066, Minnetonka, MN USA 
+Els Olevier, 360, 226, 226, 02:46:17.3, 10150, Minnetonka, MN USA 
+Ron O'Neil, 361, 135, 135, 02:49:20.3, 10413, Greenbay, WI USA 
+Lori Clark, 362, 227, 227, 02:54:00.4, 10314, Stillwater, MN USA 
+Patricia Miller, 363, 228, 228, 02:54:36.0, 10383, Minneapolis, MN USA 
+Annette Swanson, 364, 229, 229, 02:55:03.1, 10043, St Paul, MN USA 
+Michael Cherry, 365, 136, 136, 02:56:14.5, 10144, Glenview, IL USA 
+Eva Rosenthal, 366, 230, 230, 02:56:55.3, 10163, La Grange, IL USA 
+Susan Schaenzer, 367, 231, 231, 02:57:00.1, 10469, Eagan, MN USA 
+Carol Wickboldt, 368, 232, 232, 02:57:15.1, 10097, Clayton, WI USA 
+Anne Haseman, 369, 233, 233, 02:57:49.1, 10039, Crystal Lake, IL USA 
+Laurel Tyler, 370, 234, 234, 03:01:00.0, 10298, Wilmette, IL USA 
+Tim Harris, 371, 137, 137, 03:02:01.6, 10484, Englewood, CO USA 
+Allison Harris, 372, 235, 235, 03:02:02.4, 10011, Englewood, CO USA 
+Lori Reed, 373, 236, 236, 03:02:07.6, 10317, Englewood, CO USA 
+Elizabeth Harris, 374, 237, 237, 03:02:10.7, 10146, Englewood, CO USA 
+Loine Hockman, 375, 238, 238, 03:13:56.4, 10313, Brandon, WI USA 
+Jamie Hall, 376, 239, 239, 03:15:16.2, 10195, Twin Lakes, WI USA 
+Emma Klomberg, 377, 240, 240, 03:38:25.0, 10155, West Allis, WI USA 
+Sandra Botham, 378, 241, 241, 03:45:20.8, 10425, Shorewood, WI USA 
+Nikki Wuestenhagen, 379, 242, 242, 04:55:22.5, 10377, River Falls, WI USA 
+Maggie Wuestenhagen, 380, 243, 243, 04:55:26.9, 10326, Boulder Junction, WI USA 
+Amy Alt, 303, 186, 186, 02:06:51.1, 18739, Chaska, MN USA 

@@ -1,45 +1,48 @@
 #random scritps for playing with birkie results data
 import math
+import argparse
 import matplotlib.pyplot as plt
 from scipy import stats
 import numpy
 import sys
 import datetime
 from bisect import bisect
+import pandas as pd
 
 
 def main():
-    tech = sys.argv[1]
-    length = sys.argv[2]
-    wave = int(sys.argv[3])
-    year = int(sys.argv[4])
-    #tech = "classic"      #skate or classic
-    #length = 'birkie'       #kortie or birkie 
-    allResults = readIn(length, tech)
-    #print(allResults[2019])
-    #resultsByYear(tech, length, allResults)
-    #allResults = readIn(length, 'skate')
-    #resultsByYear('skate', length, allResults)
-    resultsByWave(tech, length, allResults, year)
-    getWavePlacement(allResults, year, tech,length,wave, 'AndrewPolasky')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--tech", type=str, default='classic')
+    parser.add_argument("--length", type=str, default='birkie')
+    parser.add_argument("--wave", type=int, default=1)
+    parser.add_argument("--year", type=str, default='2022')
+    parser.add_argument("--plot", type=str, default='byYear')
+    parser.add_argument("--name", type=str, default='Dan Polasky')
+    args = parser.parse_args()
+
+    allResults = readIn(args.length, args.tech)
+    #print(allResults.keys())
+    #resultsByYear(args.tech, args.length, allResults)
+    #allResults = readIn(args.length, 'skate')
+    if args.plot == 'byYear':
+        resultsByYear(args.tech, args.length, allResults)
+    elif args.plot == 'byWave':
+        resultsByWave(args.tech, args.length, allResults, int(args.year))
+    elif args.plot == 'wavePlacement': 
+        getWavePlacement(allResults, int(args.year), args.tech,args.length,args.wave, args.name)
 
 def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
-    cutoffs = {'skate':{2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}}       #wave placement cutoff times, to the nearest minute
+    cutoffs = {'skate':{2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
     for year in [plot_year]:
         waves = {}
-        for racer in allResults[year]:
-            time = racer[4]
-            time = time.split(':')
-            hours = float(time[0])
-            minutes = float(time[1])
-            seconds = float(time[2][0:2])
-            seconds += 3600 * hours + 60 * minutes  
-            
-            bib = int(racer[5])
+        allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
+ 
+        for index, row in allResults[year].iterrows(): #iterate over all skiers
+            bib = int(row[' Bib Number'])
             wave = math.floor(bib / 1000)
-            
+            seconds = row['times']
             if wave in waves:
                 waves[wave].append(seconds)
             else:
@@ -48,7 +51,7 @@ def resultsByWave(tech, length, allResults, plot_year):
         prevWaveAvg = 0
         for wave in waves:    
             if len(waves[wave]) > 10:
-                print(wave)
+                #print(wave)
                 waveAvg = sum(waves[wave]) / float(len(waves[wave]))
                 waveGap = math.floor(waveAvg - prevWaveAvg)
                 if prevWaveAvg != 0:
@@ -81,25 +84,16 @@ def resultsByWave(tech, length, allResults, plot_year):
         plt.title(length + " " + tech + " Finish Times by wave for " + str(year))
         if year == plot_year:
             plt.grid(True)
-            plt.savefig('graphs/' + length + "_" + tech + " FinishTimesbyWave_" + str(year) + '.png')
+            plt.savefig('graphs/' + length + "_" + tech + "FinishTimesbyWave_" + str(year) + '.png')
             plt.show()
         else:
             plt.clf()
     #print(sum(threeGap) / float(len(threeGap)))
 
 def resultsByYear(tech, length, allResults):    #graphs histogram of results by year
-    yearTimes = {}
     for year in allResults:
-        times = []
-        for racer in allResults[year]:
-            time = racer[4]
-            time = time.split(':')
-            hours = float(time[0])
-            minutes = float(time[1])
-            seconds = float(time[2][0:2])
-            seconds += 3600 * hours + 60 * minutes
-            times.append(float(seconds))
-        yearTimes[year] = times
+        allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
+
     if tech == 'skate':
         maxT = 28000    
         minT = 5000
@@ -107,11 +101,13 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
         maxT = 32000        
         minT = 7000
     plotTimes = {}
-    for year in yearTimes:
-        plotTimes[year] = stats.kde.gaussian_kde(yearTimes[year])
+    for year in allResults:
+        plotTimes[year] = stats.kde.gaussian_kde(allResults[year]['times'])
     print(maxT)
 
     x = numpy.linspace(minT, maxT, 200)
+    plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(numpy.linspace(0, 1, len(allResults.keys())))))
+
     for year in plotTimes:
         plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
     plt.legend(prop = {'size':10})
@@ -124,29 +120,29 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.xlabel("Finishing times")
     plt.grid(True)
     plt.title(length + " " + tech + " Finish Times by year")
-    plt.savefig('graphs/'+length + "_" + tech + " FinishTimesbyYear_" + str(year) + '.png')
+    plt.savefig('graphs/'+length + "_" + tech + "FinishTimesbyYear_" + str(year) + '.png')
     plt.show()
 
-def getWavePlacement(allResults, year, tech, length, wave, skier):
-    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave
-    if tech == 'classic' and wave <10:
-        wave+=10
+def getWavePlacement(allResults, year, tech, length, target_wave, skier):
+    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave, but does have to have skied that race in that year
+    if tech == 'classic' and target_wave <10:
+        target_wave+=10
     waveTimes = []
-    for racer in allResults[year]:
-        bib = int(racer[5])
-        racer_wave = math.floor(bib / 1000)
-        if racer[0] == skier:
-            targetTime = racer[4].strip(' ')
-            targetTime = datetime.datetime.strptime(targetTime, '%H:%M:%S.%f').time()
-            #print(targetTime)
-        elif racer_wave == wave:
-            waveTime = racer[4].strip(' ')
-            waveTime = datetime.datetime.strptime(waveTime, '%H:%M:%S.%f')
-            #print(waveTime.time().isoformat())
-            waveTimes.append(waveTime.time())
+
+    allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
+
+    for index, row in allResults[year].iterrows(): #iterate over all skiers
+        bib = int(row[' Bib Number'])
+        wave = math.floor(bib / 1000)
+        #print(row['Time'], skier.lower().strip(), row['Name'].lower().strip())
+        if row['Name'].lower().strip() == skier.lower().strip():
+            targetTime = row['times']
+        elif target_wave == wave:
+            waveTime = row['times']
+            waveTimes.append(waveTime)
     waveTimes = sorted(waveTimes) 
     place = bisect(waveTimes, targetTime)
-    print('place in wave '+str(wave)+' for '+str(skier)+':') 
+    print('place in wave '+str(target_wave)+' for '+str(skier)+':') 
     print(place+1) 
     print('out of: ')
     print(len(waveTimes))       #if the wave is the wave the skier is in, this will be off by one
@@ -161,16 +157,37 @@ def parseTime(time):
     seconds += 3600 * hours + 60 * minutes
     return seconds
 
-
-def readIn(distance, technique, path='yearly_data/', start_year = 2010, end_year=2020):
+def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2022):
     years = list(range(start_year, end_year+1))
-    years.remove(2017)           
+    years.remove(2017) 
+    years.remove(2021)          
+    allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
+    for year in years:
+        #print(year)
+        yearResults = []
+        event = distance + " " + technique + " " + str(year) + ".csv"
+        year_results = pd.read_csv(path+str(year)+'/'+event)
+        if 'Time' in year_results.columns:
+            year_results[' Finish Time'] = year_results['Time']
+            year_results[' Bib Number'] = year_results['Bib']
+            year_results['Name'] = year_results['Name'].str.split(',', expand=True)[1] + ' ' + year_results['Name'].str.split(',', expand=True)[0]
+        try:
+            year_results[' Finish Time'] = pd.to_datetime(year_results[' Finish Time'].str.strip(), format='%H:%M:%S.%f')
+        except ValueError:
+            year_results[' Finish Time'] = pd.to_datetime(year_results[' Finish Time'].str.strip(), format='%H:%M:%S')
+        allResults[year] = year_results
+    return allResults
+
+def readIn_old(distance, technique, path='yearly_data/', start_year = 2010, end_year=2022):
+    years = list(range(start_year, end_year+1))
+    years.remove(2017) 
+    years.remove(2021)          
     allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
     for year in years:
         yearResults = []
         event = distance + " " + technique + " " + str(year) + ".csv"
         try:    
-            dataIn = open(path+event, 'r')
+            dataIn = open(path+str(year)+'/'+event, 'r')
             for line in dataIn:
                 l = line.split(',')
                 if l[0] != "Name":

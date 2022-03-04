@@ -1,0 +1,469 @@
+,Ovr,Sex,Div,Bib,Name,"City, State, Nation",Age,Gender,Time,Pace
+0,1,1, ,60001,"Gurarie, Samuel","Boulder, CO, US",15,M,48:28,3:07
+1,2,2, ,60049,"Mulford, Thomas","Mora, MN, US",18,M,49:09,3:10
+2,3,3, ,60002,"Kyes, Sam","Champlin, MN, US",14,M,54:36,3:31
+3,4,4,1 M-OVR,60050,"mulford, ben","MORA, MN, US",15,M,54:53,3:32
+4,5,5,2 M-OVR,60014,"Vander Zanden, Milo","Madison, WI, US",15,M,56:13,3:37
+5,6,6,3 M-OVR,60048,"Mouser, Micah","Fergus Falls, MN, US",14,M,56:21,3:38
+6,7,7,4 M-OVR,60012,"Slette, Olin","Harshaw, WI, US",13,M,56:29,3:38
+7,8,8,5 M-OVR,60017,"Johnkoski, Nicholas","Wausau, WI, US",13,M,57:15,3:41
+8,9,1, ,60502,"Ryan, Josephine","DULUTH, MN, US",13,F,59:26,3:50
+9,10,9,6 M-OVR,61451,"Teclaw, Steve","Rhinelander, WI, US",33,M,59:47,3:51
+10,11,10,7 M-OVR,60008,"Ward, Talbot","Afton, MN, US",14,M,1:00:36,3:54
+11,12,11,8 M-OVR,60031,"Rogge, Seth","Bloomer, WI, US",14,M,1:01:30,3:58
+12,13,2, ,60541,"Skustad, Ava","Ely, MN, US",15,F,1:01:36,3:58
+13,14,12,9 M-OVR,60036,"Kohl, Theo","Spooner, WI, US",13,M,1:02:40,4:02
+14,15,13,10 M-OVR,61387,"Kujala, James","Hayward, WI, US",33,M,1:02:48,4:03
+15,16,14,11 M-OVR,60027,"Hedlund, Simon","Spooner, WI, US",14,M,1:02:52,4:03
+16,17,15,12 M-OVR,61088,"Kwasny, William","Menasha, WI, US",49,M,1:03:49,4:06
+17,18,3, ,60529,"Weider, Elizabeth","SHOREWOOD, MN, US",16,F,1:03:55,4:07
+18,19,16,13 M-OVR,61384,"Hoban, Daniel","Minneapolis, MN, US",26,M,1:04:49,4:10
+19,20,17,14 M-OVR,60042,"Solveson, David","Spooner, WI, US",14,M,1:05:10,4:12
+20,21,18,15 M-OVR,60035,"Hagen, Reid","Rice Lake, WI, US",13,M,1:05:21,4:12
+21,22,19,16 M-OVR,60020,"Rooney, Sullivan","Alexandria, MN, US",13,M,1:05:22,4:13
+22,23,20,17 M-OVR,61441,"Zwiefelhofer, Brady","Chippewa Falls, WI, US",38,M,1:05:23,4:13
+23,24,21,18 M-OVR,60016,"Horning, CJ","Telluride, CO, US",13,M,1:06:30,4:17
+24,25,4,1 F-OVR,60547,"Corbett, Adalae","Minneapolis, MN, US",13,F,1:07:28,4:21
+25,26,22,19 M-OVR,60038,"Winn, Aiden","Stevens Point, WI, US",14,M,1:07:48,4:22
+26,27,5,2 F-OVR,60520,"Aldrich, Stella","Woodbury, MN, US",16,F,1:07:50,4:22
+27,28,23,20 M-OVR,60033,"Bruckner, Trevor","Plymouth, WI, US",16,M,1:08:11,4:23
+28,29,6,3 F-OVR,60542,"Saveraid, Elisabet","Saint Paul, MN, US",17,F,1:08:55,4:26
+29,30,7,4 F-OVR,60533,"Dingmann, Lila","Saint Paul, MN, US",14,F,1:09:49,4:30
+30,31,24,21 M-OVR,60021,"Ertel, Mason","Prior Lake, MN, US",17,M,1:10:47,4:33
+31,32,25,22 M-OVR,60022,"McKinney, Parker","Lake Tomahawk, WI, US",13,M,1:11:24,4:36
+32,33,8,5 F-OVR,61131,"Meyer, Sally","Eau Claire, WI, US",39,F,1:12:58,4:42
+33,34,26,23 M-OVR,61489,"Fish, Matthew","Chippewa Falls, WI, US",41,M,1:13:19,4:43
+34,35,27,24 M-OVR,60026,"Erding, Gabe","Wykoff, MN, US",17,M,1:14:24,4:47
+35,36,28,25 M-OVR,60039,"Walt, Zander","Springbrook, WI, US",13,M,1:14:31,4:48
+36,37,9,6 F-OVR,60516,"Torniainen, Rachel","Osseo, MN, US",15,F,1:14:54,4:49
+37,38,29,26 M-OVR,60024,"Grotans, Andrejs","Minneapolis, MN, US",14,M,1:14:56,4:50
+38,39,10,7 F-OVR,60503,"earl-torniainen, aili","Saint Paul, MN, US",15,F,1:15:24,4:51
+39,40,30,27 M-OVR,60046,"Thornley, Levi","Spooner, WI, US",15,M,1:15:25,4:51
+40,41,31,28 M-OVR,60025,"Erding, Isaac","Wykoff, MN, US",17,M,1:15:52,4:53
+41,42,32,29 M-OVR,61340,"Huibregtse, Tom","Cottage Grove, WI, US",27,M,1:15:55,4:53
+42,43,11,8 F-OVR,60505,"Bennett, Margaret","Wausau, WI, US",14,F,1:16:16,4:55
+43,44,12,9 F-OVR,60513,"Wahlstrand, Teckla","Eau Claire, WI, US",14,F,1:16:26,4:55
+44,45,13,10 F-OVR,61273,"Persons, Katie","Minneapolis, MN, US",33,F,1:17:09,4:58
+45,46,33,30 M-OVR,60044,"Becker, Seth","Hayward, WI, US",16,M,1:17:37,5:00
+46,47,14,11 F-OVR,60522,"Ballard, Rowan","Wausau, WI, US",14,F,1:17:48,5:01
+47,48,15,12 F-OVR,60531,"McKinney, Avery","Lake Tomahawk, WI, US",15,F,1:19:19,5:06
+48,49,34,31 M-OVR,61393,"Cutshall, Robert","Whitewater, WI, US",65,M,1:19:35,5:08
+49,50,16,13 F-OVR,60525,"Collins, Ellie","Madison, WI, US",14,F,1:19:53,5:09
+50,51,35,32 M-OVR,61452,"Towle, Aaron","Lake Bluff, IL, US",40,M,1:19:56,5:09
+51,52,17,14 F-OVR,60519,"Locher, Sophia","Madison, WI, US",14,F,1:19:57,5:09
+52,53,36,33 M-OVR,60013,"Chamberlain, Ben","Minneapolis, MN, US",14,M,1:20:11,5:10
+53,54,37,34 M-OVR,61395,"Nechuta, Mike","Hayward, WI, US",41,M,1:21:49,5:16
+54,55,18,15 F-OVR,61485,"Dabkowska, Maggie","N Barrington, IL, US",44,F,1:22:20,5:18
+55,56,38,35 M-OVR,61430,"Fider, Neil","Minneapolis, MN, US",51,M,1:22:26,5:19
+56,57,19,16 F-OVR,60548,"Maki, Greta","Hayward, WI, US",15,F,1:22:33,5:19
+57,58,20,17 F-OVR,60527,"Berens, Brooke","Hayward, WI, US",13,F,1:22:33,5:19
+58,59,21,18 F-OVR,61002,"Dodson, Andrea","Saint Paul, MN, US",43,F,1:22:53,5:20
+59,60,39,36 M-OVR,61482,"Casey, James","Golden Valley, MN, US",45,M,1:24:36,5:27
+60,61,22,19 F-OVR,61478,"Krueger, Becca","Whitefish Bay, WI, US",39,F,1:25:13,5:29
+61,62,40,37 M-OVR,61182,"Fetting, Mark","Pittsburgh, PA, US",54,M,1:25:31,5:31
+62,63,23,20 F-OVR,61272,"Ertel, Emily","Prior Lake, MN, US",46,F,1:25:56,5:32
+63,64,41,38 M-OVR,60003,"Menet, Peter","Appleton, WI, US",14,M,1:26:07,5:33
+64,65,42,39 M-OVR,60011,"Mohr, Malcolm","Sun Prairie, WI, US",14,M,1:26:07,5:33
+65,66,24,21 F-OVR,61456,"Budde, Diana","Minneapolis, MN, US",56,F,1:26:13,5:33
+66,67,43,40 M-OVR,60010,"Schultz, Archer","Shell Lake, WI, US",13,M,1:26:13,5:33
+67,68,44,41 M-OVR,61027,"Menet, Luke","Appleton, WI, US",44,M,1:26:14,5:33
+68,69,25,22 F-OVR,61314,"Pond, Erika","Minneapolis, MN, US",33,F,1:26:23,5:34
+69,70,26,23 F-OVR,60521,"Wright, Lucy","Wausau, WI, US",13,F,1:26:38,5:35
+70,71,27,24 F-OVR,60512,"Andersen, Kai","Rochester, MN, US",13,F,1:26:42,5:35
+71,72,45,42 M-OVR,61247,"Tikalsky, Greg","New Prague, , US",55,M,1:26:57,5:36
+72,73,28,25 F-OVR,61294,"Hokanson, Kate","Minneapolis, MN, US",27,F,1:27:08,5:37
+73,74,46,43 M-OVR,60015,"Matzke, Noah","Madison, WI, US",13,M,1:27:09,5:37
+74,75,47,44 M-OVR,61419,"Salisbury, Noel","Plymouth, MN, US",50,M,1:27:22,5:38
+75,76,29,26 F-OVR,61079,"Pearce, Anne","Madison, WI, US",34,F,1:28:25,5:42
+76,77,48,45 M-OVR,61085,"Baranczyk, Shawn","Rochester, MN, US",55,M,1:28:51,5:43
+77,78,49,46 M-OVR,60005,"Northey, Keaton","Minneapolis, MN, US",14,M,1:29:06,5:44
+78,79,50,47 M-OVR,61109,"Schulte, Mark","Golden Valley, MN, US",44,M,1:29:33,5:46
+79,80,30,27 F-OVR,60506,"Schulte, Lillian","Golden Valley, MN, US",14,F,1:29:34,5:46
+80,81,51,48 M-OVR,61080,"Nelson, Jerry","River Falls, WI, US",71,M,1:29:40,5:47
+81,82,31,28 F-OVR,61192,"McGuire, Sarah","Minneapolis, MN, US",53,F,1:29:48,5:47
+82,83,32,29 F-OVR,61423,"Moss, Corinne","Madison, WI, US",23,F,1:29:52,5:47
+83,84,52,49 M-OVR,61323,"Luther, Glenn","Sylvania, OH, US",63,M,1:29:58,5:48
+84,85,53,50 M-OVR,60023,"Eberly, Mason","Flagstaff, AZ, US",13,M,1:31:08,5:52
+85,86,33,30 F-OVR,61347,"Kriegel, Sarah","Webster, WI, US",29,F,1:31:32,5:54
+86,87,54,51 M-OVR,61358,"Olson, Todd","Minneapolis, MN, US",53,M,1:32:11,5:56
+87,88,55,52 M-OVR,60034,"Lock-Scamp, Lukas","Saint Paul, MN, US",18,M,1:32:13,5:56
+88,89,56,53 M-OVR,60009,"Gerber, Lyle","Minneapolis, MN, US",13,M,1:32:32,5:58
+89,90,57,54 M-OVR,61147,"Reese, Timothy","Oneonta, NY, US",46,M,1:32:56,5:59
+90,91,34,31 F-OVR,61295,"DuBois, Nora","Wentworth, NH, US",29,F,1:33:04,6:00
+91,92,58,55 M-OVR,61263,"Johnson, Eric","La Crosse, WI, US",24,M,1:33:13,6:00
+92,93,59,56 M-OVR,60004,"Hunter, Micah","Minnetonka, MN, US",14,M,1:33:16,6:01
+93,94,60,57 M-OVR,60029,"Hower, William","Woodbury, MN, US",17,M,1:33:24,6:01
+94,95,35,32 F-OVR,61143,"Ives, Amanda","Pleasant Hill, IA, US",41,F,1:33:25,6:01
+95,96,36,33 F-OVR,61196,"Wanvig, Ann","Stillwater, MN, US",46,F,1:33:37,6:02
+96,97,37,34 F-OVR,61122,"Ryan, Carrie","Duluth, MN, US",46,F,1:34:33,6:05
+97,98,38,35 F-OVR,61410,"Faubion, Madeline","Saint Paul, MN, US",27,F,1:34:37,6:06
+98,99,39,36 F-OVR,60518,"Ryan, Grace","Duluth, MN, US",13,F,1:34:43,6:06
+99,100,61,58 M-OVR,61397,"Throne, Adam","Madison, WI, US",24,M,1:35:03,6:07
+100,101,40,37 F-OVR,61123,"McLeod, Nicole","Bend, OR, US",46,F,1:35:03,6:07
+101,102,41,38 F-OVR,61382,"Hagberg, Desiree","Hayward, WI, US",28,F,1:35:16,6:08
+102,103,62,59 M-OVR,61376,"Lindsay, Thomas","Minneapolis, MN, US",45,M,1:35:25,6:09
+103,104,42,39 F-OVR,61185,"Aronson, Katie","Excelsior, MN, US",41,F,1:35:34,6:09
+104,105,43,40 F-OVR,61234,"Hynes, Ildiko","Burlington, , US",67,F,1:36:47,6:14
+105,106,44,41 F-OVR,61005,"Gurarie, Maya","Boulder, CO, US",44,F,1:36:49,6:14
+106,107,45,42 F-OVR,61317,"Wickham, Mikayla","Springbrook, WI, US",27,F,1:36:53,6:14
+107,108,46,43 F-OVR,61363,"Witkowski, Kate","Hayward, WI, US",34,F,1:36:54,6:15
+108,109,63,60 M-OVR,61405,"Schlueter, John","Saint Paul, MN, US",43,M,1:37:39,6:17
+109,110,47,44 F-OVR,61125,"Hart, Emily","Williamstown, NY, US",40,F,1:37:46,6:18
+110,111,64,61 M-OVR,61462,"Blonien, Nick","Saint Paul, MN, US",32,M,1:38:32,6:21
+111,112,65,62 M-OVR,60037,"Weiss, Peter","Bloomington, MN, US",13,M,1:38:35,6:21
+112,113,66,63 M-OVR,61162,"Stadler, Jason","New London, NH, US",51,M,1:38:45,6:22
+113,114,67,64 M-OVR,61476,"Shaw, Frank","Evanston, IL, US",69,M,1:38:46,6:22
+114,115,68,65 M-OVR,61077,"Wolfmeyer, Mark","Lake Bluff, IL, US",39,M,1:39:23,6:24
+115,116,48,45 F-OVR,60543,"Lawler, Eleanor","Madison, WI, US",13,F,1:40:49,6:30
+116,117,49,46 F-OVR,61184,"Clayton, Anna","Saint Paul, MN, US",43,F,1:40:52,6:30
+117,118,69,66 M-OVR,60047,"Westergaard, Harold","Madison, WI, US",13,M,1:40:57,6:30
+118,119,70,67 M-OVR,61469,"Westergaard, Ryan","Madison, WI, US",45,M,1:41:01,6:31
+119,120,50,47 F-OVR,60511,"Herrick, Iris","Madison, WI, US",13,F,1:41:07,6:31
+120,121,71,68 M-OVR,61070,"Herrick, Bradley","Madison, WI, US",45,M,1:41:08,6:31
+121,122,72,69 M-OVR,61442,"Newby, Mike","Eau Claire, WI, US",55,M,1:41:17,6:32
+122,123,51,48 F-OVR,61262,"Pilewskie, Juliet","Madison, WI, US",26,F,1:42:04,6:35
+123,124,52,49 F-OVR,60534,"Galde, Stephanie","Hayward, WI, US",15,F,1:42:14,6:35
+124,125,53,50 F-OVR,61296,"Owen, Natalie","Madison, WI, US",30,F,1:42:23,6:36
+125,126,54,51 F-OVR,61071,"Wahlstrand, Disa","Eau Claire, WI, US",51,F,1:42:29,6:36
+126,127,73,70 M-OVR,61491,"Mueller, Kurt","La Crosse, WI, US",58,M,1:42:36,6:37
+127,128,74,71 M-OVR,61344,"Fredisdorf, Mark","Oak Park, IL, US",66,M,1:42:48,6:37
+128,129,55,52 F-OVR,60517,"Wenz, Katrin","Minneapolis, MN, US",14,F,1:42:56,6:38
+129,130,56,53 F-OVR,61438,"Shaw, Meg","EVANSTON, IL, US",62,F,1:43:16,6:39
+130,131,57,54 F-OVR,60537,"Lee, Norah","Neenah, WI, US",15,F,1:43:44,6:41
+131,132,58,55 F-OVR,61356,"Schouweiler, Martha","Irma, WI, US",66,F,1:44:10,6:43
+132,133,59,56 F-OVR,61099,"Bell, Lucia","Hudson, WI, US",55,F,1:44:30,6:44
+133,134,75,72 M-OVR,61098,"Bell, Brian","Hudson, WI, US",55,M,1:44:31,6:44
+134,135,60,57 F-OVR,61133,"Gebhardt, Katherin","Stevens Point, WI, US",39,F,1:44:33,6:44
+135,136,76,73 M-OVR,61434,"Boone, Logan","Evergreen, CO, US",37,M,1:44:44,6:45
+136,137,77,74 M-OVR,61293,"Theisen, John","Minneapolis, MN, US",28,M,1:45:05,6:46
+137,138,78,75 M-OVR,61443,"Peterson, Sam","Madison, WI, US",25,M,1:45:06,6:46
+138,139,79,76 M-OVR,61107,"Indudhara, Vivek","Seattle, WA, US",32,M,1:46:02,6:50
+139,140,61,58 F-OVR,61366,"Scheele, Taylor","Minneapolis, MN, US",28,F,1:46:04,6:50
+140,141,80,77 M-OVR,61449,"Leschensky, Jeff","Decorah, IA, US",54,M,1:46:06,6:50
+141,142,62,59 F-OVR,60539,"Scheele, Esther","Saint Cloud, MN, US",19,F,1:46:08,6:50
+142,143,63,60 F-OVR,61414,"Larson, Katie","Eau Claire, WI, US",37,F,1:46:27,6:52
+143,144,64,61 F-OVR,61495,"Weisinger, Sydney","Austin, MN, US",30,F,1:47:05,6:54
+144,145,65,62 F-OVR,61275,"Holmes, Sara","Rochester, MN, US",21,F,1:47:24,6:55
+145,146,81,78 M-OVR,61415,"Mitchell, Brent","Hudson, WI, US",49,M,1:47:49,6:57
+146,147,82,79 M-OVR,60045,"Jones, Robert","Long Lake, MN, US",17,M,1:49:16,7:02
+147,148,66,63 F-OVR,61205,"Edseth, Jordan","Rosholt, WI, US",33,F,1:49:22,7:03
+148,149,83,80 M-OVR,60041,"Grasse, Thomas","Hortonville, WI, US",13,M,1:49:37,7:04
+149,150,84,81 M-OVR,61500,"Roznik, Bill","Fitchburg, WI, US",34,M,1:49:54,7:05
+150,151,67,64 F-OVR,61417,"Reinhart, Anne","Onalaska, WI, US",60,F,1:50:14,7:06
+151,152,85,82 M-OVR,61460,"Lucke, Stephen","Minneapolis, MN, US",64,M,1:50:17,7:06
+152,153,68,65 F-OVR,61264,"Clarke, Alexandra","Madison, WI, US",31,F,1:50:33,7:07
+153,154,69,66 F-OVR,61254,"Tarpey, Juliana","Seattle, WA, US",32,F,1:51:02,7:09
+154,155,86,83 M-OVR,61367,"Parker, Eric","Waterford, WI, US",60,M,1:51:22,7:11
+155,156,70,67 F-OVR,61084,"Recker, Ellen","Plymouth, MN, US",33,F,1:51:22,7:11
+156,157,87,84 M-OVR,61244,"Leece, Randall","Elkhorn, WI, US",69,M,1:52:01,7:13
+157,158,71,68 F-OVR,61052,"Ferrante, Jennifer","Westport, CT, US",52,F,1:52:04,7:13
+158,159,72,69 F-OVR,61086,"Newby, Becky","Eau Claire, WI, US",55,F,1:52:18,7:14
+159,160,73,70 F-OVR,61404,"Johnson, Gina","Park Ridge, IL, US",23,F,1:52:27,7:15
+160,161,88,85 M-OVR,61101,"Ruzek, Bruce","Mosinee, WI, US",61,M,1:52:29,7:15
+161,162,74,71 F-OVR,61418,"Reinhart, Jessica","Minneapolis, MN, US",25,F,1:52:31,7:15
+162,163,89,86 M-OVR,61486,"Tardrew, Steve","Madison, WI, US",57,M,1:52:41,7:16
+163,164,75,72 F-OVR,60546,"Mitchell, Adeline","Hudson, WI, US",15,F,1:52:46,7:16
+164,165,90,87 M-OVR,61391,"Yardas, Nicolas","Washington, DC, US",26,M,1:53:01,7:17
+165,166,76,73 F-OVR,61461,"Wolford, Amy","Golden Valley, MN, US",46,F,1:53:03,7:17
+166,167,91,88 M-OVR,61093,"NIEBLER, JOSEPH","Sussex, WI, US",54,M,1:53:24,7:18
+167,168,92,89 M-OVR,61269,"Welch, Jacob","Cross Plains, WI, US",32,M,1:53:29,7:19
+168,169,93,90 M-OVR,61023,"Peller, Jeffrey","Naperville, IL, US",60,M,1:54:06,7:21
+169,170,94,91 M-OVR,61290,"Thomas, Dashiell","Saint Paul, MN, US",32,M,1:55:01,7:25
+170,171,95,92 M-OVR,61165,"Case, Michael","Butternut, WI, US",57,M,1:55:30,7:27
+171,172,96,93 M-OVR,61494,"Jarzemsky, Daniel","Lake Geneva, WI, US",67,M,1:55:52,7:28
+172,173,97,94 M-OVR,60018,"Parmann, Vince","Oconomowoc, WI, US",13,M,1:55:58,7:28
+173,174,77,74 F-OVR,60544,"Sjogren, Elsa","Golden Valley, MN, US",13,F,1:56:12,7:29
+174,175,78,75 F-OVR,61406,"Sjogren, Merrie","Minneapolis, MN, US",45,F,1:56:15,7:29
+175,176,98,95 M-OVR,61041,"Cullinan, Derk","New York, NY, US",48,M,1:56:23,7:30
+176,177,79,76 F-OVR,61424,"Malone, Shealyn","Madison, WI, US",35,F,1:56:34,7:31
+177,178,99,96 M-OVR,61303,"Brunsberg, Jacob","Minneapolis, MN, US",35,M,1:56:57,7:32
+178,179,100,97 M-OVR,60040,"Grasse, David","Hortonville, WI, US",13,M,1:57:40,7:35
+179,180,101,98 M-OVR,61124,"Anderson, Jim","Frontenac, MN, US",60,M,1:57:52,7:36
+180,181,80,77 F-OVR,61078,"Wilson, Kelsey","Minocqua, WI, US",31,F,1:58:01,7:36
+181,182,81,78 F-OVR,61206,"Piehler, Molly","Madison, WI, US",30,F,1:58:19,7:37
+182,183,82,79 F-OVR,61225,"Keating, Elizabeth","Salt Lake City, UT, US",35,F,1:58:23,7:38
+183,184,83,80 F-OVR,61200,"Thomsen, Stephanie","Madison, WI, US",40,F,1:58:29,7:38
+184,185,84,81 F-OVR,60526,"West, Hannah","Edina, MN, US",18,F,1:58:38,7:39
+185,186,102,99 M-OVR,61257,"Wolff, Raymond","Arlington Heights, IL, US",43,M,1:58:52,7:40
+186,187,85,82 F-OVR,61465,"Moritz, Emily","Saint Michael, MN, US",31,F,1:58:59,7:40
+187,188,103,100 M-OVR,61203,"Mossing, Dan","Minneapolis, MN, US",30,M,1:59:17,7:41
+188,189,104,101 M-OVR,61428,"Chapman, Justin","Ames, IA, US",28,M,1:59:29,7:42
+189,190,105,102 M-OVR,61471,"Schultz, Carl","Oconomowoc, WI, US",62,M,2:00:12,7:45
+190,191,86,83 F-OVR,61484,"Knutson, Marit","Saint Paul, MN, US",38,F,2:00:19,7:45
+191,192,106,103 M-OVR,61134,"Steward, Dave","Hudson, WI, US",57,M,2:00:47,7:47
+192,193,87,84 F-OVR,61422,"Trainor, Elizabeth","Maple Grove, MN, US",23,F,2:01:09,7:48
+193,194,88,85 F-OVR,61507,"Gallagher, Celia","Milwaukee, WI, US",24,F,2:01:50,7:51
+194,195,107,104 M-OVR,60043,"Eggert, Luke","verona, WI, US",16,M,2:02:22,7:53
+195,196,89,86 F-OVR,61034,"Cowan, Angela","Mendota Heights, MN, US",34,F,2:02:30,7:54
+196,197,90,87 F-OVR,61267,"Broshar, Molly","Saint Paul, MN, US",38,F,2:02:35,7:54
+197,198,91,88 F-OVR,61280,"Klenz, Kendra","Minneapolis, MN, US",27,F,2:02:43,7:55
+198,199,108,105 M-OVR,61288,"Boylan, Patrick","Saint Paul, MN, US",54,M,2:02:54,7:55
+199,200,92,89 F-OVR,61178,"Edseth, Karleah","Stevens Point, WI, US",32,F,2:02:56,7:55
+200,201,93,90 F-OVR,61215,"Coulter, Sara","Faribault, MN, US",43,F,2:03:06,7:56
+201,202,109,106 M-OVR,60032,"Carbone, Raymond","Stillwater, MN, US",15,M,2:03:10,7:56
+202,203,94,91 F-OVR,61490,"Mueller, Mary","La Crosse, WI, US",59,F,2:03:35,7:58
+203,204,95,92 F-OVR,61331,"Young, Kathleen","Winona, MN, US",52,F,2:03:46,7:59
+204,205,96,93 F-OVR,61501,"Hartford, Marcy","Saint Paul, MN, US",56,F,2:04:06,8:00
+205,206,97,94 F-OVR,61302,"Brunsberg, Katherine","Minneapolis, MN, US",34,F,2:04:13,8:00
+206,207,110,107 M-OVR,61479,"Zirk, Randall","Madison, WI, US",76,M,2:04:15,8:00
+207,208,98,95 F-OVR,61348,"Kearley, Ruth","Madison, WI, US",60,F,2:04:18,8:01
+208,209,111,108 M-OVR,61385,"Jacobs, Luke","Bath, ME, US",27,M,2:04:37,8:02
+209,210,112,109 M-OVR,61255,"Patrick, Jonathan","Arlington Heights, IL, US",42,M,2:04:42,8:02
+210,211,113,110 M-OVR,61311,"Howe, Chris","Minneapolis, MN, US",51,M,2:04:44,8:02
+211,212,99,96 F-OVR,60535,"Howe, Kasja","Minneapolis, MN, US",13,F,2:04:47,8:03
+212,213,100,97 F-OVR,61427,"Noel, Lori","Minneapolis, MN, US",64,F,2:04:58,8:03
+213,214,101,98 F-OVR,61204,"Callaghan, Bridget","Minneapolis, MN, US",29,F,2:06:01,8:07
+214,215,102,99 F-OVR,61342,"Hansen, Amy","Hayward, WI, US",29,F,2:06:02,8:07
+215,216,103,100 F-OVR,61402,"Vamstad, Hillary","Saint Paul, MN, US",36,F,2:06:07,8:08
+216,217,114,111 M-OVR,61277,"Bennett, Jennifer","Green Bay, WI, US",35,M,2:06:26,8:09
+217,218,115,112 M-OVR,61042,"Collins, Steve","Middletown, CT, US",47,M,2:06:38,8:10
+218,219,104,101 F-OVR,61313,"Kocha, MaryClaire","Burlington, WI, US",23,F,2:06:47,8:10
+219,220,105,102 F-OVR,61448,"Lucente, Liz","Eagan, MN, US",40,F,2:07:11,8:12
+220,221,116,113 M-OVR,61349,"Kandziora, Dale","Oconomowoc, WI, US",50,M,2:07:34,8:13
+221,222,106,103 F-OVR,61289,"Brunsberg, Jordan","Saint Paul, MN, US",32,F,2:08:09,8:16
+222,223,107,104 F-OVR,61117,"Welch, Marianne","Birchwood, WI, US",59,F,2:08:52,8:18
+223,224,117,114 M-OVR,61467,"Margolis, Jeff","MINNEAPOLIS, MN, US",52,M,2:09:06,8:19
+224,225,108,105 F-OVR,61473,"Gottlieb, Rachel","Rosholt, WI, US",43,F,2:09:07,8:19
+225,226,118,115 M-OVR,61487,"Truax, Alex","Circle Pines, MN, US",29,M,2:09:27,8:21
+226,227,119,116 M-OVR,61256,"Stannis, Brian","Arlington Heights, IL, US",45,M,2:09:33,8:21
+227,228,109,106 F-OVR,61468,"Sobieck, Mykala","Luxemburg, WI, US",25,F,2:09:38,8:21
+228,229,110,107 F-OVR,61499,"Olson, Patricia","Madison, WI, US",62,F,2:09:50,8:22
+229,230,120,117 M-OVR,61106,"Peterson, Charles","Swatara, MN, US",69,M,2:10:01,8:23
+230,231,111,108 F-OVR,61464,"Moritz, Mary","Saint Michael, MN, US",21,F,2:10:18,8:24
+231,232,112,109 F-OVR,61481,"Zirk, Jennifer","Milwaukee, WI, US",30,F,2:10:27,8:24
+232,233,121,118 M-OVR,61026,"Stampen, Jacob","Waunakee, WI, US",83,M,2:11:06,8:27
+233,234,113,110 F-OVR,61304,"Burke, Lara","West Allis, WI, US",34,F,2:11:06,8:27
+234,235,114,111 F-OVR,61197,"Conway, Deb","Mount Horeb, WI, US",56,F,2:11:08,8:27
+235,236,122,119 M-OVR,61186,"Johnson, Ben","Rochester, MN, US",25,M,2:11:10,8:27
+236,237,115,112 F-OVR,61320,"Forbes, Christi","Hayward, WI, US",37,F,2:11:17,8:28
+237,238,123,120 M-OVR,60019,"Luecke, Teddy","Waukesha, WI, US",14,M,2:11:19,8:28
+238,239,116,113 F-OVR,61110,"Silerio, Corabel","Chicago, IL, US",32,F,2:11:23,8:28
+239,240,124,121 M-OVR,61243,"Anderson, Karl","Cedar Rapids, IA, US",57,M,2:11:32,8:29
+240,241,125,122 M-OVR,61111,"Gerharz, Peter","Chicago, IL, US",42,M,2:11:32,8:29
+241,242,117,114 F-OVR,61512,"Owen, Stephanie","Minneapolis, MN, US",52,F,2:11:34,8:29
+242,243,118,115 F-OVR,61354,"McCombs, Erin","Oregon, WI, US",51,F,2:11:44,8:29
+243,244,119,116 F-OVR,60545,"Gottlieb, Isabella","Rosholt, WI, US",14,F,2:11:51,8:30
+244,245,120,117 F-OVR,61061,"Majerczak, Heidi","Park ridge, IL, US",49,F,2:11:55,8:30
+245,246,126,123 M-OVR,61305,"Raymond, Seth","West Allis, WI, US",36,M,2:12:05,8:31
+246,247,121,118 F-OVR,61390,"McCloskey, Anna","Minneapolis, MN, US",25,F,2:13:05,8:35
+247,248,122,119 F-OVR,61463,"McCarthy, Sandra","plymouth, MN, US",49,F,2:13:06,8:35
+248,249,123,120 F-OVR,61121,"Lau, Julie","Portland, OR, US",55,F,2:13:16,8:35
+249,250,124,121 F-OVR,61502,"Froelich, Anne","West St Paul, MN, US",35,F,2:13:16,8:35
+250,251,125,122 F-OVR,61299,"Merriman, Karn","Slinger, WI, US",59,F,2:13:27,8:36
+251,252,127,124 M-OVR,61054,"Berk, Matthew","Philadelphia, PA, US",47,M,2:13:49,8:37
+252,253,128,125 M-OVR,60030,"Overman, Dylan","Hayward, WI, US",18,M,2:13:51,8:38
+253,254,129,126 M-OVR,61431,"King, Brian","Alpharetta, GA, US",61,M,2:13:53,8:38
+254,255,126,123 F-OVR,61198,"Holick, Holly","Hancock, WI, US",56,F,2:13:58,8:38
+255,256,130,127 M-OVR,61346,"Hower, Todd","Woodbury, MN, US",50,M,2:14:01,8:38
+256,257,127,124 F-OVR,61097,"Daman, Megan","Minneapolis, MN, US",42,F,2:14:39,8:41
+257,258,131,128 M-OVR,61014,"Peter, Richard","Rochester, MN, US",77,M,2:14:43,8:41
+258,259,128,125 F-OVR,61116,"Alvestad, Sarah","Lemont, IL, US",52,F,2:15:13,8:43
+259,260,129,126 F-OVR,61202,"Roe, Mary","Villa Park, IL, US",60,F,2:15:21,8:43
+260,261,130,127 F-OVR,61510,"Kall, Mikaela","Rochester, MN, US",29,F,2:15:44,8:45
+261,262,131,128 F-OVR,61004,"Ostby, Keri","Rochester, MN, US",44,F,2:16:01,8:46
+262,263,132,129 M-OVR,61360,"Hakanson, Karl","Saint Paul, MN, US",64,M,2:16:04,8:46
+263,264,132,129 F-OVR,61166,"Michalski, Maureen","Minneapolis, MN, US",44,F,2:16:16,8:47
+264,265,133,130 M-OVR,61472,"Gottlieb, Timothy","Rosholt, WI, US",44,M,2:16:34,8:48
+265,266,133,130 F-OVR,60523,"Smitten, Adeline","Marine On Saint Croix, MN, US",14,F,2:16:41,8:49
+266,267,134,131 M-OVR,61081,"Seibak, Gary","Sussex, WI, US",59,M,2:16:50,8:49
+267,268,135,132 M-OVR,61421,"Kramer, Kevin","Minneapolis, MN, US",53,M,2:16:53,8:49
+268,269,134,131 F-OVR,61032,"Ciechanowski, Kay","Melrose, WI, US",63,F,2:16:57,8:50
+269,270,136,133 M-OVR,61152,"Meendering, Grady","Springfield, MN, US",24,M,2:17:00,8:50
+270,271,137,134 M-OVR,61229,"Johnson, Tim","Onalaska, WI, US",55,M,2:17:15,8:51
+271,272,135,132 F-OVR,61055,"Manock, Amanda","La Crosse, WI, US",44,F,2:17:32,8:52
+272,273,136,133 F-OVR,60524,"Nidersson, Pinty","Stillwater, MN, US",17,F,2:17:46,8:53
+273,274,137,134 F-OVR,61413,"Greven, Pat","Portage, WI, US",72,F,2:17:57,8:53
+274,275,138,135 F-OVR,61139,"Kelly, Megan","Minnetonka, MN, US",33,F,2:18:06,8:54
+275,276,139,136 F-OVR,61334,"Rykken, Joni","Prior Lake, MN, US",56,F,2:18:16,8:55
+276,277,138,135 M-OVR,61096,"Jeanne, Bob","Madison, WI, US",80,M,2:18:33,8:56
+277,278,140,137 F-OVR,61213,"Bolwerk, Emily","Milwaukee, WI, US",28,F,2:18:58,8:57
+278,279,139,136 M-OVR,61214,"Morrell, Alexander","Milwaukee, WI, US",28,M,2:19:12,8:58
+279,280,141,138 F-OVR,61220,"Caskey, Anita","Minneapolis, MN, US",44,F,2:19:21,8:59
+280,281,140,137 M-OVR,61040,"OJIBWAY, BRENDEN","Barneveld, WI, US",22,M,2:19:59,9:01
+281,282,142,139 F-OVR,61316,"Davenport, Anna","Hudson, WI, US",20,F,2:20:27,9:03
+282,283,143,140 F-OVR,61433,"Boone, Kara","Evergreen, CO, US",35,F,2:20:54,9:05
+283,284,144,141 F-OVR,61435,"Dickey, Laura","Stevens Point, WI, US",32,F,2:20:57,9:05
+284,285,141,138 M-OVR,61369,"Hasselbacher, Kevin","Madison, WI, US",34,M,2:21:03,9:05
+285,286,142,139 M-OVR,61067,"Hein, Dan","Neenah, WI, US",50,M,2:21:05,9:06
+286,287,145,142 F-OVR,60510,"Hein, Delilah","Neenah, WI, US",14,F,2:21:27,9:07
+287,288,146,143 F-OVR,61230,"Nelson Roenfeldt, Kirsten","St. Cloud, MN, US",42,F,2:21:30,9:07
+288,289,143,140 M-OVR,61146,"Sonnenberg, Eric","Saint Paul, MN, US",43,M,2:22:06,9:10
+289,290,144,141 M-OVR,61420,"Somers, Todd","Milwaukee, WI, US",49,M,2:22:07,9:10
+290,291,147,144 F-OVR,61089,"Foy, Jane","Chicago, IL, US",35,F,2:22:21,9:11
+291,292,148,145 F-OVR,61492,"Hoffman, Brandi","West Saint Paul, MN, US",45,F,2:22:37,9:12
+292,293,149,146 F-OVR,61179,"Kovar, Adrienne","Stillwater, MN, US",39,F,2:22:46,9:12
+293,294,150,147 F-OVR,61180,"Diehl, Jen","Flagstaff, AZ, US",24,F,2:22:46,9:12
+294,295,145,142 M-OVR,61151,"Meendering, Darrin","Springfield, MN, US",55,M,2:22:56,9:13
+295,296,151,148 F-OVR,61029,"Seth, Kellie","Stillwater, MN, US",47,F,2:23:37,9:15
+296,297,152,149 F-OVR,61016,"Stevenson, Katherine","Shorewood, WI, US",61,F,2:23:49,9:16
+297,298,146,143 M-OVR,61028,"Carbone, Henry","Stillwater, MN, US",47,M,2:23:52,9:16
+298,299,153,150 F-OVR,61378,"Zincke, Maggie","Milwaukee, WI, US",51,F,2:24:20,9:18
+299,300,154,151 F-OVR,61053,"Kemler Cattaneo, Iris","Rochester, MN, US",59,F,2:24:26,9:19
+300,301,155,152 F-OVR,61019,"Hunter, Becky","Minnetonka, MN, US",48,F,2:25:01,9:21
+301,302,147,144 M-OVR,61506,"Baker, Michael","Saint Paul, MN, US",74,M,2:25:25,9:22
+302,303,156,153 F-OVR,61137,"Kelly, Maura","Minneapolis, MN, US",30,F,2:27:00,9:29
+303,304,157,154 F-OVR,61389,"Oase, Alison","Minneapolis, MN, US",44,F,2:27:09,9:29
+304,305,148,145 M-OVR,61167,"Ohlman, Michael","Oak Park, IL, US",47,M,2:27:12,9:29
+305,306,158,155 F-OVR,61345,"Hower, Sara","Woodbury, MN, US",50,F,2:27:29,9:30
+306,307,159,156 F-OVR,61437,"King, Katrina","Madison, WI, US",23,F,2:27:33,9:31
+307,308,160,157 F-OVR,61037,"Miller, Kari","Wayzata, , US",57,F,2:27:56,9:32
+308,309,161,158 F-OVR,61038,"Beecham, Kim","Saint Paul, MN, US",60,F,2:28:01,9:32
+309,310,162,159 F-OVR,61454,"Lange, Katherine","Hudson, WI, US",28,F,2:28:05,9:33
+310,311,163,160 F-OVR,61068,"Webster, Mary","MINNEAPOLIS, MN, US",47,F,2:28:12,9:33
+311,312,164,161 F-OVR,60532,"Kubusek-Tang, Clementine","Wayzata, MN, US",13,F,2:28:13,9:33
+312,313,149,146 M-OVR,61113,"Jensen, Jim","Lino Lakes, MN, US",59,M,2:28:23,9:34
+313,314,165,162 F-OVR,61060,"Smith, Kate","Minneapolis, MN, US",64,F,2:28:27,9:34
+314,315,150,147 M-OVR,61161,"Cernohous, Adam","River Falls, WI, US",41,M,2:28:40,9:35
+315,316,166,163 F-OVR,61374,"Boruff, Abby","Minneapolis, MN, US",37,F,2:28:54,9:36
+316,317,167,164 F-OVR,61227,"Ralston, Kristina","Saint Paul, MN, US",46,F,2:29:10,9:37
+317,318,168,165 F-OVR,61241,"Towle, Lauren","Lake Bluff, IL, US",35,F,2:29:11,9:37
+318,319,169,166 F-OVR,61351,"Seacrist, Melissa","Saint Paul, MN, US",53,F,2:29:15,9:37
+319,320,170,167 F-OVR,61337,"Markworth, Jen","Minneapolis, MN, US",53,F,2:29:32,9:38
+320,321,171,168 F-OVR,61327,"Diedrich, Susan","Hayward, WI, US",57,F,2:29:44,9:39
+321,322,172,169 F-OVR,61508,"Oberg, Kristine","Minneapolis, MN, US",58,F,2:29:56,9:40
+322,323,151,148 M-OVR,61425,"Schaaf, Joe","Scandia, MN, US",22,M,2:30:01,9:40
+323,324,173,170 F-OVR,61285,"Johnston, Denise","Lac Du Flambeau, WI, US",62,F,2:30:07,9:41
+324,325,174,171 F-OVR,60528,"Costanzo-Adkins, Dominica","Madison, WI, US",13,F,2:30:18,9:41
+325,326,152,149 M-OVR,61511,"Gralla, Benjamin","Lake Bluff, IL, US",75,M,2:30:21,9:41
+326,327,175,172 F-OVR,60508,"Hein, Elisa","Neenah, WI, US",17,F,2:30:34,9:42
+327,328,153,150 M-OVR,61307,"Koeller, David","Portland, OR, US",65,M,2:30:40,9:43
+328,329,176,173 F-OVR,61259,"Costanzo, Christine","Madison, WI, US",55,F,2:30:45,9:43
+329,330,177,174 F-OVR,60540,"Zenzick, Annalise","Neenah, WI, US",16,F,2:30:45,9:43
+330,331,154,151 M-OVR,61224,"Young, Bryan","Salt Lake City, UT, US",34,M,2:30:50,9:43
+331,332,178,175 F-OVR,61218,"Rios-Keating, Catherine","Saint Paul, MN, US",33,F,2:30:52,9:43
+332,333,179,176 F-OVR,60509,"Hein, AnnaSophia","Neenah, WI, US",15,F,2:30:59,9:44
+333,334,180,177 F-OVR,61403,"Lindsay, Aindrea","HAYWARD, WI, US",45,F,2:31:39,9:46
+334,335,155,152 M-OVR,61328,"Farwick, Gage","Milwaukee, WI, US",28,M,2:31:39,9:46
+335,336,181,178 F-OVR,61326,"Hehemann, Sarah","Chicago, IL, US",26,F,2:31:45,9:47
+336,337,156,153 M-OVR,61286,"Holman, Glenn","Faribault, MN, US",79,M,2:32:14,9:49
+337,338,182,179 F-OVR,61189,"Luecke, Heather","Waukesha, WI, US",47,F,2:32:15,9:49
+338,339,183,180 F-OVR,61308,"Ordway, Brianne","New Richmond, WI, US",40,F,2:32:28,9:50
+339,340,157,154 M-OVR,61513,"Mullen, Michael","Cedarburg, WI, US",59,M,2:32:33,9:50
+340,341,184,181 F-OVR,61066,"Hein, Leia","neenah, WI, US",21,F,2:32:50,9:51
+341,342,185,182 F-OVR,60507,"HEIN, RAINA","Neenah, WI, US",19,F,2:32:51,9:51
+342,343,186,183 F-OVR,61100,"Nelson, Kimberly","Norway, MI, US",59,F,2:32:56,9:51
+343,344,187,184 F-OVR,61503,"Carlson, Patty","Minnetonka, MN, US",62,F,2:33:51,9:55
+344,345,158,155 M-OVR,61082,"Katsis, James","Chicago, IL, US",36,M,2:33:52,9:55
+345,346,188,185 F-OVR,61283,"Wabiszewski, Leah","Mequon, WI, US",33,F,2:33:55,9:55
+346,347,189,186 F-OVR,61183,"Fetting, Michele","Pittsburgh, PA, US",54,F,2:34:02,9:56
+347,348,190,187 F-OVR,61193,"Alio, Janet","Waupun, WI, US",60,F,2:34:06,9:56
+348,349,191,188 F-OVR,61361,"Peterson, Patricia","Windsor, WI, US",63,F,2:34:11,9:56
+349,350,159,156 M-OVR,61371,"Owen, Carl","De Forest, WI, US",63,M,2:34:14,9:57
+350,351,192,189 F-OVR,61350,"Conway, Christine","Sun Prairie, WI, US",58,F,2:34:15,9:57
+351,352,193,190 F-OVR,61160,"Losinski, Victoria","River Falls, WI, US",40,F,2:34:43,9:58
+352,353,194,191 F-OVR,61411,"Nevergall, Rachel","Minneapolis, MN, US",39,F,2:34:54,9:59
+353,354,195,192 F-OVR,61447,"Barta, Allison","Cass Lake, MN, US",65,F,2:35:26,10:01
+354,355,196,193 F-OVR,61439,"Holmquist, Marie","Winona, MN, US",62,F,2:35:31,10:01
+355,356,197,194 F-OVR,61043,"Hasler, Kim","Neenah, WI, US",51,F,2:35:31,10:02
+356,357,198,195 F-OVR,61065,"Hein, Jennifer","Neenah, WI, US",49,F,2:35:37,10:02
+357,358,160,157 M-OVR,61163,"Randolph, Bryan","Moultonborough, NH, US",38,M,2:36:19,10:05
+358,359,199,196 F-OVR,61436,"Krivda, Mary","Kensington, MD, US",59,F,2:36:29,10:05
+359,360,200,197 F-OVR,61444,"Harrigan, Laura","Cedarburg, WI, US",65,F,2:36:40,10:06
+360,361,161,158 M-OVR,61108,"Brown, Jim","Missoula, MT, US",83,M,2:36:47,10:06
+361,362,201,198 F-OVR,61135,"Frame, Wendy","Minneapolis, MN, US",51,F,2:36:59,10:07
+362,363,202,199 F-OVR,61136,"Patzer, Colleen","Milwaukee, WI, US",51,F,2:37:02,10:07
+363,364,203,200 F-OVR,61195,"Sorenson, Mary","Duluth, MN, US",69,F,2:37:06,10:08
+364,365,204,201 F-OVR,61171,"Stangler, Jody","Sobieski, WI, US",42,F,2:37:07,10:08
+365,366,205,202 F-OVR,61341,"Navarro, Kelly","Riverside, IL, US",56,F,2:37:34,10:09
+366,367,206,203 F-OVR,60515,"Walters, Reese","West Salem, WI, US",14,F,2:38:38,10:14
+367,368,162,159 M-OVR,61095,"Latham, Benjamin","La Crosse, WI, US",46,M,2:38:44,10:14
+368,369,163,160 M-OVR,61246,"Ring, Michael","Madison, WI, US",43,M,2:39:27,10:17
+369,370,207,204 F-OVR,61048,"Hayford, Kara","Sheboygan, WI, US",54,F,2:39:38,10:17
+370,371,208,205 F-OVR,61394,"Frane, Kristin","Hayward, WI, US",51,F,2:39:38,10:17
+371,372,209,206 F-OVR,61355,"Raymond, Stacey","Hayward, WI, US",60,F,2:39:47,10:18
+372,373,210,207 F-OVR,61381,"Lynn, Tracy","Hayward, WI, US",44,F,2:39:51,10:18
+373,374,211,208 F-OVR,61332,"Nesseth, Jennie","Barron, WI, US",63,F,2:40:31,10:21
+374,375,212,209 F-OVR,61155,"Muenzberg, Kathryn","Bozeman, MT, US",47,F,2:40:57,10:22
+375,376,213,210 F-OVR,61446,"Oelsner, Nancy","Torrance, CA, US",64,F,2:41:07,10:23
+376,377,164,161 M-OVR,61157,"Stivland, Todd","Stillwater, MN, US",58,M,2:41:12,10:23
+377,378,214,211 F-OVR,61383,"Leisses, Tammy","Menomonie, WI, US",44,F,2:41:14,10:24
+378,379,165,162 M-OVR,61017,"Leisses, David","Menomonie, WI, US",49,M,2:41:18,10:24
+379,380,215,212 F-OVR,61140,"Schneider, Kathleen","Wauwatosa, WI, US",30,F,2:41:37,10:25
+380,381,216,213 F-OVR,61458,"Clements, Kendall","Northfield, MN, US",33,F,2:42:08,10:27
+381,382,217,214 F-OVR,61181,"Rayala, Tari","Duluth, MN, US",57,F,2:42:36,10:29
+382,383,166,163 M-OVR,61268,"Vieth, Matt","Madison, WI, US",32,M,2:43:19,10:32
+383,384,218,215 F-OVR,61336,"Letcher, Nancy","Madison, WI, US",59,F,2:44:08,10:35
+384,385,219,216 F-OVR,61315,"Lorentz, Kendra","Rice Lake, WI, US",26,F,2:45:09,10:39
+385,386,220,217 F-OVR,61504,"Robinson, Taylor","Western Springs, IL, US",44,F,2:45:28,10:40
+386,387,167,164 M-OVR,61188,"Rayala, Jerome","Woodruff, WI, US",78,M,2:46:19,10:43
+387,388,168,165 M-OVR,61231,"Rimmereide, Arne","Carver, MN, US",58,M,2:47:34,10:48
+388,389,169,166 M-OVR,61483,"Shere, Jerry","Cleveland, OH, US",78,M,2:47:47,10:49
+389,390,170,167 M-OVR,61073,"Nania, James","Liberty Lake, WA, US",71,M,2:47:50,10:49
+390,391,221,218 F-OVR,61228,"Johnson, Laura","Onalaska, WI, US",54,F,2:47:56,10:50
+391,392,171,168 M-OVR,61276,"Bennett, Nolan","Green Bay, WI, US",35,M,2:47:59,10:50
+392,393,222,219 F-OVR,61509,"Rausch, Julie","Milwaukee, WI, US",54,F,2:48:32,10:52
+393,394,172,169 M-OVR,61103,"Sliwinski, David","Atlantic Beach, FL, US",58,M,2:48:34,10:52
+394,395,223,220 F-OVR,61498,"Dahm, Katie","Milwaukee, WI, US",49,F,2:48:44,10:53
+395,396,173,170 M-OVR,61168,"Boelter, Christopher","Sartell, MN, US",54,M,2:49:18,10:55
+396,397,224,221 F-OVR,61187,"Rayala, Heidi","Brookline, MA, US",49,F,2:49:41,10:56
+397,398,225,222 F-OVR,61399,"Gallop, Sarah","Winchester, MA, US",60,F,2:50:10,10:58
+398,399,226,223 F-OVR,61480,"Zirk, Alyssa","Madison, WI, US",33,F,2:50:57,11:01
+399,400,227,224 F-OVR,61216,"Gottsacker, Janet","Manitowoc, WI, US",63,F,2:51:27,11:03
+400,401,174,171 M-OVR,61217,"Gottsacker, Gregory","MANITOWOC, WI, US",65,M,2:51:28,11:03
+401,402,175,172 M-OVR,61353,"Anderson III, Thomas","Minneapolis, MN, US",45,M,2:52:11,11:06
+402,403,176,173 M-OVR,61170,"Cooper, James","Minneapolis, MN, US",52,M,2:52:16,11:06
+403,404,228,225 F-OVR,61036,"Stewart, Alison","Park Ridge, IL, US",50,F,2:52:55,11:09
+404,405,229,226 F-OVR,61221,"Osborne, Angie","Absarokee, MT, US",73,F,2:53:29,11:11
+405,406,230,227 F-OVR,61222,"Majnik, Amber","Milwaukee, WI, US",41,F,2:53:50,11:12
+406,407,231,228 F-OVR,61141,"Pearson, Sandra","Germantown, WI, US",61,F,2:54:11,11:14
+407,408,232,229 F-OVR,61362,"Ackerman, Caitlin","White Bear Lake, MN, US",31,F,2:54:42,11:16
+408,409,233,230 F-OVR,61426,"Buelow, Ellen","Duluth, MN, US",33,F,2:54:48,11:16
+409,410,234,231 F-OVR,61064,"Sorenson, Ginny","Saint Paul, MN, US",65,F,2:55:47,11:20
+410,411,235,232 F-OVR,61258,"Shaw, Jodi","Madison, WI, US",51,F,2:57:14,11:26
+411,412,177,174 M-OVR,61030,"Considine, Christopher","Chicago, IL, US",53,M,2:57:46,11:28
+412,413,236,233 F-OVR,61031,"Stlaske, Christine","Chicago, IL, US",43,F,2:57:47,11:28
+413,414,237,234 F-OVR,61114,"Po, Jeanne","Saint Paul, MN, US",51,F,2:58:38,11:31
+414,415,178,175 M-OVR,61015,"Kramer, Larry","Shorewood, WI, US",59,M,2:58:43,11:31
+415,416,179,176 M-OVR,61252,"Wise, Dave","Onalaska, WI, US",59,M,2:59:12,11:33
+416,417,238,235 F-OVR,61251,"Wise, Sue","Onalaska, WI, US",53,F,2:59:14,11:33
+417,418,239,236 F-OVR,61388,"Lund, Gretchen","Minneapolis, MN, US",47,F,2:59:15,11:33
+418,419,240,237 F-OVR,61208,"Much, Kerry","New Richland, MN, US",45,F,2:59:43,11:35
+419,420,241,238 F-OVR,61207,"Radies, Jenny","Iola, WI, US",43,F,2:59:53,11:36
+420,421,242,239 F-OVR,61445,"Temmer, Janet","West Bend, WI, US",53,F,3:02:18,11:45
+421,422,243,240 F-OVR,61233,"Wineberg, Jessica","Milwaukee, WI, US",41,F,3:03:05,11:48
+422,423,244,241 F-OVR,61310,"Abdo, Rose","Minneapolis, MN, US",26,F,3:03:22,11:49
+423,424,180,177 M-OVR,61309,"Abdo, Ken","Minneapolis, MN, US",65,M,3:03:40,11:50
+424,425,245,242 F-OVR,61282,"Ratajczyk, Rebecca","Oshkosh, WI, US",27,F,3:03:58,11:52
+425,426,246,243 F-OVR,61018,"Severson, Donna","Spencer, MA, US",59,F,3:04:33,11:54
+426,427,247,244 F-OVR,61201,"Drury, Madeline","Detroit, MI, US",28,F,3:04:39,11:54
+427,428,248,245 F-OVR,61128,"Kayser, Carol","Saint Paul, MN, US",60,F,3:05:35,11:58
+428,429,249,246 F-OVR,61119,"Morson, Maura","Anchorage, AK, US",57,F,3:06:11,12:00
+429,430,181,178 M-OVR,61120,"Morson, Nic","Anchorage, AK, US",48,M,3:06:16,12:00
+430,431,182,179 M-OVR,61127,"Reed, John","Saint Paul, MN, US",60,M,3:06:33,12:02
+431,432,183,180 M-OVR,61470,"Howard, Howell","Cody, WY, US",67,M,3:07:45,12:06
+432,433,184,181 M-OVR,61265,"Sanborn, Bruce","Kildeer, IL, US",68,M,3:07:52,12:07
+433,434,250,247 F-OVR,61239,"Kocha, Anne","Minneapolis, MN, US",28,F,3:08:01,12:07
+434,435,251,248 F-OVR,61279,"McNamara, Jennifer","Fargo, ND, US",21,F,3:08:37,12:10
+435,436,252,249 F-OVR,61357,"Pardue, Carla","Minneapolis, MN, US",58,F,3:08:56,12:11
+436,437,253,250 F-OVR,61238,"Marefka, Carol","Burlington, WI, US",62,F,3:10:07,12:15
+437,438,254,251 F-OVR,61459,"A Daugherty, Shelly","Mechanicsville, VA, US",54,F,3:11:49,12:22
+438,439,255,252 F-OVR,61306,"Ratajczyk, Katherine","Reedsburg, WI, US",27,F,3:12:08,12:23
+439,440,256,253 F-OVR,61076,"Bengtson, Jill","Minneapolis, MN, US",48,F,3:13:14,12:27
+440,441,257,254 F-OVR,61380,"Harvieux, Margie","Forest Lake, MN, US",50,F,3:17:00,12:42
+441,442,185,182 M-OVR,61379,"Bahr, Kevin","Forest Lake, MN, US",62,M,3:17:05,12:42
+442,443,186,183 M-OVR,61321,"Calderwood, David A","Kenosha, WI, US",56,M,3:18:50,12:49
+443,444,258,255 F-OVR,61364,"Scheele, Rebecca","Saint Cloud, MN, US",59,F,3:20:39,12:56
+444,445,259,256 F-OVR,61102,"Ascher, Carolyn","Hayward, WI, US",57,F,3:21:34,13:00
+445,446,260,257 F-OVR,60504,"Knapp, Eva","Madison, WI, US",13,F,3:25:16,13:14
+446,447,261,258 F-OVR,61058,"Knapp, Kelly","Madison, WI, US",45,F,3:25:20,13:14
+447,448,187,184 M-OVR,61175,"Adams, Kurt","Jackson, WI, US",54,M,3:25:40,13:16
+448,449,262,259 F-OVR,61172,"Adams, Sara","Jackson, WI, US",26,F,3:25:41,13:16
+449,450,263,260 F-OVR,61352,"Perkins, Amy","Roseville, MN, US",48,F,3:25:46,13:16
+450,451,188,185 M-OVR,61496,"Breitenfeldt, Paul","Mosinee, WI, US",69,M,3:28:02,13:25
+451,452,189,186 M-OVR,61365,"Scheele, Don","Saint Cloud, MN, US",64,M,3:28:18,13:26
+452,453,264,261 F-OVR,61177,"Roloff, Veronica","Wausau, WI, US",22,F,3:30:17,13:33
+453,454,190,187 M-OVR,61153,"Bigelow, James","Springfield, MN, US",50,M,3:36:18,13:57
+454,455,265,262 F-OVR,61087,"Gramlich, Meredith","Bethesda, MD, US",53,F,3:36:27,13:57
+455,456,266,263 F-OVR,61301,"Moser, Khris","East Dubuque, IL, US",58,F,3:40:22,14:13
+456,457,267,264 F-OVR,61083,"Haugland, Laurie","Chicago, IL, US",54,F,3:49:07,14:46
+457,458,191,188 M-OVR,61211,"Kumlien, Kent","Nashotah, WI, US",58,M,4:15:33,16:29
+458,459,192,189 M-OVR,61212,"Kumlien, Wendell","New Berlin, WI, US",85,M,4:15:34,16:29
+459,460,268,265 F-OVR,61407,"Hockman, Loine","Ripon, WI, US",73,F,4:52:22,18:51
+460,DSQ,DSQ, ,61062,"Lincoln, Mary","St. Paul, MN, US",60,F, , 
+461,DSQ,DSQ, ,61335,"Reiter, Scott","Chippewa Falls, WI, US",40,M,1:51:04,7:09
+462,DNF,DNF, ,60538,"Diedrich, Sami","Hayward, WI, US",15,F, , 
+463,DNF,DNF, ,61142,"Fedel, Debbie","Pelican Lake, WI, US",61,F,2:58:41,11:31
+464,DNF,DNF, ,61219,"Doubet, Jennifer","Minneapolis, MN, US",49,F,2:20:19,9:03
+465,DNF,DNF, ,61278,"Lewis, Kelly","Delafield, WI, US",33,F,2:58:47,11:32
+466,DNF,DNF, ,61396,"Harrison, Kristy","Hayward, WI, US",52,F, , 
+467,DNF,DNF, ,61475,"Bloomberg, Lois","Mendota Heights, MN, US",66,F, , 
