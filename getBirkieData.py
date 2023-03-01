@@ -112,7 +112,8 @@ def get_searchable_results():
 def get_2022_data():
     #and once again, they compeletely changed the formatting of the results, meaning new code is needed
     #link: skate: https://my.raceresult.com/189471/results#10_3C2D41
-    eventIDs = eventIds_2022()
+    #2023 link: https://my.raceresult.com/225100/results#11_C0D558
+    eventIDs = eventIds_2023()
 
     for event in eventIDs:
         results = []
@@ -120,7 +121,8 @@ def get_2022_data():
         eventID = eventIDs[event]
         #print(eventID)
         driver = webdriver.Firefox()
-        driver.get('https://my.raceresult.com/189471/'+str(eventID))
+        #driver.get('https://my.raceresult.com/189471/'+str(eventID))
+        driver.get('https://my.raceresult.com/225100/'+str(eventID))
         time.sleep(2)       #seems to take a couple seconds sometimes for the showall button to come up
         ids = driver.find_elements_by_xpath('//*[@id]')
         
@@ -146,7 +148,7 @@ def get_2022_data():
                 results.append(result)
 
         day_frame = pd.DataFrame(results, columns=header)
-        day_frame.to_csv('yearly_data/2022/'+event+'.csv')
+        day_frame.to_csv('yearly_data/2023/'+event+'.csv')
         driver.quit()
 
 
@@ -225,5 +227,17 @@ def eventIds_2022():
     eventIDs['haakon skate 2022'] = "#9_5D9B23"
 
     return eventIDs
+
+def eventIds_2023():
+    eventIDs = {}
+    #eventIDs['birkie classic 2023'] = "#11_C0D558"
+    #eventIDs['kortie classic 2023'] = "#8_1706C5"
+
+    eventIDs['birkie skate 2023'] = "#10_3C2D41"
+    #eventIDs['kortie skate 2023'] = "#7_9C7CB5"
+    #eventIDs['haakon skate 2023'] = "#9_5D9B23"
+
+    return eventIDs
+
 
 main()

@@ -3,7 +3,7 @@ import math
 import argparse
 import matplotlib.pyplot as plt
 from scipy import stats
-import numpy
+import numpy as np
 import sys
 import datetime
 from bisect import bisect
@@ -15,9 +15,9 @@ def main():
     parser.add_argument("--tech", type=str, default='classic')
     parser.add_argument("--length", type=str, default='birkie')
     parser.add_argument("--wave", type=int, default=1)
-    parser.add_argument("--year", type=str, default='2022')
+    parser.add_argument("--year", type=str, default='2023')
     parser.add_argument("--plot", type=str, default='byYear')
-    parser.add_argument("--name", type=str, default='Dan Polasky')
+    parser.add_argument("--name", type=str, default='')
     args = parser.parse_args()
 
     allResults = readIn(args.length, args.tech)
@@ -38,17 +38,20 @@ def resultsByWave(tech, length, allResults, plot_year):
     for year in [plot_year]:
         waves = {}
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
- 
+
         for index, row in allResults[year].iterrows(): #iterate over all skiers
             bib = int(row[' Bib Number'])
             wave = math.floor(bib / 1000)
             seconds = row['times']
-            if wave in waves:
-                waves[wave].append(seconds)
-            else:
-                waves[wave] = [seconds]
+            if not np.isnan(seconds):
+                if wave in waves:
+                    waves[wave].append(seconds)
+                else:
+                    waves[wave] = [seconds]
         waveGaps = []
         prevWaveAvg = 0
+        order_waves = {wave:waves[wave] for wave in sorted(list(waves.keys()))}
+        waves = order_waves
         for wave in waves:    
             if len(waves[wave]) > 10:
                 #print(wave)
@@ -64,7 +67,7 @@ def resultsByWave(tech, length, allResults, plot_year):
                 if tech == 'classic':
                     maxT = 32000        
                     minT = 7000
-                x = numpy.linspace(minT, maxT, 200)
+                x = np.linspace(minT, maxT, 200)
                 plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
 
         if year in cutoffs[tech]:
@@ -78,8 +81,8 @@ def resultsByWave(tech, length, allResults, plot_year):
         plt.ylim([0,.00065])
         plt.ylabel("Frequency")
         plt.xlabel("Finishing times")
-        times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00"]
-        xticksValues = [7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 23400, 25200]
+        times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30","8:00"]
+        xticksValues = [7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 23400, 25200, 26000, 27800]
         plt.xticks(xticksValues, times)
         plt.title(length + " " + tech + " Finish Times by wave for " + str(year))
         if year == plot_year:
@@ -93,7 +96,6 @@ def resultsByWave(tech, length, allResults, plot_year):
 def resultsByYear(tech, length, allResults):    #graphs histogram of results by year
     for year in allResults:
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
-
     if tech == 'skate':
         maxT = 28000    
         minT = 5000
@@ -102,11 +104,12 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
         minT = 7000
     plotTimes = {}
     for year in allResults:
-        plotTimes[year] = stats.kde.gaussian_kde(allResults[year]['times'])
+        results_array = allResults[year]['times'].dropna()
+        plotTimes[year] = stats.kde.gaussian_kde(results_array)
     print(maxT)
 
-    x = numpy.linspace(minT, maxT, 200)
-    plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(numpy.linspace(0, 1, len(allResults.keys())))))
+    x = np.linspace(minT, maxT, 200)
+    plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(np.linspace(0, 1, len(allResults.keys())))))
 
     for year in plotTimes:
         plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
@@ -124,7 +127,7 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.show()
 
 def getWavePlacement(allResults, year, tech, length, target_wave, skier):
-    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave, but does have to have skied that race in that year
+    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave, but does have to have skied that race in that year and in that technique
     if tech == 'classic' and target_wave <10:
         target_wave+=10
     waveTimes = []
@@ -157,7 +160,7 @@ def parseTime(time):
     seconds += 3600 * hours + 60 * minutes
     return seconds
 
-def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2022):
+def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2023):
     years = list(range(start_year, end_year+1))
     years.remove(2017) 
     years.remove(2021)          
@@ -174,7 +177,8 @@ def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year
         try:
             year_results[' Finish Time'] = pd.to_datetime(year_results[' Finish Time'].str.strip(), format='%H:%M:%S.%f')
         except ValueError:
-            year_results[' Finish Time'] = pd.to_datetime(year_results[' Finish Time'].str.strip(), format='%H:%M:%S')
+            year_results[' Finish Time'] = pd.to_datetime(year_results[' Finish Time'].str.strip().str.split(".").str[0], format='%H:%M:%S', errors='coerce')
+
         allResults[year] = year_results
     return allResults
 
@@ -196,7 +200,6 @@ def readIn_old(distance, technique, path='yearly_data/', start_year = 2010, end_
         except IOError:
             pass
     return allResults
-
 
 
 main()
