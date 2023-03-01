@@ -1,4 +1,4 @@
-Birkie and Kortie results and plotting. 
+Birkie and Kortie results and some plots
 
 Example usage:
 python birkie_data_plotting.py  --tech skate --length birkie --plot byWave
