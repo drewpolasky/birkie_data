@@ -113,7 +113,10 @@ def get_2022_data():
     #and once again, they compeletely changed the formatting of the results, meaning new code is needed
     #link: skate: https://my.raceresult.com/189471/results#10_3C2D41
     #2023 link: https://my.raceresult.com/225100/results#11_C0D558
-    eventIDs = eventIds_2023()
+    #2024 link: https://my.raceresult.com/273908/results#10_318D6F
+
+    #eventIDs = eventIds_2023()
+    eventIDs = eventIds_2024()
 
     for event in eventIDs:
         results = []
@@ -122,7 +125,8 @@ def get_2022_data():
         #print(eventID)
         driver = webdriver.Firefox()
         #driver.get('https://my.raceresult.com/189471/'+str(eventID))
-        driver.get('https://my.raceresult.com/225100/'+str(eventID))
+        #driver.get('https://my.raceresult.com/225100/'+str(eventID))
+        driver.get('https://my.raceresult.com/273908/'+str(eventID))
         time.sleep(2)       #seems to take a couple seconds sometimes for the showall button to come up
         ids = driver.find_elements_by_xpath('//*[@id]')
         
@@ -137,7 +141,11 @@ def get_2022_data():
         #driver.find_element_by_class_name("aShowAll").click()
         table_html = table.get_attribute('innerHTML')
         tree = etree.HTML(table_html)
-        header = [ 'Ovr', 'Sex', 'Div', 'Bib', 'Name', 'City, State, Nation', 'Age', 'Gender', 'Time', 'Pace']
+        if event == 'birkie classic 2024' or '2023' in event:
+            header = [ 'Ovr', 'Sex', 'Div', 'Bib', 'Name', 'City, State, Nation', 'Age', 'Gender', 'Time', 'Pace']
+        else:
+            header = [ 'Ovr', 'Bib', 'Name', 'City, State, Nation', 'Age', 'Gender', 'Time', 'Pace']
+            
         results = []
         for page in iter(tree):
             for skier in page:
@@ -146,9 +154,9 @@ def get_2022_data():
                     result.append(element.text)
                 result = result[1:-1]
                 results.append(result)
-
+        print(results[0])
         day_frame = pd.DataFrame(results, columns=header)
-        day_frame.to_csv('yearly_data/2023/'+event+'.csv')
+        day_frame.to_csv('yearly_data/2024/'+event+'.csv')
         driver.quit()
 
 
@@ -239,5 +247,22 @@ def eventIds_2023():
 
     return eventIDs
 
+def eventIds_2024():
+    #273908
+    eventIDs = {}
+    eventIDs['birkie classic 2024'] = "#11_C0D558"
+    eventIDs['birkie classic elite 2024'] = "#18_F2A54E"
+    eventIDs['birkie classic openTrack 2024'] = "#2_763D8E"
+    eventIDs['kortie classic 2024'] = "#8_650EE4"
+    eventIDs['kortie classic openTrack 2024'] = "#4_2D77B1"
+
+    eventIDs['birkie skate 2024'] = "#10_318D6F"
+    eventIDs['birkie skate elite 2024'] = "#17_579355"
+    eventIDs['birkie skate openTrack 2024'] = "#1_151CFA"
+    eventIDs['kortie skate 2024'] = "#7_4EBD65"
+    eventIDs['kortie skate openTrack 2024'] = "#3_FB03F3"
+    eventIDs['haakon skate 2024'] = "#9_595B0C"
+
+    return eventIDs
 
 main()

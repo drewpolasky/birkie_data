@@ -1,0 +1,394 @@
+,Ovr,Bib,Name,"City, State, Nation",Age,Gender,Time,Pace
+0,1.,84319,"Neufeld, Jeremy","Okotoks, CAN",49,M,1:02:27,3:04
+1,2.,84450,"Duncan, Mason","Two Harbors, MN, USA",44,M,1:03:35,3:07
+2,3.,41504,"Meng, Joe","Missoula, MT, USA",43,M,1:06:57,3:17
+3,4.,84428,"Virtue, Luke","Saint Paul, MN, USA",16,M,1:07:28,3:19
+4,5.,872,"Billings, Noah","Rochester, MN, USA",18,M,1:10:23,3:27
+5,6.,84348,"Koller, Chloe","Sobieski, WI, USA",15,F,1:13:57,3:38
+6,7.,873,"Maloney, Robert","Saint Louis Park, MN, USA",34,M,1:14:14,3:39
+7,8.,975,"Parman, Mark","Hayward, WI, USA",61,M,1:14:23,3:39
+8,9.,41399,"Harrison, Joel","Hayward, WI, USA",55,M,1:16:25,3:45
+9,10.,84453,"Willson, Nate","Salt Lake City, UT, USA",46,M,1:19:56,3:56
+10,11.,84330,"Collins, Mark","Rochester, MN, USA",64,M,1:19:58,3:56
+11,12.,84215,"Radtke, Janna","Duluth, MN, USA",38,F,1:20:26,3:57
+12,13.,85454,"De Vries, Nora","Lac Du Flambeau, WI, USA",15,F,1:20:36,3:58
+13,14.,84460,"Joss, David","Park City, UT, USA",66,M,1:21:03,3:59
+14,15.,84325,"Rogers, Greg","Oregon, WI, USA",62,M,1:21:22,4:00
+15,16.,42475,"Roden, Eric","Minneapolis, MN, USA",29,M,1:21:31,4:00
+16,17.,41497,"Marino, Joe","Houghton, MI, USA",67,M,1:21:53,4:01
+17,18.,42517,"Sande, Patrick","Shorewood, MN, USA",45,M,1:22:08,4:02
+18,19.,723,"Schull, Molly","Hayward, WI, USA",32,F,1:22:29,4:03
+19,20.,729,"Niemi, Paulette","Ironwood, MI, USA",56,F,1:22:38,4:04
+20,21.,730,"Rundman, Joan","Hancock, MI, USA",62,F,1:22:39,4:04
+21,22.,41224,"Nelson, John","Chippewa Falls, WI, USA",64,M,1:22:40,4:04
+22,23.,84342,"Holman, Amy","Anchorage, AK, USA",53,F,1:22:45,4:04
+23,24.,84461,"Johnson, Amy","Wayzata, MN, USA",56,F,1:22:48,4:04
+24,25.,41564,"Moos, Grant","Saint Paul, MN, USA",68,M,1:22:48,4:04
+25,26.,41436,"Hankee, Michael","Lake Elmo, MN, USA",47,M,1:23:11,4:05
+26,27.,42418,"Sleper, Joshua","South Saint Paul, MN, USA",33,M,1:24:21,4:09
+27,28.,45473,"Beard, Cynthia","Bend, OR, USA",56,F,1:24:40,4:10
+28,29.,41306,"Wagner, Jeannie","Marquette, MI, USA",62,F,1:25:00,4:11
+29,30.,45497,"Erickson, Paul","Madison, WI, USA",46,M,1:25:22,4:12
+30,31.,84474,"Swanson, Joel","Hayward, WI, USA",64,M,1:25:23,4:12
+31,32.,41412,"Sass, Erik","Plymouth, MN, USA",57,M,1:25:30,4:12
+32,33.,41529,"Rapallini, Erin","Minneapolis, MN, USA",47,F,1:25:39,4:13
+33,34.,84399,"Guetschow, Jill","Saint Paul, MN, USA",56,F,1:25:53,4:13
+34,35.,41511,"Salden, John","Chippewa Falls, WI, USA",56,M,1:26:48,4:16
+35,36.,84473,"Baltich, Zack","Duluth, MN, USA",31,M,1:27:40,4:19
+36,37.,84304,"Hall, Christopher","Minneapolis, MN, USA",53,M,1:28:09,4:20
+37,38.,84451,"Johnson, Michael","Stillwater, MN, USA",56,M,1:28:17,4:20
+38,39.,84220,"Savstrom, Russell","Stillwater, MN, USA",67,M,1:28:18,4:20
+39,40.,84303,"Helm, Thomas","Minneapolis, MN, USA",65,M,1:28:24,4:21
+40,41.,41461,"CERNOHOUS, JON","Stillwater, MN, USA",53,M,1:28:36,4:21
+41,42.,42443,"Spoerk, Jeff","Muskego, WI, USA",62,M,1:28:39,4:21
+42,43.,41229,"Munger, Diana","Minneapolis, MN, USA",55,F,1:28:43,4:22
+43,44.,84227,"Power, Tim","Afton, MN, USA",74,M,1:29:01,4:23
+44,45.,42490,"Rustad, Luke","Saint Paul, MN, USA",32,M,1:29:05,4:23
+45,46.,41521,"Brown, Nathan","Madison, WI, USA",40,M,1:29:05,4:23
+46,47.,84407,"LaBelle, Leilani","Hopkins, MN, USA",64,F,1:29:21,4:24
+47,48.,41422,"Sanger, Christopher","Hayward, WI, USA",44,M,1:29:36,4:24
+48,49.,41438,"DeZellar, Mike","Eden Prairie, MN, USA",61,M,1:29:48,4:25
+49,50.,42346,"Routhieaux, Brian","Pewaukee, WI, USA",50,M,1:29:49,4:25
+50,51.,84448,"Hamilton, Hanna","Saint Paul, MN, USA",28,F,1:29:54,4:25
+51,52.,41458,"Lindsley, Allan","Bloomer, WI, USA",55,M,1:30:01,4:26
+52,53.,84706,"Hooley, Dan","Scandia, MN, USA",73,M,1:30:07,4:26
+53,54.,84400,"Diller, Beatrice","Arrowtown, NZL",55,F,1:30:12,4:26
+54,55.,84324,"Sayers, Mark","Shorewood, IL, USA",62,M,1:30:12,4:26
+55,56.,84462,"Lafond, Jennifer","Minneapolis, MN, USA",36,F,1:30:46,4:28
+56,57.,41308,"Bjerkness, Kai","Portland, OR, USA",62,M,1:31:15,4:29
+57,58.,45479,"Beard, Timothy","Bend, OR, USA",56,M,1:31:15,4:29
+58,59.,84333,"Bloom, Joshua","Minneapolis, MN, USA",46,M,1:31:18,4:29
+59,60.,84457,"Lee, Amy","Champlin, MN, USA",49,F,1:31:41,4:30
+60,61.,84387,"Waryan, Steve","Minnetonka, MN, USA",68,M,1:31:51,4:31
+61,62.,84394,"Aronson, Deanne","Minneapolis, MN, USA",69,F,1:31:59,4:31
+62,63.,41322,"(Strachota) Maloney, Madeline","St. Louis Park, MN, USA",33,F,1:32:04,4:32
+63,64.,51439,"Parman, Susan","Hayward, WI, USA",58,F,1:32:07,4:32
+64,65.,725,"Oja, Michele","River Falls, WI, USA",59,F,1:32:35,4:33
+65,66.,42444,"Reitsema, Jeffrey","Minneapolis, MN, USA",41,M,1:32:39,4:33
+66,67.,84376,"DeLaRosby, Anna","Bayport, MN, USA",43,F,1:32:59,4:34
+67,68.,41103,"Weiss, Cathy","EAU CLAIRE, WI, USA",63,F,1:33:14,4:35
+68,69.,41337,"Meyer, Sally","Eau Claire, WI, USA",41,F,1:33:16,4:35
+69,70.,84326,"Ide, Lisa","Minneapolis, MN, USA",61,F,1:33:17,4:35
+70,71.,84432,"Stellmacher, Haley","Hayward, WI, USA",36,F,1:33:19,4:35
+71,72.,45367,"Christman, Katherine","Ashland, WI, USA",39,F,1:33:51,4:37
+72,73.,40055,"Lindaman, Miranda","Winona, MN, USA",17,F,1:34:01,4:37
+73,74.,84727,"Huseth, LARRY","Hayward, WI, USA",72,M,1:34:42,4:39
+74,75.,84346,"Luoma, James","Osseo, MN, USA",63,M,1:34:43,4:39
+75,76.,84430,"Ide, Arthur","Minneapolis, MN, USA",65,M,1:34:48,4:40
+76,77.,41383,"Wagner, Michael","Winter, WI, USA",61,M,1:35:05,4:40
+77,78.,43344,"Vrakas, Andrew","Delafield, WI, USA",60,M,1:35:06,4:40
+78,79.,41324,"Earll, Mark","Wausau, WI, USA",56,M,1:35:56,4:43
+79,80.,42325,"Meyers, Ryan","Oshkosh, WI, USA",43,M,1:36:11,4:44
+80,81.,42448,"Johnkoski, John","Wausau, WI, USA",61,M,1:36:26,4:44
+81,82.,42447,"Myers, Jason","Wausau, WI, USA",48,M,1:36:29,4:45
+82,83.,84315,"Kinney, Patrick","Saint Paul, MN, USA",66,M,1:36:32,4:45
+83,84.,43527,"Kafka, Eric","Boise, ID, USA",53,M,1:36:34,4:45
+84,85.,41208,"Anderson, Gregory","Marshfield, WI, USA",61,M,1:36:35,4:45
+85,86.,42375,"Karger, Michael","Glencoe, IL, USA",56,M,1:36:36,4:45
+86,87.,84715,"Heath, Linda","Winona, MN, USA",71,F,1:36:48,4:46
+87,88.,41213,"Green, Kim","CALUMET, MI, USA",60,F,1:36:49,4:46
+88,89.,84716,"Dee, Charlie","Milwaukee, WI, USA",77,M,1:37:01,4:46
+89,90.,40518,"Adrian, Sevi","GOLDEN VALLEY, MN, USA",17,M,1:37:03,4:46
+90,91.,42404,"Pierre, Samuel","Combined Locks, WI, USA",37,M,1:37:23,4:47
+91,92.,41205,"YUNEK, JAY","PLYMOUTH, MN, USA",66,M,1:37:25,4:47
+92,93.,43572,"Roub, Nathan","plymouth, MN, USA",44,M,1:37:28,4:47
+93,94.,41472,"Schlichting, Mike","Minneapolis, MN, USA",62,M,1:37:33,4:48
+94,95.,42390,"Rapallini, Leonardo","Edina, MN, USA",51,M,1:37:46,4:48
+95,96.,84726,"JOHNSON, GLEN","Reedsburg, WI, USA",72,M,1:38:04,4:49
+96,97.,41215,"Hudacek, Al","Fall Creekek, WI, USA",63,M,1:38:10,4:50
+97,98.,42485,"Larson, Betsy","Altoona, WI, USA",42,F,1:38:10,4:50
+98,99.,84371,"Mckenzie, John","Oneida, WI, USA",59,M,1:38:11,4:50
+99,100.,84725,"Lyner, Mike","Stillwater, MN, USA",70,M,1:38:14,4:50
+100,101.,84411,"Solberg, sarah","White Bear Lake, MN, USA",60,F,1:38:20,4:50
+101,102.,41211,"Kaufman, Thomas","Madison, WI, USA",70,M,1:38:34,4:51
+102,103.,42483,"Hutton, Michael","Carbondale, CO, USA",66,M,1:38:38,4:51
+103,104.,42555,"Larson, Jeff","South Range, WI, USA",61,M,1:38:41,4:51
+104,105.,42213,"Chu, Diane","Racine, WI, USA",63,F,1:38:45,4:51
+105,106.,42333,"RALSTON, Andrew","Saint Paul, MN, USA",47,M,1:39:08,4:52
+106,107.,70873,"Kuross, Steven","Duluth, MN, USA",70,M,1:39:48,4:54
+107,108.,42397,"Dannen, Devon","Hayward, WI, USA",43,F,1:39:58,4:55
+108,109.,84347,"McGrory-Usset, Mary","Mendota Heights, MN, USA",66,F,1:40:20,4:56
+109,110.,42500,"Bishop, Timothy","Minneapolis, MN, USA",44,M,1:40:23,4:56
+110,111.,836,"Kemp, Eric","Duluth, MN, USA",54,M,1:40:24,4:56
+111,112.,42420,"Loven, Mary","Northfield, MN, USA",66,F,1:40:42,4:57
+112,113.,41459,"Mavis, Jeremy","Hayward, WI, USA",46,M,1:41:13,4:59
+113,114.,41413,"UNGRODT, JEDD","Ashland, WI, USA",45,M,1:41:18,4:59
+114,115.,41429,"Hougen, Beth","Eau Claire, WI, USA",64,F,1:41:52,5:00
+115,116.,84447,"Gebhardt, Michael","Iowa City, IA, USA",40,M,1:41:52,5:00
+116,117.,44312,"Nauman, Andy","Onalaska, WI, USA",60,M,1:41:59,5:01
+117,118.,84379,"Dicke, Sheila","Minneapolis, MN, USA",59,F,1:42:08,5:01
+118,119.,84369,"Dolan, Steve","Minneapolis, MN, USA",61,M,1:42:15,5:02
+119,120.,84307,"Keim, Meghan","st louis park, MN, USA",41,F,1:42:18,5:02
+120,121.,41469,"Hill, Chris","Duluth, MN, USA",44,M,1:42:28,5:02
+121,122.,41335,"White, Ron","Independence, WI, USA",72,M,1:42:41,5:03
+122,123.,42367,"Mead, Craig","Hayward, WI, USA",63,M,1:42:56,5:04
+123,124.,84722,"Dunaway, Tom","Hayward, WI, USA",76,M,1:43:01,5:04
+124,125.,84717,"OLSON, John","Washburn, WI, USA",72,M,1:43:14,5:05
+125,126.,84302,"Zabinski, Richard","Oracle, AZ, USA",58,M,1:43:23,5:05
+126,127.,42211,"Trewartha, Kelly","Saint Paul, MN, USA",58,F,1:43:33,5:05
+127,128.,84730,"Mogren, Ken","Winona, MN, USA",75,M,1:43:34,5:06
+128,129.,42556,"Quant, Kenneth","Thiensville, WI, USA",61,M,1:43:49,5:06
+129,130.,42206,"SEVERSON, JON","Minneapolis, MN, USA",54,M,1:44:08,5:07
+130,131.,84419,"Schwartz, Sam","Green Bay, WI, USA",29,M,1:44:12,5:07
+131,132.,42378,"Stegeman, Stephanie","Saint Paul, MN, USA",39,F,1:44:19,5:08
+132,133.,43467,"Hamilton, Laura","Minneapolis, MN, USA",29,F,1:44:22,5:08
+133,134.,45368,"Callahan, Nicole","Rochester, MN, USA",39,F,1:44:35,5:09
+134,135.,43347,"Boushele-Walter, Bailey","Neenah, WI, USA",27,M,1:44:38,5:09
+135,136.,43610,"Pitts, Steve","Middleton, WI, USA",65,M,1:45:05,5:10
+136,137.,41355,"Novitch, Dan","MerrillMerrill, WI, USA",53,M,1:45:11,5:10
+137,138.,84344,"Dittrich, Steve","Oconomowoc, WI, USA",69,M,1:45:11,5:10
+138,139.,84345,"Moran, Kevin","Germantown, WI, USA",60,M,1:45:13,5:10
+139,140.,43415,"Ethier, Dave","Savage, MN, USA",62,M,1:45:25,5:11
+140,141.,84380,"HYNES, JEREMIAH","Burlington, CAN",69,M,1:45:40,5:12
+141,142.,84370,"Weum, Susan","Roseville, MN, USA",64,F,1:45:46,5:12
+142,143.,42393,"Landowski, Teri","Delafield, WI, USA",65,F,1:46:21,5:14
+143,144.,44538,"Mincberg, Alyssa","Madison, WI, USA",35,F,1:46:37,5:15
+144,145.,42327,"Zoellick, Sara","Milwaukee, WI, USA",36,F,1:46:58,5:16
+145,146.,84206,"Pearson, Tricia","St Paul, MN, USA",62,F,1:46:59,5:16
+146,147.,84728,"Roisum, Mark","Woodbury, MN, USA",71,M,1:47:05,5:16
+147,148.,43553,"Del Ponte, Maggie","Oregon, WI, USA",29,F,1:47:07,5:16
+148,149.,43328,"McKinney, Martin","Minneapolis, MN, USA",59,M,1:47:16,5:16
+149,150.,42400,"Massey, Clint","Elk Mound, WI, USA",34,M,1:47:22,5:17
+150,151.,42474,"Peterson, Nicole","BLOOMINGTON, MN, USA",41,F,1:47:27,5:17
+151,152.,70646,"Shirriff, John","bloomington, MN, USA",75,M,1:47:39,5:18
+152,153.,84374,"Klysen, Jill","Crystal Falls, MI, USA",64,F,1:47:53,5:18
+153,154.,45314,"Barker, Ken","Anoka, MN, USA",39,M,1:47:55,5:18
+154,155.,84381,"BARBOUR, Kate","Oconomowoc, WI, USA",59,F,1:47:57,5:18
+155,156.,45633,"Hogan, Matt","Winona, MN, USA",29,M,1:48:01,5:19
+156,157.,45372,"Kratz, Wil","Cable, WI, USA",44,M,1:48:01,5:19
+157,158.,43331,"Martin, Sarah","Minneapolis, MN, USA",41,F,1:48:14,5:19
+158,159.,43213,"Bowler, Bill","Wausau, WI, USA",68,M,1:48:19,5:20
+159,160.,84314,"Popp, Megan","Springbrook, WI, USA",47,F,1:48:19,5:20
+160,161.,44428,"Fratzke, Rebecca","Osseo, MN, USA",43,F,1:48:21,5:20
+161,162.,43327,"Ericson, Mark","Wauwatosa, WI, USA",33,M,1:48:30,5:20
+162,163.,41437,"Kinnee, Michael","Minneapolis, MN, USA",72,M,1:48:38,5:20
+163,164.,43501,"Van Horn, Jonathan","Minneapolis, MN, USA",54,M,1:48:47,5:21
+164,165.,43418,"Budde, Diana","Minneapolis, MN, USA",58,F,1:49:12,5:22
+165,166.,44562,"Meng, Minde","Missoula, MT, USA",43,F,1:49:18,5:22
+166,167.,43446,"Bailey, Terese","Hartland, WI, USA",60,F,1:50:01,5:25
+167,168.,84229,"CROFT, Debra","Carlton, MN, USA",63,F,1:50:04,5:25
+168,169.,43519,"Impullitti, Ann","Amherst, WI, USA",46,F,1:50:11,5:25
+169,170.,43492,"Wilder, Kelly","Minneapolis, MN, USA",38,F,1:50:32,5:26
+170,171.,41320,"Roy, Kevin","Woodruff, WI, USA",39,M,1:50:43,5:27
+171,172.,42529,"Vornbrock, Diane","Hayward, WI, USA",61,F,1:50:53,5:27
+172,173.,45351,"O’Kane, Kristi","Saint Paul, MN, USA",65,F,1:50:55,5:27
+173,174.,43547,"O'Neill, James","Minneapolis, MN, USA",61,M,1:51:04,5:28
+174,175.,42311,"Richard, Jaime","Green Bay, WI, USA",46,F,1:51:05,5:28
+175,176.,42101,"Krzak, Barbara","Hayward, WI, USA",68,F,1:51:06,5:28
+176,177.,84703,"Didion, Paul","Jefferson, WI, USA",73,M,1:51:19,5:28
+177,178.,42452,"Larson, Lesley","Hayward, WI, USA",43,F,1:51:19,5:28
+178,179.,84702,"Meyer, Donald","Whitewater, WI, USA",77,M,1:51:21,5:29
+179,180.,84335,"Hoffman, James","Black River Falls, WI, USA",60,M,1:51:25,5:29
+180,181.,42491,"Travis, Nate","Mound, MN, USA",34,M,1:51:35,5:29
+181,182.,44674,"Poethke, Steven","Rice Lake, WI, USA",64,M,1:51:46,5:30
+182,183.,84318,"Bantle, Patricia","Superior, WI, USA",64,F,1:52:05,5:31
+183,184.,84470,"Burns, John","South Milwaukee, WI, USA",69,M,1:52:05,5:31
+184,185.,84316,"Putzer, Melissa","West Bend, WI, USA",53,F,1:52:14,5:31
+185,186.,43562,"Seibel, Ben","Eau Claire, WI, USA",46,M,1:52:17,5:31
+186,187.,84366,"Morishita, Megi","Trout Lake, WA, USA",52,F,1:52:33,5:32
+187,188.,84351,"Lund, David","Kenmore, WA, USA",63,M,1:52:37,5:32
+188,189.,42353,"Carlson, Stephen","New Auburn, WI, USA",64,M,1:52:39,5:32
+189,190.,44439,"Kudak, Anna","Saint Paul, MN, USA",41,F,1:52:53,5:33
+190,191.,42205,"Mann, Gregory","Wauwatosa, WI, USA",60,M,1:53:06,5:34
+191,192.,84444,"Schmitz, Dawn","Rice Lake, WI, USA",54,F,1:53:14,5:34
+192,193.,43420,"Sharp, Sonja","Minneapolis, MN, USA",47,F,1:53:30,5:35
+193,194.,43592,"Olson, Teresa","Eau Claire, WI, USA",60,F,1:53:37,5:35
+194,195.,43386,"Siegfried, Janell","Minneapolis, MN, USA",59,F,1:53:37,5:35
+195,196.,44342,"Lloyd, Michon","Woodbury, MN, USA",60,F,1:53:51,5:36
+196,197.,45436,"Hoffmann, Julia","Minneapolis, MN, USA",27,F,1:54:10,5:37
+197,198.,45412,"Wetzel, Nadine","St. Paul, MN, USA",48,F,1:54:13,5:37
+198,199.,42380,"LeZaks, David","Madison, WI, USA",42,M,1:54:14,5:37
+199,200.,43410,"Corbett, Angela","Minneapolis, MN, USA",44,F,1:54:17,5:37
+200,201.,44340,"Boelter, Matt","Milwaukee, WI, USA",36,M,1:54:47,5:39
+201,202.,84212,"Gaynor, Victoria","Hayward, WI, USA",65,F,1:54:55,5:39
+202,203.,85402,"De Vries, Avery","Lac Du Flambeau, WI, USA",14,M,1:54:57,5:39
+203,204.,44514,"Swanson, Matthew","Neenah, WI, USA",43,M,1:55:03,5:39
+204,205.,84401,"Gale, Jonathan","Minneapolis, MN, USA",43,M,1:55:16,5:40
+205,206.,42480,"Connell, Doug","Cushing, MN, USA",64,M,1:55:22,5:40
+206,207.,44334,"Cope, Kris","Presque Isle, WI, USA",58,F,1:55:30,5:41
+207,208.,84221,"Baltich, Elizabeth","Duluth, MN, USA",64,F,1:55:38,5:41
+208,209.,42104,"Smith, Leigh","Stevens Point, WI, USA",65,M,1:55:47,5:42
+209,210.,43443,"Hubbs, Mary","Muskego, WI, USA",67,F,1:56:27,5:44
+210,211.,43412,"Koopmann, Melisa","Altoona, WI, USA",44,F,1:56:28,5:44
+211,212.,45435,"Menigo, Elaine","Brooklyn, NY, USA",30,F,1:56:40,5:44
+212,213.,45490,"Billings, Nicole","Eau Claire, WI, USA",44,F,1:57:14,5:46
+213,214.,84336,"Liedl, Lavonne","Rochester, MN, USA",55,F,1:57:31,5:47
+214,215.,43502,"Olson, Maren","Saint Paul, MN, USA",48,F,1:58:17,5:49
+215,216.,43591,"Nichols, Robert","Duluth, MN, USA",62,M,1:58:42,5:50
+216,217.,45660,"Hathaway, Wesley","Barronett, WI, USA",29,M,1:59:03,5:51
+217,218.,45578,"Swardstrom, Jerri","Two Harbors, MN, USA",49,F,1:59:15,5:52
+218,219.,41227,"Marchand, Anne","Minnetonka, MN, USA",59,F,1:59:58,5:54
+219,220.,84467,"Kelley, Brent","Hayward, WI, USA",56,M,2:00:53,5:57
+220,221.,84418,"Sturgis, jeffrey","Wayzata, MN, USA",67,M,2:00:55,5:57
+221,222.,84360,"Sumnicht, Marie","Green Bay, WI, USA",61,F,2:01:08,5:57
+222,223.,43377,"Hardman-Conklin, Sue","Chaska, MN, USA",63,F,2:01:22,5:58
+223,224.,84408,"Weidner, Katherine","Warrenville, IL, USA",38,F,2:01:33,5:59
+224,225.,84365,"Wiegel, Liana","Delavan, WI, USA",39,p,2:01:34,5:59
+225,226.,44492,"Spoerk, Lucy","Muskego, WI, USA",59,F,2:02:17,6:01
+226,227.,84327,"Haakenson, Heather","Minneapolis, MN, USA",57,F,2:02:24,6:01
+227,228.,84312,"Cochrane, Rick","Saint Paul, MN, USA",54,M,2:02:48,6:02
+228,229.,42209,"Stenoien, Kirsten","Eden Prairie, MN, USA",56,F,2:03:03,6:03
+229,230.,43336,"Rolett, Aaron","Minneapolis, MN, USA",38,M,2:03:06,6:03
+230,231.,43602,"Gerber, Steve","Duluth, MN, USA",37,M,2:03:24,6:04
+231,232.,70526,"Clement, Christine","Toledo, OH, USA",72,F,2:03:58,6:06
+232,233.,43409,"Gehrke, Aaron","Rhinelander, WI, USA",25,M,2:04:02,6:06
+233,234.,84704,"Siivola, Liz","Laurium, MI, USA",70,F,2:04:32,6:07
+234,235.,84321,"S, Gowtham","Houghton, MI, USA",44,M,2:04:38,6:08
+235,236.,84223,"Casey, Stephen","Minneapolis, MN, USA",72,M,2:04:40,6:08
+236,237.,43201,"Bantz, Kyle","Saint Paul, MN, USA",40,F,2:05:01,6:09
+237,238.,44321,"McLeod, Nicole","Bend, OR, USA",48,F,2:05:04,6:09
+238,239.,41305,"Koel, Peter","Greenville, WI, USA",58,M,2:05:56,6:12
+239,240.,42201,"Koel, Lisa","Greenville, WI, USA",62,F,2:05:57,6:12
+240,241.,44434,"Dean, Erik","Hector, MN, USA",46,M,2:06:19,6:13
+241,242.,44207,"Hodkiewicz, Nicole","Rice Lake, WI, USA",57,F,2:06:21,6:13
+242,243.,45570,"Grist, Colin","Madison, WI, USA",34,M,2:06:24,6:13
+243,244.,84368,"Hohanshelt, Laura","Minneapolis, MN, USA",65,F,2:06:37,6:14
+244,245.,43204,"Ellingson, Scott","Waconia, MN, USA",68,M,2:06:38,6:14
+245,246.,42467,"COLBY, HEIDI","Minneapolis, MN, USA",53,F,2:06:46,6:14
+246,247.,43430,"Petersson, Mats","Middleton, WI, USA",63,M,2:06:51,6:14
+247,248.,44365,"Nelson, Emily","Duluth, MN, USA",26,F,2:06:56,6:15
+248,249.,45384,"Schwartz, Maxine","Saint Paul, MN, USA",35,F,2:07:14,6:15
+249,250.,84402,"Hong, David","Minneapolis, MN, USA",50,M,2:07:21,6:16
+250,251.,44357,"Allen, Brian","Osseo, MN, USA",56,M,2:07:30,6:16
+251,252.,43456,"Lindaman, Matt","Winona, MN, USA",54,M,2:08:13,6:18
+252,253.,84720,"Loy, Dennis","Wausau, WI, USA",78,M,2:08:26,6:19
+253,254.,84471,"Ryan, Megan","Saint Paul, MN, USA",55,F,2:08:35,6:19
+254,255.,44315,"Bates, Garrett","Pine Island, MN, USA",24,M,2:09:14,6:21
+255,256.,43419,"Johnson, Genevieve","Minneapolis, MN, USA",68,F,2:09:21,6:22
+256,257.,43574,"Casper, Renee","Middleton, WI, USA",50,F,2:09:41,6:23
+257,258.,84219,"Schacherl, John","Mount Horeb, WI, USA",72,M,2:09:44,6:23
+258,259.,84101,"Markowitz, Toby","Roseville, MN, USA",79,M,2:09:47,6:23
+259,260.,43334,"Metzdorff, William","Chicago, IL, USA",65,M,2:09:49,6:23
+260,261.,44574,"Ottenberg, Matthias","Holmen, WI, USA",64,M,2:11:06,6:27
+261,262.,84711,"Stevens, James","Cottage Grove, WI, USA",72,M,2:11:35,6:28
+262,263.,84320,"Peterson, Matt","Hayward, WI, USA",65,M,2:11:39,6:29
+263,264.,84385,"Noteboom, Nikki","Minneapolis, MN, USA",35,F,2:11:39,6:29
+264,265.,84337,"Emerson, Beth","Spooner, WI, USA",60,F,2:11:41,6:29
+265,266.,43220,"Hodkiewicz, Dominic","Rice Lake, WI, USA",57,M,2:11:41,6:29
+266,267.,84323,"Emerson, Jeffrey","Spooner, WI, USA",62,M,2:11:47,6:29
+267,268.,84311,"Smith, Steven","Hayward, WI, USA",69,M,2:11:48,6:29
+268,269.,84209,"Buhr, Andrea","Phoenix, AZ, USA",40,F,2:12:11,6:30
+269,270.,70615,"Adams, James","Yorkville, IL, USA",74,M,2:12:15,6:30
+270,271.,84708,"Holte, Paul S","Shakopee, MN, USA",71,M,2:12:15,6:30
+271,272.,84361,"Szczerbinski, Jeff","Hartford, WI, USA",55,M,2:13:30,6:34
+272,273.,44330,"Lloyd, Jim","Saint Paul, MN, USA",63,M,2:13:34,6:34
+273,274.,43433,"Knox-Bauer, Ann","Medford, WI, USA",57,F,2:14:35,6:37
+274,275.,44346,"Searl, Richard","LitchfieldLitchfield, MN, USA",63,M,2:14:56,6:38
+275,276.,45396,"Wall, James","Chanhassen, MN, USA",49,M,2:15:02,6:39
+276,277.,44461,"Wall, Sara","Chanhassen, MN, USA",49,F,2:15:06,6:39
+277,278.,41442,"Vorlander, Rachel","Madison, WI, USA",32,F,2:15:34,6:40
+278,279.,44449,"Sletten, Dave","Eagle River, WI, USA",40,M,2:15:36,6:40
+279,280.,43438,"Widdifield, John","Lannon, WI, USA",68,M,2:15:41,6:40
+280,281.,44515,"Brooks, Melissa","Saint Paul, MN, USA",37,F,2:15:52,6:41
+281,282.,84357,"jacobson, Laura","Traverse City, MI, USA",63,F,2:15:53,6:41
+282,283.,84210,"Wallin, Rita","Wilmette, IL, USA",66,F,2:15:57,6:41
+283,284.,45488,"Gillen, Laura","Winthrop, WA, USA",36,F,2:16:52,6:44
+284,285.,43353,"Fields, Donna","Minneapolis, MN, USA",56,F,2:17:13,6:45
+285,286.,45586,"Howe, Marc","Oak Lawn, IL, USA",38,M,2:18:52,6:50
+286,287.,43326,"Winters, Marie-Pier","Minneapolis, MN, USA",56,F,2:19:14,6:51
+287,288.,84373,"Hudacek, Gretchen","Fall Creekfall creek, WI, USA",57,F,2:19:46,6:53
+288,289.,84469,"Hauff, Mary","Minnetonka, MN, USA",63,F,2:19:51,6:53
+289,290.,44671,"Hanson, Jenna","Boyceville, WI, USA",32,F,2:20:38,6:55
+290,291.,84393,"Rosenberger, Mindy","Eleva, WI, USA",51,F,2:20:45,6:55
+291,292.,45353,"Cole, Becky","Presque Isle, WI, USA",58,F,2:21:14,6:57
+292,293.,44329,"Kratz, Jessica","Cable, WI, USA",44,F,2:21:29,6:58
+293,294.,45381,"Born, Katie","Milwaukee, WI, USA",29,F,2:21:58,6:59
+294,295.,45380,"Kern, James","Milwaukee, WI, USA",28,M,2:21:58,6:59
+295,296.,44446,"Hagen, Brian","Saint Paul, MN, USA",64,M,2:22:07,6:59
+296,297.,84406,"Berendt, Alan","Milwaukee, WI, USA",64,M,2:22:16,7:00
+297,298.,44429,"Platner, Tom","Eden Prairie, MN, USA",64,M,2:23:14,7:03
+298,299.,84415,"Steel, Tiffany","Montréal, CAN",42,F,2:24:15,7:06
+299,300.,43102,"Wall, Deb","Rhinelander, WI, USA",62,F,2:24:32,7:07
+300,301.,84719,"Loy, Deborah","Wausau, WI, USA",74,F,2:24:54,7:08
+301,302.,44301,"Van Cleve Stiegler, Betsy","Plymouth, MN, USA",35,F,2:25:06,7:08
+302,303.,84472,"Willis, Steve","Superior, WI, USA",55,M,2:25:32,7:10
+303,304.,70635,"Luedtke, James","Excelsior, MN, USA",70,M,2:25:46,7:10
+304,305.,44318,"Waugh, Jacquelyn","Waconia, MN, USA",60,F,2:25:55,7:11
+305,306.,44201,"Campbell, Thomas","New Berlin, WI, USA",67,M,2:25:56,7:11
+306,307.,84201,"White, Therese","Cable, WI, USA",66,F,2:27:01,7:14
+307,308.,84332,"Adler, Grace","Boulder Junction, WI, USA",55,F,2:27:13,7:15
+308,309.,84437,"Meilahn, Jill","Marshfield, WI, USA",69,F,2:27:43,7:16
+309,310.,43521,"Ottenberg, Dylan","Holmen, WI, USA",28,M,2:28:05,7:17
+310,311.,70551,"Remington, James","New Richmond, WI, USA",75,M,2:30:05,7:23
+311,312.,44360,"Christopherson, Dave","Solon Springs, WI, USA",56,M,2:30:59,7:26
+312,313.,84203,"Konkel, Greg","Minneapolis, MN, USA",62,M,2:31:31,7:27
+313,314.,44450,"Grilley, Dorian","Saint Paul, MN, USA",65,M,2:32:16,7:29
+314,315.,84721,"Cardwell, Dale","Shell Lake, WI, USA",78,M,2:32:31,7:30
+315,316.,43397,"Walters, Kerrie","West Saint Paul, MN, USA",39,F,2:33:22,7:33
+316,317.,84349,"Koller, Kelly","Sobieski, WI, USA",48,F,2:33:25,7:33
+317,318.,53206,"Scherwinski, David","Butternut, WI, USA",57,M,2:35:40,7:39
+318,319.,84424,"McGrory, James","Saint Paul, MN, USA",59,M,2:36:26,7:42
+319,320.,42440,"Harrison, Britt","Woodbury, MN, USA",21,F,2:36:27,7:42
+320,321.,40064,"Harrison, Elin","Woodbury, MN, USA",19,F,2:36:29,7:42
+321,322.,40065,"Harrison, Erika","Woodbury, MN, USA",19,F,2:36:30,7:42
+322,323.,42458,"Anderson, Peter","Woodbury, MN, USA",21,M,2:36:32,7:42
+323,324.,44452,"Beilke, Genevra","Minneapolis, MN, USA",38,F,2:36:33,7:42
+324,325.,84329,"Grafft, Kevin","Chanhassen, MN, USA",62,M,2:37:01,7:43
+325,326.,84456,"Wright, Joseph","Minneapolis, MN, USA",29,M,2:37:10,7:44
+326,327.,84226,"Franzen, greg","Minneapolis, MN, USA",69,M,2:38:17,7:47
+327,328.,84205,"Gorham, Willie","Hudson, WI, USA",75,M,2:40:58,7:55
+328,329.,44311,"Diem, Susan","Minneapolis, MN, USA",60,F,2:41:23,7:56
+329,330.,84452,"Hanson, Jason","Elk Mound, WI, USA",52,M,2:42:18,7:59
+330,331.,84392,"Hocraffer, Amy","Rochester, MN, USA",38,F,2:43:13,8:02
+331,332.,84390,"Hocraffer, Henry","Rochester, MN, USA",67,M,2:43:14,8:02
+332,333.,84207,"Van Harpen, Glady","Iron Mountain, MI, USA",63,F,2:43:56,8:04
+333,334.,44313,"Louis, Clif","Denver, CO, USA",68,M,2:44:47,8:06
+334,335.,44639,"Myers, Molly","Denver, CO, USA",36,F,2:44:51,8:07
+335,336.,84375,"Wheeler, Matt","Hayward, WI, USA",35,M,2:45:28,8:08
+336,337.,43219,"Mann, Charles","Cherry Valley, IL, USA",64,M,2:46:03,8:10
+337,338.,44399,"Dahmen, Timothy","Waunakee, WI, USA",66,M,2:46:47,8:12
+338,339.,84213,"Ackeret-Johnson, Paula","Oconto, WI, USA",69,F,2:48:05,8:16
+339,340.,44634,"Olson, Mark","Menasha, WI, USA",67,M,2:48:30,8:17
+340,341.,44316,"Torkelson, Marie","Zumbrota, MN, USA",68,F,2:50:00,8:22
+341,342.,84707,"Miller, Margaret","Mauston, WI, USA",71,F,2:51:53,8:27
+342,343.,44517,"Knudson, Megan","Edina, MN, USA",41,F,2:53:02,8:31
+343,344.,84105,"Sarsfield, Robert","Menomonee Falls, WI, USA",76,M,2:53:41,8:33
+344,345.,44202,"Koehler, Douglas","WaukeshaWaukesha, WI, USA",55,M,2:54:00,8:34
+345,346.,84404,"Millerhagen, Anna","Northfield, MN, USA",25,F,2:57:17,8:43
+346,347.,43560,"Kokes, Timothy","Savage, MN, USA",44,M,2:58:28,8:47
+347,348.,84463,"Bartz, Daidre","Hayward, WI, USA",60,F,3:00:43,8:54
+348,349.,84464,"Scheer, Tina","Ellsworth, ME, USA",63,F,3:00:51,8:54
+349,350.,44203,"Uhl, Douglas","Brookfield, WI, USA",64,M,3:01:55,8:57
+350,351.,84228,"Frame, Ken","Hayward, WI, USA",65,M,3:02:21,8:58
+351,352.,70638,"Lueth, Randy","Marshfield, WI, USA",71,M,3:04:32,9:05
+352,353.,84202,"Herdrich, Gary","West Bend, WI, USA",71,M,3:07:37,9:14
+353,354.,45482,"Beskar, Jill","New Richmond, WI, USA",42,F,3:08:07,9:15
+354,355.,84350,"Erickson, Karl Leif","Shafer, MN, USA",42,M,3:17:18,9:43
+355,356.,84714,"Erickson, Paul D","Circle Pines, MN, USA",71,M,3:17:20,9:43
+356,357.,84713,"Erickson, Marilyn","Circle Pines, MN, USA",71,F,3:17:23,9:43
+357,358.,84217,"Barta, Allison","Cass Lake, MN, USA",67,F,3:19:22,9:49
+358,359.,84465,"Schwartz, Rodney","Suamico, WI, USA",60,M,3:21:33,9:55
+359,360.,44304,"Temmer, James","West Bend, WI, USA",59,M,3:29:24,10:18
+360,361.,44101,"Weiss, Anne","Madison, WI, USA",67,F,3:31:10,10:24
+361,362.,84435,"Jarocki, John","Santa Claus, IN, USA",62,M,3:42:31,10:57
+362,363.,84103,"Muench, Louis","Cumberland, WI, USA",69,M,3:43:13,10:59
+363,364.,44624,"Manock, Amanda","La Crosse, WI, USA",46,F,3:45:24,11:06
+364,365.,44521,"Clements, Lindsey","Chicago, IL, USA",29,F,3:56:06,11:37
+365,366.,45475,"Clements, Jenna","Bloomington, MN, USA",23,F,3:56:09,11:37
+366,367.,45307,"Burazin, James","Cudahy, WI, USA",36,M,4:37:27,13:39
+367,DNF,41318,"Dieperink, Kathryn","Saint Paul, MN, USA",55,F, , 
+368,DNF,42423,"Hennessy, Chris","Evergreen, CO, USA",61,M, , 
+369,DNF,43103,"Peloquin, Gregory","Hampshire, IL, USA",59,M, , 
+370,DNF,43303,"Arntzen, John","Roscoe, IL, USA",61,M, , 
+371,DNF,43339,"ADRIAN, Allison","Minneapolis, MN, USA",47,F, , 
+372,DNF,43401,"Lentfer, Karen","Madison, WI, USA",60,F, , 
+373,DNF,44471,"Lindsley, Katie","Bloomer, WI, USA",40,F, , 
+374,DNF,44605,"Nickel, Ellen","De Forest, WI, USA",63,F, , 
+375,DNF,45386,"Rice, Benjamin","West Linn, OR, USA",37,M, , 
+376,DNF,45465,"Knabe, Stephanie","Osseo, MN, USA",40,F, , 
+377,DNF,51225,"Butler, Brenda","Minneapolis, MN, USA",54,F, , 
+378,DNF,52371,"Scherwinski, Sharon","Butternut, WI, USA",48,F, , 
+379,DNF,70555,"Lybeck, Don","Whitefish BayMilwaukee, WI, USA",78,M, , 
+380,DNF,70607,"Konkel, Steven","Wausau, WI, USA",71,M, , 
+381,DNF,70617,"Swanson, Dave","Rice Lake, WI, USA",75,M,1:54:05,5:37
+382,DNF,70620,"Kolstad, Russ","Waunakee, WI, USA",74,M, , 
+383,DNF,84204,"Graham, Colleen","Hayward, WI, USA",67,F, , 
+384,DNF,84208,"Dahmen, Barbara","Waunakee, WI, USA",67,F, , 
+385,DNF,84328,"Leahy, Ann E","Stevens Point, WI, USA",68,F, , 
+386,DNF,84352,"Stuber, Lynda","Dousman, WI, USA",68,F, , 
+387,DNF,84372,"Bauer, Steve","Stillwater, MN, USA",64,M, , 
+388,DNF,84378,"Vann, Jim","Madison, WI, USA",68,M, , 
+389,DNF,84449,"McCarthy, Joe","Madison, WI, USA",65,M, , 
+390,DNF,84701,"Lowe, Greg","Holmen, WI, USA",70,M, , 
+391,DNF,84712,"Harris, Mark","Hopkins, MN, USA",70,M, , 
+392,DNS,84363,"Brodwick, Kevin","Park City, UT, USA",54,M, , 
