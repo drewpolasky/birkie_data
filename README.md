@@ -10,7 +10,7 @@ Birkie Skate finish times by year:
 
 Birkie Skate Waves 2023: 
 
-![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyWave_2023.png?raw=true)
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyWave_2024.png?raw=true)
 
 Birkie Classic by year: 
 
@@ -18,7 +18,7 @@ Birkie Classic by year:
 
 Birkie Classic Waves 2023: 
 
-![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_classicFinishTimesbyWave_2023.png?raw=true)
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_classicFinishTimesbyWave_2024.png?raw=true)
 
 
 
