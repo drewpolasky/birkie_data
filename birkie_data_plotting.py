@@ -8,6 +8,7 @@ import sys
 import datetime
 from bisect import bisect
 import pandas as pd
+from itertools import cycle
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
     parser.add_argument("--tech", type=str, default='skate')
     parser.add_argument("--length", type=str, default='birkie')
     parser.add_argument("--wave", type=int, default=1)
-    parser.add_argument("--year", type=str, default='2024')
+    parser.add_argument("--year", type=str, default='2025')
     parser.add_argument("--plot", type=str, default='byWave')
     parser.add_argument("--name", type=str, default='')
     args = parser.parse_args()
@@ -36,7 +37,7 @@ def main():
 def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
-    cutoffs = {'skate':{2023:[180,193,207,221,238,260,289,339],2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
+    cutoffs = {'skate':{2025:[185, 205], 2023:[180,193,207,221,238,260,289,339],2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
     for year in [plot_year]:
         waves = {}
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
@@ -54,29 +55,31 @@ def resultsByWave(tech, length, allResults, plot_year):
         prevWaveAvg = 0
         order_waves = {wave:waves[wave] for wave in sorted(list(waves.keys()))}
         waves = order_waves
-        for wave in waves:    
-            if len(waves[wave]) > 10:
-                #print(wave)
-                waveAvg = sum(waves[wave]) / float(len(waves[wave]))
-                waveGap = math.floor(waveAvg - prevWaveAvg)
-                if prevWaveAvg != 0:
-                    waveGaps.append(waveGap)
-                prevWaveAvg = waveAvg
-                waveHist = stats.kde.gaussian_kde(waves[wave])
-                if tech == 'skate':
-                    maxT = 28000    
-                    minT = 5000
+        for wave in waves:
+            print(wave)
+            if wave != 35:    
+                if len(waves[wave]) > 10:
+                    #print(wave)
+                    waveAvg = sum(waves[wave]) / float(len(waves[wave]))
+                    waveGap = math.floor(waveAvg - prevWaveAvg)
+                    if prevWaveAvg != 0:
+                        waveGaps.append(waveGap)
+                    prevWaveAvg = waveAvg
+                    waveHist = stats.kde.gaussian_kde(waves[wave])
+                    if tech == 'skate':
+                        maxT = 28000    
+                        minT = 5000
+                        if year == 2024:
+                            maxT = 4*3600
+                            minT = 3600
+                    if tech == 'classic':
+                        maxT = 32000        
+                        minT = 7000
                     if year == 2024:
                         maxT = 4*3600
                         minT = 3600
-                if tech == 'classic':
-                    maxT = 32000        
-                    minT = 7000
-                if year == 2024:
-                    maxT = 4*3600
-                    minT = 3600
-                x = np.linspace(minT, maxT, 200)
-                plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
+                    x = np.linspace(minT, maxT, 200)
+                    plt.plot(x, waveHist(x), label = "Wave" + str(wave), linewidth = 1.5)
 
         if year in cutoffs[tech]:
             for i in range(len(cutoffs[tech][year])):
@@ -86,13 +89,13 @@ def resultsByWave(tech, length, allResults, plot_year):
         #    threeGap.append(waveGaps[0])
         plt.legend(prop = {'size':10})
         plt.xlim([minT -200,maxT + 200])
-        plt.ylim([0,.0012])
+        plt.ylim([0,.0006])
         plt.ylabel("Frequency")
         plt.xlabel("Finishing times")
-        #times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30","8:00"]
-        times = ["1:00","1:30", "2:00", "2:30", "3:00", "3:30", "4:00"]
-        #xticksValues = [7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 23400, 25200, 26000, 27800]
-        xticksValues = [3600, 5400, 7200, 9000, 10800, 12600, 14400]
+        times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30","8:00"]
+        #times = ["1:00","1:30", "2:00", "2:30", "3:00", "3:30", "4:00"]
+        xticksValues = [7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 23400, 25200, 26000, 27800]
+        #xticksValues = [3600, 5400, 7200, 9000, 10800, 12600, 14400]
         plt.xticks(xticksValues, times)
         plt.title(length + " " + tech + " Finish Times by wave for " + str(year))
         if year == plot_year:
@@ -106,6 +109,7 @@ def resultsByWave(tech, length, allResults, plot_year):
 def wave_gaps(tech, length, allResults, plot_year):
     #calculate the percent back between the waves over the years
     years = sorted(list(allResults.keys()))
+    years.pop(3)
     waveGaps = {}
     for year in years:
         #print(year)
@@ -125,7 +129,9 @@ def wave_gaps(tech, length, allResults, plot_year):
         prevWaveAvg = 0
         order_waves = {wave:waves[wave] for wave in sorted(list(waves.keys()))}
         waves = order_waves
-        for wave in waves:    
+        print(year, waves.keys())
+        #for wave in [0,11,12,13,14,15]:
+        for wave in [0,1,2,3,4,5,6]: 
             if wave not in [35, 70] and wave < 90:
                 if len(waves[wave]) > 10:
                     waveAvg = sum(waves[wave]) / float(len(waves[wave]))
@@ -138,19 +144,19 @@ def wave_gaps(tech, length, allResults, plot_year):
                         waveGaps[wavePair][1].append(waveGap)
                     prevWaveAvg = waveAvg
                     prevWave = wave
-    #print(waveGaps['1-2'][1])
+                    #print(year, wave, waveAvg)
+    #print(waveGaps['11-12'][1])
     for wavePair in waveGaps: 
         plt.plot(waveGaps[wavePair][0], waveGaps[wavePair][1],label=wavePair)
 
     plt.title('Wave gaps by year '+' '.join([length, tech]))
     plt.ylabel('Percent difference between mean wave times')
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True)
     plt.tight_layout()
     plt.savefig('./graphs/wave_gaps_by_year_'+'_'.join([length, tech]))
     plt.show()
             
-
-
 def resultsByYear(tech, length, allResults):    #graphs histogram of results by year
     for year in allResults:
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
@@ -167,10 +173,19 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     print(maxT)
 
     x = np.linspace(minT, maxT, 200)
-    plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(np.linspace(0, 1, len(allResults.keys())))))
+    colors = plt.cm.jet(np.linspace(0, 1, len(allResults.keys())))
+    line_styles = ['-', '--', '-.', ':']
+    styles = []
+    for i in range(len(allResults.keys())):
+        styles.append((colors[i], line_styles[i%4]))
+    combined_cycle = cycle(styles)
 
     for year in plotTimes:
-        plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
+        color, style = next(combined_cycle)
+        plt.plot(x, plotTimes[year](x), label=str(year) + ' results', linewidth=1.5, color=color, linestyle=style)
+
+    #for year in plotTimes:
+    #    plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
     plt.legend(prop = {'size':10})
     plt.xlim([minT -200,maxT + 200])
     times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00"]
@@ -195,7 +210,7 @@ def getWavePlacement(allResults, year, tech, length, target_wave, skier):
     for index, row in allResults[year].iterrows(): #iterate over all skiers
         bib = int(row[' Bib Number'])
         wave = math.floor(bib / 1000)
-        #print(row['Time'], skier.lower().strip(), row['Name'].lower().strip())
+        #print(skier.lower().strip(), row['Name'].lower().strip())
         if row['Name'].lower().strip() == skier.lower().strip():
             targetTime = row['times']
         elif target_wave == wave:
@@ -218,10 +233,11 @@ def parseTime(time):
     seconds += 3600 * hours + 60 * minutes
     return seconds
 
-def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2024):
+def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2025):
     years = list(range(start_year, end_year+1))
     years.remove(2017) 
-    years.remove(2021)          
+    years.remove(2021)
+    years.remove(2024)          
     allResults = {}                 #data will be a dictonary with entries for each year. within each year there will be a list of lists, with each lowest level list containing all the elements scraped from the results website
     for year in years:
         #print(year)
