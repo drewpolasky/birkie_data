@@ -37,7 +37,7 @@ def main():
 def resultsByWave(tech, length, allResults, plot_year):
     waveTimes = {}
     threeGap = []
-    cutoffs = {'skate':{2025:[185, 205], 2023:[180,193,207,221,238,260,289,339],2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
+    cutoffs = {'skate':{2023:[180,193,207,221,238,260,289,339],2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
     for year in [plot_year]:
         waves = {}
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
