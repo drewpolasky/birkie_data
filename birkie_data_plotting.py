@@ -39,6 +39,7 @@ def resultsByWave(tech, length, allResults, plot_year):
     threeGap = []
     cutoffs = {'skate':{2023:[180,193,207,221,238,260,289,339],2020: [161,174,187,205,224,262], 2019:[191,210,227,244,268,304], 2018:[177,194,210,226,248,281], 2016:[181,199,215,231,254,288]}, 'classic':{2020:[227, 262, 302, 350], 2019:[257, 294, 328, 372], 2018:[251, 287, 326, 374]}}       #wave placement cutoff times, to the nearest minute
     for year in [plot_year]:
+        plt.figure(figsize=(10, 6))
         waves = {}
         allResults[year]['times'] = allResults[year][' Finish Time'].dt.hour*3600 + allResults[year][' Finish Time'].dt.minute*60 + allResults[year][' Finish Time'].dt.second
 
@@ -89,7 +90,7 @@ def resultsByWave(tech, length, allResults, plot_year):
         #    threeGap.append(waveGaps[0])
         plt.legend(prop = {'size':10})
         plt.xlim([minT -200,maxT + 200])
-        plt.ylim([0,.0006])
+        #plt.ylim([0,.0006])
         plt.ylabel("Frequency")
         plt.xlabel("Finishing times")
         times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30","8:00"]
@@ -172,6 +173,7 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
         plotTimes[year] = stats.kde.gaussian_kde(results_array)
     print(maxT)
 
+    plt.figure(figsize=(10, 6))
     x = np.linspace(minT, maxT, 200)
     colors = plt.cm.jet(np.linspace(0, 1, len(allResults.keys())))
     line_styles = ['-', '--', '-.', ':']
@@ -186,6 +188,7 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
 
     #for year in plotTimes:
     #    plt.plot(x,plotTimes[year](x), label = str(year)+ ' results', linewidth = 1.5 )
+
     plt.legend(prop = {'size':10})
     plt.xlim([minT -200,maxT + 200])
     times = ["2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00"]
@@ -200,7 +203,7 @@ def resultsByYear(tech, length, allResults):    #graphs histogram of results by 
     plt.show()
 
 def getWavePlacement(allResults, year, tech, length, target_wave, skier):
-    #get the placement of an indididual skier in a given wave. The skier does not have to have been in the specified wave, but does have to have skied that race in that year and in that technique
+    #get the placement of an indidividual skier in a given wave. The skier does not have to have been in the specified wave, but does have to have skied that race in that year and in that technique
     if tech == 'classic' and target_wave <10:
         target_wave+=10
     waveTimes = []
@@ -233,7 +236,7 @@ def parseTime(time):
     seconds += 3600 * hours + 60 * minutes
     return seconds
 
-def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2025):
+def readIn(distance, technique, path='yearly_data/', start_year = 2009, end_year=2026):
     years = list(range(start_year, end_year+1))
     years.remove(2017) 
     years.remove(2021)

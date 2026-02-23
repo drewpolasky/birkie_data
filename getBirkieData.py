@@ -15,6 +15,7 @@ from selenium import webdriver
 import time
 import re
 import pandas as pd
+import os
 
 def main():
     #get_searchable_results()
@@ -116,7 +117,9 @@ def get_2022_data():
     #2024 link: https://my.raceresult.com/273908/results#10_318D6F
 
     #eventIDs = eventIds_2023()
-    eventIDs = eventIds_2025()
+    #eventIDs = eventIds_2025()
+    year = 2026
+    eventIDs = eventIds_year(year=year)
 
     for event in eventIDs:
         results = []
@@ -127,13 +130,14 @@ def get_2022_data():
         #driver.get('https://my.raceresult.com/189471/'+str(eventID))
         #driver.get('https://my.raceresult.com/225100/'+str(eventID))
         #driver.get('https://my.raceresult.com/273908/'+str(eventID))
-        driver.get('https://pttiming.com/ski/2025/birkie/results.html'+str(eventID))
-        time.sleep(2)       #seems to take a couple seconds sometimes for the showall button to come up
+        driver.get('https://my.raceresult.com/380971/'+str(eventID))
+        #driver.get('https://pttiming.com/ski/2025/birkie/results.html'+str(eventID))
+        time.sleep(4)       #seems to take a couple seconds sometimes for the showall button to come up
         ids = driver.find_elements_by_xpath('//*[@id]')
         
         for ii in ids:
             print(ii.get_attribute('id'))    # id name as string
-        #driver.find_element_by_id("cookieChoiceDismiss").click()
+        driver.find_element_by_id("cookieChoiceDismiss").click()
         elements = driver.find_elements_by_css_selector(".aShowAll")
         elements[-1].click()  #click the show all results button to get everyone on one page
 
@@ -158,7 +162,9 @@ def get_2022_data():
                 results.append(result)
         print(results[0])
         day_frame = pd.DataFrame(results, columns=header)
-        day_frame.to_csv('yearly_data/2025/'+event+'.csv')
+        if not os.path.exists('yearly_data/'+str(year)):
+            os.makedirs('yearly_data/'+str(year))
+        day_frame.to_csv('yearly_data/'+str(year)+'/'+event+'.csv')
         driver.quit()
 
 
@@ -267,20 +273,21 @@ def eventIds_2024():
 
     return eventIDs
 
-def eventIds_2025():
+def eventIds_year(year = 2025):
     #273908
     eventIDs = {}
-    eventIDs['birkie classic 2025'] = "#11_C0D558"
-    eventIDs['birkie classic openTrack 2025'] = "#2_763D8E"
-    eventIDs['kortie classic 2025'] = "#8_1706C5"
-    eventIDs['kortie classic openTrack 2025'] = "#4_2D77B1"
+    eventIDs[f'birkie classic {year}'] = "#11_C0D558"
+    eventIDs[f'birkie classic openTrack {year}'] = "#2_763D8E"
+    eventIDs[f'kortie classic {year}'] = "#8_1706C5"
+    eventIDs[f'kortie classic openTrack {year}'] = "#4_2D77B1"
 
-    eventIDs['birkie skate 2025'] = "#10_3C2D41"
-    eventIDs['birkie skate openTrack 2025'] = "#1_151CFA"
-    eventIDs['kortie skate 2025'] = "#7_9C7CB5"
-    eventIDs['kortie skate openTrack 2025'] = "#3_FB03F3"
-    eventIDs['haakon skate 2025'] = "#9_5D9B23"
+    eventIDs[f'birkie skate {year}'] = "#10_3C2D41"
+    eventIDs[f'birkie skate openTrack {year}'] = "#1_151CFA"
+    eventIDs[f'kortie skate {year}'] = "#7_9C7CB5"
+    eventIDs[f'kortie skate openTrack {year}'] = "#3_FB03F3"
+    eventIDs[f'haakon skate {year}'] = "#9_5D9B23"
 
     return eventIDs
+
 
 main()
