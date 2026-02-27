@@ -22,7 +22,7 @@ from snowdas_data import load_data
 def main():
 	length = 'birkie'
 	technique = 'skate'
-	#data = readIn(length, technique)
+	data = readIn(length, technique)
 	city_data = pd.read_csv('uscities.csv')
 	city_data['compare_name'] = city_data['city'].str.lower().str.replace(" ", "")+','+city_data['state_id'].str.lower()
 	#skiable_days_by_city(data)
@@ -32,6 +32,7 @@ def main():
 	#region = [-125, -65, 26, 50]
 	region = [-115, -100, 35, 44]
 	plot_birkie_cities_skiable_days(skiable_city_days, city_data, region = region)
+	plot_skiers_per_capita_vs_skiable_days(skiable_city_days, city_data, data)
 
 def plot_birkie_cities_skiable_days(skiable_city_days, city_data, region = [-125, -65, 26, 50]):
 	fig = plt.figure(figsize=(10, 6))
@@ -70,6 +71,71 @@ def plot_birkie_cities_skiable_days(skiable_city_days, city_data, region = [-125
 	cbar.set_label('skiable days per year')
 	cbar.ax.yaxis.set_major_formatter(FuncFormatter(lambda x, pos: format_ticks(x, pos, max_ski_days)))
 	plt.savefig('Skiable_days_cities.png')
+	plt.show()
+
+def plot_skiers_per_capita_vs_skiable_days(skiable_city_days, city_data, data):
+	# Count total skiers per city across all years
+	city_skier_counts = {}
+	year_count = 0
+	for year in data:
+		year_count += 1
+		if year in [2022, 2023, 2024, 2025, 2026]:
+			cities, skiers = order_cities_2022_on(data, year)
+		elif year in range(2009, 2016):
+			cities, skiers = order_cities_pre_2009_2015(data, year)
+		else:
+			cities, skiers = order_cities_pre_2016_2020(data, year)
+		cities_list = [city.replace(' ', '') for city in cities]
+		skiers_list = list(skiers)
+		for i, city in enumerate(cities_list):
+			if city not in city_skier_counts:
+				city_skier_counts[city] = 0
+			city_skier_counts[city] += len(skiers_list[i])
+
+	avg_ski_days = []
+	skiers_per_capita = []
+	city_labels = []
+	for city in skiable_city_days:
+		if city not in city_skier_counts:
+			continue
+		city_info = city_data[city_data['compare_name'] == city]
+		if len(city_info) == 0:
+			continue
+		population = city_info['population'].values[0]
+		if population <= 0:
+			continue
+		# Average skiable days across all years
+		total_days = 0
+		for entry in skiable_city_days[city]:
+			val = entry[1]
+			if hasattr(val, 'flatten'):
+				val = val.flatten()[0]
+			total_days += val
+		avg_days = total_days / len(skiable_city_days[city])
+		# Skiers per capita per year
+		avg_skiers = city_skier_counts[city] / year_count
+		per_capita = avg_skiers / population
+		avg_ski_days.append(avg_days)
+		skiers_per_capita.append(per_capita)
+		city_labels.append(city)
+
+	avg_ski_days = np.array(avg_ski_days)
+	skiers_per_capita = np.array(skiers_per_capita)
+
+	# Label only cities with relatively high skiers per capita to reduce clutter
+	label_threshold = np.percentile(skiers_per_capita, 95)
+
+	fig, ax = plt.subplots(figsize=(10, 7))
+	ax.scatter(avg_ski_days, skiers_per_capita, alpha=0.5, s=20)
+	for i, label in enumerate(city_labels):
+		if skiers_per_capita[i] >= label_threshold:
+			ax.annotate(label, (avg_ski_days[i], skiers_per_capita[i]), fontsize=7, alpha=0.8)
+	ax.set_xlabel('Average Skiable Days per Year')
+	ax.set_ylabel('Birkie Skiers per Capita per Year')
+	ax.set_title('Birkie Skiers per Capita vs Skiable Days by City')
+	ax.grid(True)
+	plt.tight_layout()
+	plt.savefig('skiers_per_capita_vs_skiable_days.png')
 	plt.show()
 
 def format_ticks(x, pos, max_value):
