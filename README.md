@@ -16,6 +16,18 @@ python athlete_linking.py --name "drew polasky"   prints one skier's linked hist
 link) and `name_shared` (how many athletes share that exact name), to filter out shakier links in an analysis.
 
 
+Year to year performance changes:
+
+python performance_changes.py --race birkie --tech skate                        writes graphs/birkie_skate_year_to_year.png
+python performance_changes.py --race birkie --tech skate --name "drew polasky"  also plots one skier, adjusted for conditions
+
+`performance_changes.py` models log(finish time) as the skier's ability + that race's conditions + age + experience,
+fit within the same skiers from year to year. Age is held flat from 25 to 35 and learning is assumed done by the 5th
+race, which is what lets conditions and aging be told apart. 2024 (short course) and the open track are left out.
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skate_year_to_year.png?raw=true)
+
+
 Birkie Skate finish times by year: 
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyYear_2026.png?raw=true)
