@@ -28,6 +28,19 @@ race, which is what lets conditions and aging be told apart. 2024 (short course)
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skate_year_to_year.png?raw=true)
 
 
+Field strength of each race:
+
+python race_strength.py         writes graphs/race_strength.png, linked_data/crossover_results.csv and linked_data/race_strength.csv
+
+Skiers who have done several events (Birkie, Kortie, Haakon, skate and classic, open track) put every race on one scale:
+one ability per skier across events, one effect per race for its course and snow, plus age and experience. Each
+race's winner, median and spread are then quoted as % slower than the typical Birkie skate median finisher.
+`crossover_results.csv` has every finish by a multi-event skier with % of median, % back of the winner and of the top 10.
+The Haakon is shaky: many adults there are skiing with their kids rather than racing.
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/race_strength.png?raw=true)
+
+
 Birkie Skate finish times by year: 
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyYear_2026.png?raw=true)

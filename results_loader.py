@@ -219,7 +219,11 @@ def load_raceresult(filename):
         df['gender_place'] = pd.to_numeric(raw['Sex'].str.strip('. '), errors='coerce')
     df['bib'] = pd.to_numeric(raw['Bib'], errors='coerce')
     df['time_s'] = raw['Time'].map(parse_time)
-    df['status'] = np.where(df['time_s'].notna(), 'finished', 'DNF')
+    #only a placed result is a finish. DNFs sometimes still have a time (from the last checkpoint), and there are
+    #disqualifications (DSQ) and unranked starters ("a.k.")
+    place = raw['Ovr'].str.strip(' .')
+    df['status'] = np.select([df['overall_place'].notna() & df['time_s'].notna(), place == 'DSQ', place == 'a.k'],
+                             ['finished', 'DSQ', 'unranked'], 'DNF')
     df['gender'] = raw['Gender'].str.strip().str.upper().str[0]
     df['age'] = pd.to_numeric(raw['Age'], errors='coerce')
     df.loc[df['age'] <= 0, 'age'] = np.nan
