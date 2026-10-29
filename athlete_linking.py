@@ -4,8 +4,9 @@
 #   - results are only compared when the last names match and the first names are the same or a nickname
 #     ("Drew"/"Andrew", "Bob"/"Robert", "Chris"/"Christopher")
 #   - each pair of results gets a score, the log odds that they're the same person. it starts from how common the
-#     name is, then adds evidence from birth year (exact age 2021+, age group 2016-2020), middle initial
-#     (mostly 2009-2014) and hometown
+#     name is (counted by people, not results), then adds evidence from birth year (exact age 2021+, age group
+#     2016-2020), middle initial (mostly 2009-2014) and hometown, where a move counts for less the younger the skier
+#     and the more years in between
 #   - pairs are merged best first, never merging two groups of results that contradict each other
 #     (two results in the same race, different genders, incompatible birth years, Jr/Sr, different middle initials)
 #finish times are deliberately not used, so the links can't bias a year to year performance analysis
@@ -14,6 +15,7 @@
 #python athlete_linking.py                      link everything, write linked_data/
 #python athlete_linking.py --name "drew polasky"  print one skier's history
 import argparse
+import bisect
 import functools
 import itertools
 import math
@@ -274,12 +276,16 @@ def last_name_keys(last, middle):
 class NameModel:
     #frequencies of names and places, for how surprising it is that two results share them
     def __init__(self, records):
-        self.n = len(records)
-        self.first = Counter(r.first for r in records)
-        self.last = Counter(key for r in records for key in r.last_keys)
-        self.n_people = len({(r.first, r.last) for r in records})
-        self.region = Counter(r.region for r in records if r.region)
-        self.city = Counter((r.city, r.region) for r in records if r.city and r.region)
+        #names are counted by people (distinct names), not results, so a family of regulars racing every year
+        #doesn't make their last name look common
+        names = {(r.first, r.last) for r in records}
+        self.n_people = len(names)
+        self.first = Counter(first for first, last in names)
+        self.last = Counter(key for key, first in {(key, r.first) for r in records for key in r.last_keys})
+        #same for places: the share of people from each state and city
+        self.region = Counter(region for name, region in {((r.first, r.last), r.region) for r in records if r.region})
+        self.city = Counter(place for name, place in {((r.first, r.last), (r.city, r.region))
+                                                      for r in records if r.city and r.region})
         #a name that shows up more than once in a year before FIRST_MULTI_RACE_YEAR belongs to at least that many people
         per_year = Counter((r.first, r.last, r.year) for r in records if r.year < FIRST_MULTI_RACE_YEAR)
         self.min_people = defaultdict(lambda: 1)
@@ -290,7 +296,7 @@ class NameModel:
         #log odds that two results with this name are the same person, before any other evidence:
         #about -log(number of other people expected to share the name)
         n_first = max(self.first[a.first], self.first[b.first])
-        others = n_first / self.n * self.last[last_key] / self.n * self.n_people
+        others = n_first * self.last[last_key] / self.n_people
         others = max(others, self.min_people[(a.first, a.last)] - 1, self.min_people[(b.first, b.last)] - 1)
         return min(6.0, -math.log(max(others, 1e-6)))
 
@@ -346,21 +352,42 @@ def birth_year_score(a, b):
 def location_score(a, b, model):
     if not a.region or not b.region:
         return 0.0
-    gap = abs(a.year - b.year)
-    #how often the same skier still lists the same city / state this many years later (measured on rare names)
-    p_city = max(0.6, 0.93 - 0.05 * gap)
-    p_region = max(0.85, 0.98 - 0.02 * gap)
-    f_region = model.region[a.region] / model.n
+    moved_state, moved_city = move_rates(a, b)
+    f_region = model.region[a.region] / model.n_people
     if a.region != b.region:
         if len(a.city) >= 5 and a.city == b.city:
             return 0.0          #"maple grove MN" / "maple grove WI" is far more likely a typo than a move
-        return math.log((1 - p_region) / max(1 - f_region, 0.05))
+        return math.log(moved_state / max(1 - f_region, 0.05))
     if not a.city or not b.city:
-        return min(math.log(p_region / f_region), 3.0)
-    f_city = max(model.city[(a.city, a.region)], 1) / model.n
+        return min(math.log((1 - moved_state) / f_region), 3.0)
+    f_city = max(model.city[(a.city, a.region)], 1) / model.n_people
     if same_city(a.city, b.city):
-        return min(math.log(p_city / f_city), 4.5)
-    return max(-3.0, min(3.0, math.log((p_region - p_city) / max(f_region - f_city, 0.002))))
+        return min(math.log((1 - moved_city) / f_city), 4.5)
+    return max(-3.0, min(3.0, math.log((moved_city - moved_state) / max(f_region - f_city, 0.002))))
+
+
+#how often the same skier lists a different state (or country) / a different city when they race again, by their age
+#at the earlier race and the years in between. measured on rare names with consistent ages, so the links aren't
+#in doubt. young skiers move a lot more: 12% of 22-25 year olds are in a different state a year later, 2% of 40-55s
+MOVE_GAP_BANDS = [1, 2, 4, 7, 11]       #upper ends of the gap bands, longer gaps use the last band
+MOVE_RATES = {                          #age band start -> (different state, different city) for each gap band
+    None: [(0.035, 0.10), (0.050, 0.15), (0.071, 0.21), (0.094, 0.28), (0.126, 0.36), (0.147, 0.42)],
+    0:  [(0.030, 0.11), (0.051, 0.16), (0.103, 0.27), (0.200, 0.45), (0.326, 0.66), (0.389, 0.79)],
+    22: [(0.123, 0.25), (0.184, 0.40), (0.266, 0.55), (0.340, 0.71), (0.412, 0.80), (0.413, 0.83)],
+    26: [(0.086, 0.23), (0.134, 0.35), (0.182, 0.46), (0.239, 0.56), (0.266, 0.65), (0.266, 0.65)],
+    30: [(0.045, 0.12), (0.061, 0.19), (0.077, 0.25), (0.093, 0.33), (0.111, 0.38), (0.111, 0.42)],
+    40: [(0.018, 0.06), (0.022, 0.09), (0.032, 0.13), (0.039, 0.18), (0.055, 0.24), (0.072, 0.29)],
+    55: [(0.021, 0.06), (0.028, 0.09), (0.041, 0.13), (0.056, 0.18), (0.074, 0.23), (0.102, 0.27)],
+}
+
+def move_rates(a, b):
+    gap_band = bisect.bisect_left(MOVE_GAP_BANDS, abs(a.year - b.year))
+    birth = a.birth or b.birth
+    age_band = None
+    if birth:
+        age = min(a.year, b.year) - (birth[0] + birth[1]) / 2
+        age_band = max([k for k in MOVE_RATES if k is not None and k <= age], default=0)
+    return MOVE_RATES[age_band][gap_band]
 
 
 class Cluster:

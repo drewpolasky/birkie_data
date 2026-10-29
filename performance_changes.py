@@ -426,11 +426,8 @@ def plot_skier(fit, name, label):
         print('\n{} matches {} skiers in this race, not plotting'.format(name, len(ids)))
         return
     rows = p[p['athlete_id'] == ids[0]].sort_values('year')
-    sex = rows['sex'].iloc[0]
-    years = np.arange(rows['year'].min(), rows['year'].max() + 1)
-    ages = years - rows['birth_year'].iloc[0]
-    #what the model expects from this skier on an average day: their ability plus the aging (and learning) curve
-    expected_log = rows['ability'].iloc[0] + np.log1p(age_curve(fit['beta'], sex, ages) / 100)
+    #what the model expects from this skier on an average day: their ability, age and experience, without that day's luck
+    rows = rows.assign(expected=rows['adjusted'] - rows['resid'])
     to_hours = lambda log_t: np.exp(log_t)
 
     fig, ax = plt.subplots(figsize=(9, 5), facecolor=SURFACE)
@@ -438,8 +435,9 @@ def plot_skier(fit, name, label):
             label='actual finish time')
     ax.plot(rows['year'], to_hours(rows['adjusted']), color=COLORS['M'], marker='o', markersize=6, linewidth=2,
             label='adjusted to an average year')
-    ax.plot(years, to_hours(expected_log), color=COLORS['F'], linewidth=1.5, label='expected from ability + age')
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda h, _: '{}:{:02d}'.format(int(h), int(round(h % 1 * 60)) % 60)))
+    ax.plot(rows['year'], to_hours(rows['expected']), color=COLORS['F'], linewidth=1.5,
+            label='expected from ability, age and experience')
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda h, _: '{}:{:02d}'.format(*divmod(int(round(h * 60)), 60))))
     ax.invert_yaxis()
     ax.legend(frameon=False, fontsize=8)
     style(ax, '{}, {} {} (faster is up)'.format(rows['name'].iloc[-1], *label.split('_')), 'finish time', 'year')
@@ -449,10 +447,11 @@ def plot_skier(fit, name, label):
     print('saved', path)
     plt.close(fig)
 
-    print(rows.assign(actual=pd.to_datetime(rows['time_s'], unit='s').dt.strftime('%H:%M:%S'),
-                      adjusted=pd.to_datetime(rows['adjusted_time_s'], unit='s').dt.strftime('%H:%M:%S'),
+    clock = lambda seconds: pd.to_datetime(seconds, unit='s').dt.strftime('%H:%M:%S')
+    print(rows.assign(actual=clock(rows['time_s']), adjusted=clock(rows['adjusted_time_s']),
+                      expected=clock(np.exp(rows['expected']) * 3600),
                       conditions=(100 * (np.exp(rows['condition_effect']) - 1)).round(1))[
-        ['year', 'age_at_race', 'actual', 'conditions', 'adjusted']].to_string(index=False))
+        ['year', 'age_at_race', 'race_number', 'actual', 'conditions', 'adjusted', 'expected']].to_string(index=False))
 
 
 if __name__ == '__main__':
