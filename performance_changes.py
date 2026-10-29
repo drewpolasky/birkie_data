@@ -24,6 +24,8 @@ from athlete_linking import link_athletes, first_name_relation
 from results_loader import load_all_results, compact
 
 EXCLUDE_YEARS = [2024]
+#a different course. its races keep their own conditions, but aren't part of the average year they're measured from
+DIFFERENT_COURSE = [2021]
 EXCLUDE_VARIANTS = ['openTrack', 'elite']
 #age bands with their own slope. 25-35 is the reference band, held flat
 AGE_BANDS = [('<25', None, 25), ('35-45', 35, 45), ('45-55', 45, 55), ('55-65', 55, 65), ('65-75', 65, 75), ('75+', 75, None)]
@@ -189,11 +191,12 @@ def solve_within(panel, X, keep):
 
 
 def condition_effects(beta, conditions):
-    #log effect of each race's conditions, centered on the average race
+    #log effect of each race's conditions, centered on the average race on the usual course
     effect = pd.Series(0.0, index=conditions)
     for c in conditions[1:]:
         effect[c] = beta['cond ' + c]
-    effect -= effect.mean()
+    usual = [c for c in conditions if int(c.split()[0]) not in DIFFERENT_COURSE]
+    effect -= effect[usual].mean()
     return pd.DataFrame({'effect': effect, 'pct': 100 * (np.exp(effect) - 1)})
 
 
@@ -313,21 +316,26 @@ def plot_overview(fit, boot, changes, linked, label):
     field = field.assign(condition=field['year'].astype(str).where(field['variant'] == 'main',
                                                                    field['year'].astype(str) + ' ' + field['variant']))
     field_median = np.log(field.groupby('condition')['time_s'].median()).reindex(cond.index)
-    field_median = 100 * (np.exp(field_median - field_median.mean()) - 1)
+    #both lines measured from the average race on the usual course
+    usual = np.array([int(c.split()[0]) not in DIFFERENT_COURSE for c in cond.index])
+    field_median = 100 * (np.exp(field_median - field_median[usual].mean()) - 1)
     #an all-elite wave's median says nothing about the snow
     field_median[[c for c in cond.index if 'elite' in c]] = np.nan
     keys = ['cond ' + c for c in cond.index[1:]]
     draws = np.column_stack([np.zeros(len(boot)), boot[keys].values])
-    draws = 100 * (np.exp(draws - draws.mean(axis=1, keepdims=True)) - 1)
+    draws = 100 * (np.exp(draws - draws[:, usual].mean(axis=1, keepdims=True)) - 1)
     lo = pd.Series(np.percentile(draws, 2.5, axis=0), index=cond.index)
     hi = pd.Series(np.percentile(draws, 97.5, axis=0), index=cond.index)
 
     order = sorted(cond.index, key=condition_x)
     x = np.array([condition_x(c) for c in order])
-    #break the lines over years with no comparable race
-    breaks = np.where(np.diff(x) > 1.5)[0] + 1
-    gap_x = (x[breaks - 1] + x[breaks]) / 2
-    line = lambda values: (np.insert(x, breaks, gap_x), np.insert(values.reindex(order).values, breaks, np.nan))
+    #break the lines over years with no comparable race, and on either side of a different course
+    missing = np.diff(x) > 1.5
+    other_course = np.isin([int(c.split()[0]) for c in order], DIFFERENT_COURSE).astype(int)
+    breaks = np.where(missing | (np.diff(other_course) != 0))[0] + 1
+    break_x = (x[breaks - 1] + x[breaks]) / 2
+    line = lambda values: (np.insert(x, breaks, break_x), np.insert(values.reindex(order).values, breaks, np.nan))
+    gap_x = break_x[missing[breaks - 1]]
     ax.axhline(0, color=INK_2, linewidth=0.8)
     ax.plot(*line(field_median), color='#b4b2ab', marker='o', markersize=4, linewidth=1.5, label='median finisher (raw)')
     ax.plot(*line(cond['pct']), color=COLORS['M'], marker='o', markersize=5, linewidth=2,
@@ -339,7 +347,8 @@ def plot_overview(fit, boot, changes, linked, label):
     days = [c for c in order if ' ' in c]
     if days:
         low = min(days, key=lambda c: cond.loc[c, 'pct'])
-        ax.annotate('2021: one point\nper race day', (condition_x(low), cond.loc[low, 'pct']), xytext=(0, -24),
+        ax.annotate('2021: different course,\none point per race day', (condition_x(low), cond.loc[low, 'pct']),
+                    xytext=(0, -24),
                     textcoords='offset points', ha='center', fontsize=7, color=INK_2)
     ax.set_xticks(range(int(x.min()), int(x.max()) + 1, 2))
     ax.legend(frameon=False, fontsize=8, loc='upper right')

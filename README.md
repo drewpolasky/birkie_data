@@ -23,7 +23,8 @@ python performance_changes.py --race birkie --tech skate --name "drew polasky"  
 
 `performance_changes.py` models log(finish time) as the skier's ability + that race's conditions + age + experience,
 fit within the same skiers from year to year. Age is held flat from 25 to 35 and learning is assumed done by the 5th
-race, which is what lets conditions and aging be told apart. 2024 (short course) and the open track are left out.
+race, which is what lets conditions and aging be told apart. 2024 (short course) and the open track are left out. 2021 was a different course raced over several days:
+each day keeps its own conditions, but it isn't part of the average year the others are measured from.
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skate_year_to_year.png?raw=true)
 
@@ -111,6 +112,31 @@ mid-pack lost 18% (23 skiers), about the same as fast skiers who started up fron
 fifth around them (24%). The few middle fifth skiers who started up front didn't do better (27%, 14 skiers).
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/front_back_start.png?raw=true)
+
+
+Weather and race speed:
+
+python weather_speed.py     writes graphs/weather_speed.png and linked_data/weather_speed.csv, and downloads the
+                            weather into weather_data/ the first time
+
+Sets each race day's speed (from the year to year model, the same skiers compared from one race to the next) against
+the weather around the course: hourly temperature and when it was snowing from the Hayward airport (HYR, through the
+Iowa Environmental Mesonet), daily snowfall from the Hayward Ranger Station co-op (GHCN USC00473511), and course snow
+depth from SNODAS. The airport's heated gauge reports most snow as a trace, so snowfall amounts come from the co-op.
+2021 was a different course and is left out, which leaves only 15 race days, so every model is judged by predicting
+each race day from the others. Two things show up. New snow in the 3 days to race morning slows the race, about 0.8%
+per inch (1.1% skate, 0.5% classic), and thaws since the last 1"+ snowfall speed it up, about 1.2% for each day above
+freezing. Together they explain half the spread between races, and predicting each race day from the others a
+quarter (missing by 6.2% on average against 7.6% with no weather). Both lean on a few races: without 2014 new snow is
+worth 0.3% per inch, and without 2010 or 2026, the two races after a long thawed spell, the predictions are no better
+than no weather at all. Race temperature adds nothing that holds up, whether split at freezing, as the overnight low,
+the warming during the race, or a freeze overnight and thaw during the race. Only a few race days got above freezing
+at all, so the warm side can't really be tested. Course snow depth helps a little, but only through 2014, which had
+both the most new snow and the deepest snow, so the two can't be told apart. The worst misses are 2014 skate (22%
+slow, predicted 3%), 2016 classic (warm and wet, 8% slow, predicted 4% fast), 2020 skate (9% fast, predicted average)
+and 2015 skate (8% slow, predicted average).
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/weather_speed.png?raw=true)
 
 
 Birkie Skate finish times by year: 
