@@ -72,6 +72,47 @@ skiable days in a normal winter goes with being 1.7% faster, but that includes w
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/snow_at_home.png?raw=true)
 
 
+Front vs back of the field:
+
+python front_back.py        writes graphs/front_back.png, graphs/front_back_start.png, linked_data/front_back.csv
+                            and linked_data/front_back_start.csv
+
+Gives each race its own conditions effect for each tenth of the field, by typical finish time on an average day,
+still measured within the same skiers from year to year. Everyone slower by the same % already spreads the field out
+in minutes: 2014's skate field was 183 minutes from the 10th to the 90th percentile finisher against 146 in an average
+year, but as a ratio 1.91 against 1.88. On top of that, in skate the front's times swing less with conditions than
+the middle's. In 2014 the fastest tenth (2:35 skiers) lost 15%, the middle 25% and the slowest tenth 20%. Across all
+races the fastest tenth loses about 3 points less than the middle per 10% slower race (2 without 2014), and gains less
+in fast years like 2026. In classic it's the back that swings least, about 5 points less per 10% slower race (3 with
+each skier's tenth set from their other races only), in fast years as well as slow, so it isn't just the time limit
+cutting off the slowest. 2014 hit the classic field about evenly. Only finishers count, and DNFs aren't in the results
+before 2023, so the back may look better than it was in slow years. The back of the skate field has also drifted slower
+than the middle over the years, which can't be told apart from slower skiers aging faster.
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/front_back.png?raw=true)
+
+The waves are seeded by speed, so the front also starts first. The bib gives the wave (one per thousand: elite under
+1000, then skate waves 1000s-10000s and classic waves 11000s-19000s), and from that each skier's start position, the
+share of the field that started ahead of them. Seeding lags a year and first-timers start at the back, so skiers of
+the same speed start in different places, and a second model gives each race its own cost of starting later. With
+start position held fixed the skate front's edge stays (-3.9 points per 10% slower race, -10.5 in 2014): it's the
+skiers, not the fresh course. A late start cost a lot in 2009-2012, most of all in classic (17% between the first and
+last starter in 2010), and a little less than usual since. Those early years were mostly fast ones, which is why
+across all races a late start looks dearer in fast years, but from 2013 on it doesn't follow how fast the race was in
+either technique. So the classic back's steadiness is mostly the skiers too: from 2013 on its gap is -5.0 points per
+10% slower race as measured and -4.1 at the same start. Start position also stands for time of day and how many
+skiers went by first, which can't be told apart here.
+
+A plain check without the start position model gives the same answers. Each result is set against the skier's own
+usual from their other races, through the simple year to year model only, and skiers of the same speed are split by
+where they started, each race read against the average race. Race by race, late starters' extra loss matches the
+model's start cost (correlation 0.90 skate, 0.94 classic). In 2014 skate, fast skiers (the fastest fifth) who started
+mid-pack lost 18% (23 skiers), about the same as fast skiers who started up front (17%) and well under the middle
+fifth around them (24%). The few middle fifth skiers who started up front didn't do better (27%, 14 skiers).
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/front_back_start.png?raw=true)
+
+
 Birkie Skate finish times by year: 
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyYear_2026.png?raw=true)
