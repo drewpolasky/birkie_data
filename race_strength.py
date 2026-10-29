@@ -14,6 +14,7 @@
 #example usage:
 #python race_strength.py
 #python race_strength.py --name "drew polasky"      one skier's results across every event
+#python race_strength.py --name "dan polasky" "drew polasky"     two skiers on one scale, and their head to head
 import argparse
 import itertools
 import os
@@ -42,15 +43,19 @@ QUANTILES = {'p10': 0.1, 'p25': 0.25, 'median': 0.5, 'p75': 0.75, 'p90': 0.9}
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--linked", type=str, default='linked_data/linked_results.csv')
-    parser.add_argument("--name", type=str, default='', help='just plot this skier\'s results across every event')
+    parser.add_argument("--name", type=str, nargs='+', default=[],
+                        help='just plot this skier\'s results across every event, or compare two skiers')
     args = parser.parse_args()
     out_dir = os.path.dirname(args.linked) or '.'
 
     linked = load_linked(args.linked)
     results = normalized_results(linked)
     fit = fit_model(results)
-    if args.name:
-        plot_skier(fit, results, args.name)
+    if len(args.name) == 1:
+        plot_skier(fit, results, args.name[0])
+        return
+    if len(args.name) == 2:
+        plot_pair(fit, results, *args.name)
         return
     boot = bootstrap(fit)
     races, events, yearly = field_levels(fit, results, boot)
@@ -376,24 +381,32 @@ def plot_strength(events, yearly):
     plt.close(fig)
 
 
-def plot_skier(fit, results, name):
-    #one skier's races across every event: on the common scale, and how much of each field they beat
-    f = implied_abilities(fit, results)
-    ref = reference_level(f)
+def skier_rows(fit, f, ref, name):
+    #one skier's finishes on the common scale, and what the model expects of them each year (their ability with
+    #age and experience, without the day's luck), or None when the name isn't exactly one skier
     last = compact(name.split()[-1])
     first = compact(' '.join(name.split()[:-1]))
     match = (f['last'].map(compact) == last) & f['first'].map(compact).map(lambda x: first_name_relation(x, first) is not None)
     ids = f.loc[match, 'athlete_id'].unique()
     if len(ids) != 1:
         print('{} matches {} skiers, not plotting'.format(name, len(ids)))
-        return
+        return None, None
     rows = f[f['athlete_id'] == ids[0]].sort_values(['year', 'event']).copy()
     rows['level'] = to_pct(rows['implied'] - ref)
     rows['beat'] = 100 - rows['percentile']
-    #what the model expects from them: their ability with age and experience, without the day's luck
     mine = fit['panel'][fit['panel']['athlete_id'] == ids[0]]
     expected = (mine['log_time'] - mine['resid'] - mine['race_id'].map(fit['race_effects'])).groupby(mine['year']).mean()
     rows['expected'] = rows['year'].map(to_pct(expected - ref))
+    return rows, expected
+
+
+def plot_skier(fit, results, name):
+    #one skier's races across every event: on the common scale, and how much of each field they beat
+    f = implied_abilities(fit, results)
+    ref = reference_level(f)
+    rows, expected = skier_rows(fit, f, ref, name)
+    if rows is None:
+        return
 
     fig, (ax, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True, facecolor=SURFACE,
                                   gridspec_kw={'height_ratios': [2, 1]})
@@ -428,6 +441,69 @@ def plot_skier(fit, results, name):
         ['year', 'event', 'time', 'place', 'pct_of_median', 'pct_back_winner', 'level', 'expected']].round(1).to_string(index=False))
 
 
+def plot_pair(fit, results, name_a, name_b):
+    #two skiers on the common scale (color is the skier, shape is the event), and below that the raw head to head
+    #in every race they both finished
+    f = implied_abilities(fit, results)
+    ref = reference_level(f)
+    (a, exp_a), (b, exp_b) = skier_rows(fit, f, ref, name_a), skier_rows(fit, f, ref, name_b)
+    if a is None or b is None:
+        return
+    label_a, label_b = a['name'].iloc[-1], b['name'].iloc[-1]
+    events = sorted(set(a['event']) | set(b['event']),
+                    key=lambda e: list(EVENT_COLORS).index(e) if e in EVENT_COLORS else 99)
+    shape = dict(zip(events, 'osD^vPX*'))
+
+    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(10, 8.5), sharex=True, facecolor=SURFACE,
+                                  gridspec_kw={'height_ratios': [2, 1]})
+    for rows, expected, color, label in [(a, exp_a, PAIR_COLORS[0], label_a), (b, exp_b, PAIR_COLORS[1], label_b)]:
+        ax.plot(expected.index, to_pct(expected - ref), color=color, linewidth=2, alpha=0.5)
+        for event in events:
+            d = rows[rows['event'] == event]
+            ax.plot(d['year'], d['level'], shape[event], color=color, markersize=8, markeredgecolor=SURFACE,
+                    markeredgewidth=1.5)
+        ax.annotate(label, (expected.index[-1], to_pct(expected.iloc[-1] - ref)), xytext=(8, 0),
+                    textcoords='offset points', va='center', fontsize=9, color=INK)
+    #legend: who is which color, which event is which shape, and the lines
+    handles = [plt.Line2D([], [], color=c, marker='o', linestyle='', markersize=8, label=l)
+               for c, l in zip(PAIR_COLORS, [label_a, label_b])]
+    handles += [plt.Line2D([], [], color=INK_2, marker=shape[e], linestyle='', markersize=7, label=e) for e in events]
+    handles.append(plt.Line2D([], [], color=INK_2, linewidth=2, alpha=0.5, label='expected from ability, age and experience'))
+    ax.legend(handles=handles, frameon=False, fontsize=8, ncol=2)
+    ax.axhline(0, color=INK_2, linewidth=0.8)
+    ax.invert_yaxis()
+    style(ax, '{} and {}: every race on one scale (faster is up)'.format(label_a, label_b),
+          '% slower than the typical {} median finisher'.format(REFERENCE))
+
+    both = a.merge(b, on=['race_id', 'year', 'event'], suffixes=('_a', '_b'))
+    both['gap'] = 100 * (both['time_s_a'] / both['time_s_b'] - 1)
+    gap = to_pct(exp_a - exp_b).dropna()
+    ax2.plot(gap.index, gap, color=INK_2, linewidth=2, alpha=0.5)
+    for event in events:
+        d = both[both['event'] == event]
+        ax2.plot(d['year'], d['gap'], shape[event], color=INK, markersize=8, markeredgecolor=SURFACE,
+                 markeredgewidth=1.5)
+    for _, r in both[both['year'].isin(COURSE_NOTES)].iterrows():
+        ax2.annotate(COURSE_NOTES[r['year']], (r['year'], r['gap']), xytext=(0, -14), textcoords='offset points',
+                     ha='center', fontsize=7, color=INK_2)
+    ax2.axhline(0, color=INK_2, linewidth=0.8)
+    ax2.invert_yaxis()
+    ax2.set_xticks(range(int(min(a['year'].min(), b['year'].min())), int(max(a['year'].max(), b['year'].max())) + 1, 2))
+    style(ax2, 'Same race, raw times: {} vs {} (above the line, {} was faster)'.format(
+        label_a.split()[0], label_b.split()[0], label_a.split()[0]),
+        '% slower than {}'.format(label_b.split()[0]), 'year')
+    fig.tight_layout()
+    path = 'graphs/all_events_{}_vs_{}.png'.format(compact(name_a), compact(name_b))
+    fig.savefig(path, dpi=130, facecolor=SURFACE)
+    print('saved', path)
+    plt.close(fig)
+    clock = lambda s: pd.to_datetime(s, unit='s').dt.strftime('%H:%M:%S')
+    print(both.assign(time_a=clock(both['time_s_a']), time_b=clock(both['time_s_b']))[
+        ['year', 'event', 'time_a', 'time_b', 'gap', 'level_a', 'level_b']].round(1).to_string(index=False))
+
+
+#the two skiers in a comparison, first two categorical colors
+PAIR_COLORS = ['#2a78d6', '#eb6834']
 #notes for races that weren't the usual course
 COURSE_NOTES = {2024: 'short course'}
 

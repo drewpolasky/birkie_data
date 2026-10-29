@@ -137,8 +137,11 @@ def age_basis(age, lo, hi):
     return np.clip(age - lo, 0, hi - lo)
 
 
-def fit_model(panel):
+def fit_model(panel, extra=None):
+    #extra: more columns for the model, on panel's index (snow_effect.py adds snow at home)
     X, conditions = design(panel)
+    if extra is not None:
+        X = X.join(extra)
     beta, keep = solve_within(panel, X, np.ones(len(panel), dtype=bool))
     #one refit without wild outliers (injuries, broken equipment, timing errors)
     resid = within(panel['log_time'], panel['athlete_id'], keep) - within(X, panel['athlete_id'], keep) @ beta
@@ -200,13 +203,15 @@ def age_curve(beta, sex, ages):
     return 100 * (np.exp(f) - 1)
 
 
-def bootstrap(fit, n=N_BOOTSTRAP, seed=0):
-    #resample skiers, for uncertainty on the conditions, age curves and learning effects
+def bootstrap(fit, n=N_BOOTSTRAP, seed=0, clusters=None):
+    #resample skiers, for uncertainty on the conditions, age curves and learning effects. clusters (one label per
+    #panel row, the same for all of a skier's rows) resamples whole groups of skiers instead
     panel, X = fit['panel'], fit['X']
     keep = np.ones(len(panel), dtype=bool)
     y = within(panel['log_time'], panel['athlete_id'], keep)
     Xw = within(X, panel['athlete_id'], keep)
-    rows = pd.Series(np.arange(len(panel))).groupby(panel['athlete_id'].values).apply(np.array)
+    groups = panel['athlete_id'] if clusters is None else clusters
+    rows = pd.Series(np.arange(len(panel))).groupby(np.asarray(groups)).apply(np.array)
     rng = np.random.default_rng(seed)
     betas = []
     for _ in range(n):

@@ -41,6 +41,37 @@ The Haakon is shaky: many adults there are skiing with their kids rather than ra
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/race_strength.png?raw=true)
 
 
+Snow at skiers' hometowns:
+
+python snow_depth.py download --start 2023-01-01 --end 2026-03-31     daily SNODAS tars from NSIDC, October to March
+python snow_depth.py build                                             writes snow_data/hometowns.csv and snow_data/hometown_snow_depth.parquet
+
+SNODAS is NOAA's daily 1 km snow model for the lower 48 (NSIDC dataset G02158). `build` places every US hometown in
+the results with the Census gazetteer and USGS place names (downloaded on first use), then reads snow depth out of the
+daily tars (`--tars`, E:/snowdas_data by default) for every day October to March since January 2004. Each hometown
+gets the depth in its nearest 1 km land cell (`depth_mm`) and the average over land within 10 km (`depth_10km_mm`).
+Only cells that are land in every season are used, since SNODAS's lake and border mask changed in 2013. Results
+join to `hometowns.csv` on city and state. Hometowns outside the lower 48 have no SNODAS data.
+
+
+Does snow at home make for a faster Birkie?
+
+python snow_effect.py       writes graphs/snow_at_home.png and linked_data/snow_performance.csv
+
+Counts each skier's skiable days at home (4+ inches within 10 km) from November 1 to the day before the race, and adds
+them to the year to year model, split into the town's normal winter and how far this winter was above or below it.
+The race's conditions take out everything the whole field shared that year, so the winter effect comes only from
+skiers whose winter at home was snowier or leaner than normal there, compared with skiers from other places in the
+same race. A winter with 30 more skiable days than normal is worth about 0.4% (0.2-0.6%), well under a minute for a
+3 hour skier. It holds for skate and classic, without the local skiers, for skiers who never moved, with every
+definition of a skiable day, and with a time trend for each state. The following winter's snow, which can't have
+helped (a placebo), shows no gain (-0.15%, -0.31 to 0.00). The gain is biggest in towns that normally get little
+snow and for slower skiers, and close to zero in towns that already get 60+ days. Moving somewhere with 30 more
+skiable days in a normal winter goes with being 1.7% faster, but that includes whatever else came with the move.
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/snow_at_home.png?raw=true)
+
+
 Birkie Skate finish times by year: 
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skateFinishTimesbyYear_2026.png?raw=true)
