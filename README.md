@@ -119,22 +119,28 @@ Weather and race speed:
 python weather_speed.py     writes graphs/weather_speed.png and linked_data/weather_speed.csv, and downloads the
                             weather into weather_data/ the first time
 
+python weather_speed.py --reread_snodas     reads the SNODAS tars again (about 7 minutes) instead of the cache
+
 Sets each race day's speed (from the year to year model, the same skiers compared from one race to the next) against
 the weather around the course: hourly temperature and when it was snowing from the Hayward airport (HYR, through the
-Iowa Environmental Mesonet), daily snowfall from the Hayward Ranger Station co-op (GHCN USC00473511), and course snow
-depth from SNODAS. The airport's heated gauge reports most snow as a trace, so snowfall amounts come from the co-op.
-2021 was a different course and is left out, which leaves only 15 race days, so every model is judged by predicting
-each race day from the others. Two things show up. New snow in the 3 days to race morning slows the race, about 0.8%
-per inch (1.1% skate, 0.5% classic), and thaws since the last 1"+ snowfall speed it up, about 1.2% for each day above
-freezing. Together they explain half the spread between races, and predicting each race day from the others a
-quarter (missing by 6.2% on average against 7.6% with no weather). Both lean on a few races: without 2014 new snow is
-worth 0.3% per inch, and without 2010 or 2026, the two races after a long thawed spell, the predictions are no better
-than no weather at all. Race temperature adds nothing that holds up, whether split at freezing, as the overnight low,
-the warming during the race, or a freeze overnight and thaw during the race. Only a few race days got above freezing
-at all, so the warm side can't really be tested. Course snow depth helps a little, but only through 2014, which had
-both the most new snow and the deepest snow, so the two can't be told apart. The worst misses are 2014 skate (22%
-slow, predicted 3%), 2016 classic (warm and wet, 8% slow, predicted 4% fast), 2020 skate (9% fast, predicted average)
-and 2015 skate (8% slow, predicted average).
+Iowa Environmental Mesonet), daily snowfall from the Hayward Ranger Station co-op (GHCN USC00473511), and SNODAS's
+daily grids (snowfall, rain, snow water, depth, snowpack temperature, melt) averaged over the land within 5 km of a
+straight line from Cable to Hayward. 2021 was a different course and is left out, which leaves only 15 race days, so
+every model is judged by predicting each race day from the others. Two things show up. New snow in the 3 days to race
+eve slows the race, about 0.5% per mm of water along the course (0.7% skate, 0.25% classic; a mm of water is roughly
+a cm of fresh snow), and thaws since the last 1"+ snowfall speed it up, about 1.3% for each day above freezing.
+Together they explain 58% of the spread between races, and predicting each race day from the others 34% (missing by
+5.8% on average against 7.6% with no weather). SNODAS's snowfall along the course does better than the co-op's at one
+spot (25%), and holds up better too: leaving out 2010 or 2026, the two races after a long thawed spell, it still
+predicts 26% and 20%, where the co-op version predicted nothing. New snow still leans on 2014 (0.2% per mm without
+it). The rest of SNODAS adds nothing that holds up: melt is near zero before every race (melt that refreezes in the
+snowpack isn't counted), only 2016 and 2026 had rain the week before, and snowpack density and temperature don't help.
+Snow depth and snow on race day look like they help, but only through one race each (2014, and 2018, whose race day
+snow mostly fell after the race and comes out as making the race faster). Race temperature adds nothing that holds
+up either, whether split at freezing, as the overnight low, the warming during the race, or a freeze overnight and
+thaw during the race; only a few race days got above freezing at all, so the warm side can't really be tested. The
+worst misses are 2014 skate (22% slow, predicted 5%), 2016 classic (warm and wet, 8% slow, predicted 3% fast), 2015
+skate (8% slow, predicted 1% fast) and 2020 skate (9% fast, predicted 1% fast).
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/weather_speed.png?raw=true)
 

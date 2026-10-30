@@ -3,9 +3,11 @@
 #is set against the weather around the course:
 #   hourly: hayward municipal airport (HYR, at the finish end) from the iowa environmental mesonet, for temperature
 #           and when it was snowing. its heated gauge reports most snow as a trace, so it can't say how much fell
-#   daily:  the hayward ranger station co-op (GHCN USC00473511) for snowfall amounts. its daily totals end around
-#           midday, so the race day's report covers the night before and the race morning
-#   SNODAS: snow depth on the course, the average of cable and hayward (snow_depth.py's output)
+#   daily:  the hayward ranger station co-op (GHCN USC00473511) for snowfall at one spot, to count the thaw days since
+#           the last snowfall. its daily totals end around midday, so the race day's report covers the race morning
+#   SNODAS: NOAA's daily 1 km snow model (snowfall, rain, snow water, depth, snowpack temperature, melt), averaged
+#           over the land within 5 km of a straight line from cable to hayward, so along the whole course. read once
+#           from the daily tars (snow_depth.py downloads them) and cached. its snowfall is the new snow measure
 #each race is one data point per technique, so there are only 15 of each. every model is judged by leaving out one
 #race day at a time and predicting it from the others, skate and classic together. 2021 is left out: it was a
 #different course, so its speed isn't comparable.
@@ -13,8 +15,11 @@
 #example usage:
 #python weather_speed.py              downloads the weather into weather_data/ the first time
 import argparse
+import concurrent.futures
 import glob
+import gzip
 import os
+import tarfile
 import urllib.request
 
 import matplotlib.pyplot as plt
@@ -23,6 +28,8 @@ import pandas as pd
 
 from performance_changes import load_linked, build_panel, fit_model, style, INK, INK_2, GRID, SURFACE
 from snow_effect import RACE_DAYS
+from snow_depth import TAR_DIR, NEW_TAR_DIR, N_ROWS, N_COLS, CELL, WEST_CENTER, NORTH_CENTER, NO_DATA, tar_files, \
+    land_cells
 
 WEATHER_DIR = 'weather_data'
 ASOS_STATION = 'HYR'
@@ -32,42 +39,53 @@ ASOS_URL = ('https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station={
             '&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4')
 COOP_URL = ('https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations={station}'
             '&startDate=2008-10-01&endDate=2026-04-01&dataTypes=SNOW,SNWD,PRCP,TMAX,TMIN&format=csv&units=standard')
-COURSE_TOWNS = [('cable', 'WI'), ('hayward', 'WI')]
+#SNODAS's daily grids by the code in each file name. each tar is dated at midnight central time: the snowpack then,
+#and the totals over the 24 hours before. the scale comes from each grid's header (2026 stores temperature in tenths)
+SNODAS_GRIDS = {'1025SlL01': 'snowfall_mm', '1025SlL00': 'rain_mm', '1034tS__': 'swe_mm', '1036tS__': 'depth_mm',
+                '1038wS__': 'snowpack_k', '1044bS__': 'melt_mm', '1050lL00': 'sublimation_mm'}
+UNIT_TO = {'Meters': 1000, 'Kilograms per square meter': 1, 'Kelvins': 1}       #to mm of water, mm, or kelvin
+COURSE_LINE = [(46.2011, -91.2937), (46.0066, -91.4897)]       #cable to hayward
+COURSE_KM = 5
 LEAVE_OUT_YEARS = [2017, 2021, 2024]    #cancelled, a different course, and the shortened course
 RACE_HOURS = (8, 14)                    #the field is mostly on course from 8am to 2pm
-NEW_SNOW_DAYS = 3                       #race day's co-op report and the two before it
-SNOWFALL_IN = 1.0                       #a snowfall, for counting thaw days since the last one
+NEW_SNOW_DAYS = 3                       #SNODAS's 3 days to race eve, or the co-op's race day report and the two before
+SNOWFALL_IN = 1.0                       #a snowfall at the co-op, for counting thaw days since the last one
 LOOKBACK_DAYS = 30
 TECHS = ['skate', 'classic']
 COLORS = {'skate': '#2a78d6', 'classic': '#eb6834'}
-#candidate models, each on top of a separate level for each technique. the first is the simple one plotted
+#candidate models, each on top of a separate level for each technique. MAIN is the simple one plotted
 MAIN = ['new_snow', 'thaws']
-MODELS = {'technique only': [], 'new snow': ['new_snow'], 'new snow + thaw days': MAIN,
-          '+ race temperature, below and above freezing': MAIN + ['below_freezing', 'above_freezing'],
-          '+ race temperature, mean': MAIN + ['t_race'], '+ overnight low': MAIN + ['overnight_low'],
-          '+ warming during the race': MAIN + ['warming'], '+ froze overnight, thawed in the race': MAIN + ['thaw_in_race'],
-          '+ hours snowing in the race': MAIN + ['snowing_in_race'], '+ course snow depth': MAIN + ['depth_10cm'],
-          'every one of the above': ['new_snow', 'thaws', 'below_freezing', 'above_freezing', 'overnight_low',
-                                     'thaw_in_race', 'snowing_in_race', 'depth_10cm']}
+MAIN_NAME = 'new snow along the course + thaw days'
+EXTRAS = {'+ race temperature, below and above freezing': ['below_freezing', 'above_freezing'],
+          '+ race temperature, mean': ['t_race'], '+ overnight low': ['overnight_low'],
+          '+ warming during the race': ['warming'], '+ froze overnight, thawed in the race': ['thaw_in_race'],
+          '+ hours snowing in the race': ['snowing_in_race'], '+ snow on race day': ['race_day_snow'],
+          '+ snowpack density': ['density'], '+ snowpack temperature': ['snowpack_c'],
+          '+ melt in the week before': ['melt_7d'], '+ rain in the week before': ['rain_7d'],
+          '+ snow depth': ['depth_10cm']}
+MODELS = {'technique only': [], 'new snow along the course': ['new_snow'], MAIN_NAME: MAIN,
+          'new snow at the hayward co-op + thaw days': ['coop_new_snow', 'thaws'],
+          **{name: MAIN + extra for name, extra in EXTRAS.items()},
+          'every one of the above': MAIN + [k for extra in EXTRAS.values() for k in extra]}
 N_BOOTSTRAP = 1000
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--linked", type=str, default='linked_data/linked_results.csv')
-    parser.add_argument("--snow", type=str, default='snow_data', help='folder with snow_depth.py\'s output')
     parser.add_argument("--refresh", action='store_true', help='download the weather again')
+    parser.add_argument("--reread_snodas", action='store_true', help='read the SNODAS tars again')
     args = parser.parse_args()
 
     download(args.refresh)
-    weather = race_weather(hourly_weather(), daily_weather(), course_depth(args.snow))
+    weather = race_weather(hourly_weather(), daily_weather(), course_snowpack(args.reread_snodas))
     data = race_speeds(load_linked(args.linked)).join(weather, on='condition', how='inner')
     data = data.reset_index(drop=True)
 
     scores = {name: cross_validate(data, terms) for name, terms in MODELS.items()}
     fit = fit_terms(data, MAIN)
     boot = bootstrap_days(data, MAIN)
-    data['predicted'] = scores['new snow + thaw days']['predicted']
+    data['predicted'] = scores[MAIN_NAME]['predicted']
     print_summary(data, scores, fit, boot)
     plot_weather(data, fit, scores)
     data.round(3).to_csv(os.path.join(os.path.dirname(args.linked) or '.', 'weather_speed.csv'), index=False)
@@ -110,12 +128,67 @@ def daily_weather():
     return d.set_index('DATE')['SNOW'].fillna(0)
 
 
-def course_depth(snow_dir):
-    towns = pd.read_csv(os.path.join(snow_dir, 'hometowns.csv'))
-    ids = [towns.loc[(towns['city'] == c) & (towns['state'] == s), 'hometown_id'].iloc[0] for c, s in COURSE_TOWNS]
-    depth = pd.read_parquet(os.path.join(snow_dir, 'hometown_snow_depth.parquet'), columns=['hometown_id', 'date',
-                                                                                             'depth_10km_mm'])
-    return depth[depth['hometown_id'].isin(ids)].groupby('date')['depth_10km_mm'].mean() / 10
+def course_cells(land):
+    #flat grid indexes of the land within COURSE_KM of the line from cable to hayward
+    (lat0, lon0), (lat1, lon1) = COURSE_LINE
+    rows = np.arange(int((NORTH_CENTER - max(lat0, lat1)) / CELL) - 60, int((NORTH_CENTER - min(lat0, lat1)) / CELL) + 60)
+    cols = np.arange(int((min(lon0, lon1) - WEST_CENTER) / CELL) - 60, int((max(lon0, lon1) - WEST_CENTER) / CELL) + 60)
+    r, c = np.meshgrid(rows, cols, indexing='ij')
+    lat, lon = NORTH_CENTER - r * CELL, WEST_CENTER + c * CELL
+    #distance to the segment, on a flat km grid around the course
+    kx, ky = 111.2 * np.cos(np.radians((lat0 + lat1) / 2)), 111.2
+    px, py, ax, ay, bx, by = lon * kx, lat * ky, lon0 * kx, lat0 * ky, lon1 * kx, lat1 * ky
+    t = np.clip(((px - ax) * (bx - ax) + (py - ay) * (by - ay)) / ((bx - ax) ** 2 + (by - ay) ** 2), 0, 1)
+    km = np.hypot(px - (ax + t * (bx - ax)), py - (ay + t * (by - ay)))
+    cells = (r * N_COLS + c)[km <= COURSE_KM].astype(np.int64)
+    return cells[land[cells]]
+
+
+def set_course(cells):
+    global COURSE
+    COURSE = cells
+
+
+def grid_scale(header):
+    #"Data units: Meters / 1000.000000" -> what to multiply the stored integers by
+    line = next(l for l in header.splitlines() if l.lower().startswith('data units'))
+    unit, _, divisor = line.split(':', 1)[1].partition('/')
+    return UNIT_TO[unit.strip()] / float(divisor or 1)
+
+
+def course_day(path):
+    #one tar: each grid's average over the course
+    out = {}
+    with tarfile.open(path) as t:
+        names = t.getnames()
+        for code, name in SNODAS_GRIDS.items():
+            data = next((n for n in names if code in n and n.endswith('.dat.gz')), None)
+            if data is None:
+                continue
+            header = gzip.decompress(t.extractfile(data.replace('.dat.gz', '.txt.gz')).read()).decode('latin1')
+            grid = np.frombuffer(gzip.decompress(t.extractfile(data).read()), dtype='>i2')
+            values = grid[COURSE].astype(float)
+            values = values[values != NO_DATA]
+            out[name] = values.mean() * grid_scale(header) if len(values) else np.nan
+    return out
+
+
+def course_snowpack(refresh=False, workers=6):
+    #SNODAS along the course for the LOOKBACK_DAYS before each race and the race day after, cached
+    path = os.path.join(WEATHER_DIR, 'snodas_course.csv')
+    if os.path.exists(path) and not refresh:
+        return pd.read_csv(path, parse_dates=['date']).set_index('date')
+    paths = tar_files([TAR_DIR, NEW_TAR_DIR])
+    cells = course_cells(land_cells(paths))
+    days = sorted({d for day in race_days().values() for d in pd.date_range(day - pd.Timedelta(days=LOOKBACK_DAYS),
+                                                                             day + pd.Timedelta(days=1))})
+    days = [d for d in days if d in paths.index]
+    print('reading SNODAS for {} days over {} course cells'.format(len(days), len(cells)))
+    with concurrent.futures.ProcessPoolExecutor(workers, initializer=set_course, initargs=(cells,)) as pool:
+        rows = list(pool.map(course_day, [paths[d] for d in days], chunksize=4))
+    snow = pd.DataFrame(rows, index=pd.DatetimeIndex(days, name='date'))
+    snow.round(3).to_csv(path)
+    return snow
 
 
 def race_days():
@@ -123,25 +196,33 @@ def race_days():
     return {str(y): pd.Timestamp(d) for y, d in RACE_DAYS.items() if y not in LEAVE_OUT_YEARS}
 
 
-def race_weather(hourly, snowfall, depth):
+def race_weather(hourly, snowfall, snodas):
     rows = {}
+    daily_max = hourly['t'].resample('D').max()
     for condition, day in race_days().items():
         start, end = day + pd.Timedelta(hours=RACE_HOURS[0]), day + pd.Timedelta(hours=RACE_HOURS[1] - 1)
         race = hourly.loc[start:end]
         night = hourly.loc[day - pd.Timedelta(hours=6):start - pd.Timedelta(hours=1), 't']
-        #snowfall reports back from the race day, and the days since the last real snowfall
+        #co-op snowfall reports back from the race day, and the thaw days since the last real snowfall
         back = snowfall.reindex(pd.date_range(day - pd.Timedelta(days=LOOKBACK_DAYS - 1), day))[::-1].fillna(0).values
         snowed = np.where(back >= SNOWFALL_IN)[0]
         since = int(snowed[0]) if len(snowed) else LOOKBACK_DAYS
-        daily_max = hourly['t'].resample('D').max()
         thaws = int((daily_max.loc[day - pd.Timedelta(days=since):day - pd.Timedelta(days=1)] > 0).sum()) if since else 0
+        #SNODAS along the course, back from race eve (the tar dated race day: the snowpack at midnight before it)
+        sn = snodas.reindex(pd.date_range(day - pd.Timedelta(days=LOOKBACK_DAYS - 1), day))[::-1]
+        eve = sn.iloc[0]
         rows[condition] = {
-            'date': day, 'new_snow': back[:NEW_SNOW_DAYS].sum(), 'days_since_snowfall': since, 'thaws': thaws,
+            'date': day, 'new_snow': sn['snowfall_mm'].iloc[:NEW_SNOW_DAYS].sum(),
+            'coop_new_snow': back[:NEW_SNOW_DAYS].sum(), 'days_since_snowfall': since, 'thaws': thaws,
             't_race': race['t'].mean(), 'below_freezing': np.maximum(-race['t'], 0).mean(),
             'above_freezing': np.maximum(race['t'], 0).mean(), 'overnight_low': night.min(),
             'warming': hourly.loc[end, 't'] - hourly.loc[start, 't'],
             'thaw_in_race': float(night.min() < 0 and (race['t'] > 0).any()),
-            'snowing_in_race': race['snowing'].sum(), 'depth_10cm': depth.get(day, np.nan) / 10}
+            'snowing_in_race': race['snowing'].sum(),
+            'race_day_snow': snodas['snowfall_mm'].get(day + pd.Timedelta(days=1), np.nan),
+            'density': 1000 * eve['swe_mm'] / eve['depth_mm'], 'snowpack_c': eve['snowpack_k'] - 273.15,
+            'melt_7d': sn['melt_mm'].iloc[:7].sum(), 'rain_7d': sn['rain_mm'].iloc[:7].sum(),
+            'depth_10cm': eve['depth_mm'] / 100}
     return pd.DataFrame(rows).T.astype({k: float for k in rows[next(iter(rows))] if k != 'date'})
 
 
@@ -208,7 +289,7 @@ def print_summary(data, scores, fit, boot):
     print('\nshare of the spread between races explained, fit to every race / predicting each race day from the rest:')
     for name, s in scores.items():
         print('  {:48s} {:5.2f}  {:5.2f}   (miss by {:.1f}% on average)'.format(name, s['in_sample'], s['cv'], s['rmse']))
-    print('\nnew snow + thaw days, % slower [95% CI over race days]:')
+    print('\n{}, % slower per mm of new snow water and per thaw day [95% CI over race days]:'.format(MAIN_NAME))
     for k in MAIN:
         print('  {:10s} {:+.2f} [{:+.2f}, {:+.2f}]'.format(k, fit[k], *boot[k].quantile([0.025, 0.975])))
     #a few races carry each term: 2014 the new snow, 2010 and 2026 (7 and 10 thaw days) the thaws
@@ -219,7 +300,8 @@ def print_summary(data, scores, fit, boot):
         f = fit_terms(sub, MAIN)
         print('  {:22s} new snow {:+.2f}  thaws {:+.2f}  (explained {:.2f}, predicting {:.2f})'.format(
             label, f['new_snow'], f['thaws'], cross_validate(sub, MAIN)['in_sample'], cross_validate(sub, MAIN)['cv']))
-    cols = ['tech', 'condition', 'slower', 'predicted', 'new_snow', 'thaws', 't_race', 'overnight_low', 'snowing_in_race']
+    cols = ['tech', 'condition', 'slower', 'predicted', 'new_snow', 'coop_new_snow', 'thaws', 't_race', 'density',
+            'rain_7d']
     print('\nevery race, % slower than average and the prediction from the other race days:')
     print(data[cols].sort_values(['tech', 'condition']).round(1).to_string(index=False))
 
@@ -239,8 +321,8 @@ def plot_weather(data, fit, scores):
                 y, fit_terms(sub, MAIN)[term], cross_validate(sub, MAIN)['rmse'], cross_validate(sub, [])['rmse']))
         leans[term] = '\n'.join(parts)
     for i, (term, title, xlabel) in enumerate([
-            ('new_snow', 'New snow slows the race: about {:.1f}% per inch', 'new snow in the 3 days to race morning, '
-                                                                               'inches (Hayward co-op)'),
+            ('new_snow', 'New snow slows the race: about {:.1f}% per mm of water',
+             'new snow in the 3 days to race eve, mm of water (SNODAS, along the course)'),
             ('thaws', 'Thaws since the last snowfall speed it up: {:.1f}% a day',
              'days above freezing since the last 1"+ snowfall (Hayward airport)')]):
         ax = fig.add_subplot(grid[0, i])
@@ -274,13 +356,13 @@ def plot_weather(data, fit, scores):
     for _, r in data.loc[(data['slower'] - data['predicted']).abs().sort_values().index[-5:]].iterrows():
         ax.annotate('{} {}'.format(r['condition'], r['tech']), (r['predicted'], r['slower']), xytext=(6, 2),
                     textcoords='offset points', fontsize=7, color=INK_2)
-    s = scores['new snow + thaw days']
+    s = scores[MAIN_NAME]
     ax.set_ylim(lim[0], lim[1] + 0.3 * (lim[1] - lim[0]))
     ax.text(0.03, 0.97, 'predicting each race day from the others misses by {:.1f}% on average ({:.1f}% with no\n'
             'weather), {:.0%} of the spread between races explained ({:.0%} fit to every race)'.format(
                 s['rmse'], scores['technique only']['rmse'], s['cv'], s['in_sample']),
             transform=ax.transAxes, fontsize=8, color=INK_2, va='top')
-    style(ax, 'New snow and thaw days predict about a quarter of it', '% slower than the average race, actual',
+    style(ax, 'New snow and thaw days predict {:.0%} of it'.format(s['cv']), '% slower than the average race, actual',
           'predicted from the other race days')
     ax.legend(loc='lower right', fontsize=8, frameon=False)
 
