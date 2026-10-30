@@ -1,11 +1,12 @@
 #load every results file in yearly_data/ into one standardized table, one row per finisher
 #the results site (and scraper) changed several times, so there are four file formats:
-#   2009-2020: hand written csv "Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City, State"
+#   2008-2020: hand written csv "Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City, State"
 #              2016-2020 division place also carries gender and age group ("34 M 35-39")
 #              2020 names have the space between first and last name dropped ("KnuteSands")
 #   2021:      runsignup export, split up by race day because of COVID, exact age and gender
 #   2022-2026: raceresult export, names are "Last, First", exact age and gender
-#the pre-birkie ('prebirkie' and 'prebirkie_short' files, from get_prebirkie_data.py) is in one plain format every year
+#the birkie before 2008 (get_old_birkie_data.py) and the pre-birkie (get_prebirkie_data.py) are in one plain format,
+#told apart by its header
 import functools
 import glob
 import os
@@ -63,8 +64,10 @@ def parse_filename(filename):
 
 def load_file(filename):
     race, tech, variant, year = parse_filename(filename)
-    if race.startswith('prebirkie'):
-        df = load_prebirkie(filename)
+    with open(filename, encoding='utf-8', errors='replace') as f:
+        plain = f.readline().startswith(PLAIN_HEADER)
+    if plain:
+        df = load_plain(filename)
     elif year <= 2020:
         df = load_legacy(filename, year)
     elif year == 2021:
@@ -238,11 +241,13 @@ def load_raceresult(filename):
     return df
 
 
-#---------------------------------------------------------------- pre-birkie
+#---------------------------------------------------------------- plain format (pre-birkie, birkie before 2008)
 
-def load_prebirkie(filename):
+PLAIN_HEADER = 'place,bib,name,first,last'
+
+def load_plain(filename):
     #name is "First Last" (chronotrack) or "Last, First", and first and last are filled in whenever the source split them.
-    #exact age, except 2009 (age group only)
+    #exact age, or only the age group (the 2009 pre-birkie, the 2006 birkie)
     raw = pd.read_csv(filename, dtype=str, keep_default_na=False)
     df = pd.DataFrame()
     split = raw['last'] != ''

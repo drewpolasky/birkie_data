@@ -104,6 +104,8 @@ def lookup(days, hometown_id, race_day):
 def snow_panel(linked, towns, depth):
     #birkie skate and classic finishes by skiers with 2+ of them, with the snow at the hometown they listed that year
     p = pd.concat([build_panel(linked, 'birkie', tech) for tech in ['skate', 'classic']], ignore_index=True)
+    #the race days in RACE_DAYS only: the hometown snow starts in 2004, and so its winters are complete from 2009 on
+    p = p[p['year'].isin(RACE_DAYS)]
     p['skier'] = p['athlete_id']
     p['athlete_id'] = p['athlete_id'].astype(str) + ' ' + p['tech']
     p['condition'] = p['tech'] + ' ' + p['condition']

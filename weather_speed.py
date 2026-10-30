@@ -9,8 +9,8 @@
 #   SNODAS: NOAA's daily 1 km snow model (snowfall, rain, snow water, depth, snowpack temperature, melt), averaged
 #           over the land within 5 km of a straight line from cable to hayward, so along the whole course. read once
 #           from the daily tars (snow_depth.py downloads them) and cached. its snowfall is the new snow measure
-#each race is one data point per technique, so the birkie has only 15 of each. 2021 is left out: it was a different
-#course, so its speed isn't comparable. the pre-birkie (get_prebirkie_data.py) is on the same trail about two weeks
+#each race is one data point per technique. 2002 and 2021 are left out: they were different courses, so their speed
+#isn't comparable, and SNODAS starts in the 2003-04 winter, so the birkie runs from 2004. the pre-birkie (get_prebirkie_data.py) is on the same trail about two weeks
 #before, so it adds race days in other weather. its course has moved, so each course gets a level of its own, as each
 #technique does, and only the race days on one course are compared with each other. every model is judged by leaving
 #out one race day at a time and predicting it from the others.
@@ -30,6 +30,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from front_back import place_labels
 from performance_changes import load_linked, build_panel, fit_model, style, INK, INK_2, GRID, SURFACE
 from snow_effect import RACE_DAYS
 from snow_depth import TAR_DIR, NEW_TAR_DIR, N_ROWS, N_COLS, CELL, WEST_CENTER, NORTH_CENTER, NO_DATA, tar_files, \
@@ -43,7 +44,7 @@ ASOS_URL = ('https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station={
             '&year1={y0}&month1=11&day1=1&year2={y1}&month2=3&day2=15&tz=America%2FChicago&format=onlycomma'
             '&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4')
 COOP_URL = ('https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations={station}'
-            '&startDate=2008-10-01&endDate=2026-04-01&dataTypes=SNOW,SNWD,PRCP,TMAX,TMIN&format=csv&units=standard')
+            '&startDate={start}&endDate=2026-04-01&dataTypes=SNOW,SNWD,PRCP,TMAX,TMIN&format=csv&units=standard')
 #SNODAS's daily grids by the code in each file name. each tar is dated at midnight central time: the snowpack then,
 #and the totals over the 24 hours before. the scale comes from each grid's header (2026 stores temperature in tenths)
 SNODAS_GRIDS = {'1025SlL01': 'snowfall_mm', '1025SlL00': 'rain_mm', '1034tS__': 'swe_mm', '1036tS__': 'depth_mm',
@@ -51,7 +52,14 @@ SNODAS_GRIDS = {'1025SlL01': 'snowfall_mm', '1025SlL00': 'rain_mm', '1034tS__': 
 UNIT_TO = {'Meters': 1000, 'Kilograms per square meter': 1, 'Kelvins': 1}       #to mm of water, mm, or kelvin
 COURSE_LINE = [(46.2011, -91.2937), (46.0066, -91.4897)]       #cable to hayward
 COURSE_KM = 5
-LEAVE_OUT_YEARS = [2017, 2021, 2024]    #cancelled, a different course, and the shortened course
+#the birkie before 2009 (get_old_birkie_data.py). 2007 was cut to 25 km and isn't in the data
+OLD_RACE_DAYS = {2002: '2002-02-23', 2003: '2003-02-22', 2004: '2004-02-21', 2005: '2005-02-26', 2006: '2006-02-25',
+                 2008: '2008-02-23'}
+BIRKIE_DAYS = {**OLD_RACE_DAYS, **RACE_DAYS}
+LEAVE_OUT_YEARS = [2002, 2017, 2021, 2024]  #cut to 46.7 km, cancelled, a different course, and the shortened course
+#classic skiers raced the skate course with the skaters until 2008, whose first separate classic race was 53 km. each
+#is a course of its own for classic. SNODAS starts in the 2003-04 winter, so race days before that are left out
+CLASSIC_COURSES = {'on the skate course': [2002, 2003, 2004, 2005, 2006], '53 km': [2008]}
 RACE_HOURS = (8, 14)                    #the field is mostly on course from 8am to 2pm
 NEW_SNOW_DAYS = 3                       #SNODAS's 3 days to race eve, or the co-op's race day report and the two before
 SNOWFALL_IN = 1.0                       #a snowfall at the co-op, for counting thaw days since the last one
@@ -94,8 +102,8 @@ def main():
 
     download(args.refresh)
     weather = race_weather(hourly_weather(), daily_weather(), course_snowpack(args.reread_snodas))
-    data = race_speeds(load_linked(args.linked)).join(weather, on='date', how='inner')
-    birkie = data[data['race'] == 'birkie'].reset_index(drop=True)
+    data = comparable(race_speeds(load_linked(args.linked)).join(weather, on='date', how='inner'))
+    birkie = comparable(data[data['race'] == 'birkie'])
     if args.birkie_only:
         data = birkie
     data = data.reset_index(drop=True)
@@ -116,15 +124,17 @@ def main():
 def download(refresh=False):
     os.makedirs(WEATHER_DIR, exist_ok=True)
     for station in [ASOS_STATION] + ASOS_BACKUP:
-        for year in range(min(RACE_DAYS), max(RACE_DAYS) + 1):
+        for year in range(min(BIRKIE_DAYS), max(BIRKIE_DAYS) + 1):
             path = os.path.join(WEATHER_DIR, '{}_{}.csv'.format(station.lower(), year))
             if refresh or not os.path.exists(path):
                 print('downloading', path)
                 urllib.request.urlretrieve(ASOS_URL.format(station=station, y0=year - 1, y1=year), path)
+    #again whenever the race days now start before the saved co-op record does
     path = os.path.join(WEATHER_DIR, 'ghcn_{}.csv'.format(COOP_STATION))
-    if refresh or not os.path.exists(path):
+    start = '{}-10-01'.format(min(BIRKIE_DAYS) - 1)
+    if refresh or not os.path.exists(path) or pd.read_csv(path, nrows=1)['DATE'][0] > start:
         print('downloading', path)
-        urllib.request.urlretrieve(COOP_URL.format(station=COOP_STATION), path)
+        urllib.request.urlretrieve(COOP_URL.format(station=COOP_STATION, start=start), path)
 
 
 def hourly_weather():
@@ -237,7 +247,7 @@ def course_snowpack(refresh=False, workers=6):
 
 def race_days():
     #every race day: the birkie's that are compared, and the pre-birkie's
-    days = {pd.Timestamp(d) for y, d in RACE_DAYS.items() if y not in LEAVE_OUT_YEARS}
+    days = {pd.Timestamp(d) for y, d in BIRKIE_DAYS.items() if y not in LEAVE_OUT_YEARS}
     return sorted(days | {pd.Timestamp(d) for d in PREBIRKIE_DAYS.values()})
 
 
@@ -280,23 +290,34 @@ def race_speeds(linked):
     rows = []
     for race in ['birkie'] + PREBIRKIE_RACES:
         pre = race != 'birkie'
-        days = PREBIRKIE_DAYS if pre else RACE_DAYS
+        days = PREBIRKIE_DAYS if pre else BIRKIE_DAYS
         for tech in TECHS:
             panel = build_panel(linked, race, tech)
             if panel.empty:
                 continue
             fit = fit_model(panel)
+            courses = PREBIRKIE_COURSES if pre else CLASSIC_COURSES if tech == 'classic' else {}
             for condition, pct in fit['conditions']['pct'].items():
                 year = int(condition.split()[0])
                 if not pre and year in LEAVE_OUT_YEARS:
                     continue
-                course = next(c for c, years in PREBIRKIE_COURSES.items() if year in years) if pre else ''
+                course = next((c for c, years in courses.items() if year in years), '')
                 rows.append({'race': race, 'tech': tech, 'condition': condition, 'slower': pct,
                              'date': pd.Timestamp(days[year]),
                              'label': ('pre ' if pre else '') + condition + (' short' if race.endswith('short') else ''),
                              'series': ('pre-birkie ' if pre else 'birkie ') + tech,
                              'level': ' '.join([race, tech, course]).strip()})
-    data = pd.DataFrame(rows)
+    return pd.DataFrame(rows)
+
+
+def comparable(data):
+    #race days with every weather measure (SNODAS starts in the 2003-04 winter), on a course raced on more than one of
+    #them: a course with one race day says nothing about the weather
+    terms = sorted({k for terms in MODELS.values() for k in terms})
+    complete = data[terms].notna().all(axis=1)
+    if (~complete).any():
+        print('left out for missing weather:', ', '.join(sorted(set(data.loc[~complete, 'label']))))
+    data = data[complete]
     return data[data.groupby('level')['date'].transform('nunique') > 1].reset_index(drop=True)
 
 
@@ -436,11 +457,11 @@ def plot_weather(data, fit, scores, check=None, name='weather_speed'):
         if len(d):
             ax.plot(d['predicted'], d['slower'], 'o', color=color, markersize=7, markeredgecolor=SURFACE,
                     markeredgewidth=1.2, label=series)
-    for _, r in data.loc[(data['slower'] - data['predicted']).abs().sort_values().index[-5:]].iterrows():
-        ax.annotate('{} {}'.format(r['label'], r['tech']), (r['predicted'], r['slower']), xytext=(6, 2),
-                    textcoords='offset points', fontsize=7, color=INK_2)
     s = scores[MAIN_NAME]
     ax.set_ylim(lim[0], lim[1] + 0.3 * (lim[1] - lim[0]))
+    worst = data.loc[(data['slower'] - data['predicted']).abs().sort_values().index[-5:]]
+    place_labels(ax, [((r['predicted'], r['slower']), '{} {}'.format(r['label'], r['tech']),
+                       {'fontsize': 7, 'color': INK_2}) for _, r in worst.iterrows()], size=(80, 8))
     note = '{:.0%} of the spread between races explained fit to every race'.format(s['in_sample'])
     if check:
         note = 'each birkie race day misses by {:.1f}% predicted from every other race day,\n{:.1f}% from the other ' \

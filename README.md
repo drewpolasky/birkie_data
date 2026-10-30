@@ -16,6 +16,21 @@ python athlete_linking.py --name "drew polasky"   prints one skier's linked hist
 link) and `name_shared` (how many athletes share that exact name), to filter out shakier links in an analysis.
 
 
+Birkie results before 2009:
+
+python get_old_birkie_data.py       writes yearly_data/<year>/birkie <tech> <year>.csv for 2002-2006 and 2008
+
+The Birkie's results page goes back further than the searchable results: PDFs for 2002-2005 (White River Sports
+Timing, then Finish Line Sports) and one for 2006 (two columns a page, classic skiers printed in blue), cached in
+birkie_pdfs/, and the old results.birkie.com search for 2008, the site 2009-2015 came from. Until 2008 classic skiers
+raced the skate course in one 51 km race with the skaters, as their own division (2002 and 2003 leave the division
+blank for some classic skiers, who are placed by their division places). 2002 was cut to 46.7 km, 2007 to 25 km (not
+included), and 2008's first separate classic race was 53 km. 2002-2005 have exact ages and middle initials, 2006 age
+groups, and 2008 neither ages nor genders, which come from the places as for 2009-2015. 75% of these results link to
+someone who also raced from 2009 on. 1999 and 2001 are on birkie.com too, with no technique, and 1975-1998 are in the
+scanned Birch Scroll magazines linked from the same page.
+
+
 Pre-Birkie results:
 
 python get_prebirkie_data.py        writes yearly_data/<year>/prebirkie <tech> <year>.csv (42 km, 46 km in 2019) and
@@ -37,8 +52,10 @@ python performance_changes.py --race birkie --tech skate --name "drew polasky"  
 
 `performance_changes.py` models log(finish time) as the skier's ability + that race's conditions + age + experience,
 fit within the same skiers from year to year. Age is held flat from 25 to 35 and learning is assumed done by the 5th
-race, which is what lets conditions and aging be told apart. 2024 (short course) and the open track are left out. 2021 was a different course raced over several days:
-each day keeps its own conditions, but it isn't part of the average year the others are measured from.
+race, which is what lets conditions and aging be told apart. 2024 (short course) and the open track are left out, and
+2007 (cut to 25 km) isn't in the data. 2021 was a different course raced over several days, 2002 was cut to 46.7 km,
+and classic skiers raced the skate course until 2008: each keeps its own conditions, but isn't part of the average year
+the others are measured from. The results go back to 2002.
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/birkie_skate_year_to_year.png?raw=true)
 
@@ -140,32 +157,34 @@ Sets each race day's speed (from the year to year model, the same skiers compare
 the weather around the course: hourly temperature and when it was snowing from the Hayward airport (HYR, through the
 Iowa Environmental Mesonet, with the Ashland and Rice Lake airports filling the hours it's down), daily snowfall from the Hayward Ranger Station co-op (GHCN USC00473511), and SNODAS's
 daily grids (snowfall, rain, snow water, depth, snowpack temperature, melt) averaged over the land within 5 km of a
-straight line from Cable to Hayward. 2021 was a different course and is left out, which leaves only 15 race days, so
-every model is judged by predicting each race day from the others. On the Birkie's own race days (`--birkie_only`) two
-things show up. New snow in the 3 days to race
-eve slows the race, about 0.5% per mm of water along the course (0.7% skate, 0.25% classic; a mm of water is roughly
-a cm of fresh snow), and thaws since the last 1"+ snowfall speed it up, about 1.3% for each day above freezing.
-Together they explain 58% of the spread between races, and predicting each race day from the others 34% (missing by
-5.8% on average against 7.7% with no weather). SNODAS's snowfall along the course does better than the co-op's at one
-spot (25%), and holds up better too: leaving out 2010 or 2026, the two races after a long thawed spell, it still
-predicts 26% and 20%, where the co-op version predicted nothing. New snow still leans on 2014 (0.2% per mm without
-it). The rest of SNODAS adds nothing that holds up: melt is near zero before every race (melt that refreezes in the
-snowpack isn't counted), only 2016 and 2026 had rain the week before, and snowpack density and temperature don't help.
-Snow depth and snow on race day look like they help, but only through one race each (2014, and 2018, whose race day
-snow mostly fell after the race and comes out as making the race faster). Race temperature adds nothing that holds
-up either, whether split at freezing, as the overnight low, the warming during the race, or a freeze overnight and
-thaw during the race; only a few race days got above freezing at all, so the warm side can't really be tested. The
-worst misses are 2014 skate (22% slow, predicted 5%), 2016 classic (warm and wet, 8% slow, predicted 3% fast), 2015
-skate (8% slow, predicted 1% fast) and 2020 skate (9% fast, predicted 1% fast).
+straight line from Cable to Hayward. SNODAS starts in the 2003-04 winter, so the Birkie's race days run from 2004.
+2002 and 2021 were different courses and are left out, and classic before 2009 (on the skate course) gets a level of
+its own, so only its own years are compared. That leaves 19 race days, so every model is judged by predicting each race
+day from the others. On the Birkie's own race days (`--birkie_only`) two things show up. New snow in the 3 days to
+race eve slows the race, about 0.5% per mm of water along the course (0.7% skate, 0.3% classic; a mm of water is
+roughly a cm of fresh snow), and thaws since the last 1"+ snowfall speed it up, about 1.2% for each day above freezing.
+Together they explain 56% of the spread between races, and predicting each race day from the others 37% (missing by
+5.2% on average against 7.0% with no weather). SNODAS's snowfall along the course does much better than the co-op's at
+one spot (14%), and holds up better too: leaving out 2026, one of the two races after a long thawed spell, it still
+predicts 18%, and leaving out 2010, the other, 0%, where the co-op version gets worse than no weather either way. New
+snow still leans on 2014 (0.3% per mm without it). The rest of SNODAS adds nothing that holds up: melt is near zero
+before every race (melt that refreezes in the snowpack isn't counted), only a few races had rain the week before, and
+snowpack density and temperature don't help. Snow depth and snow on race day look like they help, but not without
+2014 (and race day snow not without 2018 either, whose race day snow mostly fell after the race). Race temperature adds
+nothing that holds up either, whether split at freezing, as the overnight low, the warming during the race, or a freeze
+overnight and thaw during the race; only a few race days got above freezing at all, so the warm side can't really be
+tested. The worst misses are 2014 skate (22% slow, predicted 8%), 2016 classic (warm and wet, 8% slow, predicted 3%
+fast), 2015 skate (8% slow, predicted 1% fast), 2026 skate (15% fast, predicted 7% fast) and 2020 skate (10% fast,
+predicted 2% fast).
 
 The Pre-Birkie adds race days on the same trail in other weather. Its course has moved, so each course gets its own
 level and only the race days on one course are compared: 2009-2011 north from Lake Hayward, 2015-2020 from Birkie
 Ridge, and 2022-2026 out and back from Birkie Ridge. 2019 (46 and 24 km) and 2021 (held in March) are the only race days
 on their courses, so they're left out. That's 10 more race days, but only 7 more comparisons, since each course's level
 uses up one. The Pre-Birkie days had little new snow (7 mm of water at most), so they say little about it (0.6% per mm
-with them), but they back up the thaws: still -1.3% a day, now clearly below zero (95% range -2.0 to -0.1, against -3.0
-to +0.2 for the Birkie alone), and -0.8% on the Pre-Birkie days by themselves. Each Birkie race day predicted from every
-other race day misses by 5.3% on average, against 5.8% from the other Birkies only. The Pre-Birkie days themselves are
+with them), but they back up the thaws: -1.2% a day with a narrower range (95% range -1.8 to +0.1, against -1.6 to +1.1
+for the Birkie alone), and -0.8% on the Pre-Birkie days by themselves. Each Birkie race day predicted from every
+other race day misses by 4.9% on average, against 5.2% from the other Birkies only. The Pre-Birkie days themselves are
 harder to predict: with three or four race days a course, each course's level is shaky, and the long and short races
 disagree by 10 points or more in 2020 and 2026, which may be course changes I couldn't find. The 2022 Pre-Birkie, -21 C
 after 7 mm of new snow, was 13-15% slow for skaters and 3-8% for classic skiers, like a small 2014.

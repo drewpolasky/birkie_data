@@ -73,8 +73,10 @@ def main():
 #---------------------------------------------------------------- data
 
 def normalized_results(linked):
-    #every finish, with its race's reference times and the normalized versions of it
-    f = linked[linked['status'] == 'finished'].dropna(subset=['time_s']).copy()
+    #every finish at the birkie weekend from 2009 on (before that the data only has the birkie itself), with its race's
+    #reference times and the normalized versions of it
+    f = linked[(linked['status'] == 'finished') & ~linked['race'].str.startswith('prebirkie') & (linked['year'] >= 2009)]
+    f = f.dropna(subset=['time_s']).copy()
     f['race_id'] = f['year'].astype(str) + ' ' + f['race'] + ' ' + f['tech'] + ' ' + f['variant']
     f['event'] = f['race'] + ' ' + f['tech'] + f['variant'].map(variant_group).radd(' ').replace(' ', '')
     g = f.groupby('race_id')['time_s']

@@ -40,6 +40,7 @@ TECHS = ['skate', 'classic']
 GROUPS = 10
 FRONT, MIDDLE, BACK = [0], [4, 5], [9]          #fastest tenth, the middle fifth, slowest tenth
 LEAVE_OUT_YEARS = [2021]
+FIRST_YEAR = 2009                               #the bib waves are known from here on, older results numbered bibs otherwise
 MIN_RACES_LOO = 3                               #the leave one out check needs 2+ other races to place a skier
 MIDDLE_START = 0.5                              #start position of the skier in the middle of the start order
 CHECK_FROM = 2013                               #the late start costs of 2009-2012 carry the start checks, so refit without
@@ -103,7 +104,7 @@ def main():
 
 def race_panel(linked, tech):
     panel = build_panel(linked, 'birkie', tech)
-    panel = panel[~panel['year'].isin(LEAVE_OUT_YEARS)]
+    panel = panel[(panel['year'] >= FIRST_YEAR) & ~panel['year'].isin(LEAVE_OUT_YEARS)]
     panel = panel.merge(start_positions(linked, tech), on=['year', 'variant', 'athlete_id'], how='left')
     panel = panel.dropna(subset=['start_pos'])
     return panel[panel.groupby('athlete_id')['year'].transform('size') > 1].reset_index(drop=True)
@@ -363,7 +364,7 @@ def plain_check(panel, n=N_BOOTSTRAP, seed=0):
 def raw_spread(linked, tech):
     #minutes from the 10th to the 90th percentile finisher each year, and the ratio between them
     r = linked[(linked['race'] == 'birkie') & (linked['tech'] == tech) & (linked['status'] == 'finished') &
-               (linked['variant'] == 'main') & ~linked['year'].isin(LEAVE_OUT_YEARS + [2024])]
+               (linked['variant'] == 'main') & (linked['year'] >= FIRST_YEAR) & ~linked['year'].isin(LEAVE_OUT_YEARS + [2024])]
     q = r.groupby('year')['time_s'].quantile([0.1, 0.9]).unstack() / 60
     return pd.DataFrame({'p10': q[0.1], 'p90': q[0.9], 'minutes': q[0.9] - q[0.1], 'ratio': q[0.9] / q[0.1]})
 

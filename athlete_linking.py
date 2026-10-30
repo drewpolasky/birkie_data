@@ -249,8 +249,8 @@ def prepare_records(results):
                    np.where(results['year'] < FIRST_MULTI_RACE_YEAR, results['year'].astype(str) + ' birkie', ''))
     region = results['state'].where(results['state'] != '', results['country']).fillna('')
     gender = results['gender'].where(results['gender'].isin(['M', 'F']), '')
-    #2009-2015 birkie weekend genders are inferred from places
-    inferred = (results['year'] < 2016) & ~pre
+    #2008-2015 birkie weekend genders are inferred from places
+    inferred = results['year'].between(2008, 2015) & ~pre
 
     #birth year range: exact from age (2021+), or from the age group (2016-2020)
     birth_lo = (results['year'] - results['age']).fillna(results['year'] - results['age_max'] - 1)
@@ -330,7 +330,7 @@ def pair_score(a, b, last_key, model):
     if a.gender and b.gender and a.gender != b.gender:
         if not (a.gender_inferred or b.gender_inferred):
             return None
-        score -= 3.0            #2009-2015 gender is inferred from places, so allow for a mistake
+        score -= 3.0            #2008-2015 gender is inferred from places, so allow for a mistake
 
     birth = birth_year_score(a.birth, b.birth)
     if birth is None:

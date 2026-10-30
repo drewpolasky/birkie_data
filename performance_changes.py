@@ -8,7 +8,8 @@
 #two assumptions make that possible. age goes up a year every year, so a steady drift in conditions and a steady
 #aging trend look identical from inside the data. the age effect is assumed flat from 25 to 35, so 25-35 year olds'
 #year to year changes pin down the conditions. likewise learning is assumed to be done after the 5th race.
-#2024 is left out (shortened course), and so are the open track and 2024 elite races.
+#2024 is left out (shortened course), and so are the open track and 2024 elite races. 2002, 2021 and classic before
+#2009 were other courses: they keep their own conditions but aren't part of the average year.
 #
 #example usage:
 #python performance_changes.py --race birkie --tech skate
@@ -24,8 +25,14 @@ from athlete_linking import link_athletes, first_name_relation
 from results_loader import load_all_results, compact
 
 EXCLUDE_YEARS = [2024]
-#a different course. its races keep their own conditions, but aren't part of the average year they're measured from
-DIFFERENT_COURSE = [2021]
+#a different course. its races keep their own conditions, but aren't part of the average year they're measured from.
+#2002 was cut to 46.7 km and 2021 was raced near cable. until 2008 classic skiers raced the skate course, in one race
+#with the skaters, and 2008's first separate classic race was 53 km against 54-55 since
+DIFFERENT_COURSE = {'skate': [2002, 2021], 'classic': [2002, 2003, 2004, 2005, 2006, 2008, 2021]}
+#years with no race to compare (2007 was cut to 25 km and isn't in the data, 2017 was cancelled)
+NO_RACE_YEARS = [2007, 2017]
+#labels for the other courses on the conditions chart: the year they hang from, and how far below it in points
+COURSE_NOTES = {'skate': {2002: ('cut to 46.7 km', 42)}, 'classic': {2004: ('on the skate course', 84)}}
 EXCLUDE_VARIANTS = ['openTrack', 'elite']
 #age bands with their own slope. 25-35 is the reference band, held flat
 AGE_BANDS = [('<25', None, 25), ('35-45', 35, 45), ('45-55', 45, 55), ('55-65', 55, 65), ('65-75', 65, 75), ('75+', 75, None)]
@@ -160,7 +167,7 @@ def fit_model(panel, extra=None):
     #performance with conditions, aging and learning all taken out: the skier's ability plus that day's luck
     panel['form'] = panel['log_time'] - effects
     #performance with conditions taken out, as a finish time on an average day
-    cond = condition_effects(beta, conditions)
+    cond = condition_effects(beta, conditions, panel['tech'].iloc[0])
     panel['condition_effect'] = panel['condition'].map(cond['effect'])
     panel['adjusted'] = panel['log_time'] - panel['condition_effect']
     panel['adjusted_time_s'] = np.exp(panel['adjusted']) * 3600
@@ -190,12 +197,20 @@ def solve_within(panel, X, keep):
     return pd.Series(beta, index=X.columns), keep
 
 
-def condition_effects(beta, conditions):
+def other_course(condition, tech):
+    #'2021 saturday', or 'classic 2010' when skate and classic are fitted together (snow_effect.py)
+    words = condition.split()
+    if words[0] in DIFFERENT_COURSE:
+        tech, words = words[0], words[1:]
+    return int(words[0]) in DIFFERENT_COURSE.get(tech, [])
+
+
+def condition_effects(beta, conditions, tech):
     #log effect of each race's conditions, centered on the average race on the usual course
     effect = pd.Series(0.0, index=conditions)
     for c in conditions[1:]:
         effect[c] = beta['cond ' + c]
-    usual = [c for c in conditions if int(c.split()[0]) not in DIFFERENT_COURSE]
+    usual = [c for c in conditions if not other_course(c, tech)]
     effect -= effect[usual].mean()
     return pd.DataFrame({'effect': effect, 'pct': 100 * (np.exp(effect) - 1)})
 
@@ -226,14 +241,14 @@ def bootstrap(fit, n=N_BOOTSTRAP, seed=0, clusters=None):
 #---------------------------------------------------------------- year to year changes
 
 def consecutive_changes(fit):
-    #each pair of back to back races by the same skier: consecutive years, or skipping over 2017 (cancelled)
-    #or 2024 (left out)
+    #each pair of back to back races by the same skier: consecutive years, or skipping over 2007 or 2017 (no race to
+    #compare) or 2024 (left out)
     p = fit['panel'].sort_values(['athlete_id', 'year'])
     nxt = p.groupby('athlete_id').shift(-1)
     pairs = p.assign(next_year=nxt['year'], next_adjusted=nxt['adjusted'], next_form=nxt['form'],
                      next_age=nxt['age_at_race']).dropna(subset=['next_year'])
     gap = pairs['next_year'] - pairs['year']
-    pairs = pairs[(gap == 1) | ((gap == 2) & (pairs['year'] + 1).isin([2017] + EXCLUDE_YEARS))].copy()
+    pairs = pairs[(gap == 1) | ((gap == 2) & (pairs['year'] + 1).isin(NO_RACE_YEARS + EXCLUDE_YEARS))].copy()
     pairs['change_pct'] = 100 * (np.exp(pairs['next_adjusted'] - pairs['adjusted']) - 1)
 
     #how much of a good or bad day carries over: deviation from the skier's usual, with aging and learning taken
@@ -317,7 +332,8 @@ def plot_overview(fit, boot, changes, linked, label):
                                                                    field['year'].astype(str) + ' ' + field['variant']))
     field_median = np.log(field.groupby('condition')['time_s'].median()).reindex(cond.index)
     #both lines measured from the average race on the usual course
-    usual = np.array([int(c.split()[0]) not in DIFFERENT_COURSE for c in cond.index])
+    other = DIFFERENT_COURSE.get(tech, [])
+    usual = np.array([int(c.split()[0]) not in other for c in cond.index])
     field_median = 100 * (np.exp(field_median - field_median[usual].mean()) - 1)
     #an all-elite wave's median says nothing about the snow
     field_median[[c for c in cond.index if 'elite' in c]] = np.nan
@@ -331,7 +347,7 @@ def plot_overview(fit, boot, changes, linked, label):
     x = np.array([condition_x(c) for c in order])
     #break the lines over years with no comparable race, and on either side of a different course
     missing = np.diff(x) > 1.5
-    other_course = np.isin([int(c.split()[0]) for c in order], DIFFERENT_COURSE).astype(int)
+    other_course = np.isin([int(c.split()[0]) for c in order], other).astype(int)
     breaks = np.where(missing | (np.diff(other_course) != 0))[0] + 1
     break_x = (x[breaks - 1] + x[breaks]) / 2
     line = lambda values: (np.insert(x, breaks, break_x), np.insert(values.reindex(order).values, breaks, np.nan))
@@ -344,6 +360,10 @@ def plot_overview(fit, boot, changes, linked, label):
     for gx in gap_x:
         missing = 'cancelled' if round(gx) == 2017 else 'short course'
         ax.text(gx, 0, missing, rotation=90, ha='center', va='bottom', fontsize=7, color=INK_2)
+    for year, (note, below) in COURSE_NOTES.get(tech, {}).items():
+        if str(year) in cond.index:
+            ax.annotate(note, (year, cond.loc[str(year), 'pct']), xytext=(0, -below), textcoords='offset points',
+                        ha='center', fontsize=7, color=INK_2)
     days = [c for c in order if ' ' in c]
     if days:
         low = min(days, key=lambda c: cond.loc[c, 'pct'])
