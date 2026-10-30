@@ -1,0 +1,52 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,73,"Canfield, Connor",Connor,Canfield,M,26,Male 20-29,Richfield,MN,,2:19:07,finished
+2,281,"Olson, Brian",Brian,Olson,M,23,Male 20-29,Lakeland,MN,,2:27:00,finished
+3,574,"Shield, Douglas",Douglas,Shield,M,24,Male 20-29,Altoona,WI,,2:27:52,finished
+4,374,"Anderson, Brian",Brian,Anderson,M,35,Male 30-39,Rhinelander,WI,,2:33:01,finished
+5,110,"Reker, Zoe",Zoe,Reker,F,30,Female 30-39,Minneapolis,MN,,2:33:55,finished
+6,108,"Reker, Kevin",Kevin,Reker,M,54,Male 50-59,Hayward,WI,,2:34:12,finished
+7,236,"Menk, Jeremiah",Jeremiah,Menk,M,45,Male 40-49,Shoreview,MN,,2:35:12,finished
+8,594,"Sandman, Todd",Todd,Sandman,M,52,Male 50-59,Cumberland,WI,,2:43:51,finished
+9,64,"Andresen, Will",Will,Andresen,M,62,Male 60-69,Ironwood,MI,,2:45:23,finished
+10,438,"Carlson, David",David,Carlson,M,19,Male 19 & Under,Bemidji,MN,,2:55:32,finished
+11,189,"Berkopec, Mike",Mike,Berkopec,M,60,Male 60-69,Rosemount,MN,,2:56:12,finished
+12,342,"Downs, Jed",Jed,Downs,M,65,Male 60-69,Cross Plains,WI,,2:56:31,finished
+13,118,"Luetmer, Marianne",Marianne,Luetmer,F,33,Female 30-39,Rochester,MN,,2:57:12,finished
+14,575,"Conrad, Sara",Sara,Conrad,F,43,Female 40-49,Minneapolis,MN,,2:59:00,finished
+15,349,"Nelson, Ethan",Ethan,Nelson,M,24,Male 20-29,Minneapolis,MN,,3:08:10,finished
+16,153,"Rasmussen, Sheridan",Sheridan,Rasmussen,F,29,Female 20-29,Minneapolis,MN,,3:10:11,finished
+17,4,"Jones, Edward",Edward,Jones,M,66,Male 60-69,Cambridge,MN,,3:10:55,finished
+18,181,"Harke, Dan",Dan,Harke,M,38,Male 30-39,Rochester,MN,,3:12:43,finished
+19,9,"Sund, Mike",Mike,Sund,M,63,Male 60-69,Wayzata,MN,,3:13:18,finished
+20,238,"Carlson, Danita",Danita,Carlson,F,56,Female 50-59,Minneapolis,MN,,3:13:39,finished
+21,221,"Arnett, Collin",Collin,Arnett,M,39,Male 30-39,Minneapolis,MN,,3:15:06,finished
+22,276,"Costello, Michael",Michael,Costello,M,60,Male 60-69,Grand Marais,MN,,3:18:39,finished
+23,219,"Olson, Greg",Greg,Olson,M,53,Male 50-59,Lakeland,MN,,3:20:16,finished
+24,470,"Goyke, Andrew",Andrew,Goyke,M,57,Male 50-59,Ashland,WI,,3:22:24,finished
+25,139,"Farrow, Randall",Randall,Farrow,M,62,Male 60-69,Mankato,MN,,3:23:58,finished
+26,22,"Rousar, Bill",Bill,Rousar,M,60,Male 60-69,Rice Lake,WI,,3:24:07,finished
+27,387,"Brings, Claire",Claire,Brings,F,19,Female 19 & Under,Saint Paul,MN,,3:24:33,finished
+28,461,"DeLuca, Deborah",Deborah,DeLuca,F,62,Female 60-69,Duluth,MN,,3:30:22,finished
+29,232,"Moyer, Joe",Joe,Moyer,M,44,Male 40-49,Rochester,MN,,3:30:43,finished
+30,283,"Hoch, John",John,Hoch,M,51,Male 50-59,Minneapolis,MN,,3:32:58,finished
+31,227,"Scheckel, Patrick",Patrick,Scheckel,M,52,Male 50-59,Madison,WI,,3:33:32,finished
+32,343,"Solheid, Chris",Chris,Solheid,M,48,Male 40-49,Minneapolis,MN,,3:33:14,finished
+33,404,"Menacher, Max",Max,Menacher,M,62,Male 60-69,Eau Claire,WI,,3:34:35,finished
+34,163,"S, Gowtham",Gowtham,S,M,43,Male 40-49,Houghton,MI,,3:36:47,finished
+35,501,"Flynn, Maren",Maren,Flynn,F,42,Female 40-49,Minneapolis,MN,,3:37:09,finished
+36,2,"Januschka, Mary",Mary,Januschka,F,61,Female 60-69,Cambridge,MN,,3:43:26,finished
+37,425,"Behr, Melissa",Melissa,Behr,F,68,Female 60-69,Madison,WI,,3:44:57,finished
+38,595,"Coon, Christopher W",Christopher W,Coon,M,41,Male 40-49,Rochester,MN,,3:45:57,finished
+39,572,"Madison, Dominick",Dominick,Madison,M,55,Male 50-59,Washburn,WI,,3:46:57,finished
+40,70,"Ferry, Ethan",Ethan,Ferry,M,25,Male 20-29,Manchester,ME,,3:57:32,finished
+41,527,"Arneson, Jay",Jay,Arneson,M,67,Male 60-69,Spring Valley,WI,,3:58:44,finished
+42,462,"Anderson, Laurie",Laurie,Anderson,F,55,Female 50-59,Duluth,MN,,4:02:55,finished
+43,442,"Gemuenden, Megan",Megan,Gemuenden,F,25,Female 20-29,Minneapolis,MN,,4:04:39,finished
+44,437,"Gemuenden, Bob",Bob,Gemuenden,M,59,Male 50-59,Forest Lake,MN,,4:04:39,finished
+45,591,"Janty, Lisa",Lisa,Janty,F,54,Female 50-59,Cumberland,WI,,4:13:25,finished
+46,530,"Craemer, Michael",Michael,Craemer,M,59,Male 50-59,Minnetonka,MN,,4:32:58,finished
+47,529,"Maag, Terrence",Terrence,Maag,M,56,Male 50-59,Hopkins,MN,,4:32:57,finished
+48,246,"O'Keeffe, Michael",Michael,O'Keeffe,M,20,Male 20-29,Arlington Heights,IL,,4:29:49,finished
+49,245,"O'Keeffe, Gerald",Gerald,O'Keeffe,M,55,Male 50-59,Barrington,IL,,4:35:41,finished
+50,76,"Fitzsimmons, Becky",Becky,Fitzsimmons,F,50,Female 50-59,Ellendale,MN,,4:44:07,finished
+51,77,"Fitzsimmons, John",John,Fitzsimmons,M,55,Male 50-59,Ellendale,MN,,4:44:25,finished

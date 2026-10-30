@@ -1,0 +1,165 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,47,"Hammerbeck, Adam",Adam,Hammerbeck,M,39,Male 30-39,Green Bay,WI,,01:14:58,finished
+2,50,"Ellingson, Marc",Marc,Ellingson,M,42,Male 40-49,Minneapolis,MN,,01:16:06,finished
+3,35,"Gilbertson, Caleb",Caleb,Gilbertson,M,15,Male 29 & Under,Duluth,MN,,01:18:49,finished
+4,51,"Ellingson, Eric",Eric,Ellingson,M,42,Male 40-49,North Oaks,MN,,01:18:53,finished
+5,223,"Ping, Garrett",Garrett,Ping,M,46,Male 40-49,Winona,MN,,01:20:29,finished
+6,367,"Deckert, Steven",Steven,Deckert,M,35,Male 30-39,Minneapolis,MN,,01:20:48,finished
+7,49,"Hareldson, Matt",Matt,Hareldson,M,42,Male 40-49,Minneapolis,MN,,01:21:00,finished
+8,459,"Soule, Ryan",Ryan,Soule,M,34,Male 30-39,Woodbury,MN,,01:22:17,finished
+9,45,"Hammerbeck, Melanie",Melanie,Hammerbeck,F,36,Female 30-39,Green Bay,WI,,01:23:30,finished
+10,467,"Kohler, Dan",Dan,Kohler,M,50,Male 50-59,Cable,WI,,01:25:29,finished
+11,34,"Gilbertson, Carson",Carson,Gilbertson,M,13,Male 29 & Under,Duluth,MN,,01:25:30,finished
+12,306,"Saunders, John",John,Saunders,M,48,Male 40-49,Minneapolis,MN,,01:25:40,finished
+13,146,"Gilmer, David",David,Gilmer,M,47,Male 40-49,Winona,MN,,01:26:32,finished
+14,329,"Pollari, Don",Don,Pollari,M,64,Male 60-69,Duluth,MN,,01:26:48,finished
+15,178,"Duffy, Hunter",Hunter,Duffy,M,28,Male 29 & Under,Center City,MN,,01:27:16,finished
+16,193,"Haire, Gabriella",Gabriella,Haire,F,28,Female 29 & Under,Minneapolis,MN,,01:28:15,finished
+17,189,"Gjertson, Daniel",Daniel,Gjertson,M,39,Male 30-39,Minneapolis,MN,,01:28:48,finished
+18,457,"Leske, David",David,Leske,M,57,Male 50-59,Stillwater,MN,,01:29:27,finished
+19,319,"Schwerbel, Brint",Brint,Schwerbel,M,39,Male 30-39,Madison,WI,,01:29:39,finished
+20,415,"Anoszko, Elias",Elias,Anoszko,M,38,Male 30-39,Rhinelander,WI,,01:29:49,finished
+21,302,"Turman, Micah",Micah,Turman,M,45,Male 40-49,Minneapolis,MN,,01:30:41,finished
+22,417,"LINDSLEY, ALLAN",ALLAN,LINDSLEY,M,57,Male 50-59,Bloomer,WI,,01:30:58,finished
+23,462,"Hauch, Jena",Jena,Hauch,F,27,Female 29 & Under,Minneapolis,MN,,01:31:19,finished
+24,243,"Sjogren, Aaron",Aaron,Sjogren,M,48,Male 40-49,Minneapolis,MN,,01:32:26,finished
+25,53,"Hinck, Bryan",Bryan,Hinck,M,41,Male 40-49,Minnetonka,MN,,01:32:55,finished
+26,276,"Wurst, Eric",Eric,Wurst,M,25,Male 29 & Under,Minneapolis,MN,,01:33:31,finished
+27,149,"Ertl, Justine",Justine,Ertl,F,28,Female 29 & Under,,,,01:33:46,finished
+28,54,"Morales, Rebecca",Rebecca,Morales,F,38,Female 30-39,Minneapolis,MN,,01:33:45,finished
+29,602,"Kotcon, Dennis",Dennis,Kotcon,M,64,Male 60-69,Hayward,WI,,01:33:53,finished
+30,141,"Mannion, Jamie",Jamie,Mannion,M,68,Male 60-69,La Crosse,WI,,01:34:17,finished
+31,21,"Skillicorn, Kelly",Kelly,Skillicorn,F,62,Female 60-69,Marquette,MI,,01:34:37,finished
+32,19,"Reker, Nicolette",Nicolette,Reker,F,31,Female 30-39,Winona,MN,,01:35:20,finished
+33,20,"Reker, Zoe",Zoe,Reker,F,33,Female 30-39,Minneapolis,MN,,01:35:20,finished
+34,297,"Peterson, Paul",Paul,Peterson,M,62,Male 60-69,Hastings,MN,,01:36:14,finished
+35,307,"Anderson, Charles",Charles,Anderson,M,53,Male 50-59,BLAINE,MN,,01:36:22,finished
+36,253,"Patterson, Sydney",Sydney,Patterson,F,28,Female 29 & Under,Duluth,MN,,01:36:34,finished
+37,475,"Paaske, Hjalte",Hjalte,Paaske,M,34,Male 30-39,Minneapolis,MN,,01:36:33,finished
+38,239,"Dums, Donovan",Donovan,Dums,M,42,Male 40-49,Hayward,WI,,01:37:53,finished
+39,222,"Ping, Owen",Owen,Ping,M,22,Male 29 & Under,Winona,MN,,01:39:01,finished
+40,156,"Holey, Garrick",Garrick,Holey,M,44,Male 40-49,Winona,MN,,01:39:20,finished
+41,493,"Quinn, Jesse",Jesse,Quinn,M,41,Male 40-49,Eau Claire,WI,,01:39:38,finished
+42,377,"Earll, Pat",Pat,Earll,M,56,Male 50-59,Marshfield,WI,,01:39:59,finished
+43,388,"Gehlsen, Mark",Mark,Gehlsen,M,60,Male 60-69,Minneapolis,MN,,01:39:59,finished
+44,311,"Mueller, Jaime",Jaime,Mueller,F,49,Female 40-49,Winona,MN,,01:40:15,finished
+45,419,"Kern, Sean",Sean,Kern,M,35,Male 30-39,Eden Prairie,MN,,01:40:43,finished
+46,390,"Longley, Jesse",Jesse,Longley,M,60,Male 60-69,Bloomington,MN,,01:41:03,finished
+47,380,"Hankee, Michael",Michael,Hankee,M,49,Male 40-49,Lake Elmo,MN,,01:42:34,finished
+48,339,"Pavkovich, Anthony",Anthony,Pavkovich,M,37,Male 30-39,Ashland,WI,,01:43:18,finished
+49,38,"Edel, Nate",Nate,Edel,M,49,Male 40-49,Minneapolis,MN,,01:43:42,finished
+50,235,"Burger, Emily",Emily,Burger,F,28,Female 29 & Under,,,,01:44:00,finished
+51,456,"Fedje-Johnston, John",John,Fedje-Johnston,M,60,Male 60-69,Stillwater,MN,,01:43:44,finished
+52,352,"Patterson, Darrell",Darrell,Patterson,M,65,Male 60-69,Duluth,MN,,01:44:13,finished
+53,215,"Kenaga, Ryan",Ryan,Kenaga,M,47,Male 40-49,Winona,MN,,01:44:10,finished
+54,15,"Widmer, Joseph",Joseph,Widmer,M,36,Male 30-39,Theresa,WI,,01:44:37,finished
+55,210,"Witkowski, Augie",Augie,Witkowski,F,28,Female 29 & Under,Minneapolis,MN,,01:45:13,finished
+56,499,"Bromann, Scot",Scot,Bromann,M,66,Male 60-69,,,,01:45:59,finished
+57,209,"Thorsgaard, Ellie",Ellie,Thorsgaard,F,27,Female 29 & Under,Minneapolis,MN,,01:46:18,finished
+58,14,"Hinz, Mark",Mark,Hinz,M,65,Male 60-69,Westcliffe,CO,,01:46:40,finished
+59,64,"BENNETT, JAMES",JAMES,BENNETT,M,69,Male 60-69,Rochester,MN,,01:46:35,finished
+60,159,"Pautsch, Kathie",Kathie,Pautsch,F,63,Female 60-69,Hayward,WI,,01:48:05,finished
+61,286,"Sandberg, John",John,Sandberg,M,58,Male 50-59,Saint Louis Park,MN,,01:48:04,finished
+62,188,"Keller-Miller, Kristine",Kristine,Keller-Miller,F,29,Female 29 & Under,Minneapolis,MN,,01:48:22,finished
+63,477,"Washatka, Jim",Jim,Washatka,M,67,Male 60-69,Mellen,WI,,01:49:00,finished
+64,80,"Bengtson, Keith",Keith,Bengtson,M,66,Male 60-69,Rochester,MN,,01:49:29,finished
+65,458,"Baier, Adrianne",Adrianne,Baier,F,41,Female 40-49,Duluth,MN,,01:49:54,finished
+66,400,"Smith, Kevin",Kevin,Smith,M,68,Male 60-69,Bayfield,WI,,01:49:51,finished
+67,255,"Allin, Lauren",Lauren,Allin,F,29,Female 29 & Under,Minneapolis,MN,,01:50:08,finished
+68,387,"Wiitala, Marty",Marty,Wiitala,M,61,Male 60-69,Minneapolis,MN,,01:50:25,finished
+69,133,"Schroeder, Kurt",Kurt,Schroeder,M,69,Male 60-69,La Crosse,WI,,01:51:29,finished
+70,134,"Herbert, Dave",Dave,Herbert,M,69,Male 60-69,,,,01:51:27,finished
+71,154,"Burns, Brian",Brian,Burns,M,66,Male 60-69,La Crosse,WI,,01:51:06,finished
+72,289,"Reid, Mike",Mike,Reid,M,58,Male 50-59,Lake Elmo,MN,,01:51:35,finished
+73,492,"Poling, Jerad",Jerad,Poling,M,40,Male 40-49,Minneapolis,MN,,01:52:21,finished
+74,491,"Poling, Matthew",Matthew,Poling,M,37,Male 30-39,Minneapolis,MN,,01:52:21,finished
+75,285,"Friedell, Jon",Jon,Friedell,M,59,Male 50-59,Minnetonka,MN,,01:53:04,finished
+76,4,"Bromann, Scot",Scot,Bromann,M,66,Male 60-69,Rib Lake,WI,,01:53:36,finished
+77,201,"Sereno, David",David,Sereno,M,68,Male 60-69,Madison,WI,,01:54:12,finished
+78,240,"Dums, Sarah",Sarah,Dums,F,42,Female 40-49,Hayward,WI,,01:55:37,finished
+79,199,"Aufrance, Tom",Tom,Aufrance,M,71,Male 70+,Marquette,MI,,01:55:21,finished
+80,236,"Burger, Heidi",Heidi,Burger,F,59,Female 50-59,,,,01:55:37,finished
+81,260,"Bennett, Natalie",Natalie,Bennett,F,22,Female 29 & Under,Blaine,MN,,01:59:13,finished
+82,60,"Lee, Michael",Michael,Lee,M,53,Male 50-59,Madison,WI,,01:57:08,finished
+83,216,"Detzner, Tom",Tom,Detzner,M,74,Male 70+,Hayward,WI,,01:59:31,finished
+84,8,"Scheckel, Patrick",Patrick,Scheckel,M,55,Male 50-59,Madison,WI,,01:59:38,finished
+85,501,"Tracy, Brian",Brian,Tracy,M,42,Male 40-49,La Crescent,MN,,01:59:54,finished
+86,148,"Caban, Malwina",Malwina,Caban,F,50,Female 50-59,Bloomington,MN,,01:59:53,finished
+87,350,"Ihry, Beth",Beth,Ihry,F,56,Female 50-59,Minneapolis,MN,,01:59:59,finished
+88,365,"Taggart, Tom",Tom,Taggart,M,71,Male 70+,La Crosse,WI,,02:00:14,finished
+89,153,"Messerly, Ben",Ben,Messerly,M,37,Male 30-39,Minneapolis,MN,,02:00:20,finished
+90,250,"Constant, Mike",Mike,Constant,M,58,Male 50-59,Champlin,MN,,02:00:32,finished
+91,453,"Ashton, Joshua",Joshua,Ashton,M,52,Male 50-59,Minneapolis,MN,,02:00:35,finished
+92,374,"Pedersen, Nick",Nick,Pedersen,M,33,Male 30-39,Rice Lake,WI,,02:01:11,finished
+93,386,"West, Derek",Derek,West,M,35,Male 30-39,Eau Claire,WI,,02:01:35,finished
+94,484,"Koscik, Ken",Ken,Koscik,M,61,Male 60-69,Monona,WI,,02:01:44,finished
+95,103,"Persons, Patrick",Patrick,Persons,M,38,Male 30-39,Minneapolis,MN,,02:02:17,finished
+96,40,"Nordgren, Thomas",Thomas,Nordgren,M,65,Male 60-69,Pulaski,WI,,02:02:50,finished
+97,42,"Willner, Mary",Mary,Willner,F,46,Female 40-49,Hopkins,MN,,02:03:11,finished
+98,200,"Aufrance, MaryKay",MaryKay,Aufrance,F,72,Female 70+,Marquette,MI,,02:03:37,finished
+99,226,"Stephens, Todd",Todd,Stephens,M,58,Male 50-59,Rice Lake,WI,,02:03:39,finished
+100,129,"Benson, Kristyn",Kristyn,Benson,F,51,Female 50-59,Lake Elmo,MN,,02:04:29,finished
+101,174,"Blenkush, Alex",Alex,Blenkush,M,35,Male 30-39,Lake Elmo,MN,,02:04:20,finished
+102,31,"Miner, Elliot",Elliot,Miner,M,14,Male 29 & Under,Duluth,MN,,02:04:48,finished
+103,168,"Bohen, Jen",Jen,Bohen,F,46,Female 40-49,,,,02:06:17,finished
+104,161,"Wahlstrand, Carl",Carl,Wahlstrand,M,46,Male 40-49,Saint Paul,MN,,02:06:45,finished
+105,33,"Gilbertson, Claire",Claire,Gilbertson,F,11,Female 29 & Under,Duluth,MN,,02:06:50,finished
+106,187,"Quinn, Allison",Allison,Quinn,F,41,Female 40-49,Minneapolis,MN,,02:06:56,finished
+107,489,"Muench, Louis",Louis,Muench,M,42,Male 40-49,Cumberland,WI,,02:07:15,finished
+108,106,"Mercer, Robert",Robert,Mercer,M,69,Male 60-69,Delafield,WI,,02:06:50,finished
+109,218,"Bates, Garrett",Garrett,Bates,M,26,Male 29 & Under,Winter,WI,,02:07:11,finished
+110,264,"Peterson, Rachel",Rachel,Peterson,F,28,Female 29 & Under,Hastings,MN,,02:08:44,finished
+111,182,"Miller, Kathleen",Kathleen,Miller,F,65,Female 60-69,Minneapolis,MN,,02:09:45,finished
+112,85,"McNutt, Daryl",Daryl,McNutt,M,56,Male 50-59,,,,02:09:45,finished
+113,221,"Berniard, Chip",Chip,Berniard,M,53,Male 50-59,St Paul,MN,,02:09:55,finished
+114,44,"Whyte, Brett",Brett,Whyte,M,57,Male 50-59,Winona,MN,,02:11:01,finished
+115,247,"Holmes, Julia",Julia,Holmes,F,30,Female 30-39,Saint Paul,MN,,02:12:18,finished
+116,211,"Lindsay, Matt",Matt,Lindsay,M,30,Male 30-39,Saint Paul,MN,,02:12:19,finished
+117,405,"Crites, Greg",Greg,Crites,M,56,Male 50-59,,,,02:13:10,finished
+118,32,"Gilbertson, Rebecca",Rebecca,Gilbertson,F,47,Female 40-49,Duluth,MN,,02:13:59,finished
+119,206,"Chadwick, John",John,Chadwick,M,61,Male 60-69,La Grange Park,IL,,02:13:43,finished
+120,119,"Dorwart, Andrew",Andrew,Dorwart,M,62,Male 60-69,Stillwater,MN,,02:15:04,finished
+121,28,"Vargo, Paul",Paul,Vargo,M,66,Male 60-69,Saint Paul,MN,,02:15:45,finished
+122,185,"Callahan, Teresa",Teresa,Callahan,F,63,Female 60-69,Minneapolis,MN,,02:16:16,finished
+123,184,"Callahan, Matt",Matt,Callahan,M,66,Male 60-69,Minneapolis,MN,,02:16:48,finished
+124,30,"Miner, Danielle",Danielle,Miner,F,49,Female 40-49,Duluth,MN,,02:18:12,finished
+125,274,"Andersen, Kai",Kai,Andersen,F,17,Female 29 & Under,Rochester,MN,,02:18:25,finished
+126,140,"Peterson, Hayley",Hayley,Peterson,F,35,Female 30-39,Minneapolis,MN,,02:20:01,finished
+127,420,"Koehler, Matthew",Matthew,Koehler,M,33,Male 30-39,Saint Paul,MN,,02:20:59,finished
+128,150,"Gearhart, James",James,Gearhart,M,73,Male 70+,Oak Park,IL,,02:21:58,finished
+129,349,"Spring, Jeremy",Jeremy,Spring,M,45,Male 40-49,Champlin,MN,,02:24:15,finished
+130,244,"Arnett, Collin",Collin,Arnett,M,42,Male 40-49,Minneapolis,MN,,02:24:46,finished
+131,180,"Harrington, Levi",Levi,Harrington,M,37,Male 30-39,Cable,WI,,02:24:59,finished
+132,237,"Bantz, Kyle",Kyle,Bantz,F,42,Female 40-49,Saint Paul,MN,,02:26:37,finished
+133,495,"Kiehl, Trevor",Trevor,Kiehl,M,34,Male 30-39,Rice Lake,WI,,02:26:27,finished
+134,76,"Van Hale Henke, Rachel",Rachel,Van Hale Henke,F,44,Female 40-49,Mounds View,MN,,02:26:39,finished
+135,194,"Lundgren, Christina",Christina,Lundgren,F,32,Female 30-39,Saint Paul,MN,,02:34:58,finished
+136,337,"Leazer, Jennifer",Jennifer,Leazer,F,59,Female 50-59,,,,02:35:25,finished
+137,269,"Kratz, Wil",Wil,Kratz,M,46,Male 40-49,Hayward,WI,,02:35:44,finished
+138,117,"Manson, Daniel",Daniel,Manson,M,60,Male 60-69,Minneapolis,MN,,02:35:36,finished
+139,77,"Sullivan, Mandy",Mandy,Sullivan,F,45,Female 40-49,Princeton,WI,,02:36:13,finished
+140,25,"Larsen, Chris",Chris,Larsen,M,73,Male 70+,Hayward,WI,,02:37:41,finished
+141,81,"Wikum, Erick",Erick,Wikum,M,60,Male 60-69,Maineville,OH,,02:39:24,finished
+142,130,"Shelley, Dirk",Dirk,Shelley,M,63,Male 60-69,Cable,WI,,02:41:26,finished
+143,176,"Maranowicz, Harry",Harry,Maranowicz,M,78,Male 70+,Hayward,WI,,02:42:03,finished
+144,369,"Stancic, Zoran",Zoran,Stancic,M,64,Male 60-69,Onalaska,WI,,02:43:32,finished
+145,483,"Larson, Julie Ann",Julie Ann,Larson,F,61,Female 60-69,Eau Claire,WI,,02:47:03,finished
+146,177,"Weidner, Bill",Bill,Weidner,M,73,Male 70+,Warrenville,IL,,02:46:45,finished
+147,421,"Koopmann, Melisa",Melisa,Koopmann,F,46,Female 40-49,Eau Claire,WI,,02:47:44,finished
+148,160,"Bohen, Jen",Jen,Bohen,F,51,Female 50-59,Hayward,WI,,02:42:28,finished
+149,423,"Urlaub, Michelle",Michelle,Urlaub,F,55,Female 50-59,Eau Claire,WI,,02:47:46,finished
+150,422,"Larson, Betsy",Betsy,Larson,F,44,Female 40-49,Altoona,WI,,02:47:49,finished
+151,74,"Frane, Kristin",Kristin,Frane,F,55,Female 50-59,,,,02:47:52,finished
+152,404,"Lewis, David",David,Lewis,M,53,Male 50-59,Greenville,WI,,02:48:25,finished
+153,578,"Poser, Taylor",Taylor,Poser,F,30,Female 30-39,Sullivan,WI,,02:53:45,finished
+154,195,"Seitz, David",David,Seitz,M,68,Male 60-69,Waukesha,WI,,02:55:43,finished
+155,299,"Evenson, Annika",Annika,Evenson,F,22,Female 29 & Under,Savage,MN,,02:58:57,finished
+156,2,"Gorski, Joanne",Joanne,Gorski,F,61,Female 60-69,Hortonville,WI,,03:01:40,finished
+157,29,"GOULD, John",John,GOULD,M,73,Male 70+,Duluth,MN,,03:04:14,finished
+158,136,"Holmquist, Hannah",Hannah,Holmquist,F,34,Female 30-39,Plymouth,MN,,03:09:43,finished
+159,270,"Kratz, Jessica",Jessica,Kratz,F,45,Female 40-49,Hayward,WI,,03:24:25,finished
+160,213,"Dahmen, Timothy",Timothy,Dahmen,M,68,Male 60-69,Waunakee,WI,,03:47:35,finished
+,497,"Ross, Kate",Kate,Ross,F,44,Female 40-49,,,,02:35:22,DSQ
+,120,"Wood, Deb",Deb,Wood,F,47,Female 40-49,Davenport,IA,,,DNF
+,139,"Bradley, Jeff",Jeff,Bradley,M,64,Male 60-69,Davenport,IA,,,DNF
+,410,"Schulz, Russell",Russell,Schulz,M,73,Male 70+,Glen Ellyn,IL,,,DNF

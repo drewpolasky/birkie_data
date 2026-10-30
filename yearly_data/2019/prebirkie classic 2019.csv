@@ -1,0 +1,45 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,6365,Samuel Miner,,,M,27,M25-29,Winona,MN,,02:38:46,finished
+2,6561,Douglas Shield,,,M,20,M19-24,Saint Paul,MN,,02:39:05,finished
+3,6507,Brent Smith,,,M,62,M60-64,Carlton,MN,,02:43:21,finished
+4,6448,Thomas Krenz,,,M,57,M55-59,Chisago City,MN,,02:45:25,finished
+5,6604,Carter Scheele,,,M,21,M19-24,Saint Cloud,MN,,02:47:10,finished
+6,6394,Murray Dunsirn,,,M,21,M19-24,Milwaukee,WI,,02:47:52,finished
+7,6570,Conner Canfield,,,M,22,M19-24,Minneapolis,MN,,02:47:55,finished
+8,6246,Bonnie Weiskopf,,,F,50,F50-54,Stillwater,MN,,02:52:12,finished
+9,6431,Brandy Stewart,,,F,41,F40-44,Minneapolis,MN,,02:52:15,finished
+10,6419,Ryan Rogers,,,M,39,M35-39,Bemidji,MN,,02:52:39,finished
+11,6239,Terry Tansey,,,M,62,M60-64,Hayward,WI,,02:55:49,finished
+12,6345,Jed Downs,,,M,61,M60-64,Cross Plains,WI,,02:58:32,finished
+13,6592,Thomas Dehler,,,M,33,M30-34,Duluth,MN,,03:01:41,finished
+14,6620,John Rock,,,M,54,M50-54,Saint Paul,MN,,03:04:32,finished
+15,6354,Henning Von Bauer,,,M,57,M55-59,Madison,WI,,03:06:38,finished
+16,6554,Ketzel Levens,,,F,20,F19-24,Bayfield,WI,,03:07:20,finished
+17,6565,Katelyn Engel,,,F,31,F30-34,Minneapolis,MN,,03:08:59,finished
+18,6591,Douglas Ansel,,,M,31,M30-34,Madison,WI,,03:21:21,finished
+19,6433,Lori Seele,,,F,37,F35-39,Duluth,MN,,03:24:16,finished
+20,6447,Tim Wilkie,,,M,55,M55-59,Saint Croix Falls,WI,,03:27:58,finished
+21,6418,Dan McKeon,,,M,41,M40-44,Bemidji,MN,,03:29:27,finished
+22,6396,Greg Engel,,,M,62,M60-64,Minneapolis,MN,,03:36:40,finished
+23,6626,Terrence Maag,,,M,52,M50-54,Hopkins,MN,,03:37:20,finished
+24,6403,James Coors,,,M,69,M65-69,Madison,WI,,03:38:43,finished
+25,6392,Ulf-Eiel Bach,,,M,57,M55-59,Minnetonka,MN,,03:44:44,finished
+26,6331,James Maki,,,M,51,M50-54,Wausau,WI,,03:50:39,finished
+27,6619,Randall Farrow,,,M,58,M55-59,Mankato,MN,,03:55:02,finished
+28,6449,Andrew Goyke,,,M,53,M50-54,Ashland,WI,,03:58:33,finished
+29,6410,George Curry,,,M,62,M60-64,Hayward,WI,,03:59:07,finished
+30,6390,Danita Carlson,,,F,52,F50-54,Minneapolis,MN,,04:01:22,finished
+31,6572,Ethan Ferry,,,M,21,M19-24,Saint Paul,MN,,04:02:02,finished
+32,6608,Connor Miller,,,M,22,M19-24,Saint Paul,MN,,04:02:03,finished
+33,6335,Keith Olson,,,M,56,M55-59,Springfield,MN,,04:05:20,finished
+34,6351,Ann Pollock,,,F,68,F65-69,Madison,WI,,04:10:28,finished
+35,6573,Joseph Burrell,,,M,18,M15-18,Olympia,WA,,04:10:46,finished
+36,6550,Sarah Broghammer,,,F,19,F19-24,Winona,MN,,04:10:59,finished
+37,6502,Olivia Rengo,,,F,21,F19-24,Esko,MN,,04:16:30,finished
+38,6326,Tom Ferry,,,M,50,M50-54,Saint Paul,MN,,04:20:46,finished
+39,6240,Ian Duncan,,,M,71,M70-74,Madison,WI,,04:30:51,finished
+40,6400,Tia Connelly,,,F,18,F15-18,Chanhassen,MN,,04:45:29,finished
+41,6323,Vic LaPort,,,M,78,M75-79,Clarksburg,MA,,04:53:20,finished
+42,6556,Jen Anderson,,,F,54,F50-54,Minneapolis,MN,,04:54:24,finished
+43,6366,Baine Alexander,,,F,60,F60-64,Madison,WI,,05:00:29,finished
+44,6333,Shelly Gilbertson,,,F,58,F55-59,Cottage Grove,WI,,05:03:55,finished

@@ -5,6 +5,7 @@
 #              2020 names have the space between first and last name dropped ("KnuteSands")
 #   2021:      runsignup export, split up by race day because of COVID, exact age and gender
 #   2022-2026: raceresult export, names are "Last, First", exact age and gender
+#the pre-birkie ('prebirkie' and 'prebirkie_short' files, from get_prebirkie_data.py) is in one plain format every year
 import functools
 import glob
 import os
@@ -50,18 +51,21 @@ def load_all_results(path='yearly_data/'):
 def parse_filename(filename):
     #'birkie skate openTrack 2024.csv' -> ('birkie', 'skate', 'openTrack', 2024)
     #'prince haakon 2012.csv' -> ('haakon', 'skate', 'main', 2012), the early haakon was a freestyle race
+    #'prebirkie_short skate 2015.csv' -> ('prebirkie_short', 'skate', 'main', 2015)
     words = os.path.splitext(os.path.basename(filename))[0].split()
     year = int([w for w in words if re.fullmatch(r'\d{4}', w)][0])
     race = 'haakon' if 'haakon' in words else words[0]
     tech = 'classic' if 'classic' in words else 'skate'
-    extra = [w for w in words if w not in ('prince', 'haakon', 'birkie', 'kortie', 'skate', 'classic', 'freestyle', str(year))]
+    extra = [w for w in words[1:] if w not in ('haakon', 'skate', 'classic', 'freestyle', str(year))]
     variant = ' '.join(extra) if extra else 'main'
     return race, tech, variant, year
 
 
 def load_file(filename):
     race, tech, variant, year = parse_filename(filename)
-    if year <= 2020:
+    if race.startswith('prebirkie'):
+        df = load_prebirkie(filename)
+    elif year <= 2020:
         df = load_legacy(filename, year)
     elif year == 2021:
         df = load_runsignup(filename)
@@ -231,6 +235,37 @@ def load_raceresult(filename):
         df['gender_place'] = df.groupby('gender')['overall_place'].rank(method='min')
     locs = raw['City, State, Nation'].fillna('').map(parse_csv_location)
     df[['city', 'state', 'country']] = pd.DataFrame(locs.tolist(), index=df.index)
+    return df
+
+
+#---------------------------------------------------------------- pre-birkie
+
+def load_prebirkie(filename):
+    #name is "First Last" (chronotrack) or "Last, First", and first and last are filled in whenever the source split them.
+    #exact age, except 2009 (age group only)
+    raw = pd.read_csv(filename, dtype=str, keep_default_na=False)
+    df = pd.DataFrame()
+    split = raw['last'] != ''
+    df['name'] = (raw['first'] + ' ' + raw['last']).where(split, raw['name']).map(clean_whitespace)
+    names = [split_first_last(first, last=last) if last else split_first_last(name)
+             for first, last, name in zip(raw['first'], raw['last'], raw['name'])]
+    df = pd.concat([df, pd.DataFrame(names, columns=['first', 'middle', 'last', 'suffix'])], axis=1)
+    df['overall_place'] = pd.to_numeric(raw['place'], errors='coerce')
+    df['bib'] = pd.to_numeric(raw['bib'], errors='coerce')
+    df['time_s'] = raw['time'].map(parse_time)
+    df['status'] = raw['status']
+    df['gender'] = raw['gender'].str.strip().str.upper().str[0].where(lambda g: g.isin(['M', 'F']))
+    df['age'] = pd.to_numeric(raw['age'], errors='coerce')
+    df.loc[df['age'] <= 0, 'age'] = np.nan
+    #"M 40-44", only used when there's no exact age
+    group = raw['age_group'].str.extract(r'(\d+)\s*-\s*(\d+)').apply(pd.to_numeric)
+    narrow = (group[1] - group[0]) <= 10
+    df['age_min'] = group[0].where(narrow & df['age'].isna())
+    df['age_max'] = group[1].where(narrow & df['age'].isna())
+    finished = df['status'] == 'finished'
+    df['gender_place'] = df[finished].groupby('gender')['overall_place'].rank(method='min')
+    locs = [normalize_location(c, s, n) for c, s, n in zip(raw['city'], raw['state'], raw['country'])]
+    df[['city', 'state', 'country']] = pd.DataFrame(locs, index=df.index)
     return df
 
 

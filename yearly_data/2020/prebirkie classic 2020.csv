@@ -1,0 +1,60 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,6492,Evan Wetzel,,,M,22,M19-24,Waukesha,WI,,02:16:40,finished
+2,6461,Connor Canfield,,,M,23,M19-24,Plymouth,MN,,02:26:49,finished
+3,6822,Samuel Miner,,,M,28,M25-29,Winona,MN,,02:28:02,finished
+4,6827,Carter Scheele,,,M,21,M19-24,Saint Cloud,MN,,02:32:05,finished
+5,6839,Murray Dunsirn,,,M,22,M19-24,Rochester,MN,,02:34:40,finished
+6,6851,Brent Smith,,,M,63,M60-64,Carlton,MN,,02:35:08,finished
+7,6499,Daniel Meyer,,,M,37,M35-39,Minneapolis,MN,,02:35:11,finished
+8,6773,Keith Olson,,,M,57,M55-59,Springfield,MN,,02:37:04,finished
+9,6763,Bonnie Weiskopf,,,F,51,F50-54,Stillwater,MN,,02:39:29,finished
+10,6875,Joseph Lowery,,,M,53,M50-54,Hudson,WI,,02:42:54,finished
+11,6697,Chase Edgerton,,,M,35,M35-39,Duluth,MN,,02:42:57,finished
+12,6654,Henning Von Bauer,,,M,58,M55-59,Madison,WI,,02:46:41,finished
+13,6650,Jan-Petter Lovald,,,M,59,M55-59,Hopkins,MN,,02:46:46,finished
+14,6532,Todd Sandman,,,M,49,M45-49,Cumberland,WI,,02:48:35,finished
+15,6664,Greg Greene,,,M,64,M60-64,Oshkosh,WI,,02:48:58,finished
+16,6846,Luke Novak,,,M,29,M25-29,Embarrass,MN,,02:49:01,finished
+17,6534,Jed Downs,,,M,62,M60-64,Cross Plains,WI,,02:50:28,finished
+18,6490,Ketzel Levens,,,F,21,F19-24,Madison,WI,,02:50:39,finished
+19,6716,Jim Mullen,,,M,62,M60-64,Hazelhurst,WI,,02:52:51,finished
+20,6700,Annie Bunio,,,F,32,F30-34,Minneapolis,MN,,02:56:06,finished
+21,6864,Peter Dahlberg,,,M,57,M55-59,North Oaks,MN,,02:59:01,finished
+22,6871,Aistis Tumas,,,M,37,M35-39,Ashland,WI,,03:04:17,finished
+23,6538,Jim Coors,,,M,70,M70-74,Madison,WI,,03:07:25,finished
+24,6877,Kaleb Kielisch,,,M,29,M25-29,Middleton,WI,,03:07:44,finished
+25,6661,ULF - EIEL Bach,,,M,58,M55-59,Minnetonka,MN,,03:08:25,finished
+26,6750,Eric Dott,,,M,61,M60-64,Duluth,MN,,03:11:02,finished
+27,6474,Tim Wilkie,,,M,56,M55-59,St. Croix Falls,WI,,03:11:17,finished
+28,6674,Edward  Jones,,,M,63,M60-64,Cambridge,MN,,03:13:24,finished
+29,6730,AUDUN MIKKELSON,,,M,61,M60-64,Hayward,WI,,03:18:09,finished
+30,6888,Christopher Coon,,,M,38,M35-39,Rochester,MN,,03:18:30,finished
+31,6463,Greg Rowley,,,M,46,M45-49,Rochester,MN,,03:19:55,finished
+32,6708,Anne Beckman,,,F,35,F35-39,Wisconsin,US,,03:20:47,finished
+33,6677,Randy Farrow,,,M,59,M55-59,Mankato,MN,,03:22:04,finished
+34,6543,Julia Malicki,,,F,20,F19-24,Madison,WI,,03:25:13,finished
+35,6660,Mark Prescher,,,M,23,M19-24,Crystal,MN,,03:35:17,finished
+36,6767,ANDREW GOYKE,,,M,54,M50-54,Ashland,WI,,03:37:24,finished
+37,6667,Paul Gage,,,M,56,M55-59,Edina,MN,,03:39:33,finished
+38,6748,Deb DeLuca,,,F,59,F55-59,Duluth,MN,,03:40:15,finished
+39,6684,Mary Januschka,,,F,58,F55-59,Cambridge,MN,,03:40:21,finished
+40,6853,Karen Possley,,,F,64,F60-64,Chippewa Falls,WI,,03:42:09,finished
+41,6826,Sarah Broghammer,,,F,20,F19-24,Winona,MN,,03:42:39,finished
+42,6718,Steve Wagner,,,M,53,M50-54,Chippewa Falls,WI,,03:46:34,finished
+43,6546,Tom McDowell,,,M,67,M65-69,Mound,MN,,03:47:20,finished
+44,6753,Chris Solheid,,,M,45,M45-49,Minneapolis,MN,,03:48:47,finished
+45,6663,LESLIE TAYLOR,,,F,58,F55-59,Madison,WI,,03:49:45,finished
+46,6678,James Johnson,,,M,65,M65-69,Genoa,IL,,03:56:06,finished
+47,6732,Dan Dudley,,,M,67,M65-69,Prairie Du Sac,WI,,03:56:10,finished
+48,6842,Cullen White,,,M,22,M19-24,Duluth,MN,,03:59:56,finished
+49,6868,Leslie Johnson,,,F,61,F60-64,Eau Claire,WI,,04:01:00,finished
+50,6781,Afton Clarke-Sather,,,M,38,M35-39,Duluth,MN,,04:01:30,finished
+51,6909,Jay Arneson,,,M,64,M60-64,Spring Valley,WI,,04:03:17,finished
+52,6702,Keith Olson,,,M,57,M55-59,Springfield,MN,,04:03:25,finished
+53,6658,Doug Otopalik,,,M,62,M60-64,Sturgeon Bay,WI,,04:07:02,finished
+54,6694,George Larson,,,M,54,M50-54,Hayward,WI,,04:17:49,finished
+55,6468,Ian Duncan,,,M,72,M70-74,Madison,WI,,04:18:25,finished
+56,6636,Nick Teehan,,,M,60,M60-64,Hayward,WI,,04:34:18,finished
+57,6751,Holly Einess,,,F,56,F55-59,MINNEAPOLIS,MN,,04:40:00,finished
+58,6823,Sara Holmes,,,F,19,F19-24,Rochester,MN,,05:06:30,finished
+59,6874,John Humphries,,,M,54,M50-54,Mount Horeb,WI,,05:14:49,finished

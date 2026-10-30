@@ -8,7 +8,8 @@
 #     2016-2020), middle initial (mostly 2009-2014) and hometown, where a move counts for less the younger the skier
 #     and the more years in between
 #   - pairs are merged best first, never merging two groups of results that contradict each other
-#     (two results in the same race, different genders, incompatible birth years, Jr/Sr, different middle initials)
+#     (two results in the same race or on the same day, different genders, incompatible birth years, Jr/Sr, different
+#     middle initials)
 #finish times are deliberately not used, so the links can't bias a year to year performance analysis
 #
 #example usage:
@@ -30,7 +31,8 @@ from results_loader import load_all_results, compact
 
 MERGE_THRESHOLD = 2.0           #minimum log odds to link two results. 2.0 is ~88% sure
 BIRTH_YEAR_SPREAD = 45          #roughly how many birth years the field is spread over, for how often strangers share one
-FIRST_MULTI_RACE_YEAR = 2018    #before this the birkie and kortie were the same day, so one race per person per year
+FIRST_MULTI_RACE_YEAR = 2018    #before this the birkie and kortie were the same day, so one race per person per year.
+                                #the pre-birkie's races are always on one day
 FIRST_NAME_PENALTY = {0: 0.0, 1: -1.0, 2: -2.0}     #same first name, known nickname, looser variant
 PARTIAL_LAST_NAME_PENALTY = -1.5                    #"Noble-Stuen" vs "Stuen"
 
@@ -144,7 +146,7 @@ william will bill billy willy willie liam
 zachary zachariah zackary zach zack zac
 '''
 
-Rec = namedtuple('Rec', 'i year event first last last_keys initial suffix gender gender_inferred birth city region')
+Rec = namedtuple('Rec', 'i year event day first last last_keys initial suffix gender gender_inferred birth city region')
 
 
 def main():
@@ -240,8 +242,15 @@ def prepare_records(results):
     initial = middle.str.split().str[0].where(middle.str.split().str[0].str.len() == 1, '').fillna('')
     last_keys = [last_name_keys(l, m) for l, m in zip(results['last'].fillna(''), middle)]
     event = results['year'].astype(str) + ' ' + results['race'] + ' ' + results['tech'] + ' ' + results['variant']
+    #races on one day, where a skier can only have one result: each pre-birkie, and the birkie weekend before
+    #FIRST_MULTI_RACE_YEAR. empty when a skier could have more than one
+    pre = results['race'].str.startswith('prebirkie')
+    day = np.where(pre, results['year'].astype(str) + ' prebirkie',
+                   np.where(results['year'] < FIRST_MULTI_RACE_YEAR, results['year'].astype(str) + ' birkie', ''))
     region = results['state'].where(results['state'] != '', results['country']).fillna('')
     gender = results['gender'].where(results['gender'].isin(['M', 'F']), '')
+    #2009-2015 birkie weekend genders are inferred from places
+    inferred = (results['year'] < 2016) & ~pre
 
     #birth year range: exact from age (2021+), or from the age group (2016-2020)
     birth_lo = (results['year'] - results['age']).fillna(results['year'] - results['age_max'] - 1)
@@ -250,10 +259,10 @@ def prepare_records(results):
     records = []
     for i in range(len(results)):
         birth = None if np.isnan(birth_lo[i]) else (int(birth_lo[i]), int(birth_hi[i]))
-        records.append(Rec(i=i, year=int(results.at[i, 'year']), event=event[i], first=first[i], last=last[i],
-                           last_keys=last_keys[i], initial=initial[i], suffix=results.at[i, 'suffix'] or '',
-                           gender=gender[i], gender_inferred=results.at[i, 'year'] < 2016, birth=birth,
-                           city=results.at[i, 'city'] or '', region=region[i]))
+        records.append(Rec(i=i, year=int(results.at[i, 'year']), event=event[i], day=day[i], first=first[i],
+                           last=last[i], last_keys=last_keys[i], initial=initial[i],
+                           suffix=results.at[i, 'suffix'] or '', gender=gender[i], gender_inferred=inferred[i],
+                           birth=birth, city=results.at[i, 'city'] or '', region=region[i]))
     return records
 
 
@@ -286,10 +295,10 @@ class NameModel:
         self.region = Counter(region for name, region in {((r.first, r.last), r.region) for r in records if r.region})
         self.city = Counter(place for name, place in {((r.first, r.last), (r.city, r.region))
                                                       for r in records if r.city and r.region})
-        #a name that shows up more than once in a year before FIRST_MULTI_RACE_YEAR belongs to at least that many people
-        per_year = Counter((r.first, r.last, r.year) for r in records if r.year < FIRST_MULTI_RACE_YEAR)
+        #a name that shows up more than once on one race day belongs to at least that many people
+        per_day = Counter((r.first, r.last, r.day) for r in records if r.day)
         self.min_people = defaultdict(lambda: 1)
-        for (first, last, year), count in per_year.items():
+        for (first, last, day), count in per_day.items():
             self.min_people[(first, last)] = max(self.min_people[(first, last)], count)
 
     def prior(self, a, b, last_key):
@@ -305,7 +314,7 @@ def pair_score(a, b, last_key, model):
     #log odds that results a and b are the same skier, or None when they can't be
     if a.event == b.event:
         return None
-    if a.year == b.year and a.year < FIRST_MULTI_RACE_YEAR:
+    if a.day and a.day == b.day:
         return None
     if a.suffix and b.suffix and a.suffix != b.suffix:
         return None
@@ -392,11 +401,11 @@ def move_rates(a, b):
 
 class Cluster:
     #everything about a group of linked results that a new result has to be consistent with
-    __slots__ = ('events', 'early_years', 'genders', 'birth_lo', 'birth_hi', 'firsts', 'initials', 'suffixes')
+    __slots__ = ('events', 'days', 'genders', 'birth_lo', 'birth_hi', 'firsts', 'initials', 'suffixes')
 
     def __init__(self, rec):
         self.events = {rec.event}
-        self.early_years = {rec.year} if rec.year < FIRST_MULTI_RACE_YEAR else set()
+        self.days = {rec.day} if rec.day else set()
         self.genders = {rec.gender} if rec.gender and not rec.gender_inferred else set()
         self.birth_lo, self.birth_hi = rec.birth if rec.birth else (-math.inf, math.inf)
         self.firsts = {rec.first}
@@ -404,7 +413,7 @@ class Cluster:
         self.suffixes = {rec.suffix} if rec.suffix else set()
 
     def compatible(self, other):
-        if self.events & other.events or self.early_years & other.early_years:
+        if self.events & other.events or self.days & other.days:
             return False
         if len(self.genders | other.genders) > 1:
             return False
@@ -416,7 +425,7 @@ class Cluster:
 
     def absorb(self, other):
         self.events |= other.events
-        self.early_years |= other.early_years
+        self.days |= other.days
         self.genders |= other.genders
         self.birth_lo = max(self.birth_lo, other.birth_lo)
         self.birth_hi = min(self.birth_hi, other.birth_hi)

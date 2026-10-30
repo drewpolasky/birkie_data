@@ -1,0 +1,347 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,631,Henry Reich,,,M,27,M25-29,Marine On Saint Croix,MN,,01:11:54,finished
+2,632,Alex Reich,,,M,25,M25-29,Marine On Saint Croix,MN,,01:11:55,finished
+3,401,Ben Popp,,,M,40,M40-44,Springbrook,WI,,01:12:01,finished
+4,634,Jonathon Rulseh,,,M,30,M30-34,Ironwood,MI,,01:12:33,finished
+5,469,Blaise Sopiwnik,,,M,33,M30-34,Washburn,WI,,01:13:53,finished
+6,643,Andy Weddle,,,M,38,M35-39,Wausau,WI,,01:13:55,finished
+7,760,Matt Zak,,,M,41,M40-44,Eveleth,MN,,01:14:00,finished
+8,771,Marc Beitz,,,M,45,M45-49,Minneapolis,MN,,01:14:27,finished
+9,629,Rhett Bonner,,,M,51,M50-54,Duluth,MN,,01:15:27,finished
+10,626,Matthew Ryan,,,M,40,M40-44,Duluth,MN,,01:15:55,finished
+11,479,Brian Bich,,,M,48,M45-49,Duluth,MN,,01:16:39,finished
+12,443,Jens Brabbit,,,M,25,M25-29,La Crosse,WI,,01:16:41,finished
+13,524,Ben Mogren,,,M,32,M30-34,Green Bay,WI,,01:16:43,finished
+14,779,Zach Beresford,,,M,35,M35-39,Superior,WI,,01:17:45,finished
+15,358,Nathaniel Johnson,,,M,18,M15-18,Brooklyn Park,MN,,01:18:29,finished
+16,376,THOMAS MATUSH,,,M,45,M45-49,Middleton,WI,,01:18:58,finished
+17,480,Rod Raymond,,,M,49,M45-49,Duluth,MN,,01:19:14,finished
+18,417,Timothy Swift,,,M,51,M50-54,Hayward,WI,,01:19:22,finished
+19,410,Montgomery Mouw,,,M,51,M50-54,Saint Paul,MN,,01:19:29,finished
+20,669,Trent Ping,,,M,29,M25-29,La Crosse,WI,,01:20:09,finished
+21,644,David Andresen,,,M,27,M25-29,Saint Paul,MN,,01:20:12,finished
+22,380,Fred Scheer,,,M,57,M55-59,Hayward,WI,,01:20:30,finished
+23,803,Joel Harrison,,,M,46,M45-49,Hayward,WI,,01:20:39,finished
+24,408,Terry Tansey,,,M,58,M55-59,Hayward,WI,,01:21:12,finished
+25,618,Brad Skillicorn,,,M,45,M45-49,Winona,MN,,01:21:48,finished
+26,381,Slater Crosby,,,M,49,M45-49,Minneapolis,MN,,01:21:50,finished
+27,357,Robby Johnson,,,M,18,M15-18,Brooklyn Park,MN,,01:22:06,finished
+28,420,Scott Cooper,,,M,50,M50-54,Holmen,WI,,01:22:36,finished
+29,628,NOAH ROUNDS,,,M,36,M35-39,Osseo,MN,,01:22:58,finished
+30,627,Troy Kinnunen-Skidmore,,,M,48,M45-49,Calumet,MI,,01:23:06,finished
+31,518,David Gilmer,,,M,36,M35-39,Winona,MN,,01:24:06,finished
+32,391,Kevin Stalheim,,,M,60,M60-64,Milwaukee,WI,,01:24:08,finished
+33,487,Owen Gage,,,M,15,M15-18,Minneapolis,MN,,01:24:09,finished
+34,474,Kara Salmela,,,F,42,F40-44,Duluth,MN,,01:24:11,finished
+35,647,Paulette Niemi,,,F,47,F45-49,Ironwood,MI,,01:24:24,finished
+36,440,Steven Mach,,,M,42,M40-44,La Crosse,WI,,01:24:28,finished
+37,614,Charles Anderson,,,M,42,M40-44,Minneapolis,MN,,01:24:33,finished
+38,387,Josh Wolke,,,M,39,M35-39,Minneapolis,MN,,01:24:40,finished
+39,747,Dallas Johnson,,,M,49,M45-49,Wayzata,MN,,01:24:44,finished
+40,363,John Gildersleeve,,,M,40,M40-44,Kewaskum,WI,,01:24:45,finished
+41,648,Adam Hammerbeck,,,M,28,M25-29,Milwaukee,WI,,01:25:18,finished
+42,588,Carolyn Warren,,,F,25,F25-29,Ironwood,MI,,01:25:30,finished
+43,681,Robyn Lauritsen,,,F,25,F25-29,Green Bay,WI,,01:25:38,finished
+44,641,Greg Pautsch,,,M,62,M60-64,Hayward,WI,,01:26:07,finished
+45,433,Jim Holmes,,,M,39,M35-39,Cross Plains,WI,,01:26:16,finished
+46,659,Thomas Kaufman,,,M,61,M60-64,Fitchburg,WI,,01:26:41,finished
+47,696,Andrew Nelson,,,M,27,M25-29,Rochester,MN,,01:26:44,finished
+48,653,Al Bowman,,,M,41,M40-44,Stone Lake,WI,,01:27:01,finished
+49,573,Alex Nemeth,,,M,13,M12-14,Sartell,MN,,01:27:07,finished
+50,378,Brad Miller,,,M,52,M50-54,Rochester,MN,,01:27:14,finished
+51,595,Nate Rounds,,,M,38,M35-39,Maple Grove,MN,,01:27:33,finished
+52,450,Dan Berntson,,,M,63,M60-64,Minneapolis,MN,,01:27:56,finished
+53,680,Randy Larson,,,M,62,M60-64,Spooner,WI,,01:28:07,finished
+54,744,Gary Chu,,,M,56,M55-59,Racine,WI,,01:28:08,finished
+55,775,Richard Geisen,,,M,48,M45-49,Washburn,WI,,01:29:01,finished
+56,690,John Garrett,,,M,61,M60-64,Hayward,WI,,01:29:16,finished
+57,780,Allan Lindsley,,,M,46,M45-49,Bloomer,WI,,01:29:18,finished
+58,750,Pierce Laing,,,M,17,M15-18,Long Lake,MN,,01:29:18,finished
+59,412,Paul Deninger,,,M,44,M40-44,Iowa City,IA,,01:29:51,finished
+60,465,David Leske,,,M,46,M45-49,Minneapolis,MN,,01:30:18,finished
+61,708,Paul Gabriel,,,M,63,M60-64,Athens,WI,,01:30:18,finished
+62,711,Greg Bernhardt,,,M,53,M50-54,Hopkins,MN,,01:30:55,finished
+63,562,Ryan Sportel,,,M,39,M35-39,Inver Grove Heights,MN,,01:31:02,finished
+64,413,Jeff Bradley,,,M,53,M50-54,Davenport,IA,,01:31:15,finished
+65,427,Andy Kangas,,,M,58,M55-59,Green Bay,WI,,01:31:17,finished
+66,679,Dan Meyer,,,M,64,M60-64,Lake Elmo,MN,,01:31:41,finished
+67,689,Jeff Tumbleson,,,M,50,M50-54,Hayward,WI,,01:31:48,finished
+68,715,Cristina Roberts,,,F,28,F25-29,St Louis Park,MN,,01:31:51,finished
+69,709,Kathie Pautsch,,,F,52,F50-54,Hayward,WI,,01:32:11,finished
+70,575,Zach Nemeth,,,M,12,M12-14,Sartell,MN,,01:32:23,finished
+71,497,Phil Evans,,,M,20,M19-24,Saint Paul,MN,,01:32:41,finished
+72,782,Cameron Wilcox,,,M,26,M25-29,Washburn,WI,,01:32:51,finished
+73,574,Will Nemeth,,,M,12,M12-14,Sartell,MN,,01:33:02,finished
+74,612,Douglas Keller,,,M,56,M55-59,Plymouth,MN,,01:33:12,finished
+75,685,Andy Schwartz,,,M,58,M55-59,Milwaukee,WI,,01:33:42,finished
+76,748,Austin Johnson,,,M,14,M12-14,Wayzata,MN,,01:33:59,finished
+77,442,Ron Raymond,,,F,51,F50-54,Roberts,WI,,01:34:39,finished
+78,758,Alyson Welch,,,F,15,F15-18,Rochester,MN,,01:34:44,finished
+79,645,Mark Luehring,,,M,32,M30-34,Ashland,WI,,01:34:44,finished
+80,430,Jeff Melby,,,M,55,M55-59,Bloomington,MN,,01:34:45,finished
+81,511,Chris Morley,,,M,58,M55-59,Minneapolis,MN,,01:34:49,finished
+82,295,Steve Morales,,,M,66,M65-69,Hayward,WI,,01:34:53,finished
+83,534,Mary Hansen,,,F,36,F35-39,Hayward,WI,,01:35:02,finished
+84,623,Philip Peterson,,,M,58,M55-59,Maple Grove,MN,,01:35:27,finished
+85,467,Lindsey Greenlund,,,F,16,F15-18,Rochester,MN,,01:35:30,finished
+86,431,Chris Klohn,,,M,50,M50-54,Stillwater,MN,,01:35:49,finished
+87,592,Duane Palomaki,,,M,71,M70-74,Ishpeming,MI,,01:35:56,finished
+88,397,Borg Isaksen,,,M,41,M40-44,Brule,WI,,01:36:21,finished
+89,503,Gary Slavik,,,M,62,M60-64,Elburn,IL,,01:36:22,finished
+90,477,Siiri Morse,,,F,42,F40-44,Duluth,MN,,01:36:26,finished
+91,437,Mike Duerr,,,M,52,M50-54,Chaska,MN,,01:36:30,finished
+92,434,Andrew Caflisch,,,M,44,M40-44,Hastings,MN,,01:36:59,finished
+93,445,Darrell Kurth,,,M,58,M55-59,Wausau,WI,,01:37:03,finished
+94,583,Deborah DeLuca,,,F,54,F50-54,Duluth,MN,,01:37:13,finished
+95,720,James Washatka,,,M,56,M55-59,Mellen,WI,,01:37:17,finished
+96,567,Gary Simon,,,M,47,M45-49,Somerset,WI,,01:37:22,finished
+97,444,Andrea Mayo,,,F,24,F19-24,Cable,WI,,01:37:34,finished
+98,729,Amy Royce,,,F,26,F25-29,Minneapolis,MN,,01:37:43,finished
+99,615,John Clemmings,,,M,58,M55-59,Eden Prairie,MN,,01:37:45,finished
+100,369,Jacob Moss,,,M,26,M25-29,Ames,IA,,01:37:50,finished
+101,757,Robb Welch,,,M,51,M50-54,Rochester,MN,,01:37:51,finished
+102,426,Aaron Nelson,,,M,38,M35-39,Saint Paul,MN,,01:38:08,finished
+103,717,Gary Meader,,,M,63,M60-64,La Crosse,WI,,01:38:16,finished
+104,594,Chris Evavold,,,M,51,M50-54,Foxboro,WI,,01:38:18,finished
+105,500,Matt Jorgensen,,,M,36,M35-39,Hopkins,MN,,01:38:28,finished
+106,365,Joe Coyle,,,M,55,M55-59,Phillips,WI,,01:38:31,finished
+107,110,Jon Peterson,,,M,59,M55-59,Minneapolis,MN,,01:38:50,finished
+108,496,Sydney Bramer,,,F,18,F15-18,Minneapolis,MN,,01:39:05,finished
+109,713,Sarah Moravchik,,,F,36,F35-39,Mason,WI,,01:39:09,finished
+110,543,Keith Bengtson,,,M,55,M55-59,Rochester,MN,,01:39:18,finished
+111,682,Tom Detzner,,,M,63,M60-64,Hayward,WI,,01:39:21,finished
+112,572,Riley Halstrom,,,M,14,M12-14,Sartell,MN,,01:39:21,finished
+113,425,Tyler Nelson,,,M,31,M30-34,Saint Paul,MN,,01:39:22,finished
+114,774,Joe Kane,,,M,28,M25-29,Minneapolis,MN,,01:39:23,finished
+115,121,Annika Ferber,,,F,24,F19-24,Plymouth,MN,,01:39:27,finished
+116,464,Rick Mollgaard,,,M,44,M40-44,Red Wing,MN,,01:39:57,finished
+117,382,David Berard,,,M,58,M55-59,Madison,WI,,01:39:59,finished
+118,795,Rob Ogren,,,M,66,M65-69,Bloomington,MN,,01:40:03,finished
+119,495,Caitlin McGoldrick,,,F,20,F19-24,Excelsior,MN,,01:40:19,finished
+120,411,Jenny Swift,,,F,42,F40-44,Hayward,WI,,01:40:29,finished
+121,482,Joseph Duffy,,,M,38,M35-39,Minneapolis,MN,,01:40:34,finished
+122,1351,Cindy Swift,,,F,53,F50-54,Hayward,WI,,01:40:51,finished
+123,726,Ralph Bovard,,,M,62,M60-64,Minneapolis,MN,,01:41:16,finished
+124,476,Ethan Peterson,,,M,13,M12-14,Minneapolis,MN,,01:41:22,finished
+125,436,Andrew Schweizer,,,M,54,M50-54,Saint Paul,MN,,01:42:05,finished
+126,150,Chad Korby,,,M,15,M15-18,Brooklyn Park,MN,,01:42:13,finished
+127,642,Jessica Weddle,,,F,36,F35-39,Wausau,WI,,01:42:17,finished
+128,753,John Nelson,,,M,55,M55-59,Chippewa Falls,WI,,01:42:27,finished
+129,716,Jordan Roby,,,M,24,M19-24,Wayzata,MN,,01:42:28,finished
+130,368,Stephen Walburg,,,M,67,M65-69,Minneapolis,MN,,01:42:35,finished
+131,613,Kathleen Miller,,,F,54,F50-54,Minneapolis,MN,,01:42:55,finished
+132,769,Eric Stull,,,M,32,M30-34,La Crosse,WI,,01:43:11,finished
+133,540,Abbott Wright,,,M,65,M65-69,Palatine,IL,,01:43:15,finished
+134,697,Mark Collins,,,M,55,M55-59,Rochester,MN,,01:43:15,finished
+135,746,Joe Morehouse,,,M,50,M50-54,Duluth,MN,,01:43:27,finished
+136,761,Dave Witschen,,,M,53,M50-54,Aurora,MN,,01:43:29,finished
+137,499,Kevin Dudley,,,M,19,M19-24,Minnesota,US,,01:43:39,finished
+138,517,Aimee Zabrowski,,,F,35,F35-39,Hayward,WI,,01:43:46,finished
+139,802,Emily Strzok,,,F,29,F25-29,Duluth,MN,,01:44:06,finished
+140,566,Lori Belz,,,F,53,F50-54,Stillwater,MN,,01:44:15,finished
+141,399,Marcia Engebretson,,,F,61,F60-64,Hayward,WI,,01:44:15,finished
+142,550,Paul Jahns,,,M,60,M60-64,Wausau,WI,,01:45:02,finished
+143,388,John Holler,,,M,55,M55-59,Hopkins,MN,,01:45:04,finished
+144,393,John Craychee,,,M,63,M60-64,Saint Charles,IL,,01:45:37,finished
+145,569,John Koch,,,M,50,M50-54,Maple Grove,MN,,01:45:37,finished
+146,765,Peter Magnuson,,,M,39,M35-39,Proctor,MN,,01:45:42,finished
+147,602,Molly Schull,,,F,23,F19-24,Hayward,WI,,01:46:15,finished
+148,755,Eric Schoenberg,,,M,47,M45-49,Cadott,WI,,01:46:17,finished
+149,439,Michael Schlecht,,,M,50,M50-54,Minneapolis,MN,,01:46:23,finished
+150,792,Kirk Heisterkamp,,,M,20,M19-24,Minneapolis,MN,,01:46:33,finished
+151,597,Leon Zeug,,,M,61,M60-64,Delano,MN,,01:46:42,finished
+152,523,Elizabeth Smith,,,F,49,F45-49,Lake Elmo,MN,,01:46:54,finished
+153,435,Julie Reddan,,,F,48,F45-49,Minneapolis,MN,,01:47:04,finished
+154,773,Tom Allen,,,M,27,M25-29,Saint Paul,MN,,01:47:13,finished
+155,361,Laurie Landgraf,,,F,59,F55-59,Eau Claire,WI,,01:47:30,finished
+156,101,Julie Virkus,,,F,62,F60-64,Minneapolis,MN,,01:47:32,finished
+157,513,Scott Smith,,,M,72,M70-74,Hayward,WI,,01:47:47,finished
+158,668,Tom Bengel,,,M,64,M60-64,Saint Paul,MN,,01:47:52,finished
+159,664,Mary Johansen,,,F,57,F55-59,Hayward,WI,,01:47:53,finished
+160,710,Jim Anderson,,,M,62,M60-64,Cable,WI,,01:47:55,finished
+161,589,Brian Hegge,,,M,56,M55-59,Rhinelander,WI,,01:48:19,finished
+162,739,Michael Cragg,,,M,66,M65-69,Rice Lake,WI,,01:48:28,finished
+163,663,Emily Nagel,,,F,17,F15-18,Red Wing,MN,,01:48:29,finished
+164,620,Jennifer Narveson,,,F,27,F25-29,Saint Paul,MN,,01:48:35,finished
+165,446,Raymond Lee,,,M,57,M55-59,Hudson,WI,,01:48:41,finished
+166,43,Elizabeth Mattson,,,F,14,F12-14,Brooklyn Park,MN,,01:49:01,finished
+167,806,Allison Cogbill,,,F,29,F25-29,Onalaska,WI,,01:49:11,finished
+168,756,Randy Back,,,M,55,M55-59,Superior,WI,,01:49:14,finished
+169,470,Brian Zuck,,,M,40,M40-44,Esko,MN,,01:49:26,finished
+170,807,Thomas Cogbill,,,M,62,M60-64,Cable,WI,,01:49:34,finished
+171,383,David Asp,,,M,67,M65-69,Red Wing,MN,,01:50:01,finished
+172,141,Greg Miller,,,M,15,M15-18,Brooklyn Park,MN,,01:50:03,finished
+173,432,Stephen Narveson,,,M,62,M60-64,Hayward,WI,,01:50:06,finished
+174,619,Elena Cattaneo,,,F,17,F15-18,Rochester,MN,,01:50:08,finished
+175,578,Matthew Ryan,,,M,17,M15-18,Rochester,MN,,01:50:21,finished
+176,402,Brendon O'Brien,,,M,38,M35-39,Hopkins,MN,,01:50:38,finished
+177,677,William Jackson,,,M,44,M40-44,Chicago,IL,,01:50:55,finished
+178,740,Ali Parsons,,,F,29,F25-29,Minneapolis,MN,,01:50:59,finished
+179,505,Nicolle Reker,,,F,44,F40-44,Saint Paul,MN,,01:51:03,finished
+180,471,Pete Hanna,,,M,41,M40-44,Minneapolis,MN,,01:51:19,finished
+181,367,David Drexler,,,M,66,M65-69,Horicon,WI,,01:51:26,finished
+182,736,Teresa Stanley,,,F,32,F30-34,Northfield,MN,,01:51:53,finished
+183,732,Beth Ihry,,,F,45,F45-49,Edina,MN,,01:52:04,finished
+184,606,Mark Nachbor,,,M,52,M50-54,Plymouth,MN,,01:52:11,finished
+185,416,Michael Garrity,,,M,54,M50-54,Minneapolis,MN,,01:53:29,finished
+186,370,Kevin Moss,,,M,57,M55-59,Bondurant,IA,,01:53:41,finished
+187,665,Jack Slaasted,,,M,62,M60-64,Garden,MI,,01:54:19,finished
+188,793,Dave Wilcox,,,M,62,M60-64,Washburn,WI,,01:54:21,finished
+189,778,Jeff Henderson,,,M,28,M25-29,Minneapolis,MN,,01:54:51,finished
+190,406,Brian Carey,,,M,53,M50-54,Saint Paul,MN,,01:54:56,finished
+191,422,John Mayek,,,M,48,M45-49,Lake Elmo,MN,,01:55:00,finished
+192,731,Curtis Baum,,,M,18,M15-18,Rochester,MN,,01:55:08,finished
+193,366,John Wagener,,,M,62,M60-64,Augusta,WI,,01:55:17,finished
+194,484,Thomas Konat,,,M,51,M50-54,Excelsior,MN,,01:55:20,finished
+195,364,Helen Leemkuil,,,F,58,F55-59,Hudson,WI,,01:55:32,finished
+196,559,Bruce Fiedler,,,M,52,M50-54,Cottage Grove,MN,,01:55:52,finished
+197,670,Maddie McAlister,,,F,62,F60-64,Minneapolis,MN,,01:56:16,finished
+198,654,Barb Bowman,,,F,42,F40-44,Stone Lake,WI,,01:56:28,finished
+199,587,Paul Windberg,,,M,61,M60-64,Duluth,MN,,01:56:32,finished
+200,666,David Ware,,,M,57,M55-59,Saint Louis,MO,,01:56:46,finished
+201,616,Jane Allen,,,F,51,F50-54,Woodbury,MN,,01:56:54,finished
+202,536,Amy Lundell,,,F,46,F45-49,Saint Paul,MN,,01:57:04,finished
+203,767,John Trolander,,,M,69,M65-69,Oronoco,MN,,01:57:20,finished
+204,727,Jon Cernohous,,,M,44,M40-44,Stillwater,MN,,01:57:25,finished
+205,541,Ken Koscik,,,M,50,M50-54,Monona,WI,,01:57:36,finished
+206,558,Ian Duncan,,,M,67,M65-69,Madison,WI,,01:58:14,finished
+207,683,Noreen Leahy,,,F,58,F55-59,Stoughton,WI,,01:58:22,finished
+208,698,Heather Nagel,,,F,44,F40-44,Red Wing,MN,,01:58:32,finished
+209,481,Walter Ebertz,,,M,61,M60-64,Saint Paul,MN,,01:58:41,finished
+210,544,Bryan Wilcox,,,M,20,M19-24,Sauk City,WI,,01:58:51,finished
+211,652,Andrew Black,,,M,65,M65-69,Barrington,IL,,01:59:09,finished
+212,745,Diane Chu,,,F,54,F50-54,Racine,WI,,01:59:14,finished
+213,699,Tom Wilton,,,M,57,M55-59,Polk City,IA,,01:59:24,finished
+214,547,Tina Olson,,,F,47,F45-49,River Falls,WI,,01:59:29,finished
+215,640,Stephen Schleppegrell,,,M,57,M55-59,Rice Lake,WI,,01:59:50,finished
+216,438,Tory Nygren,,,M,52,M50-54,Saint Paul,MN,,01:59:58,finished
+217,375,Jerry Nelson,,,M,64,M60-64,River Falls,WI,,02:00:07,finished
+218,754,Peter Spencer,,,M,44,M40-44,Chaska,MN,,02:00:11,finished
+219,475,Susan Feyereisen,,,F,47,F45-49,Minneapolis,MN,,02:00:14,finished
+220,738,Louis Muench,,,M,31,M30-34,Cumberland,WI,,02:00:26,finished
+221,538,Eva Manson,,,F,17,F15-18,Minneapolis,MN,,02:00:32,finished
+222,791,Shari Hietpas,,,F,46,F45-49,Stillwater,MN,,02:00:37,finished
+223,656,Greg Hoelscher,,,M,58,M55-59,Amery,WI,,02:00:47,finished
+224,537,Daniel Manson,,,M,49,M45-49,Minneapolis,MN,,02:01:43,finished
+225,560,Matthew Breitzman,,,M,23,M19-24,Stillwater,MN,,02:02:05,finished
+226,389,George Odio,,,M,58,M55-59,Alexandria,MN,,02:02:11,finished
+227,392,Angie Johnson,,,F,32,F30-34,Alexandria,MN,,02:02:12,finished
+228,718,Ray Weyer,,,M,61,M60-64,Loyal,WI,,02:02:13,finished
+229,691,Darrin Mann,,,M,44,M40-44,Waupaca,WI,,02:02:32,finished
+230,468,Karl Schwartz,,,M,39,M35-39,Chetek,WI,,02:02:39,finished
+231,293,Ashley Janni,,,F,16,F15-18,Brooklyn Park,MN,,02:03:02,finished
+232,712,David Delforge,,,M,66,M65-69,Chanhassen,MN,,02:03:02,finished
+233,294,Bailey Krolnik,,,M,16,M15-18,Brooklyn Park,MN,,02:03:22,finished
+234,147,Rachel Mummah,,,F,13,F12-14,Brooklyn Park,MN,,02:03:55,finished
+235,377,Zoran Stancic,,,M,53,M50-54,Onalaska,WI,,02:04:02,finished
+236,539,John Huppert,,,M,59,M55-59,Saint Germain,WI,,02:04:12,finished
+237,396,Joan Sachs,,,F,51,F50-54,Seymour,WI,,02:04:14,finished
+238,478,Zoe Harvieux,,,F,17,F15-18,Duluth,MN,,02:04:35,finished
+239,166,Anne Beckman,,,F,30,F30-34,Osseo,MN,,02:04:49,finished
+240,423,Randy Johnson,,,M,57,M55-59,Minneapolis,MN,,02:05:14,finished
+241,2,Emily Durkot,,,F,17,F15-18,Brooklyn Park,MN,,02:05:50,finished
+242,371,Matt Rowley,,,M,34,M30-34,Rochester,MN,,02:06:34,finished
+243,601,Olivia Steinmetz,,,F,20,F19-24,Madison,WI,,02:06:35,finished
+244,678,Debra Croft,,,F,54,F50-54,Carlton,MN,,02:07:17,finished
+245,796,Linda Stone,,,F,51,F50-54,Minnetonka,MN,,02:07:23,finished
+246,429,Jared Shuman,,,M,30,M30-34,Hayward,WI,,02:07:35,finished
+247,766,Jane Stull,,,F,30,F30-34,La Crosse,WI,,02:07:35,finished
+248,700,Julie Malyon,,,F,38,F35-39,Red Wing,MN,,02:07:58,finished
+249,783,Matthew Bloedel,,,F,48,F45-49,Saint Paul,MN,,02:09:02,finished
+250,604,Therese Besser,,,F,18,F15-18,Woodbury,MN,,02:09:08,finished
+251,741,Daniel Wolbrink,,,M,31,M30-34,Duluth,MN,,02:09:37,finished
+252,733,Jay Lyons,,,M,51,M50-54,Minneapolis,MN,,02:09:41,finished
+253,527,Tom Oatman,,,M,60,M60-64,Madison,WI,,02:09:44,finished
+254,570,Annie Perkins,,,F,48,F45-49,Afton,MN,,02:09:50,finished
+255,582,Ami Voeltz,,,F,40,F40-44,Lake Elmo,MN,,02:09:58,finished
+256,660,Dennis Arthur,,,M,73,M70-74,Hayward,WI,,02:10:20,finished
+257,743,James Getchell,,,M,59,M55-59,Duluth,MN,,02:10:34,finished
+258,515,Jim Adams,,,M,65,M65-69,Yorkville,IL,,02:10:44,finished
+259,603,Nina Comiskey,,,F,21,F19-24,Madison,WI,,02:10:55,finished
+260,542,Mary Willner,,,F,35,F35-39,Hopkins,MN,,02:10:57,finished
+261,762,Brent Shipman,,,M,28,M25-29,La Crosse,WI,,02:11:33,finished
+262,737,David Lee,,,M,64,M60-64,Washburn,WI,,02:12:22,finished
+263,530,Carl Lippert,,,M,60,M60-64,Hayward,WI,,02:12:24,finished
+264,810,Jessica Deegan,,,F,38,F35-39,Saint Paul,MN,,02:12:36,finished
+265,549,John Wyland,,,M,56,M55-59,Birchwood,MN,,02:12:38,finished
+266,172,Josh Reed,,,M,12,M12-14,Brooklyn Park,MN,,02:13:04,finished
+267,776,Aaron Zeuli,,,M,39,M35-39,Hudson,WI,,02:13:06,finished
+268,362,Mary Gladitsch,,,F,59,F55-59,Bloomer,WI,,02:13:30,finished
+269,514,Joseph (Kelly) Randolph,,,M,58,M55-59,Drummond,WI,,02:13:40,finished
+270,672,Cindy Walters,,,F,56,F55-59,Fifield,WI,,02:13:49,finished
+271,649,Linda Evert,,,F,46,F45-49,Circle Pines,MN,,02:14:01,finished
+272,667,Dustin Beckwith,,,M,40,M40-44,Hayward,WI,,02:14:39,finished
+273,561,Bill Breitzman,,,M,58,M55-59,Stillwater,MN,,02:15:00,finished
+274,749,Chris Franken,,,F,56,F55-59,Minneapolis,MN,,02:15:16,finished
+275,764,Vanessa Handler,,,F,35,F35-39,Minneapolis,MN,,02:15:24,finished
+276,395,Jen Bohen,,,F,40,F40-44,Hayward,WI,,02:15:37,finished
+277,735,Brandon Harms,,,M,26,M25-29,Reedsburg,WI,,02:15:40,finished
+278,719,Bonnie Weyer,,,F,60,F60-64,Loyal,WI,,02:15:56,finished
+279,646,James Cirilli,,,M,69,M65-69,Superior,WI,,02:16:34,finished
+280,356,Chuck Kessler,,,M,69,M65-69,Northbrook,IL,,02:16:48,finished
+281,553,Edna Mullen,,,F,65,F65-69,Minneapolis,MN,,02:17:02,finished
+282,805,Gary Janssen,,,M,70,M70-74,Greenwood,WI,,02:17:04,finished
+283,686,Scott Everson,,,M,50,M50-54,Hudson,WI,,02:17:07,finished
+284,638,Nico Alexander,,,M,11,M1-11,Minneapolis,MN,,02:17:19,finished
+285,600,Wallace Alexander,,,M,49,M45-49,Minneapolis,MN,,02:17:22,finished
+286,535,Carol Heinrich,,,F,61,F60-64,Hayward,WI,,02:17:46,finished
+287,734,Mark Akins,,,M,50,M50-54,Savage,MN,,02:18:09,finished
+288,794,Megan Ryan,,,F,46,F45-49,Saint Paul,MN,,02:19:29,finished
+289,605,Swetha Saseedhar,,,F,19,F19-24,Madison,WI,,02:19:31,finished
+290,385,David Hastert,,,M,59,M55-59,Minneapolis,MN,,02:19:46,finished
+291,1403,Jason Bolz,,,M,42,M40-44,Lake Elmo,MN,,02:19:59,finished
+292,751,Tim Owen,,,M,47,M45-49,Minneapolis,MN,,02:20:09,finished
+293,394,Stephen Casey,,,M,63,M60-64,Minneapolis,MN,,02:20:29,finished
+294,522,Charles Smith,,,M,69,M65-69,Blair,WI,,02:20:31,finished
+295,360,Jim Syverson,,,M,60,M60-64,Minneapolis,MN,,02:20:31,finished
+296,662,Barbara Dahmen,,,F,58,F55-59,Waunakee,WI,,02:21:09,finished
+297,91,Heather MacMurdo,,,F,16,F15-18,Brooklyn Park,MN,,02:22:23,finished
+298,4,Liam Johnson,,,M,15,M15-18,Brooklyn Park,MN,,02:22:29,finished
+299,546,Ken Fenton,,,M,57,M55-59,Waupaca,WI,,02:22:51,finished
+300,617,Willie Gorham,,,M,66,M65-69,Hudson,WI,,02:22:52,finished
+301,498,Kimberly Moy,,,F,21,F19-24,Minnesota,US,,02:23:05,finished
+302,808,David Riley,,,M,65,M65-69,Red Wing,MN,,02:24:00,finished
+303,809,Christine Riley,,,F,61,F60-64,Red Wing,MN,,02:24:01,finished
+304,428,Tweed Shuman,,,M,53,M50-54,Hayward,WI,,02:24:38,finished
+305,502,Timothy Dahmen,,,M,57,M55-59,Waunakee,WI,,02:24:48,finished
+306,693,Amanda Mann,,,F,34,F30-34,Waupaca,WI,,02:25:46,finished
+307,742,Mary Schoenberg Getchell,,,F,57,F55-59,Duluth,MN,,02:27:05,finished
+308,557,Gerry Becker,,,M,68,M65-69,Danbury,WI,,02:27:37,finished
+309,772,Scott Bowe,,,M,45,M45-49,Prairie Du Sac,WI,,02:27:50,finished
+310,353,Eric Seitz,,,M,29,M25-29,Madison,WI,,02:27:50,finished
+311,354,David Seitz,,,M,57,M55-59,Waukesha,WI,,02:27:51,finished
+312,625,Kate Karshna,,,F,44,F40-44,Fridley,MN,,02:28:18,finished
+313,531,Chris Amley,,,M,62,M60-64,Saint Paul,MN,,02:28:33,finished
+314,403,Katie Hulback,,,F,31,F30-34,Hopkins,MN,,02:29:17,finished
+315,770,Sonya Travanty,,,F,36,F35-39,Minneapolis,MN,,02:30:08,finished
+316,721,Rita Wallin,,,M,57,M55-59,Saint Paul,MN,,02:30:12,finished
+317,390,Scott Johnston,,,M,60,M60-64,Alexandria,MN,,02:32:07,finished
+318,529,Scott Clare,,,M,57,M55-59,Saint Paul,MN,,02:33:09,finished
+319,730,Mark Gherty,,,M,62,M60-64,Hudson,WI,,02:33:45,finished
+320,610,Greg Konkel,,,M,53,M50-54,Eden Prairie,MN,,02:34:50,finished
+321,563,Eugene Dumas,,,M,66,M65-69,Janesville,WI,,02:35:19,finished
+322,374,John Meshigaud,,,M,49,M45-49,Waupaca,WI,,02:40:31,finished
+323,768,Linda Isaacson,,,F,60,F60-64,Cadott,WI,,02:43:10,finished
+324,564,Edward Eroe,,,M,62,M60-64,Minneapolis,MN,,02:44:56,finished
+325,763,Laine Shipman,,,F,30,F30-34,Newton,IA,,02:48:32,finished
+326,571,Harold Friestad,,,M,75,M75-79,Williams Bay,WI,,02:49:08,finished
+327,404,PETE FADNESS,,,M,50,M50-54,Hayward,WI,,02:52:22,finished
+328,520,David Mickelson,,,M,63,M60-64,Eau Claire,WI,,02:55:07,finished
+329,777,Mike Mccloskey,,,M,55,M55-59,Minneapolis,MN,,02:59:22,finished
+330,661,Beth Kienbaum,,,F,54,F50-54,Madison,WI,,03:00:51,finished
+331,415,Russ Schumacher,,,M,62,M60-64,Hayward,WI,,03:02:02,finished
+332,424,Brian Jahns,,,M,35,M35-39,Glendale,WI,,03:05:20,finished
+333,801,Carol Mordorski,,,F,57,F55-59,Unknown,,,03:05:33,finished
+334,296,Jason Reynolds,,,M,45,M45-49,Oregon,WI,,03:06:12,finished
+335,608,Nancy Konkel,,,F,54,F50-54,Eden Prairie,MN,,03:10:00,finished
+336,400,Greg Hedman,,,M,60,M60-64,Hayward,WI,,03:14:13,finished
+337,24,Johnathan Ernst,,,M,14,M12-14,Brooklyn Park,MN,,03:14:28,finished
+338,565,Timothy Burke,,,M,61,M60-64,Superior,WI,,03:17:43,finished
+339,692,Ryan Chadek,,,F,34,F30-34,Appleton,WI,,03:18:23,finished
+340,694,Bill Chadek,,,M,38,M35-39,Appleton,WI,,03:18:24,finished
+341,752,Karen Smith,,,F,53,F50-54,Saint Paul,MN,,03:19:00,finished
+342,83,Rita Arel,,,F,51,F50-54,Brooklyn Park,MN,,03:19:14,finished
+343,593,Judith Karshna,,,F,74,F70-74,Park Falls,WI,,03:23:12,finished
+344,165,Hannah Bautch,,,F,14,F12-14,Brooklyn Park,MN,,03:23:30,finished
+345,379,Aleksandra Stancic,,,F,51,F50-54,Onalaska,WI,,03:40:28,finished
+346,42,Christine Ernst,,,F,42,F40-44,Brooklyn Park,MN,,03:48:15,finished
