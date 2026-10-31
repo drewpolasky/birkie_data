@@ -143,13 +143,15 @@ TIME_IN = re.compile(r'(\d{2}:\d{2}:\d{2}\.\d)')
 def two_column(path):
     #RK, TIME, BIB, NAME, HOMETOWN, ST, CO, CLASS ("M 30-34"), class rank, 25% club, pace, in each half of the page.
     #classic skiers are printed in blue, with a Y in the CL column that runs into the time ("1045Y03:23:19.8").
-    #the later pages are the kortelopet
+    #the kortelopet starts partway down the last women's page and fills the pages after
     rows = []
     with pdfplumber.open(path) as pdf:
         for page in pdf.pages:
             lines = lines_of(page, extra_attrs=['non_stroking_color'])
             if not any('BIRKEBEINER' in w['text'] for w in lines[0]):
                 continue
+            korte = next((i for i, l in enumerate(lines) if any('KORTELOPET' in w['text'] for w in l)), len(lines))
+            lines = lines[:korte]
             header = next(l for l in lines if any(w['text'] == 'HOMETOWN' for w in l))
             middle = page.width / 2
             for half in (lambda x: x < middle, lambda x: x >= middle):

@@ -27,8 +27,62 @@ raced the skate course in one 51 km race with the skaters, as their own division
 blank for some classic skiers, who are placed by their division places). 2002 was cut to 46.7 km, 2007 to 25 km (not
 included), and 2008's first separate classic race was 53 km. 2002-2005 have exact ages and middle initials, 2006 age
 groups, and 2008 neither ages nor genders, which come from the places as for 2009-2015. 75% of these results link to
-someone who also raced from 2009 on. 1999 and 2001 are on birkie.com too, with no technique, and 1975-1998 are in the
-scanned Birch Scroll magazines linked from the same page.
+someone who also raced from 2009 on.
+
+
+Results before 2002 (kept out of the models for now):
+
+python birkie_archive.py download      the pdfs and scans into old_results/pdfs/, about 380 MB
+python birkie_archive.py pages         each scanned page as an image in old_results/pages/
+python birkie_archive.py ocr           Tesseract OCR of every page into old_results/ocr/, then each year's own readings
+                                       of its results pages, a few hours in all
+python birkie_archive.py parse         writes old_results/<year>/birkie <year>.csv
+python check_results.py                reliability checks, written to old_results/reliability.csv
+python average_times.py                graphs/average_finish_time.png, the average finish time each year since 1991
+
+1999 and 2001 are text pdfs on birkie.com, one list for men and one for women, with hometown, state, nation, age class
+and class rank but no technique: classic skiers were ranked with the skaters and their bibs aren't in a range of their
+own. 2000 was cancelled. 1973-1998 are scanned Birch Scroll magazines and results booklets, images only, in at least five
+layouts (typewritten lists in the 1970s, tiny sideways print around 1980, dot-matrix printouts in the mid 1980s, computer
+printouts to 1990 and typeset tables from 1991), so they need OCR. `check_results.py` scores each year on how much of
+it holds together: places that count up with no gaps or repeats, times that never go down as the places go up, times that
+read as real times, age class ranks that count up within each class, no repeated bibs, last and first names and towns
+that turn up in other years' clean results, states that exist, and fastest finishers that match the Birkie's champions
+list. The clean years 2002-2008 run through the same checks as a yardstick: they pass the first five completely, with
+93-96% of last names and 98-99% of towns seen in other years. 1999 and 2001 pass the first five completely too, with
+87% and 91% of last names seen elsewhere (further from 2002 on, more skiers never raced again) and both winners matching.
+The checks also caught 84 Kortelopet finishers in the 2006 Birkie lists, since fixed.
+
+The scans are read with Tesseract (installed separately), which keeps each word's position, with pypdfium2 decoding
+the byte-aligned CCITT scans pypdf gets wrong (most of 1995's and 1996's pages) and scikit-learn for 1996's glyphs. Each
+year from 1991 to 1998 has its own parser, old_results_parsers/y<year>.py, since the layout changes nearly every year:
+line printer tables in 1991 (printed sideways) and 1992, typeset tables from 1993 to 1997 (1996 in alphabetical order),
+and Burns Computer Services' tables in 1998. Most also read their results pages again their own way (each column or
+field cut out and read on its own at two to four times the size), in the ocr step. Tesseract alone gets about one digit
+in a hundred wrong in these fonts, so the parsers read the figures from the scan's pixels as well, matched against
+figures of known value (the places count up by one, so the place column's digits are known), and then mend only what
+the tables pin down: places count up, times rise with place and fit the pace, class ranks count up within each class,
+and bibs don't repeat. Every place from 1 to the last one printed is there for both genders in every year:
+
+year  finishers  technique                    last names   towns     sample of 40 rows checked by eye against the scan
+1991       3719  none printed                     76%        94%      1 time a tenth off
+1992       3982  classic marked C (524)           78%        94%      no errors
+1993       4026  none printed                     78%        95%      2 towns wrong
+1994       4090  none printed                     79%        95%      3 names wrong (2 a space lost by a middle initial)
+1995       4030  none printed                     81%        96%      1 town or state wrong (3 more in 80 more rows)
+1996       4369  none printed                     82%        95%      no errors
+1997       4960  classic marked C (827)           81%        94%      3 names wrong (11 in 369 rows, technique always right)
+1998       4250  classic marked Y (402)           85%        96%      no errors
+
+All eight pass the places, order, times and class rank checks for 99.9% or more of their results, both winners match the
+champions list in each, and no more than 0.6% of bibs repeat. The last name and town shares are a little below 1999's
+(87% and 96%) because the further back a year is, the fewer of its skiers raced again from 2002 on; checks of the
+unknown last names found most are real names. In the 320 sampled rows no place, gender or age class was wrong, and
+counts of whole pages found no row missing or that wasn't a Birkebeiner finisher. The errors were 6 names (lookalike
+capitals, a middle initial run into the last name), 4 towns or states and 1 time. 1991's hometowns were cut to 15
+characters in print and are written out where only one known town fits (STVNS POINT is written STEVENS POINT). 1998 was
+cut to 23 km, which the times check allows for. The dot-matrix printouts of the 1980s and the typewritten lists of the
+1970s aren't parsed yet.
 
 
 Pre-Birkie results:
@@ -166,7 +220,7 @@ roughly a cm of fresh snow), and thaws since the last 1"+ snowfall speed it up, 
 Together they explain 56% of the spread between races, and predicting each race day from the others 37% (missing by
 5.2% on average against 7.0% with no weather). SNODAS's snowfall along the course does much better than the co-op's at
 one spot (14%), and holds up better too: leaving out 2026, one of the two races after a long thawed spell, it still
-predicts 18%, and leaving out 2010, the other, 0%, where the co-op version gets worse than no weather either way. New
+predicts 17%, and leaving out 2010, the other, 0%, where the co-op version gets worse than no weather either way. New
 snow still leans on 2014 (0.3% per mm without it). The rest of SNODAS adds nothing that holds up: melt is near zero
 before every race (melt that refreezes in the snowpack isn't counted), only a few races had rain the week before, and
 snowpack density and temperature don't help. Snow depth and snow on race day look like they help, but not without
