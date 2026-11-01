@@ -34,8 +34,9 @@ CHAMPIONS_URL = 'https://www.birkie.com/wp-content/uploads/2019/02/Birkie-Champi
 CHAMPIONS_PDF = os.path.join(OLD_DIR, 'pdfs', 'Birkie-Champions-2019.pdf')
 BASELINE_YEARS = range(2002, 2009)
 TIME_RANGE = (1.5 * 3600, 10 * 3600)
-#races cut short, with their length in km, against the usual 51
-SHORT_RACES = {1998: 23}
+#races cut short, with their length in km, against the usual 51. 1991 started at an alternate start for lack of snow,
+#and its pace column is the time over 46 km
+SHORT_RACES = {1991: 46, 1998: 23}
 FULL_KM = 51
 WINNER_SECONDS = 1.0
 
@@ -164,7 +165,9 @@ def check(r, others, champs, length=1):
     out['last'] = r['last'].map(compact).isin(set(others['last'].map(compact))).mean()
     out['first'] = r['first'].map(compact).isin(set(others['first'].map(compact))).mean()
     north_american = r['country'].isin(['USA', 'CAN', ''])
-    out['state'] = r.loc[north_american, 'state'].isin(US_STATES | CA_PROVINCES).mean()
+    #(not for a list that gives no one's home, 1973's and 1974's)
+    located = (r['state'] != '') | (r['country'] != '') | (r['city'] != '')
+    out['state'] = r.loc[north_american, 'state'].isin(US_STATES | CA_PROVINCES).mean() if located.any() else np.nan
     towns = set(zip(others['city'], others['state']))
     known = r[r['state'].isin(US_STATES | CA_PROVINCES) & (r['city'] != '')]
     out['town'] = np.mean([t in towns for t in zip(known['city'], known['state'])]) if len(known) else np.nan
@@ -180,14 +183,18 @@ def valid_time(raw, length=1):
 
 
 def winners(r, champs):
-    #share of the champions list's winners (each gender's first race) that match the fastest finisher of that gender
+    #share of the genders whose fastest finisher matches the champions list's winner of one of that year's races (1981
+    #lists the elite race the day before the citizens' first, whose results are only partly printed). 1974's women's
+    #winner is listed with the time of the shorter race's
     if not champs:
         return np.nan
     hits = []
     for gender in ('M', 'F'):
-        listed = [c for c in champs if c[0] == gender][:1]
+        listed = [seconds for g, _, seconds in champs if g == gender]
         fastest = r.loc[r['gender'] == gender, 'time_s'].min()
-        hits += [abs(fastest - seconds) <= WINNER_SECONDS for _, _, seconds in listed]
+        #a year whose list has no one of a gender (1973's women raced 22 km) checks the other only
+        if listed and np.isfinite(fastest):
+            hits.append(any(abs(fastest - seconds) <= WINNER_SECONDS for seconds in listed))
     return np.mean(hits) if hits else np.nan
 
 

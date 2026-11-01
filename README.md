@@ -38,7 +38,8 @@ python birkie_archive.py ocr           Tesseract OCR of every page into old_resu
                                        of its results pages, a few hours in all
 python birkie_archive.py parse         writes old_results/<year>/birkie <year>.csv
 python check_results.py                reliability checks, written to old_results/reliability.csv
-python average_times.py                graphs/average_finish_time.png, the average finish time each year since 1991
+python average_times.py                graphs/average_finish_time.png, the average finish time each year since 1973 (a
+                                       dashed line where the race turned for good to run from Cable to Hayward, 1993)
 
 1999 and 2001 are text pdfs on birkie.com, one list for men and one for women, with hometown, state, nation, age class
 and class rank but no technique: classic skiers were ranked with the skaters and their bibs aren't in a range of their
@@ -53,18 +54,53 @@ list. The clean years 2002-2008 run through the same checks as a yardstick: they
 87% and 91% of last names seen elsewhere (further from 2002 on, more skiers never raced again) and both winners matching.
 The checks also caught 84 Kortelopet finishers in the 2006 Birkie lists, since fixed.
 
-The scans are read with Tesseract (installed separately), which keeps each word's position, with pypdfium2 decoding
-the byte-aligned CCITT scans pypdf gets wrong (most of 1995's and 1996's pages) and scikit-learn for 1996's glyphs. Each
-year from 1991 to 1998 has its own parser, old_results_parsers/y<year>.py, since the layout changes nearly every year:
-line printer tables in 1991 (printed sideways) and 1992, typeset tables from 1993 to 1997 (1996 in alphabetical order),
-and Burns Computer Services' tables in 1998. Most also read their results pages again their own way (each column or
-field cut out and read on its own at two to four times the size), in the ocr step. Tesseract alone gets about one digit
-in a hundred wrong in these fonts, so the parsers read the figures from the scan's pixels as well, matched against
-figures of known value (the places count up by one, so the place column's digits are known), and then mend only what
-the tables pin down: places count up, times rise with place and fit the pace, class ranks count up within each class,
-and bibs don't repeat. Every place from 1 to the last one printed is there for both genders in every year:
+The scans are read with Tesseract (installed separately), which keeps each word's position, with pypdfium2 decoding the
+byte-aligned CCITT scans pypdf gets wrong (most of 1995's and 1996's pages) and scikit-learn for 1996's glyphs. Each
+year from 1973 to 1998 has its own parser, old_results_parsers/y<year>.py, since the layout changes
+nearly every year. 1973 to 1977 print their results class by class, each class under a heading and numbered from 1, in
+one or two columns down a page: typewritten to 1976, the timing company's printout in 1977. They're read by
+old_results_parsers/class_lists.py, each year giving its pages, columns, fields and where each class's heading is: each
+line's name and town by Tesseract (whole and field by field, at two sizes, taking the reading whose words are seen in
+the clean results), its time digit by digit, cut out on the typewriter's grid and read by Tesseract, by the nearest of
+the digits it reads surely and by a small network learned from them, with the digits the class's order pins (a time
+between two of 4:4x has an hour of 4) counting for more, and the times then put in order within each class at least
+cost. A skier's place is their place by time among their gender in the Birkebeiner. From 1978 the layouts are fixed
+pitch tables from 1978 to 1991 on ten printers (1978; 1979, printed sideways; 1980, typewritten, sideways; 1981; 1982,
+in mixed case; 1983, a dot matrix in mixed case, sideways, its places typed on; 1984-1985, a faint dot matrix; 1986;
+1987; and 1988-1991, 1991 printed sideways), read character by character by old_results_parsers/line_printer.py with
+each year giving its printer's geometry, its pages and their tilt, and what's odd about its copy (blocks that run across
+facing pages, a dark or dithered scan edge, letters the printer drops, lines the scan cuts off or blanks out, a line's
+fields set off one another, corrections pasted over the table, sections under headings, lines typed in after it was
+printed), another line printer's in 1992, typeset tables from 1993 to 1997 (1996 in
+alphabetical order), and Burns Computer Services' tables in 1998. Most also read their results pages again their own
+way (each column or field cut out and read on its own at two to four times the size), in the ocr step.
+Tesseract alone gets about one digit in a hundred wrong in these fonts, so the parsers read the figures from the scan's
+pixels as well, matched against figures of known value (the places count up by one, so the place column's digits are
+known), and then mend only what the tables pin down: places count up, times rise with place and fit the pace, class
+ranks count up within each class, and bibs don't repeat. 1978 to 1983 list men and women together by overall place;
+each skier's gender is their class's (printed as a number), and the places within each gender are counted from that.
+Every place from 1 to the last one printed is there for both genders in every year but 1978, 1979, 1982, 1984, 1985
+and 1989 (below):
 
 year  finishers  technique                    last names   towns     sample of 40 rows checked by eye against the scan
+1973         33  none printed                     67%       none      every time checked: all right
+1974         60  none printed                     62%       none      every time checked: 1 a digit off
+1975        161  none printed                     71%        95%      times all checked: 8 a digit off; 3 names, 1 town
+1976        654  none printed                     67%        93%      2 names, 2 faint hundredths (4 more since fixed)
+1977       1281  none printed                     56%        88%      16 names, 14 towns or states (5 since fixed)
+1978       1678  none printed                     62%        85%      5 names, 2 towns wrong (1 since fixed)
+1979       2285  none printed                     69%        85%      2 names, 1 town wrong; 5 times cut by the scan
+1980       3055  none printed                     64%        93%      2 names wrong (a stray mark read as a letter)
+1981       2358  none printed                     66%        90%      23 rows wrong (9 still: first names, initials)
+1982       3844  none printed                     65%        92%      9 rows with a name, town or state wrong (8 since fixed)
+1983       4974  none printed                     64%        92%      7 rows wrong: 3 names, 2 bibs, 1 class, 2 hometowns
+1984       4881  none printed                     68%        95%      1 name wrong (a two-word surname split, since fixed)
+1985       3388  none printed                     69%        91%      2 names wrong (a suffix put first, since fixed)
+1986       3526  none printed                     71%        94%      1 class rank wrong
+1987       3332  none printed                     70%        92%      2 names, 1 town and state wrong (one row garbled)
+1988       3253  none printed                     72%        94%      1 name wrong, 1 town with a postcode left in it
+1989       3183  none printed                     73%        92%      1 bib, 2 towns wrong (3 X read as K, since fixed)
+1990       3393  none printed                     77%        94%      1 name wrong (and a country, since fixed)
 1991       3719  none printed                     76%        94%      1 time a tenth off
 1992       3982  classic marked C (524)           78%        94%      no errors
 1993       4026  none printed                     78%        95%      2 towns wrong
@@ -74,15 +110,111 @@ year  finishers  technique                    last names   towns     sample of 4
 1997       4960  classic marked C (827)           81%        94%      3 names wrong (11 in 369 rows, technique always right)
 1998       4250  classic marked Y (402)           85%        96%      no errors
 
-All eight pass the places, order, times and class rank checks for 99.9% or more of their results, both winners match the
-champions list in each, and no more than 0.6% of bibs repeat. The last name and town shares are a little below 1999's
-(87% and 96%) because the further back a year is, the fewer of its skiers raced again from 2002 on; checks of the
-unknown last names found most are real names. In the 320 sampled rows no place, gender or age class was wrong, and
-counts of whole pages found no row missing or that wasn't a Birkebeiner finisher. The errors were 6 names (lookalike
-capitals, a middle initial run into the last name), 4 towns or states and 1 time. 1991's hometowns were cut to 15
-characters in print and are written out where only one known town fits (STVNS POINT is written STEVENS POINT). 1998 was
-cut to 23 km, which the times check allows for. The dot-matrix printouts of the 1980s and the typewritten lists of the
-1970s aren't parsed yet.
+The places, order, times and class rank checks pass for 99.9% or more of each year's results, but for 1990's order
+(99.7%: five times are left blank where no reading fits between the times around them), 1989's places and class ranks,
+the places of 1978, 1982, 1984 and 1985, 1979's order and times (99.6% and 99.8%), and the class ranks of 1978 to 1987
+(95.5% to 99.6%: a class code or rank misread, or blank on 1979's scan, which the check counts against the rank after it
+too; 1983's are the women's alone, below). 1979's places pass for 84%: its 182 blanked lines have no gender, so no
+place. Both winners match
+the champions list in every year but 1985 and 1989 (1981's list also names the winners of an elite race the day before,
+whose results are typeset on another page with two small loop races, and aren't read), and no more than 0.6% of bibs
+repeat. 1981's copy stretches each block's left part (bib, name and town) against its right, unevenly along the lines,
+so its first names and towns are read less well than other years' (87% and 90% seen in the later results). 1982's scan
+has some pages twice and is missing the page with places 2945 to 3181 (184 men and 49 women, by the class ranks either
+side), and its RANK column skips from 3800 to 3815 with no skier missing; the 22 skiers it gives no age class have the
+gender their first name has in the later results, and its average time on the plot is about four minutes low for the
+missing page. 1984's odd pages were scanned with their foot cut off, losing up to six lines a block (76 men and 7 women,
+whose places are left out), and 1985's first page, with the men's places 1 to 100, sets its fields too irregularly to
+read, so its men's list starts at 101 and it's left off the average time plot too. 1989's scanned issue has no page with
+men's places 1 to 240 (its printed page 26 starts at 241, with no page missing from the numbering), and the scan cuts
+places 802 and 803 off the foot of a page scanned turned three and a half degrees, so its men's places start at 241 and
+its men's classes partway; it's left off the average time plot. The line printer years' RANK column, read on its own,
+counts up with the lines in every list (1983's but for the lines typed in after it was printed), so no line is missing
+or extra. The last name and town shares are a little below 1999's (87% and 96%) because the further back a year is, the
+fewer of its skiers raced again from 2002 on; checks of the unknown last names found most are real names. In the 720
+sampled rows no place or gender was wrong and one age class was (1983's, a typed 6 read as 7), and counts of whole pages
+found no row missing or that wasn't a Birkebeiner finisher. The errors were 36 names (lookalike capitals, a middle
+initial run into the last name, a comma or point read as a letter, a suffix or a two-word surname out of place), 20
+towns, states or countries (two of them a foreign postal code read as letters, two in one garbled 1987 row and one in a
+faint 1983 one, three a state's I read as L in 1982), 7 bibs (4 in 1981), 1 age class, 1 class rank and 1 time a tenth
+off. Those the check found in 1981 and 1982 were fixed after it but for 10 names, 9 of them 1981's. A state or province
+that reads as none is mended where the town is seen in one state nine times in ten in the later results, or a letter
+was read after it (MNR: MN), and a country that reads as none is USA beside a state. 1991's hometowns were cut to 15
+characters in print and are written out where only one known town fits (STVNS POINT is written STEVENS POINT). The pace
+columns put the course at 52.5 km in 1988, 55 in 1989, 53.5 in 1990 and 52 from 1992 to 1997. 1991 started from an
+alternate start for lack of snow, and its pace is over 46 km; 1998 was cut to 23 km. The times check allows for both.
+
+1973 to 1977 list each class on its own, so their places are counted by time across the classes, and the places and
+order checks pass by construction; within each class the reader puts the times in order. Every 1973-1975 time was also
+read by eye to measure the reader: of the 253 kept as printed, 243 match, 9 have a digit wrong (5 of them faded, most at
+the scan's edge) and 1974's 5:58:68 is written 5:58:08. The first races ran from Hayward to Telemark, 48 km in 1973, 50
+in 1974, 53 in 1976 and 55 in 1975 and 1977 by the champions list. In 1973 and 1974 the women raced the shorter race
+from Seeley, which isn't read, but for 1974's women's champion, listed among the men 20-34 (the champions list gives her
+the shorter race's time, so 1974's winners check fails); 1973's lists have no woman in the long race, though the
+champions list names one. Neither year prints towns, and a skier listed with no time (two in 1973, one in 1974) is left
+out. 1975's scan is marked up in pen: three lines struck out (the 23rd of men 20-34, listed again as the 9th of men
+35-42; the 8th of men 35-42; and the 21st of men 35-42, written in again below as 5:28:32), which are dropped or moved,
+the class ranks counted again after them, and six lines the marks leave unreadable are set as printed in the year's
+module. 1976 types a few lines askew, a name's town and time half a line off, so that they'd be read with the next
+line's; those seven, and a line whose place isn't printed, are set in its module too. 1977's bibs are kept where two
+readings agree and no other skier's is the same (874 of 1281), and its names are the weakest of any parsed year: the
+printer's capitals (R like P, the comma between surname and first name read as a letter) read worse than the
+typewriters', so a name word not seen in the clean results there takes the one it's clearly nearest (SCHNEITOER:
+SCHNEIDER).
+
+1978 to 1980 print one list of men and women by overall place, read like the line printer years. 1978's table runs
+across each pair of facing pages (down the left page's left block, the right page's left block, then the two right
+blocks), so its module gives the blocks' order. The scans lose two or three lines where the table crosses from one page
+to the next (23 places in all: 21 men and 2 women by the class ranks either side); the scans' black edges and the dither
+shading them are cleared, and six lines at the edges the glyphs can't be read on are set by hand. A correction pasted
+over page 19's table gives place 733 to Anna Marie Beckel-Krutz, not the Nancy Carlson the printer has, without her bib
+or town. 1978's comma is now and then read as a Y (WIESEYJOHN), split where the words either side are a known surname
+and first name, and its towns are printed cut to 8 characters. 1979's scan blanks out parts of its table: 323 lines show
+little more than their place and time, 182 of them neither a name nor a class, which are kept with no gender or place
+(the men and women among each blanked stretch are counted from the class ranks either side, shared in their proportion
+where a class's next rank lies past the next stretch). Its last page has only a strip of times with no places, so its
+slowest 260 or so finishers (of about 2,545) aren't read and it's left off the average time plot. The scan's edge cuts
+off the right block's hundredths on pages 4 and 6, and on page 8 everything after the tens of seconds (taken as the
+middle of the ten seconds), and the printer drops a W now and then (NOR AY; a state printed I is WI) and a digit or a
+colon (7:1 :12.50, whose missing digit the times around it give).
+
+1980's list is Minnesota Micro Systems' printout in a typewriter face, set sideways two blocks a page in sections under
+headings (TOP 20, 21-50, ... 3001-), each line led by the class rank and class and ending with the overall place. Its
+printer sets each line's left part (the class to the country) off its right (years finished, time and place) by up to
+a column and a half, differently from block to block and now and then from line to line, so each line's grid is taken
+from its time and the left part fitted to its own glyphs. Tesseract reads the face well enough that its digits are
+learned along with its letters (each kept only in a column that holds it: it reads a 0 in the class column as Q). The
+scan's edge cuts the times short at the foot of page 5's and page 11's right blocks and all down page 7's, each line
+keeping the digits wholly on the scan (a time cut to the minute is taken as its middle, so one pair of them counts
+against the order check), and cuts the first digit off some class ranks on page 10, which the ranks either side give.
+Two finishers were typed into the table after the printout, each tied with the line above (the note under the table
+gives 3,055 finishers, as read), and a correction is typed over a line on page 5; those, three times the glyphs
+misplace or misread, and nine lines whose class or name can't be read are set in its module. It prints AUS for Austria
+and Australia alike, kept as printed, and its course was 53 km by the champions list.
+
+1983's results are a booklet of unofficial results, each scan a tabloid page set sideways with two blocks of a dot
+matrix printout in mixed case (BIB, NAME, CITY, ST, CTRY, CTZ, YRS, 25%, TIME), in sections under headings; the overall
+place, class and class rank are typed onto it at the left, and the list ends a third of the way down page 27's first
+block, where the Kortelopet's begins. Each line's grid is taken from its country to its time. The typed part sits up to
+four columns off it and up to half a line above or below, differently from section to section and drifting down a
+block, so it's placed by its first glyph (the place's first digit, typed left aligned) with its height tracked line by
+line. The bib to the state is set up to two columns off the country to the time from line to line, and the copy is
+stretched unevenly across some pages (that part's pitch up to 0.3 pixels a character more), so it's fitted to its own
+glyphs and pitch. The network never learns the printer's small l, which it reads as I, so a name or town word not seen
+in the clean results takes the known word its I's as L make (BIII: BILL); and a small m printed after some names, a
+mark, is left out. The note above the list says about 100 skiers left off it were found on the backup timing sheets
+and added in their place by time: 80 lines typed in between its lines in a typewriter's face, with no place or class
+rank and the class typed small, which the glyphs can't read and are set in the module from the scan (the class can't
+be read on six, and is left blank, as on four with none printed; one time's tens of seconds can't be, 4:19:37 or
+4:19:47 by the times either side, and is taken as the middle), so its 4,974 finishers run past the RANK column's last
+place, 4,896, which also skips 2621 and 2622 with no skier missing (the class ranks run on). The note
+also says the men's class ranks (classes 1 to 9) are wrong: their codes are typed with a leading 0 or without (03 or
+3), and each way is ranked on its own, so the men's ranks are left out and the women's kept (the check's 95.5% is
+theirs: a class misread puts one in another class). A man's class read as a woman's (03 as 13) is a man's where the
+first name clearly is, and a woman's first name in a man's class leaves the class to the class ranks. Three times are
+misprinted (3:22:82:27, 6:02:65:00, 7:25:78:00) and left blank, two over ten hours and three lines a speck or smudge
+keeps from their grid are set by hand, and Shirley Pommier is listed twice, printed at 3:21:39.40 and typed in again at
+3:45:24, both kept as printed. The champions list gives its course as 50 km.
 
 
 Pre-Birkie results:
