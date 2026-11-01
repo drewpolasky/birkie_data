@@ -40,6 +40,8 @@ python birkie_archive.py parse         writes old_results/<year>/birkie <year>.c
 python check_results.py                reliability checks, written to old_results/reliability.csv
 python average_times.py                graphs/average_finish_time.png, the average finish time each year since 1973 (a
                                        dashed line where the race turned for good to run from Cable to Hayward, 1993)
+python finishers.py                    graphs/finishers_per_year.png, the number of finishers each year since 1973 by
+                                       technique where it's known, with the finishers the scans lose outlined
 
 1999 and 2001 are text pdfs on birkie.com, one list for men and one for women, with hometown, state, nation, age class
 and class rank but no technique: classic skiers were ranked with the skaters and their bibs aren't in a range of their
