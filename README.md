@@ -431,7 +431,8 @@ python weather_speed.py     writes graphs/weather_speed.png and linked_data/weat
                             weather into weather_data/ the first time
 
 python weather_speed.py --reread_snodas     reads the SNODAS tars again (about 10 minutes) instead of the cache
-python weather_speed.py --birkie_only       the Birkie's race days alone, without the Pre-Birkie
+python weather_speed.py --birkie_only       the Birkie's race days alone, in graphs/weather_speed_birkie_only.png
+python weather_speed.py --races birkie prebirkie     any of the Birkie's, Kortelopet's and Pre-Birkie's race days
 
 Sets each race day's speed (from the year to year model, the same skiers compared from one race to the next) against
 the weather around the course: hourly temperature and when it was snowing from the Hayward airport (HYR, through the
@@ -439,13 +440,14 @@ Iowa Environmental Mesonet, with the Ashland and Rice Lake airports filling the 
 daily grids (snowfall, rain, snow water, depth, snowpack temperature, melt) averaged over the land within 5 km of a
 straight line from Cable to Hayward. SNODAS starts in the 2003-04 winter, so the Birkie's race days run from 2004.
 2002 and 2021 were different courses and are left out, and classic before 2009 (on the skate course) gets a level of
-its own, so only its own years are compared. That leaves 19 race days, so every model is judged by predicting each race
-day from the others. On the Birkie's own race days (`--birkie_only`) two things show up. New snow in the 3 days to
-race eve slows the race, about 0.5% per mm of water along the course (0.7% skate, 0.3% classic; a mm of water is
-roughly a cm of fresh snow), and thaws since the last 1"+ snowfall speed it up, about 1.2% for each day above freezing.
-Together they explain 56% of the spread between races, and predicting each race day from the others 37% (missing by
-5.2% on average against 7.0% with no weather). SNODAS's snowfall along the course does much better than the co-op's at
-one spot (14%), and holds up better too: leaving out 2026, one of the two races after a long thawed spell, it still
+its own, so only its own years are compared. Each race day's speed is measured from the average race day on its own
+course. That leaves 19 race days, so every model is judged by predicting each race day from the others. On the
+Birkie's own race days (`--birkie_only`) two things show up. New snow in the 3 days to race eve slows the race, about
+0.5% per mm of water along the course (0.7% skate, 0.3% classic; a mm of water is roughly a cm of fresh snow), and
+thaws since the last 1"+ snowfall speed it up, about 1.2% for each day above freezing. Together they explain 57% of
+the spread between races, and predicting each race day from the others 37% (missing by 5.2% on average against 7.1%
+with no weather). SNODAS's snowfall along the course does much better than the co-op's at one spot (13%), and holds up
+better too: leaving out 2026, one of the two races after a long thawed spell, it still
 predicts 17%, and leaving out 2010, the other, 0%, where the co-op version gets worse than no weather either way. New
 snow still leans on 2014 (0.3% per mm without it). The rest of SNODAS adds nothing that holds up: melt is near zero
 before every race (melt that refreezes in the snowpack isn't counted), only a few races had rain the week before, and
@@ -454,7 +456,7 @@ snowpack density and temperature don't help. Snow depth and snow on race day loo
 nothing that holds up either, whether split at freezing, as the overnight low, the warming during the race, or a freeze
 overnight and thaw during the race; only a few race days got above freezing at all, so the warm side can't really be
 tested. The worst misses are 2014 skate (22% slow, predicted 8%), 2016 classic (warm and wet, 8% slow, predicted 3%
-fast), 2015 skate (8% slow, predicted 1% fast), 2026 skate (15% fast, predicted 7% fast) and 2020 skate (10% fast,
+fast), 2015 skate (8% slow, predicted 1% fast), 2026 skate (15% fast, predicted 6% fast) and 2020 skate (10% fast,
 predicted 2% fast).
 
 The Pre-Birkie adds race days on the same trail in other weather. Its course has moved, so each course gets its own
@@ -462,12 +464,32 @@ level and only the race days on one course are compared: 2009-2011 north from La
 Ridge, and 2022-2026 out and back from Birkie Ridge. 2019 (46 and 24 km) and 2021 (held in March) are the only race days
 on their courses, so they're left out. That's 10 more race days, but only 7 more comparisons, since each course's level
 uses up one. The Pre-Birkie days had little new snow (7 mm of water at most), so they say little about it (0.6% per mm
-with them), but they back up the thaws: -1.2% a day with a narrower range (95% range -1.8 to +0.1, against -1.6 to +1.1
-for the Birkie alone), and -0.8% on the Pre-Birkie days by themselves. Each Birkie race day predicted from every
-other race day misses by 4.9% on average, against 5.2% from the other Birkies only. The Pre-Birkie days themselves are
-harder to predict: with three or four race days a course, each course's level is shaky, and the long and short races
-disagree by 10 points or more in 2020 and 2026, which may be course changes I couldn't find. The 2022 Pre-Birkie, -21 C
-after 7 mm of new snow, was 13-15% slow for skaters and 3-8% for classic skiers, like a small 2014.
+with them, `--races birkie prebirkie`), but they back up the thaws: -1.2% a day with a narrower range (95% range -1.8
+to +0.2, against -1.6 to +1.1 for the Birkie alone), and -0.7% on the Pre-Birkie days by themselves. Each Birkie race
+day predicted from every other race day misses by 4.9% on average, against 5.2% from the other Birkies only. The
+Pre-Birkie days themselves are harder to predict: with three or four race days a course, each course's level is shaky,
+and the long and short races disagree by 7 to 12 points in 2020 (skate) and 2026, which may be course changes I couldn't
+find. The 2022 Pre-Birkie, -21 C after 7 mm of new snow, was 13-16% slow for skaters and 6-13% for classic skiers, like
+a small 2014.
+
+The Kortelopet adds race days too. Until 2016 it was raced the same day as the Birkie, 23 km from the Birkie's start,
+splitting off at 9 km and back to Telemark. Since 2018 it's been the Friday before, 29 km from OO to Main Street in
+Hayward, the Birkie's back half (the move was set for 2017, whose races were cancelled). 2021 (raced in waves over five
+days) and 2024 (cut to 20 km) are left out, each course gets its own level, and classic before 2009 gets its own levels
+as in the Birkie. That's 19 more race days from 2004 on, 7 of them Fridays with weather of their own. A Birkie and the
+Kortelopet the day before share most of their weather, so every model is judged by predicting each race weekend from
+the others, and the ranges come from resampling whole weekends. By itself (`--races kortie`) the Kortelopet shows the
+same two things about as strongly: 0.5% slower per mm of new snow and 0.9% faster per thaw day, against 0.5% and 1.2%
+for the Birkie. It's harder to predict, though. Each Kortelopet race day predicted from the other Kortelopets misses by
+6.5% on average, against 7.6% with no weather (11% of the spread, against 37% for the Birkie), and it doesn't help
+predict the Birkie (5.3% from the Birkies and Kortelopets, 5.2% from the Birkies alone). What it does is firm up the
+effects. With every race day, new snow slows the race 0.6% per mm (95% range +0.0 to +0.8) and thaws speed it up 1.1%
+a day (-1.7 to +0.0, against -1.8 to +0.2 with the Birkie and Pre-Birkie alone). Each Birkie race day predicted from
+every other race weekend misses by 5.0% on average, each Kortelopet's by 6.1%. Its worst misses are 2014 skate (26%
+slow, predicted 9%) and 2015 skate (12% slow, predicted 3% fast), the same weekends as the Birkie's, 2011 skate (10%
+fast, predicted 0%), 2018 skate (9% slow, predicted 0%; little new snow before it, but 9 mm fell that day) and 2019
+skate (2.5% fast, predicted 6% slow, after the same 11 mm of new snow as the next day's Birkie, whose skaters were 9%
+slow).
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/weather_speed.png?raw=true)
 

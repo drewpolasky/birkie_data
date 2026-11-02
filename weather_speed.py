@@ -10,14 +10,17 @@
 #           over the land within 5 km of a straight line from cable to hayward, so along the whole course. read once
 #           from the daily tars (snow_depth.py downloads them) and cached. its snowfall is the new snow measure
 #each race is one data point per technique. 2002 and 2021 are left out: they were different courses, so their speed
-#isn't comparable, and SNODAS starts in the 2003-04 winter, so the birkie runs from 2004. the pre-birkie (get_prebirkie_data.py) is on the same trail about two weeks
-#before, so it adds race days in other weather. its course has moved, so each course gets a level of its own, as each
-#technique does, and only the race days on one course are compared with each other. every model is judged by leaving
-#out one race day at a time and predicting it from the others.
+#isn't comparable, and SNODAS starts in the 2003-04 winter, so the birkie runs from 2004. the kortelopet is on the
+#same trail, the same day as the birkie until 2016 and the friday before it since 2018, and the pre-birkie
+#(get_prebirkie_data.py) about two weeks before, so they add race days, some in other weather. both have moved
+#course, so each course gets a level of its own, as each technique does, and only the race days on one course are
+#compared with each other. every model is judged by leaving out one race weekend at a time (the birkie and the
+#kortelopet together, since they share the weather) and predicting it from the others.
 #
 #example usage:
 #python weather_speed.py              downloads the weather into weather_data/ the first time
 #python weather_speed.py --birkie_only     the birkie's race days alone
+#python weather_speed.py --races birkie prebirkie     the birkie's and pre-birkie's, without the kortelopet
 import argparse
 import concurrent.futures
 import glob
@@ -73,8 +76,31 @@ PREBIRKIE_DAYS = {2009: '2009-02-07', 2010: '2010-02-13', 2011: '2011-02-12', 20
                   2023: '2023-02-11', 2026: '2026-02-07'}
 PREBIRKIE_COURSES = {'north from lake hayward': [2009, 2010, 2011], 'from birkie ridge': [2015, 2017, 2018, 2020],
                      '46 and 24 km': [2019], 'in march': [2021], 'out and back from birkie ridge': [2022, 2023, 2026]}
-COLORS = {'birkie skate': '#2a78d6', 'birkie classic': '#eb6834', 'pre-birkie skate': '#1baf7a',
-          'pre-birkie classic': '#eda100'}
+#the kortelopet (get_old_birkie_data.py --race kortie before 2009). until 2016 it was raced the same day as the birkie,
+#23 km from the birkie's start, splitting off at 9 km and back to telemark. its move to the friday before, on a new
+#29 km course from OO to main street in hayward (the birkie's back half), was put off by 2017's cancelled race, so 2018
+#was the first. 2021 was raced in waves over five days, and 2024 was cut to 20 km
+KORTIE_FRIDAY_FROM = 2018
+KORTIE_DAYS = {y: str((pd.Timestamp(d) - pd.Timedelta(days=int(y >= KORTIE_FRIDAY_FROM))).date())
+               for y, d in BIRKIE_DAYS.items()}
+KORTIE_LEAVE_OUT_YEARS = [2017, 2021, 2024]
+KORTIE_COURSES = {'23 km to telemark': list(range(2002, 2017)), '29 km from OO': list(range(KORTIE_FRIDAY_FROM, 2027))}
+#classic was a division of the one race, on the skate course, until 2008's first classic race, as in the birkie
+KORTIE_CLASSIC_COURSES = {'on the skate course': [2002, 2003, 2004, 2005, 2006], 'first classic race': [2008],
+                          '23 km to telemark': list(range(2009, 2017)),
+                          '29 km from OO': list(range(KORTIE_FRIDAY_FROM, 2027))}
+#each race: its race days, the years left out, its courses for each technique (one course where none are given), and
+#its name and label prefix in the output
+RACES = {'birkie': (BIRKIE_DAYS, LEAVE_OUT_YEARS, {'classic': CLASSIC_COURSES}, 'birkie', ''),
+         'kortie': (KORTIE_DAYS, KORTIE_LEAVE_OUT_YEARS, {'skate': KORTIE_COURSES, 'classic': KORTIE_CLASSIC_COURSES},
+                    'kortie', 'kortie '),
+         **{race: (PREBIRKIE_DAYS, [], {'skate': PREBIRKIE_COURSES, 'classic': PREBIRKIE_COURSES}, 'pre-birkie', 'pre ')
+            for race in PREBIRKIE_RACES}}
+RACE_GROUPS = {'birkie': ['birkie'], 'kortie': ['kortie'], 'prebirkie': PREBIRKIE_RACES}
+RACE_TITLES = {'birkie': 'Birkie', 'kortie': 'Kortelopet', 'pre-birkie': 'Pre-Birkie'}
+#six series is too many to tell apart by color alone, so the color is the technique and the marker the race
+TECH_COLORS = {'skate': '#2a78d6', 'classic': '#eb6834'}
+RACE_MARKERS = {'birkie': ('o', 7), 'kortie': ('s', 6), 'pre-birkie': ('^', 8)}
 #candidate models, each on top of a separate level for each technique. MAIN is the simple one plotted
 MAIN = ['new_snow', 'thaws']
 MAIN_NAME = 'new snow along the course + thaw days'
@@ -97,25 +123,27 @@ def main():
     parser.add_argument("--linked", type=str, default='linked_data/linked_results.csv')
     parser.add_argument("--refresh", action='store_true', help='download the weather again')
     parser.add_argument("--reread_snodas", action='store_true', help='read the SNODAS tars again')
-    parser.add_argument("--birkie_only", action='store_true', help='leave out the pre-birkie')
+    parser.add_argument("--races", nargs='+', choices=list(RACE_GROUPS), default=list(RACE_GROUPS),
+                        help='the races whose race days are compared')
+    parser.add_argument("--birkie_only", action='store_true', help='the birkie alone, the same as --races birkie')
     args = parser.parse_args()
+    groups = ['birkie'] if args.birkie_only else [g for g in RACE_GROUPS if g in args.races]
 
     download(args.refresh)
     weather = race_weather(hourly_weather(), daily_weather(), course_snowpack(args.reread_snodas))
-    data = comparable(race_speeds(load_linked(args.linked)).join(weather, on='date', how='inner'))
-    birkie = comparable(data[data['race'] == 'birkie'])
-    if args.birkie_only:
-        data = birkie
-    data = data.reset_index(drop=True)
+    races = [race for g in groups for race in RACE_GROUPS[g]]
+    data = comparable(race_speeds(load_linked(args.linked), races).join(weather, on='date', how='inner'))
 
     scores = {name: cross_validate(data, terms) for name, terms in MODELS.items()}
     fit = fit_terms(data, MAIN)
     boot = bootstrap_days(data, MAIN)
     data['predicted'] = scores[MAIN_NAME]['predicted']
-    check = birkie_check(data, birkie) if (data['race'] != 'birkie').any() else None
-    print_summary(data, scores, fit, boot, check)
-    name = 'weather_speed_birkie_only' if args.birkie_only else 'weather_speed'
-    plot_weather(data, fit, scores, check, name)
+    checks = {race: race_check(data, race) for race in ['birkie', 'kortie']
+              if race in races and data['race'].nunique() > 1}
+    print_summary(data, scores, fit, boot, checks)
+    name = 'weather_speed' if len(groups) == len(RACE_GROUPS) else \
+        'weather_speed_' + '_'.join(groups) + ('_only' if len(groups) == 1 else '')
+    plot_weather(data, fit, scores, checks, name)
     data.round(3).to_csv(os.path.join(os.path.dirname(args.linked) or '.', name + '.csv'), index=False)
 
 
@@ -246,9 +274,9 @@ def course_snowpack(refresh=False, workers=6):
 
 
 def race_days():
-    #every race day: the birkie's that are compared, and the pre-birkie's
-    days = {pd.Timestamp(d) for y, d in BIRKIE_DAYS.items() if y not in LEAVE_OUT_YEARS}
-    return sorted(days | {pd.Timestamp(d) for d in PREBIRKIE_DAYS.values()})
+    #every race day of every race that's compared
+    return sorted({pd.Timestamp(d) for days, leave_out, *_ in RACES.values() for y, d in days.items()
+                   if y not in leave_out})
 
 
 def race_weather(hourly, snowfall, snodas):
@@ -284,30 +312,42 @@ def race_weather(hourly, snowfall, snodas):
 
 #---------------------------------------------------------------- model
 
-def race_speeds(linked):
-    #% slower than the average race for the same skiers, every race day of each race and technique. each has a level
-    #of its own (the pre-birkie one for each course), so only the race days on one course are compared
+def race_speeds(linked, races):
+    #% slower than the average race on the same course for the same skiers, every race day of each race and technique.
+    #each has a level of its own (one for each course), so only the race days on one course are compared. the year to
+    #year model measures each race from its average year, which mixes courses when a race has moved (the kortelopet's
+    #29 km races are 25% slower than its 23 km ones), so each is measured again from its own course's average
     rows = []
-    for race in ['birkie'] + PREBIRKIE_RACES:
-        pre = race != 'birkie'
-        days = PREBIRKIE_DAYS if pre else BIRKIE_DAYS
+    for race in races:
+        days, leave_out, courses, name, prefix = RACES[race]
         for tech in TECHS:
             panel = build_panel(linked, race, tech)
             if panel.empty:
                 continue
             fit = fit_model(panel)
-            courses = PREBIRKIE_COURSES if pre else CLASSIC_COURSES if tech == 'classic' else {}
-            for condition, pct in fit['conditions']['pct'].items():
+            for condition, effect in fit['conditions']['effect'].items():
                 year = int(condition.split()[0])
-                if not pre and year in LEAVE_OUT_YEARS:
+                if year in leave_out:
                     continue
-                course = next((c for c, years in courses.items() if year in years), '')
-                rows.append({'race': race, 'tech': tech, 'condition': condition, 'slower': pct,
-                             'date': pd.Timestamp(days[year]),
-                             'label': ('pre ' if pre else '') + condition + (' short' if race.endswith('short') else ''),
-                             'series': ('pre-birkie ' if pre else 'birkie ') + tech,
-                             'level': ' '.join([race, tech, course]).strip()})
-    return pd.DataFrame(rows)
+                course = next((c for c, years in courses.get(tech, {}).items() if year in years), '')
+                date = pd.Timestamp(days[year])
+                rows.append({'race': race, 'tech': tech, 'condition': condition, 'effect': effect, 'date': date,
+                             'weekend': weekend(date),
+                             'label': prefix + condition + (' short' if race.endswith('short') else ''),
+                             'series': name + ' ' + tech, 'level': ' '.join([race, tech, course]).strip()})
+    rows = pd.DataFrame(rows)
+    rows['slower'] = 100 * np.expm1(rows['effect'] - rows.groupby('level')['effect'].transform('mean'))
+    return rows.drop(columns='effect')
+
+
+def weekend(day):
+    #the monday starting the week of a race day: the birkie and the kortelopet the day before it share one
+    return day.to_period('W').start_time
+
+
+def without_birkie_weekend(data, year):
+    #every race day but that year's birkie and kortelopet
+    return data['weekend'] != weekend(pd.Timestamp(BIRKIE_DAYS[year]))
 
 
 def comparable(data):
@@ -341,44 +381,46 @@ def explained(data, predicted):
 
 
 def cross_validate(data, terms):
-    #predict each race day from a fit to all the other race days
+    #predict each race weekend from a fit to all the other race weekends
     X, _ = design(data, terms)
     y = data['slower'].values
     predicted = np.empty(len(y))
-    for day in data['date'].unique():
-        out = (data['date'] == day).values
+    for week in data['weekend'].unique():
+        out = (data['weekend'] == week).values
         predicted[out] = X[out] @ np.linalg.lstsq(X[~out], y[~out], rcond=None)[0]
     in_sample = X @ np.linalg.lstsq(X, y, rcond=None)[0]
     return {'predicted': predicted, 'cv': explained(data, predicted), 'in_sample': explained(data, in_sample),
             'rmse': np.sqrt(np.mean((y - predicted) ** 2))}
 
 
-def birkie_check(data, birkie):
-    #does the pre-birkie help predict the birkie? how far off each birkie race day is when predicted from every other
-    #race day, from the other birkies only, and with no weather at all
-    on_birkie = (data['race'] == 'birkie').values
-    return {'with the pre-birkies': np.sqrt(np.mean((data['slower'] - data['predicted'])[on_birkie] ** 2)),
-            'birkies only': cross_validate(birkie, MAIN)['rmse'], 'no weather': cross_validate(birkie, [])['rmse']}
+def race_check(data, race):
+    #do the other races help predict this one? how far off each of its race days is when predicted from every other
+    #race weekend, from its own other race days only, and with no weather at all
+    own = comparable(data[data['race'] == race])
+    on = (data['race'] == race).values
+    return {'every race': np.sqrt(np.mean((data['slower'] - data['predicted'])[on] ** 2)),
+            'own race': cross_validate(own, MAIN)['rmse'], 'no weather': cross_validate(own, [])['rmse']}
 
 
 def bootstrap_days(data, terms, n=N_BOOTSTRAP, seed=0):
-    #resample whole race days
-    days = data['date'].unique()
-    rows = data.groupby('date').indices
+    #resample whole race weekends
+    weeks = data['weekend'].unique()
+    rows = data.groupby('weekend').indices
     rng = np.random.default_rng(seed)
     draws = []
     for _ in range(n):
-        pick = np.concatenate([rows[d] for d in rng.choice(days, len(days))])
+        pick = np.concatenate([rows[w] for w in rng.choice(weeks, len(weeks))])
         draws.append(fit_terms(data.iloc[pick], terms))
     return pd.DataFrame(draws)
 
 
 #---------------------------------------------------------------- output
 
-def print_summary(data, scores, fit, boot, check):
+def print_summary(data, scores, fit, boot, checks):
     days = data.groupby('race')['date'].nunique()
-    print('{} race days ({}), {} races. spread between race days on one course (sd):'.format(
-        data['date'].nunique(), ', '.join('{} {}'.format(n, r) for r, n in days.items()), len(data)))
+    print('{} race days on {} weekends ({}), {} races. spread between race days on one course (sd):'.format(
+        data['date'].nunique(), data['weekend'].nunique(), ', '.join('{} {}'.format(n, r) for r, n in days.items()),
+        len(data)))
     spread = data['slower'] - data.groupby('level')['slower'].transform('mean')
     for series, s in spread.groupby(data['series']):
         print('  {:20s} {:.1f}% over {} races'.format(series, s.std(), len(s)))
@@ -388,38 +430,49 @@ def print_summary(data, scores, fit, boot, check):
     print('\n{}, % slower per mm of new snow water and per thaw day [95% CI over race days]:'.format(MAIN_NAME))
     for k in MAIN:
         print('  {:10s} {:+.2f} [{:+.2f}, {:+.2f}]'.format(k, fit[k], *boot[k].quantile([0.025, 0.975])))
-    #a few races carry each term: 2014 the new snow, 2010 and 2026 (7 and 10 thaw days) the thaws
-    without = {'without {}'.format(y): data['label'] != str(y) for y in [2014, 2010, 2026]}
-    subsets = [('birkie only', data['race'] == 'birkie'), ('pre-birkie only', data['race'] != 'birkie'),
+    #a few race weekends carry each term: 2014 the new snow, 2010 and 2026 (7 and 10 thaw days) the thaws
+    without = {'without {}'.format(y): without_birkie_weekend(data, y) for y in [2014, 2010, 2026]}
+    subsets = [('birkie only', data['race'] == 'birkie'), ('kortie only', data['race'] == 'kortie'),
+               ('pre-birkie only', data['race'].isin(PREBIRKIE_RACES)),
+               ('birkie and kortie', data['race'].isin(['birkie', 'kortie'])),
                ('skate only', data['tech'] == 'skate'), ('classic only', data['tech'] == 'classic'), *without.items()]
     for label, keep in subsets:
         sub = data[keep].reset_index(drop=True)
-        if sub['date'].nunique() < 4:
+        if sub['weekend'].nunique() < 4:
             continue
         f = fit_terms(sub, MAIN)
         cv = cross_validate(sub, MAIN)
         print('  {:22s} new snow {:+.2f}  thaws {:+.2f}  (explained {:.2f}, predicting {:.2f}, {} race days)'.format(
             label, f['new_snow'], f['thaws'], cv['in_sample'], cv['cv'], sub['date'].nunique()))
-    if check:
-        print('\npredicting each birkie race day: misses by {:.1f}% from the other birkies, {:.1f}% with the pre-birkies '
-              'too ({:.1f}% with no weather)'.format(check['birkies only'], check['with the pre-birkies'],
-                                                     check['no weather']))
+    for race, check in checks.items():
+        print('\npredicting each {} race day: misses by {:.1f}% from its other race days, {:.1f}% with the other races '
+              'too ({:.1f}% with no weather)'.format(race, check['own race'], check['every race'], check['no weather']))
     cols = ['label', 'tech', 'level', 'slower', 'predicted', 'new_snow', 'coop_new_snow', 'thaws', 't_race']
     print('\nevery race, % slower than average and the prediction from the other race days:')
     print(data[cols].sort_values(['level', 'label']).round(1).to_string(index=False))
 
 
-def plot_weather(data, fit, scores, check=None, name='weather_speed'):
+def plot_series(ax, data, x, y):
+    #every race and technique, each with its own marker and color
+    for race, (marker, size) in RACE_MARKERS.items():
+        for tech, color in TECH_COLORS.items():
+            on = data['series'] == race + ' ' + tech
+            if on.any():
+                ax.plot(x[on], y[on], marker, color=color, markersize=size, markeredgecolor=SURFACE,
+                        markeredgewidth=1.2, linestyle='none', label=race + ' ' + tech)
+
+
+def plot_weather(data, fit, scores, checks=None, name='weather_speed'):
     fig = plt.figure(figsize=(14, 10), facecolor=SURFACE)
     grid = fig.add_gridspec(2, 2, hspace=0.38, wspace=0.22, top=0.9)
 
     #each term's share, with the other one taken out: partial residuals. and how much it leans on its extreme years
     level = data['level'].map(fit)
     leans = {}
-    for term, years in [('new_snow', ['2014']), ('thaws', ['2010', '2026'])]:
+    for term, years in [('new_snow', [2014]), ('thaws', [2010, 2026])]:
         parts = []
         for y in years:
-            sub = data[data['label'] != y].reset_index(drop=True)
+            sub = data[without_birkie_weekend(data, y)].reset_index(drop=True)
             parts.append('without {}: {:+.1f}, misses unseen races by {:.1f}% (no weather: {:.1f}%)'.format(
                 y, fit_terms(sub, MAIN)[term], cross_validate(sub, MAIN)['rmse'], cross_validate(sub, [])['rmse']))
         leans[term] = '\n'.join(parts)
@@ -435,11 +488,7 @@ def plot_weather(data, fit, scores, check=None, name='weather_speed'):
         xs = np.array([data[term].min(), data[term].max()])
         ax.plot(xs, fit[term] * xs - (fit[term] * data[term]).mean() + partial.mean(), color=INK_2, linewidth=1.2,
                 linestyle='--')
-        for series, color in COLORS.items():
-            d = data[data['series'] == series]
-            if len(d):
-                ax.plot(d[term], partial[d.index], 'o', color=color, markersize=7, markeredgecolor=SURFACE,
-                        markeredgewidth=1.2, label=series)
+        plot_series(ax, data, data[term], partial)
         for _, r in data.loc[partial.abs().sort_values().index[-4:]].iterrows():
             ax.annotate(r['label'], (r[term], partial[_]), xytext=(6, 2), textcoords='offset points', fontsize=7,
                         color=INK_2)
@@ -452,36 +501,28 @@ def plot_weather(data, fit, scores, check=None, name='weather_speed'):
     ax = fig.add_subplot(grid[1, 0])
     lim = [min(data['slower'].min(), data['predicted'].min()) - 2, max(data['slower'].max(), data['predicted'].max()) + 2]
     ax.plot(lim, lim, color=GRID, linewidth=1.2)
-    for series, color in COLORS.items():
-        d = data[data['series'] == series]
-        if len(d):
-            ax.plot(d['predicted'], d['slower'], 'o', color=color, markersize=7, markeredgecolor=SURFACE,
-                    markeredgewidth=1.2, label=series)
+    plot_series(ax, data, data['predicted'], data['slower'])
     s = scores[MAIN_NAME]
     ax.set_ylim(lim[0], lim[1] + 0.3 * (lim[1] - lim[0]))
     worst = data.loc[(data['slower'] - data['predicted']).abs().sort_values().index[-5:]]
     place_labels(ax, [((r['predicted'], r['slower']), '{} {}'.format(r['label'], r['tech']),
                        {'fontsize': 7, 'color': INK_2}) for _, r in worst.iterrows()], size=(80, 8))
     note = '{:.0%} of the spread between races explained fit to every race'.format(s['in_sample'])
-    if check:
-        note = 'each birkie race day misses by {:.1f}% predicted from every other race day,\n{:.1f}% from the other ' \
-               'birkies only ({:.1f}% with no weather)'.format(check['with the pre-birkies'], check['birkies only'],
-                                                             check['no weather'])
+    if checks:
+        note = 'each race day missed by, predicted from every other race weekend /\nfrom its own race only / with no ' \
+               'weather:\n' + '\n'.join('  {:8s} {:.1f}% / {:.1f}% / {:.1f}%'.format(
+                   race, c['every race'], c['own race'], c['no weather']) for race, c in checks.items())
     ax.text(0.03, 0.97, note, transform=ax.transAxes, fontsize=8, color=INK_2, va='top')
     style(ax, 'Unseen race days: off by {:.1f}% on average, {:.1f}% with no weather'.format(
         s['rmse'], scores['no weather']['rmse']), '% slower than the average race, actual',
-          'predicted from the other race days')
+          'predicted from the other race weekends')
 
     #temperature during the race, after new snow and thaws
     ax = fig.add_subplot(grid[1, 1])
     resid = data['slower'] - (design(data, MAIN)[0] @ fit.values)
     ax.axhline(0, color=INK_2, linewidth=0.8)
     ax.axvline(0, color=GRID, linewidth=1.2)
-    for series, color in COLORS.items():
-        d = data[data['series'] == series]
-        if len(d):
-            ax.plot(d['t_race'], resid[d.index], 'o', color=color, markersize=7, markeredgecolor=SURFACE,
-                    markeredgewidth=1.2, label=series)
+    plot_series(ax, data, data['t_race'], resid)
     for _, r in data.loc[resid.abs().sort_values().index[-4:]].iterrows():
         ax.annotate('{} {}'.format(r['label'], r['tech']), (r['t_race'], resid[_]), xytext=(6, 2),
                     textcoords='offset points', fontsize=7, color=INK_2)
@@ -494,7 +535,8 @@ def plot_weather(data, fit, scores, check=None, name='weather_speed'):
     style(ax, 'Race-day temperature adds nothing reliable', 'what new snow and thaws leave unexplained, %',
           'average temperature 8am to 2pm, C (Hayward airport)')
 
-    races = 'Birkie' if (data['race'] == 'birkie').all() else 'Birkie and Pre-Birkie'
+    titles = [RACE_TITLES[r] for r in RACE_MARKERS if (data['series'].str.rsplit(n=1).str[0] == r).any()]
+    races = ', '.join(titles[:-1]) + ' and ' + titles[-1] if len(titles) > 1 else titles[0]
     fig.suptitle('Weather and {} speed: each race day, the same skiers compared from one year to the next'.format(
         races), x=0.06, ha='left', fontsize=13, color=INK)
     handles, labels = fig.axes[0].get_legend_handles_labels()
