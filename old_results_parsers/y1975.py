@@ -1,7 +1,8 @@
 #1975's results booklet: three typewritten pages, each class under a heading in two columns (its first half down the
 #left, the rest down the right), read by class_lists.py: place, name, town ("Wausau, Wi."), time (h:mm:ss). the 55 km
-#classes are the birkebeiner; pages 2 and 3 end with the 27.5 km race from seeley, for women and boys. someone has
-#marked up the scan with a pen: lines struck out (two marked OK again), a time written in, a note in the margin
+#classes are the birkebeiner; pages 2 and 3 end with the 27.5 km race from seeley, for women and boys (the
+#kortelopet, read with the rest, its classes marked as its race: k1975.py). someone has marked up the scan with a pen:
+#lines struck out (two marked OK again), a time written in, a note in the margin
 import sys
 
 from old_results_parsers import class_lists
@@ -33,8 +34,8 @@ HEADINGS = [(1, 234, 'M elite'), (1, 542, 'M 20-34'), (1, 2160, 'M 35-42'), (2, 
 CLASSES = {'M elite': ('M', 'M 19-24', 'birkie'), 'M 20-34': ('M', 'M 20-34', 'birkie'),
            'M 35-42': ('M', 'M 35-42', 'birkie'), 'M 43-49': ('M', 'M 43-49', 'birkie'),
            'M 50+': ('M', 'M 50+', 'birkie'), 'M junior': ('M', 'M -19', 'birkie'), 'F': ('F', '', 'birkie'),
-           'F 20-34 seeley': ('F', 'F 20-34', 'seeley'), 'F 35+ seeley': ('F', 'F 35+', 'seeley'),
-           'F junior seeley': ('F', 'F -19', 'seeley'), 'M junior seeley': ('M', 'M -18', 'seeley')}
+           'F 20-34 seeley': ('F', 'F 20-34', 'kortie'), 'F 35+ seeley': ('F', 'F 35+', 'kortie'),
+           'F junior seeley': ('F', 'F -19', 'kortie'), 'M junior seeley': ('M', 'M -19', 'kortie')}
 #the pen's marks on page 1, by (page, column, the line's top): lines struck out, that line's time written in, and the
 #lines its marks leave unreadable, as printed
 HAND = {
@@ -54,6 +55,41 @@ HAND = {
     (1, 1, 1919): {'name': 'Stephen Paladie', 'town': 'Oakdale, Minn.', 'time': '7:08:50'},
     (1, 1, 2815): {'name': 'Malcolm C. Scott', 'town': 'Superior, Wis.'},
     (1, 1, 2932): {'time': '7:34:35'},
+    #the kortelopet's (k1975.py): the scan's right edge fades page 2's right column's last digits, read by eye where
+    #enough of the digit shows (women 20-34, and two of women 35 and over), and taken as 5, the middle of its ten
+    #seconds, where it doesn't
+    (2, 1, 1646): {'time': '3:46:21'},
+    (2, 1, 1685): {'time': '3:51:09'},
+    (2, 1, 1723): {'time': '3:53:17'},
+    (2, 1, 1762): {'time': '3:58:28'},
+    (2, 1, 1802): {'time': '4:04:49'},
+    (2, 1, 1841): {'time': '4:12:44'},
+    (2, 1, 1880): {'time': '4:17:32'},
+    (2, 1, 1919): {'time': '4:17:57'},
+    (2, 1, 1957): {'time': '4:24:06'},
+    (2, 1, 1998): {'time': '4:31:59'},
+    (2, 1, 2036): {'time': '4:35:46'},
+    (2, 1, 2074): {'time': '4:46:03'},
+    (2, 1, 2111): {'name': 'Eileen Stombaugh', 'time': '4:46:19'},
+    (2, 1, 2268): {'time': '3:48:55'},
+    (2, 1, 2307): {'time': '3:56:45'},
+    (2, 1, 2346): {'time': '4:11:05'},
+    (2, 1, 2384): {'time': '4:13:19'},
+    (2, 1, 2423): {'time': '4:26:53'},
+    (2, 1, 2463): {'time': '4:43:55'},
+    (2, 1, 2502): {'time': '5:26:45'},
+    (2, 1, 2540): {'time': '5:39:05'},
+    (2, 1, 2580): {'time': '5:46:55'},
+    (2, 1, 2733): {'time': '3:43:05'},
+    (2, 1, 2773): {'time': '4:12:35'},
+    (2, 1, 2812): {'time': '4:15:15'},
+    (2, 1, 2852): {'time': '4:21:15'},
+    (2, 1, 2891): {'time': '4:21:25'},
+    (2, 1, 2929): {'time': '4:46:25'},
+    (2, 1, 2968): {'time': '5:36:05'},
+    #and its names and towns tesseract misreads
+    (2, 0, 2463): {'name': 'Helen Dungan'},
+    (3, 1, 1078): {'town': 'La Crosse, Wis.'},
 }
 
 

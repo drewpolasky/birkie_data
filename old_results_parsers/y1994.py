@@ -1,7 +1,7 @@
 #1994 birch scroll: "MEN'S DYNO AMERICAN BIRKEBEINER RESULTS" on pages 35-51 (places 1-3547) and "WOMEN'S ..." on pages
-#52-54 (places 1-543). the kortelopet follows on 55-63 ("... HERITAGE BANK OF HAYWARD KORTELOPET RESULTS") and the class
-#award lists (top three in each class) are on pages 6-7; both are left out. each results page has two columns of 110
-#results (the last page of each list fewer), one result to a column's line:
+#52-54 (places 1-543). the kortelopet follows on 55-63 ("... HERITAGE BANK OF HAYWARD KORTELOPET RESULTS"), read the
+#same way by k1994.py (use_race), and the class award lists (top three in each class) are on pages 6-7, left out. each
+#results page has two columns of 110 results (the last page of each list fewer), one result to a column's line:
 #   RANK, FINAL TIME (h:mm:ss.t), BIB, NAME, HOMETOWN, ST, NAT, CLASS ("M40-44", "M70+"), CLASS RANK, 25% club ("Y"),
 #   PACE MN/KM (the time over 52 km in min.sec, cut to the second: 2:51:44.6 -> 3.18)
 #places run per gender, one list for each; classic and skate skiers are listed together with no technique marked, so
@@ -52,9 +52,28 @@ SOURCES = ['x2', 'd3', 'x1', 'd4']
 PROVINCES = {'ONT': 'ON', 'QUE': 'QC', 'MAN': 'MB', 'SAS': 'SK', 'ALB': 'AB'}
 #the last places printed: page 51's 3547 for the men, page 54's 543 for the women
 LAST_PLACE = {'M': 3547, 'F': 543}
+#the bibs run 1 to 10437; longer readings are a digit read twice or a mark read as one
+BIBS = (0, 10999)
+#a pace's minutes: one figure
+PACE_MINUTES = r'\d'
+#whether a name read with as many words as the page shows wins over readings OCR gave more weight (choose_name). the
+#birkebeiner's list was read and checked without it; it would change 26 of its names, 24 of them for the better
+WORDS_FIRST = False
+#the list being read: the birkebeiner's, or the kortelopet's (k1994.py, which gives its table: the columns, classes,
+#PACE distance, bibs, paces' minutes and names' words in place of these). parse() sets it
+BIRKIE = dict(FIELDS=FIELDS, CLASSES=CLASSES, KM=KM, BIBS=BIBS, PACE_MINUTES=PACE_MINUTES, WORDS_FIRST=WORDS_FIRST)
+race = 'birkie'
 
 
-def parse(year, names=None, pages=None, raw=False):
+def use_race(name, table):
+    global race, FIELDS, CLASSES, KM, BIBS, PACE_MINUTES, WORDS_FIRST, CLASS_DIGITS
+    race = name
+    FIELDS, CLASSES, KM, BIBS, PACE_MINUTES, WORDS_FIRST = (table[k] for k in BIRKIE)
+    CLASS_DIGITS = {c.replace('-', ''): c for c in CLASSES if c != '70+'}
+
+
+def parse(year, names=None, pages=None, raw=False, race='birkie', table=None):
+    use_race(race, table or BIRKIE)
     names = names or SOURCES
     pages = [(p, g) for p, g in results_pages(year) if not pages or p in pages]
     column_ocr(year, [p for p, _ in pages])
@@ -72,9 +91,10 @@ def parse(year, names=None, pages=None, raw=False):
 #---------------------------------------------------------------- pages and words
 
 def results_pages(year):
-    #(page, gender) for each birkebeiner results page: a page of times under a RANK ... HOMETOWN header, titled
-    #MEN'S/WOMEN'S ... BIRKEBEINER RESULTS (not KORTELOPET). a title OCR garbled carries over from the page before
-    out, race, gender = [], None, None
+    #(page, gender) for each results page of the race being read: a page of times under a RANK ... HOMETOWN header,
+    #titled MEN'S/WOMEN'S ... BIRKEBEINER RESULTS (or KORTELOPET RESULTS). a title OCR garbled carries over from the
+    #page before
+    out, listed, gender = [], None, None
     for path in sorted(glob.glob(os.path.join(OCR_DIR, str(year), '[0-9][0-9][0-9].tsv'))):
         page = int(os.path.basename(path)[:3])
         words = ocr_words(year, page, scaled=False)
@@ -84,17 +104,17 @@ def results_pages(year):
         top = words.loc[timed, 'top'].min() if timed.any() else words['top'].max()
         title = ' '.join(words.loc[words['top'] < top, 'text']).upper()
         if 'KORTE' in title:
-            race = 'kortie'
+            listed = 'kortie'
         elif 'BIRKE' in title and 'RESULTS' in title:
-            race = 'birkie'
+            listed = 'birkie'
         if 'WOMEN' in title:
             gender = 'F'
         elif re.search(r'\bMEN', title):
             gender = 'M'
-        if timed.sum() >= 20 and race == 'birkie' and words['text'].str.contains('HOMETOWN').any():
+        if timed.sum() >= 20 and listed == race and words['text'].str.contains('HOMETOWN').any():
             out.append((page, gender))
         elif timed.sum() < 20:
-            race = None
+            listed = None
     return out
 
 
@@ -198,12 +218,13 @@ def page_records(page, words, start):
                 boxes[source, place].append((left, top, width, height))
         #where each row's name is printed: its words' median top and height, across the name field
         regions = {}
+        edges = dict(FIELDS)
         for place in {p for _, p in boxes}:
             b = [x for (s, p), bs in boxes.items() if p == place for x in bs if x[3] <= 22]
             if b:
                 top, height = np.median([x[1] for x in b]), np.median([x[3] for x in b])
                 x = np.polyval(fit, top + height / 2)
-                regions[place] = (int(x + 155), int(top), int(x + 445), int(top + height))
+                regions[place] = (int(x + edges['name'] + 5), int(top), int(x + edges['town'] - 7), int(top + height))
         for (source, place), row in rows.items():
             fields = {k: ' '.join(row[k]) for k, _ in FIELDS[:-1]}
             #a result has numbers in at least two of its number fields (not the header)
@@ -329,7 +350,7 @@ def time_reads(text):
 
 def pace_read(text):
     #'3.18' as seconds per km
-    m = re.search(r'(\d)\W{0,2}(\d\d)\W*$', str(text).translate(DIGIT_CHARS))
+    m = re.search(r'(' + PACE_MINUTES + r')\W{0,2}(\d\d)\W*$', str(text).translate(DIGIT_CHARS))
     if not m or int(m.group(2)) > 59:
         return np.nan
     return int(m.group(1)) * 60 + int(m.group(2))
@@ -380,7 +401,8 @@ def record_fields(r):
     if not cls:
         cls, rest = class_read(r['nat'] + ' ' + r['cls'])
     crank = digits(r['crank']) or rest
-    pace = pace_read(r['pace']) if r['pace'] else pace_read(r['club'])
+    #(the kortelopet's table has no 25% club column)
+    pace = pace_read(r['pace']) if r['pace'] else pace_read(r.get('club', ''))
     times = time_reads(r['time'])
     if not times and ':' in r['rank']:
         #the rank run into the time: '12:36:47.0'
@@ -399,8 +421,6 @@ def record_fields(r):
 WEIGHTS = {'x2': 1.0, 'd3': 0.8, 'x1': 0.7, 'd4': 0.4}
 TEXT_WEIGHTS = {'x2': 1.0, 'x1': 0.8, 'd3': 0.7, 'd4': 0.4}
 BIB_WEIGHTS = {'x2': 1.0, 'x1': 0.8, 'd3': 0.6, 'd4': 0.3}
-#the bibs run 1 to 10437; longer readings are a digit read twice or a mark read as one
-MAX_BIB = 10999
 
 
 def blank(v):
@@ -526,9 +546,10 @@ def words_printed(page, region):
 
 def choose_name(values, weights, town, words=None):
     #the readings are grouped by their letters, so that 'LINDA LWAPPNER' and 'LINDA L WAPPNER' count together. the
-    #group whose reading has known names and the printed shape wins, then the one read with the most weight. its
-    #spelling (as read, or with a lost space put back) is the one with as many words as the page shows, then the best
-    #scored, then the one with the most initials split off
+    #group whose reading has known names and the printed shape wins (with WORDS_FIRST, a group that can be spelt with
+    #as many words as the page shows comes first: 'CHARLIE E MUELLER' over 'CHARLIE MUELLER'), then the one read with
+    #the most weight. its spelling (as read, or with a lost space put back) is the one with as many words as the page
+    #shows, then the best scored, then the one with the most initials split off
     groups, spellings = {}, {}
     for v, w in zip(values, weights):
         if v:
@@ -540,7 +561,8 @@ def choose_name(values, weights, town, words=None):
     if not groups:
         return ''
     key = lambda n: (name_score(n), name_shape(n, town))
-    k = max(groups, key=lambda k: (max(key(n) for n in spellings[k]), groups[k]))
+    printed = lambda k: WORDS_FIRST and any(len(n.split()) == words for n in spellings[k])
+    k = max(groups, key=lambda k: (printed(k), max(key(n) for n in spellings[k]), groups[k]))
     return max(spellings[k], key=lambda n: (len(n.split()) == words, key(n), sum(len(t) == 1 for t in n.split()),
                                             spellings[k][n]))
 
@@ -627,7 +649,7 @@ def merge(records, names):
         for f in ('bib', 'name', 'city', 'state', 'cls', 'class_rank'):
             row[f + '_reads'] = dict(zip(recs['source'], recs[f]))
         row['pace'] = vote(recs['pace'].tolist(), w)
-        bibs = [b if b and int(b) <= MAX_BIB else '' for b in recs['bib']]
+        bibs = [b if b and BIBS[0] <= int(b) <= BIBS[1] else '' for b in recs['bib']]
         row['bib_tally'] = tally(bibs, recs['bib_weight'].tolist())
         row['bib'] = vote(bibs, recs['bib_weight'].tolist())
         tw = recs['text_weight'].tolist()

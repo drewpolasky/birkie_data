@@ -15,7 +15,14 @@
 #then put in order at least cost (see repair_times)
 #
 #a class rank is the line's count in its class, a tie (two lines with one number and one time) sharing it. the place is
-#the skier's among their gender in the birkebeiner, by time. 'top' is the line's y pixel on the page turned level
+#the skier's among their gender in the race, by time. 'top' is the line's y pixel on the page turned level
+#
+#the shorter race (the kortelopet, from seeley in its first years) is read the same way: from its own pages, laid out
+#in k<year>.py (1973, 1974 and 1976), or from the birkebeiner's pages, whose module marks its classes' race (1975).
+#1978's and 1981's kortelopet are typeset class by class too, and read the same way, with what their modules can set
+#beyond the 1970s': a turn for each column (ANGLE), the order the columns run in where it isn't page by page and
+#headings that head one column (COLUMN_ORDER), fields that move down a column (BAND_FIELDS), a town followed by its
+#country (TOWN_COUNTRY), lines the scan loses (RANK_SKIPS) or too faint to find (EXTRA_LINES)
 import collections
 import concurrent.futures
 import csv
@@ -63,8 +70,27 @@ PLACE_LOOKS = str.maketrans({'l': '1', 'i': '1', 'I': '1', 'L': '1', '|': '1', '
                              'B': '8', '&': '8', 'Z': '2', 'z': '2', 'G': '6', 'b': '6', 'g': '9', 'q': '9'})
 
 
+#the race whose pages are read: the birkebeiner's (y<year>.py) or the kortelopet's (k<year>.py)
+RACE_MODULES = {'birkie': 'y', 'kortie': 'k'}
+race = 'birkie'
+
+
 def layout(year):
-    return importlib.import_module('old_results_parsers.y{}'.format(year))
+    return importlib.import_module('old_results_parsers.{}{}'.format(RACE_MODULES[race], year))
+
+
+def use_race(name):
+    #read the other race's pages: what's kept of the pages and their readings is cleared
+    global race
+    if name != race:
+        race = name
+        for kept in (level_page, column_lines, field_offsets, column_field_rows, readings, typical_time_ink):
+            kept.cache_clear()
+
+
+def lines_file(year):
+    #tesseract's readings of the lines, old_results/ocr/<year>/lines.tsv (kortie_lines.tsv for the kortelopet's pages)
+    return os.path.join(ocr_dir(year), 'lines.tsv' if race == 'birkie' else race + '_lines.tsv')
 
 
 def setting(year, name, page=None, default=None):
@@ -74,9 +100,13 @@ def setting(year, name, page=None, default=None):
     return getattr(layout(year), name, default)
 
 
-def fields_of(year, page, col):
+def fields_of(year, page, col, line=None):
     #each field's left and right edge in pixels from the column's left: the year's FIELDS, or the column's own where it
-    #gives one for each column
+    #gives one for each column, or a line's band's own where BAND_FIELDS gives the column bands down it, each from its
+    #top (1978's kortelopet pastes up lists typed to different tab stops)
+    bands = getattr(layout(year), 'BAND_FIELDS', {}).get((page, col))
+    if bands and line is not None:
+        return [f for top, f in bands if top <= line[0]][-1]
     fields = setting(year, 'FIELDS', page)
     return fields[col] if isinstance(fields, (list, tuple)) else fields
 
@@ -97,7 +127,17 @@ def level_page(year, page):
     turn = layout(year).TURN.get(page)
     if turn is not None:
         im = im.transpose(turn)
-    im = im.rotate(layout(year).ANGLE[page], resample=Image.BICUBIC, fillcolor=255)
+    angle = layout(year).ANGLE[page]
+    if isinstance(angle, tuple):
+        #a turn for each column, where a page's columns sit at different slants (1978's and 1981's kortelopet, each
+        #list pasted up on its own): each column cut from the page turned its way
+        turned = [np.array(im.rotate(a, resample=Image.BICUBIC, fillcolor=255)) for a in angle]
+        whole = turned[0].copy()
+        for (x0, x1), part in zip(setting(year, 'COLUMNS', page), turned):
+            whole[:, x0:x1] = part[:, x0:x1]
+        im = Image.fromarray(whole)
+    else:
+        im = im.rotate(angle, resample=Image.BICUBIC, fillcolor=255)
     scale = getattr(layout(year), 'SCALE', {}).get(page)
     if scale:
         #(a page printed larger than the rest, shrunk to their size)
@@ -149,7 +189,9 @@ def column_lines(year, page, col):
     inks = [profile[a:b].sum() for a, b in out]
     typical = np.median(inks) if inks else 0
     tall = [(profile[a:b] > 0.3 * profile[a:b][profile[a:b] > 0].mean()).sum() >= least for a, b in out]
-    return tuple(l for l, ink, t in zip(out, inks, tall) if ink >= typical / 4 and t)
+    found = [l for l, ink, t in zip(out, inks, tall) if ink >= typical / 4 and t]
+    #and those with too little ink there to be found (1981's line with a place and bib but no name)
+    return tuple(sorted(found + getattr(layout(year), 'EXTRA_LINES', {}).get((page, col), [])))
 
 
 def split_runs(profile, offset, least, most, pitch):
@@ -176,7 +218,7 @@ def field_runs(year, page, col, line, field):
     #touching ink cut between them), but specks: (top, bottom, middle less the line's)
     gray = level_page(year, page)
     x0 = setting(year, 'COLUMNS', page)[col][0]
-    a, b = fields_of(year, page, col)[field]
+    a, b = fields_of(year, page, col, line)[field]
     pitch = setting(year, 'LINE_PITCH', page)
     least, most = setting(year, 'LINE_HEIGHT', page)
     if field == 'time':
@@ -284,7 +326,7 @@ def read_line(year, page, col, line):
     #it after a pen's mark
     out = []
     x_col = setting(year, 'COLUMNS', page)[col][0]
-    fields = fields_of(year, page, col)
+    fields = fields_of(year, page, col, line)
     gray = level_page(year, page)
 
     def add(img, x0, key, scale):
@@ -326,20 +368,21 @@ def characters(img, scale):
     return [(b[0], int(b[1]) / scale, int(b[3]) / scale) for b in boxes if len(b) == 6]
 
 
-def ocr(year):
-    #tesseract's readings of every line, as old_results/ocr/<year>/lines.tsv
+def ocr(year, race='birkie'):
+    #tesseract's readings of every line of the race's pages, as its lines_file
+    use_race(race)
     jobs = [(page, col, line) for page in layout(year).PAGES for col in range(len(setting(year, 'COLUMNS', page)))
             for line in column_lines(year, page, col)]
     with concurrent.futures.ThreadPoolExecutor(OCR_WORKERS) as pool:
         words = [w for ws in pool.map(lambda job: read_line(year, *job), jobs) for w in ws]
-    pd.DataFrame(words).to_csv(os.path.join(ocr_dir(year), 'lines.tsv'), sep='	', index=False)
+    pd.DataFrame(words).to_csv(lines_file(year), sep='	', index=False)
     print(year, len(jobs), 'lines read')
 
 
 @functools.lru_cache(maxsize=None)
 def readings(year):
     #{(page, col, top): {reading: [(left, right, text)]}}, the whole line's readings first
-    t = pd.read_csv(os.path.join(ocr_dir(year), 'lines.tsv'), sep='	', quoting=csv.QUOTE_NONE,
+    t = pd.read_csv(lines_file(year), sep='	', quoting=csv.QUOTE_NONE,
                     keep_default_na=False, dtype={'text': str, 'reading': str})
     out = {}
     for row in t.itertuples():
@@ -365,6 +408,8 @@ def field_words(words, field, x0, fields):
 def sections(year):
     #each result line, in reading order, with its class: a heading's class runs down each column below it to the next
     #heading on the page (or to the page's foot, and on down the next page's columns above its first heading)
+    if hasattr(layout(year), 'COLUMN_ORDER'):
+        return column_sections(year)
     out = []
     current = None
     headings = getattr(layout(year), 'HEADINGS')
@@ -389,6 +434,30 @@ def sections(year):
     return out
 
 
+def column_sections(year):
+    #the same, column by column in the year's COLUMN_ORDER (1978's kortelopet, each magazine page scanned in two halves,
+    #runs down the left column of a page's top half and of its foot, then the right ones), where a heading can head
+    #one column: (page, column, its top, class). a column's lines above its first heading are the class the column
+    #before it ends with (None: no class), and those above its TABLE_TOP (keyed by page and column) no result
+    out = []
+    current = None
+    for page, col in layout(year).COLUMN_ORDER:
+        mine = sorted((h[-2], h[-1]) for h in layout(year).HEADINGS if h[0] == page and (len(h) == 3 or h[1] == col))
+        top = getattr(layout(year), 'TABLE_TOP', {}).get((page, col), 0)
+        bands = [(0, current)] + mine
+        ends = [y for y, _ in bands[1:]] + [10 ** 6]
+        below = (setting(year, 'HEADING_LINES', page, 1) - 0.2) * setting(year, 'LINE_PITCH', page)
+        for (start, label), end in zip(bands, ends):
+            if label is None:
+                continue
+            for line in column_lines(year, page, col):
+                if line[0] >= top and start + (below if start else 0) <= line[0] < end - 6:
+                    out.append((page, col, line, label))
+        if mine:
+            current = mine[-1][1]
+    return out
+
+
 #---------------------------------------------------------------- times
 
 def glyphs(year, page, col, line):
@@ -398,7 +467,7 @@ def glyphs(year, page, col, line):
     #less 2
     gray = level_page(year, page)
     x0 = setting(year, 'COLUMNS', page)[col][0]
-    a, b = fields_of(year, page, col)['time']
+    a, b = fields_of(year, page, col, line)['time']
     rows = field_rows(year, page, col, line, 'time')
     top = max(0, rows[0] - 2)
     crop = gray[top:rows[1] + 2, x0 + a:x0 + b].copy()
@@ -490,7 +559,7 @@ def time_digits(year, page, col, line):
     phase = (np.angle(np.exp(2j * np.pi * single / pitch).mean()) / (2 * np.pi)) % 1 * pitch
     gray = level_page(year, page)
     x0 = setting(year, 'COLUMNS', page)[col][0]
-    a, _ = fields_of(year, page, col)['time']
+    a, _ = fields_of(year, page, col, line)['time']
     #the digits' own rows: from the top of the tallest glyphs to their foot
     tall = [g for g in gs if g[3] - g[2] >= 0.75 * max(h[3] - h[2] for h in gs)]
     origin = max(0, field_rows(year, page, col, line, 'time')[0] - 2)
@@ -905,6 +974,35 @@ def place_of(words):
     return text.replace(',', ' ').upper(), '', ''
 
 
+def country_town(reading, x0, fields):
+    #a town with its country after its state ("River Falls, WI USA", "Voss, NOR", "NOR"): (city, state, country). of
+    #the line's readings, the one whose town is known in its state, or else as most of them make it (a speck read as a
+    #word after the country can make it a state), the one with a country and a state on a tie. a state's I read as E
+    #(WE) is an I, and a country a letter off USA (ISA) is USA
+    votes = collections.Counter()
+    for words in word_readings(reading):
+        words = [w for w in field_words(words, 'town', x0, fields) if re.search(r'[A-Za-z]', w)]
+        #(specks after the town read as small letters: states and countries are printed in capitals)
+        while words and words[-1].islower():
+            words.pop()
+        if not words:
+            continue
+        country = ''
+        last = clean_word(words[-1]).strip('.')
+        if last in COUNTRY_WORDS or (len(last) == 3 and sum(a == b for a, b in zip(last, 'USA')) == 2):
+            country = COUNTRY_WORDS.get(last, 'USA')
+            words.pop()
+        if words and re.fullmatch(r'[A-Z]E\W*', words[-1]):
+            words[-1] = words[-1][0] + 'I'
+        city, state, typed = place_of(words) if words else ('', '', '')
+        votes[(city.strip(' .'), state, typed or country)] += 1
+    if not votes:
+        return '', '', ''
+    known = lambda w: bool(w[2]) + bool(w[1]) + 2 * bool(w[1] and town_counts().get(w[1], collections.Counter())[
+        re.sub(r'[^A-Z ]', '', w[0].replace('ST. ', 'ST '))])
+    return max(votes, key=lambda w: (known(w) > 2, votes[w], known(w)))
+
+
 def printed_place(reading, x0, fields, town):
     #a printout's town, state and country in their own columns (1977's: STEVENS PT, WI, USA; OSLO 3, , NORWAY)
     city = ' '.join(best_words(reading, 'town', x0, fields, town)).upper()
@@ -964,7 +1062,7 @@ def read_lines(year):
             reading = readings(year).get((page, col, line[0]), {})
             x0 = setting(year, 'COLUMNS', page)[col][0]
             for words in [reading.get('c2', []), reading.get('c3', [])] + word_readings(reading):
-                d = digit_text(field_words(words, 'time', x0, fields_of(year, page, col)))
+                d = digit_text(field_words(words, 'time', x0, fields_of(year, page, col, line)))
                 if len(d) in n:
                     digits[i] = [d, d, '0' * len(d), [{ch: 0.0 if ch == c else 1.0 for ch in DIGITS} for c in d]]
                     break
@@ -973,7 +1071,7 @@ def read_lines(year):
     rows = []
     for (page, col, line, label), d in zip(lines, digits):
         x0 = setting(year, 'COLUMNS', page)[col][0]
-        fields = fields_of(year, page, col)
+        fields = fields_of(year, page, col, line)
         reading = readings(year).get((page, col, line[0]), {})
         mine = hand(year, page, col, line[0])
         name = mine.get('name') or ' '.join(best_words(reading, 'name', x0, fields, either))
@@ -981,6 +1079,8 @@ def read_lines(year):
             where = place_of(mine['town'].split())
         elif 'st' in fields:
             where = printed_place(reading, x0, fields, town)
+        elif 'town' in fields and setting(year, 'TOWN_COUNTRY', page):
+            where = country_town(reading, x0, fields)
         elif 'town' in fields:
             where = place_of(best_words(reading, 'town', x0, fields, town))
         else:
@@ -1016,14 +1116,24 @@ def read_lines(year):
             at = next((k for k, j in enumerate(order) if seconds(df.at[j, 'time']) > t), len(order))
             order.insert(at, i)
         df.loc[order, 'class_rank'] = class_ranks(df.loc[order])
+    #lines the scan has lost (a page's cut off foot) count in the ranks after them
+    for (p, c, y), lost in getattr(layout(year), 'RANK_SKIPS', {}).items():
+        at = df[(df['page'] == p) & (df['col'] == c) & ((df['top'] - y).abs() <= setting(year, 'LINE_PITCH', p) / 2)]
+        for label in at['label']:
+            after = (df['label'] == label) & (df['class_rank'] >= at['class_rank'].min())
+            df.loc[after, 'class_rank'] += lost
     #a skier listed in a class not theirs (1974's women's champion, among the men) has no class rank
     df.loc[df['age_group'] != [classes[l][1] for l in df['label']], 'class_rank'] = np.nan
     order = setting(year, 'NAME_ORDER')
     if order == 'last':
         df['raw_name'] = [separated(name).replace(',', ', ') for name in df['raw_name']]
-    df['raw_name'] = [' '.join(known_name(w, either) for w in name.upper().split()) for name in df['raw_name']]
+    #(a name HAND gives is as printed, so it isn't moved to a known one)
+    given = [bool(hand(year, p, c, t).get('name')) for p, c, t in zip(df['page'], df['col'], df['top'])]
+    df['raw_name'] = [name.upper() if g else ' '.join(known_name(w, either) for w in name.upper().split())
+                      for name, g in zip(df['raw_name'], given)]
     if setting(year, 'NEAR_NAMES', default=False):
-        df['raw_name'] = [re.sub(r'[A-Z]+', lambda m: near_name(m.group()), name) for name in df['raw_name']]
+        df['raw_name'] = [name if g else re.sub(r'[A-Z]+', lambda m: near_name(m.group()), name)
+                          for name, g in zip(df['raw_name'], given)]
     points = setting(year, 'POINTS', default=False)
     parts = pd.DataFrame([name_parts(t, order, points) for t in df['raw_name']], index=df.index)
     df[['name', 'first', 'last']] = parts[['name', 'first', 'last']]
@@ -1034,25 +1144,27 @@ def read_lines(year):
     return df
 
 
-def parse(year):
+def parse(year, race='birkie', pages=None):
+    #a race's results, read from its own pages, or from those of `pages` where its classes are printed there
+    use_race(pages or race)
     df = read_lines(year)
-    birkie = df[df['race'] == 'birkie'].copy()
-    birkie['secs'] = birkie['time'].map(seconds)
-    birkie['place'] = birkie.groupby('gender')['secs'].rank(method='first').astype('Int64')
-    birkie = birkie.sort_values(['gender', 'place'], ascending=[False, True])
-    birkie['age'] = ''
-    birkie['status'] = 'finished'
-    birkie['tech'] = ''
-    birkie['class_rank'] = birkie['class_rank'].astype('Int64')
-    return birkie[['place', 'bib', 'name', 'first', 'last', 'gender', 'age', 'age_group', 'city', 'state', 'country',
-                   'time', 'status', 'tech', 'class_rank', 'page', 'top']].reset_index(drop=True)
+    out = df[df['race'] == race].copy()
+    out['secs'] = out['time'].map(seconds)
+    out['place'] = out.groupby('gender')['secs'].rank(method='first').astype('Int64')
+    out = out.sort_values(['gender', 'place'], ascending=[False, True])
+    out['age'] = ''
+    out['status'] = 'finished'
+    out['tech'] = ''
+    out['class_rank'] = out['class_rank'].astype('Int64')
+    return out[['place', 'bib', 'name', 'first', 'last', 'gender', 'age', 'age_group', 'city', 'state', 'country',
+                'time', 'status', 'tech', 'class_rank', 'page', 'top']].reset_index(drop=True)
 
 
 def field_ink(year, page, col, line, field):
     #the ink in a field's own rows of a line
     gray = level_page(year, page)
     x0 = setting(year, 'COLUMNS', page)[col][0]
-    a, b = fields_of(year, page, col)[field]
+    a, b = fields_of(year, page, col, line)[field]
     top, bottom = field_rows(year, page, col, line, field)
     return int((gray[top:bottom, x0 + a:x0 + b] < 150).sum())
 
@@ -1089,8 +1201,9 @@ def class_ranks(c):
 
 #---------------------------------------------------------------- surveying a year's pages
 
-def survey(year, page):
+def survey(year, page, race='birkie'):
     #each line on a page, column by column, with tesseract's reading at twice the size: for finding the headings
+    use_race(race)
     for col in range(len(setting(year, 'COLUMNS', page))):
         for line in column_lines(year, page, col):
             img, x0 = line_crop(year, page, col, line)

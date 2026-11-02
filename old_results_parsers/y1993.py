@@ -1,8 +1,8 @@
 #1993 birch scroll: the men's dyno american birkebeiner results on pages 31-46 (places 1-3506) and the women's on pages
-#47-49 (1-520); the kortelopet follows on 50-58 and the class award lists are on 7-8. each results page has two halves of
-#110 rows (so two results to a printed line), each RANK, FINAL TIME, BIB, NAME, HOMETOWN, ST, NAT, CLASS ("M35-39"), class
-#RANK, 25% club ("Y"), PACE (min.sec per km over 52 km). one list per gender, placed by time; the year has no technique
-#column, so tech is left blank
+#47-49 (1-520); the kortelopet follows on 50-58 (read the same way, by k1993.py) and the class award lists are on 7-8.
+#each results page has two halves of 110 rows (so two results to a printed line), each RANK, FINAL TIME, BIB, NAME,
+#HOMETOWN, ST, NAT, CLASS ("M35-39"), class RANK, 25% club ("Y"), PACE (min.sec per km over 52 km). one list per gender,
+#placed by time; the year has no technique column, so tech is left blank
 #
 #birkie_archive's twice-size OCR (NNN_x2.tsv), which its typeset parser prefers, reads the rows well enough, but its
 #character list garbles the outlined page titles, so that parser never sees "BIRKEBEINER" and keeps nothing (the plain
@@ -17,6 +17,7 @@
 #   states: read whole against the shapes of the codes tesseract reads in towns known in that state
 import concurrent.futures
 import functools
+import importlib
 import itertools
 import json
 import math
@@ -37,13 +38,36 @@ SUFFIX = 'h3'
 SCALE = 3
 WHITELIST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.-'/& "
 OCR_WORKERS = 4
+#the list being read: the birkebeiner's, laid out by this module's TITLE, TABLE_ENDS, COLUMNS, TEXT_FROM, TEXT_TO,
+#BIB_RIGHT, STATE_COLUMN, NATION_COLUMN, PACE_DIGITS, GROUPS and KM, or the kortelopet's, which follows it in the same
+#typeface, laid out the same way by k1993.py. parse() and ocr() set it
+RACE_MODULES = {'birkie': 'y', 'kortie': 'k'}
+race = 'birkie'
+YEAR = 1993
+
+
+def layout():
+    return importlib.import_module('old_results_parsers.{}{}'.format(RACE_MODULES[race], YEAR))
+
+
+def use_race(name):
+    #what's kept of the pages (their ink) is kept by page, and the two lists' pages are apart, so nothing needs clearing
+    global race
+    race = name
 
 
 #---------------------------------------------------------------- pages and OCR
 
+#the word the results pages' titles have, and one they don't (the kortelopet's titles say KORTELOPET)
+TITLE = ('BIRKEBEINER', 'KORTE')
+#{page: the row of the scan below which there are only photos} for pages whose table stops partway down (page 49's
+#OCR reads its last rows well enough with its photos)
+TABLE_ENDS = {}
+
+
 def results_pages(year):
-    #{page: gender} for the birkebeiner results pages: the title says BIRKEBEINER (not KORTELOPET) and a column heading
-    #line (HOMETOWN) sits under it
+    #{page: gender} for the race's results pages: the title names the race (BIRKEBEINER, not KORTELOPET, for the
+    #birkebeiner) and a column heading line (HOMETOWN) sits under it
     pages = {}
     for page in range(1, 200):
         path = os.path.join(OCR_DIR, str(year), '{:03d}.tsv'.format(page))
@@ -52,7 +76,8 @@ def results_pages(year):
         words = ocr_words(year, page, scaled=False)
         top = words.loc[words['top'] < 0.2 * words['top'].max(), 'text'].str.upper()
         title = ' '.join(top)
-        if 'BIRKEBEINER' in title and 'KORTE' not in title and top.str.contains('HOMETOWN').any():
+        has, lacks = layout().TITLE
+        if has in title and lacks not in title and top.str.contains('HOMETOWN').any():
             pages[page] = 'F' if 'WOMEN' in title else 'M'
     return pages
 
@@ -119,6 +144,11 @@ def ocr_page(year, page):
         edge = np.array([rule_x(rule, tilt, y, h) for y in range(h)])[:, None]
         cols = np.arange(w)[None, :]
         pixels[(cols >= edge - 3) if half == 'L' else (cols <= edge + 4)] = 255
+        #and on a page whose table stops at photos, everything below it: tesseract reads a photo as lines of junk,
+        #and takes the last rows' lines apart with them
+        end = layout().TABLE_ENDS.get(page)
+        if end:
+            pixels[end:] = 255
         crop = Image.fromarray(pixels).crop((x0, 0, x1, h))
         crop = crop.resize((crop.width * SCALE, crop.height * SCALE), Image.LANCZOS)
         png = tsv[half][:-4] + '.png'
@@ -133,7 +163,8 @@ def ocr_page(year, page):
         json.dump(meta, f)
 
 
-def ocr(year):
+def ocr(year=YEAR, race='birkie'):
+    use_race(race)
     pages = sorted(results_pages(year))
     with concurrent.futures.ThreadPoolExecutor(OCR_WORKERS) as pool:
         list(pool.map(lambda p: ocr_page(year, p), pages))
@@ -157,10 +188,10 @@ def to_page(x, y, angle, width, height):
     return width / 2 + dx * math.cos(t) - dy * math.sin(t), height / 2 + dx * math.sin(t) + dy * math.cos(t)
 
 
-def column_of(rel, mid):
-    if TEXT_FROM <= rel < TEXT_TO:
-        return 'name' if rel < COLUMNS[4][1] else 'city'
-    return [c for c, x in COLUMNS if x <= mid][-1]
+def column_of(rel, mid, lay):
+    if lay.TEXT_FROM <= rel < lay.TEXT_TO:
+        return 'name' if rel < dict(lay.COLUMNS)['city'] else 'city'
+    return [c for c, x in lay.COLUMNS if x <= mid][-1]
 
 
 #the name and hometown columns' letters (a narrow condensed face) are about this wide, in page pixels, as fitted to the
@@ -250,7 +281,8 @@ def split_words(words, inked):
 def unread(pieces, inked, ref):
     #how many words of ink in the name column no reading's word sits on (a middle initial the OCR lost)
     lefts = {x for _, x in pieces}
-    return sum(1 for l, _ in inked if l - ref < COLUMNS[4][1] and l not in lefts)
+    city = dict(layout().COLUMNS)['city']
+    return sum(1 for l, _ in inked if l - ref < city and l not in lefts)
 
 
 def half_rows(year, page, half):
@@ -273,7 +305,8 @@ def half_rows(year, page, half):
     lines = []
     for _, line in words.groupby(['block_num', 'par_num', 'line_num']):
         line = line[line['text'].str.contains(r'[0-9A-Z]')]
-        if line.empty or centre(line) < start:
+        #(the headings' line, which can sit below start when tesseract runs HOMETOWN into the line above, is no result)
+        if line.empty or centre(line) < start or line['text'].str.contains('HOMETOWN').any():
             continue
         lines.append(line)
     #tesseract lines closer than half a row are one row
@@ -285,23 +318,24 @@ def half_rows(year, page, half):
         else:
             merged.append(line)
     a = ink(year, page, half)
+    lay = layout()
     rows = []
     for line in merged:
         y = centre(line)
         line = line.sort_values('x')
         rel = line['x'] - ref
         #(a word whose box starts a little left of the name column but is mostly in it is a name)
-        in_text = (rel + line['w'] / 2 >= TEXT_FROM) & (rel + line['w'] / 2 < TEXT_TO)
+        in_text = (rel + line['w'] / 2 >= lay.TEXT_FROM) & (rel + line['w'] / 2 < lay.TEXT_TO)
         text = line[in_text]
-        inked = ink_words(a, y, ref + TEXT_FROM - 5, ref + TEXT_TO)
-        fields = {c: [] for c, _ in COLUMNS}
+        inked = ink_words(a, y, ref + lay.TEXT_FROM - 5, ref + lay.TEXT_TO)
+        fields = {c: [] for c, _ in lay.COLUMNS}
         pieces = split_words(list(zip(text['text'], text['x'], text['x'] + text['w'])), inked)
         for t, x in pieces:
-            fields[column_of(x - ref, x - ref)].append(t)
+            fields[column_of(x - ref, x - ref, lay)].append(t)
         boxes = {}
         for _, w in line[~in_text].iterrows():
             r = w['x'] - ref
-            column = column_of(r, r + w['w'] / 2)
+            column = column_of(r, r + w['w'] / 2, lay)
             fields[column].append(w['text'])
             box = (w['x'], w['y'], w['x'] + w['w'], w['y'] + w['h'])
             old = boxes.get(column, box)
@@ -333,6 +367,8 @@ def other_readings(year, page, half, rows):
         meta = json.load(f)
     angle, width, height = meta[half]['angle'], meta['width'], meta['height']
     a = ink(year, page, half)
+    lay = layout()
+    city = dict(lay.COLUMNS)['city']
     ys = np.array([r['y'] for r in rows])
     out = {}
     for reading, suffix, scale in OTHER_READINGS:
@@ -347,14 +383,14 @@ def other_readings(year, page, half, rows):
                 rx, _ = to_page((w.left + w.width) / scale, mid, -angle, width, height)
                 k = int(np.argmin(np.abs(ys - ly)))
                 rel = (lx + rx) / 2 - rows[k]['ref']
-                if abs(ys[k] - ly) < 9 and TEXT_FROM <= rel < TEXT_TO:
+                if abs(ys[k] - ly) < 9 and lay.TEXT_FROM <= rel < lay.TEXT_TO:
                     found[k].append((w.text.upper(), lx, rx))
         out[reading] = []
         for r, words in zip(rows, found):
-            inked = ink_words(a, r['y'], r['ref'] + TEXT_FROM - 5, r['ref'] + TEXT_TO)
+            inked = ink_words(a, r['y'], r['ref'] + lay.TEXT_FROM - 5, r['ref'] + lay.TEXT_TO)
             pieces = split_words(sorted(words, key=lambda w: w[1]), inked)
-            out[reading].append((' '.join(t for t, x in pieces if x - r['ref'] < COLUMNS[4][1]),
-                                 ' '.join(t for t, x in pieces if x - r['ref'] >= COLUMNS[4][1]),
+            out[reading].append((' '.join(t for t, x in pieces if x - r['ref'] < city),
+                                 ' '.join(t for t, x in pieces if x - r['ref'] >= city),
                                  unread(pieces, inked, r['ref'])))
     return out
 
@@ -531,7 +567,7 @@ def read_glyph_bibs(df, year, templates):
         h0, top = r.corner
         cells = []
         for k in range(5):
-            left = h0 + BIB_RIGHT - 10 * k - 1 - SHIFT
+            left = h0 + layout().BIB_RIGHT - 10 * k - 1 - SHIFT
             if (a[top:top + 18, left + SHIFT + 2:left + SHIFT + 10] > 0.45).sum() < 20:
                 break
             cells.append(a[top - 1 - SHIFT:top - 1 + GLYPH_H + SHIFT, left:left + GLYPH_W + 2 * SHIFT])
@@ -630,6 +666,12 @@ def choose_state(read, glyph, shapes, country):
     return 'AB' if read == 'AL' and country == 'CAN' else read
 
 
+def in_nation(code, nation):
+    #whether one of the tables' own codes ('MAN', 'WIS') can be the state beside the nation read (none read: any)
+    code = PROVINCES.get(code, code)
+    return not nation or nation == ('CAN' if code in CA_PROVINCES else 'USA')
+
+
 #---------------------------------------------------------------- fields
 
 TIME_PARTS = re.compile(r'(\d+)\W+(\d\d)\W+(\d\d)\W+(\d)')
@@ -650,44 +692,55 @@ def time_text(d):
     return read_time(d) if len(d) == 6 else ''
 
 
+#the pace's digits: min.sec, never ten minutes or more (the birkebeiner's last skier's, 8:25:20.8, is 9.43)
+PACE_DIGITS = (3,)
+
+
 def read_pace(text):
-    #min.sec per km: '2.24', '241', '3-30'
+    #min.sec per km: '2.24', '241', '3-30', and where the list has them '10.42'
     d = digits(text)
-    if len(d) == 3 and int(d[1:]) < 60:
-        return int(d[0]) * 60 + int(d[1:])
+    if len(d) in layout().PACE_DIGITS and int(d[-2:]) < 60:
+        return int(d[:-2]) * 60 + int(d[-2:])
     return np.nan
 
 
 GROUPS = ['18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70+']
-UPPER = {g[-2:]: g for g in GROUPS[:-1]}
-LOWER = {g[:2]: g for g in GROUPS}
 
 
 def read_class(text):
     #the age class from 'M35-39', 'M3539', 'M85-39', '40-44', 'M70' (the whitelist has no '+'): the upper bound names
-    #the class, failing that the lower bound
+    #the class, failing that the lower bound ('F30-4' too)
+    groups = layout().GROUPS
+    upper, lower = {g[-2:]: g for g in groups[:-1]}, {g[:2]: g for g in groups}
     t = re.sub(r'^[^0-9]*?[MFH](?=[0-9OSBG])', '', text.upper().replace(' ', ''))
     d = digits(t.translate(DIGIT_LETTERS))
     if len(d) < 2:
         return ''
     if d.startswith('70') and len(d) <= 3:
         return '70+'
-    if len(d) >= 3 and d[-2:] in UPPER:
-        return UPPER[d[-2:]]
-    if len(d) >= 4 and d[:2] in LOWER:
-        return LOWER[d[:2]]
+    if len(d) >= 3 and d[-2:] in upper:
+        return upper[d[-2:]]
+    if len(d) >= 3 and d[:2] in lower:
+        return lower[d[:2]]
     return ''
 
 
 #---------------------------------------------------------------- the lists
 
-def counted(read, window=10):
+def counted(read, window=10, spread=None):
     #the numbers that count up by one down a list (places, or class ranks within a class), from what OCR read of them
     #(an int or None for each entry, in order). each entry's offset (reading minus position) is the one most entries
     #within window of it share, so misreads are outvoted. next to a change of offset (OCR lost or added an entry) an
-    #entry keeps a number only if its own reading has the offset of one side
+    #entry keeps a number only if its own reading has the offset of one side. with a spread, a reading whose offset is
+    #further than that from the list's middle one is no reading: the count only shifts by the few entries OCR lost or
+    #added, while a hundreds digit misread down a stretch of the list ('905' for 505 for rows on end) can outvote the
+    #right readings near it
     n = len(read)
     offset = [r - i if r is not None else None for i, r in enumerate(read)]
+    known = [o for o in offset if o is not None]
+    if spread is not None and known:
+        middle = np.median(known)
+        offset = [o if o is not None and abs(o - middle) <= spread else None for o in offset]
     shared = []
     for i in range(n):
         near = sorted((abs(j - i), offset[j]) for j in range(max(0, i - window), min(n, i + window + 1))
@@ -745,7 +798,7 @@ def variants(d):
 
 
 def fits_pace(seconds, pace):
-    return np.isnan(pace) or abs(seconds / KM - pace) <= PACE_SLACK
+    return np.isnan(pace) or abs(seconds / layout().KM - pace) <= PACE_SLACK
 
 
 def nondecreasing(values):
@@ -797,7 +850,8 @@ def repair_times(lst):
     #a time the shapes and tesseract read alike, in order with the others read alike, is kept. any other time has to
     #fall between those around it and fit its pace: the shapes' reading is kept if it does and every cell was sure;
     #else of the readings that do, the one tesseract and the shapes (best or second best digits) agree on, failing that
-    #the shapes' best, failing that the only one; else it's left blank
+    #the shapes' best, failing that the only one, failing that tesseract's own (the shapes were read off the digits'
+    #places when a speck before the hour was taken for its edge); else it's left blank
     n = len(lst)
     glyph, tess = lst['glyph'].tolist(), lst['time_digits'].tolist()
     margin, second = lst['glyph_margin'].tolist(), lst['glyph_second'].tolist()
@@ -824,7 +878,8 @@ def repair_times(lst):
         good = [t for t in time_candidates(glyph[i], margin[i], second[i], tess[i]) if fits(t)]
         t = time_text(tess[i])
         shapes = time_candidates(glyph[i], margin[i], second[i], '')
-        pick = t if t in good and t in shapes else g if g in good else good[0] if len(set(good)) == 1 else ''
+        pick = t if t in good and t in shapes else g if g in good else good[0] if len(set(good)) == 1 else \
+            t if t in good else ''
         out.append(pick)
         how.append('repaired' if pick else 'blank')
     return out, how
@@ -849,11 +904,11 @@ def repair_classes(groups, ranks):
             b, a = neighbours(i, groups[i])
             if r == b + 1 or (a is not None and r == a - 1):
                 continue
-        fits = [g for g in GROUPS if neighbours(i, g)[0] + 1 == r and neighbours(i, g)[1] == r + 1]
+        fits = [g for g in layout().GROUPS if neighbours(i, g)[0] + 1 == r and neighbours(i, g)[1] == r + 1]
         if len(fits) == 1:
             groups[i] = fits[0]
     out = [None] * len(groups)
-    for g in GROUPS:
+    for g in layout().GROUPS:
         at = [i for i, x in enumerate(groups) if x == g]
         for i, r in zip(at, counted([ranks[i] for i in at])):
             out[i] = r
@@ -884,11 +939,12 @@ def clean_words(text, keep_digits=False):
     return ' '.join(w for w in words if w)
 
 
-def parse(year):
+def parse(year=YEAR, race='birkie'):
+    use_race(race)
     pages = results_pages(year)
     missing = [p for p in pages if not all(os.path.exists(f) for f in [half_paths(year, p)[0], *half_paths(year, p)[1].values()])]
     if missing:
-        ocr(year)
+        ocr(year, race)
     rows = []
     for page, gender in sorted(pages.items()):
         for half in 'LR':
@@ -908,7 +964,7 @@ def parse(year):
     for gender, lst in df.groupby('gender', sort=False):
         lst = lst.reset_index(drop=True)
         ranks = [int(r) if r and len(r) <= 4 else None for r in lst['rank_read']]
-        lst['place'] = counted(ranks)
+        lst['place'] = counted(ranks, spread=10)
         lst['time'], lst['time_how'] = repair_times(lst)
         lst['group'] = lst['class'].map(read_class)
         lst['class_rank_read'] = lst['class_rank'].map(lambda t: int(digits(t)) if 0 < len(digits(t)) <= 3 else None)
@@ -927,12 +983,16 @@ def parse(year):
     df['city'] = [c[0] for c in df['cities']]
     #(junk the OCR ran into a code: 'WOUSA')
     read = df['country'].map(lambda t: re.sub(r'^[A-Z]+(?=USA$|CAN$)', '', re.sub(r'[^A-Z]', '', t.upper())))
-    glyphs, shapes = read_glyph_codes(df, year, [c if c in NATIONS else None for c in read], NATION_COLUMN, True)
+    lay = layout()
+    glyphs, shapes = read_glyph_codes(df, year, [c if c in NATIONS else None for c in read], lay.NATION_COLUMN, True)
     df['country'] = [choose_code(r, g, shapes, NATIONS) for r, g in zip(read, glyphs)]
     read = [read_state(t, c) for t, c in zip(df['state'], df['city'])]
     towns = known_towns()
-    sure = [s if s and ((compact(c), s) in towns or s in PROVINCES) else None for s, c in zip(read, df['city'])]
-    glyphs, shapes = read_glyph_codes(df, year, sure, STATE_COLUMN)
+    #(one of the tables' own codes is sure in its own nation: an 'MAN' read beside USA is a blotted MN, and a shape
+    #learnt from it alone fits the other MNs)
+    sure = [s if s and ((compact(c), s) in towns or (s in PROVINCES and in_nation(s, n))) else None
+            for s, c, n in zip(read, df['city'], df['country'])]
+    glyphs, shapes = read_glyph_codes(df, year, sure, lay.STATE_COLUMN)
     df['state'] = [choose_state(r, g, shapes, c) for r, g, c in zip(read, glyphs, df['country'])]
     df['city'] = [likeliest(c, lambda t: (compact(t), s) in towns) for c, s in zip(df['cities'], df['state'])]
     df.loc[df['state'].isin(US_STATES) & (df['country'] == ''), 'country'] = 'USA'

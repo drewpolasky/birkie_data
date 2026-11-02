@@ -104,7 +104,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 103,1032,"Konrad, Sarah K",Sarah K,Konrad,F,34,,Laramie,WY,USA,02:30:14.0,finished
 104,118,"Hebert, Ryan N",Ryan N,Hebert,M,28,,Eau Claire,WI,USA,02:30:26.7,finished
 105,139,"Hanson, Allen R",Allen R,Hanson,M,44,,Greenwood,MN,USA,02:30:27.9,finished
-106,1010,"Cecil-Johnson, Lynne",Lynne,Cecil-Johnson,F,40,,Bloomington,MN,USAWomen's Birkebeiner,02:30:30.2,finished
+106,1010,"Cecil-Johnson, Lynne",Lynne,Cecil-Johnson,F,40,,Bloomington,MN,USA,02:30:30.2,finished
 107,143,"Mommaerts, Jon C",Jon C,Mommaerts,M,32,,Marquette,MI,USA,02:30:30.5,finished
 108,1019,"Hollingsworth-Caldwell,",,Hollingsworth-Caldwell,F,30,,Windham,VT,USA,02:30:30.7,finished
 109,771,"Arenz, Devin F",Devin F,Arenz,M,24,,Cass Lake,MN,USA,02:30:31.8,finished
@@ -126,7 +126,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 125,154,"Brundage, Bill",Bill,Brundage,M,51,,Traverse City,MI,USA,02:31:38.5,finished
 126,147,"Baker, Jack E",Jack E,Baker,M,44,,Granite Falls,MN,USA,02:31:47.8,finished
 127,35,"Nicholson, Will",Will,Nicholson,M,23,,Duluth,MN,USA,02:31:59.5,finished
-128,1053,"Joder, Kristina",Kristina,Joder,F,23,,Salt Lake City,UT,USAWomen's Birkebeiner,02:32:12.9,finished
+128,1053,"Joder, Kristina",Kristina,Joder,F,23,,Salt Lake City,UT,USA,02:32:12.9,finished
 129,120,"Mullen, James E",James E,Mullen,M,45,,Hazelhurst,WI,USA,02:32:31.4,finished
 130,1009,"Dibiase, Susan",Susan,Dibiase,F,38,,Boulder,CO,USA,02:32:32.4,finished
 131,303,"Tumbleson, Jeff A",Jeff A,Tumbleson,M,37,,Bristol,WI,USA,02:32:57.3,finished
@@ -313,7 +313,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 312,516,"Loomis, Paul D",Paul D,Loomis,M,40,,Eau Claire,WI,USA,02:46:25.0,finished
 313,394,"Mannion, Jamie P",Jamie P,Mannion,M,44,,La Crosse,WI,USA,02:46:26.2,finished
 314,732,"Tremblay, Diane",Diane,Tremblay,F,32,,Hayward,WI,USA,02:46:26.6,finished
-315,1034,"Silbernick, Melinda D",Melinda D,Silbernick,F,46,,Maple Grove,MN,USAWomen's Birkebeiner,02:46:27.8,finished
+315,1034,"Silbernick, Melinda D",Melinda D,Silbernick,F,46,,Maple Grove,MN,USA,02:46:27.8,finished
 316,430,"Alms, Dan R",Dan R,Alms,M,41,,Minneapolis,MN,USA,02:46:27.9,finished
 317,535,"Anschutz, Paul C",Paul C,Anschutz,M,44,,Sturgeon Bay,WI,USA,02:46:31.8,finished
 318,3426,"Keim, Clayton",Clayton,Keim,M,19,,Sauk Rapids,MN,USA,02:46:38.7,finished
@@ -634,7 +634,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 633,11204,"Gorev, Kirill",Kirill,Gorev,M,38,,Sankt-petersburg,,,03:02:57.5,finished
 634,3383,"Benson, Buck",Buck,Benson,M,50,,Marais,MN,USA,03:02:59.4,finished
 635,3197,"Medo, Ryan J",Ryan J,Medo,M,18,,Wisconsin Rapids,WI,,03:03:00.6,finished
-636,3168,"Olsen, Nancy L",Nancy L,Olsen,F,37,,Grand Marais,MN,USAWomen's Birkebeiner,03:03:00.9,finished
+636,3168,"Olsen, Nancy L",Nancy L,Olsen,F,37,,Grand Marais,MN,USA,03:03:00.9,finished
 637,2144,"Fenelon, Geoff",Geoff,Fenelon,M,40,,,IL,USA,03:03:01.3,finished
 638,2442,"Chin, Richard R",Richard R,Chin,M,42,,St Paul,MN,USA,03:03:03.2,finished
 639,629,"Brooks, Ned",Ned,Brooks,M,37,,St Paul,MN,USA,03:03:03.7,finished
@@ -935,7 +935,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 934,2128,"Rattunde, William C",William C,Rattunde,M,44,,Madison,WI,USA,03:14:10.3,finished
 935,2518,"Bidwell, Jane E",Jane E,Bidwell,F,47,,Hayward,WI,USA,03:14:11.6,finished
 936,3169,"Bjerke, Michelle",Michelle,Bjerke,F,29,,Anchorage,AK,USA,03:14:12.0,finished
-937,1037,"Schroeder, Carmen C",Carmen C,Schroeder,F,46,,Sturgeon Bay,WI,USAWomen's Birkebeiner,03:14:12.3,finished
+937,1037,"Schroeder, Carmen C",Carmen C,Schroeder,F,46,,Sturgeon Bay,WI,USA,03:14:12.3,finished
 938,613,"Gardiner, David A",David A,Gardiner,M,42,,Maple Plain,MN,USA,03:14:13.7,finished
 939,3475,"Moore, Mark P",Mark P,Moore,M,37,,Nashotah,WI,USA,03:14:14.0,finished
 940,520,"Hokanson, John M",John M,Hokanson,M,46,,Maple Grove,MN,USA,03:14:22.7,finished
@@ -1008,7 +1008,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 1007,3433,"Carlson, Randall S",Randall S,Carlson,M,36,,Duluth,MN,USA,03:16:56.9,finished
 1008,2290,"Weyer, Kyle",Kyle,Weyer,M,19,,Loyal,WI,USA,03:17:00.5,finished
 1009,3321,"Truesdale, Dan",Dan,Truesdale,M,34,,Milwaukee,WI,USA,03:17:02.7,finished
-1010,4197,"Johnson, Mary Kay",Mary Kay,Johnson,F,43,,Chanhassen,MN,USAWomen's Birkebeiner,03:17:03.5,finished
+1010,4197,"Johnson, Mary Kay",Mary Kay,Johnson,F,43,,Chanhassen,MN,USA,03:17:03.5,finished
 1011,2092,"Bakkum, Dellin R",Dellin R,Bakkum,M,52,,Spooner,WI,USA,03:17:06.8,finished
 1012,5450,"Dossett, Bill",Bill,Dossett,M,35,,Minneapolis,MN,USA,03:17:12.6,finished
 1013,3332,"Adelmeyer, Keith",Keith,Adelmeyer,M,44,,Lomira,WI,USA,03:17:12.7,finished
@@ -1555,7 +1555,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 1554,6225,"Smith, Richard R",Richard R,Smith,M,40,,Stoughton,WI,USA,03:37:57.6,finished
 1555,384,"Kirby, Scott R",Scott R,Kirby,M,45,,Burnsville,MN,USA,03:38:10.4,finished
 1556,5270,"Bowe, Allen M",Allen M,Bowe,M,42,,Chippewa Falls,WI,,03:38:15.2,finished
-1557,9166,"Summers, Kelly H",Kelly H,Summers,F,39,,Grand Marais,MN,USAWomen's Birkebeiner,03:38:20.5,finished
+1557,9166,"Summers, Kelly H",Kelly H,Summers,F,39,,Grand Marais,MN,USA,03:38:20.5,finished
 1558,5239,"Timken, Mark R",Mark R,Timken,M,41,,,WI,USA,03:38:22.7,finished
 1559,4120,"Henriksen, Tina M",Tina M,Henriksen,F,37,,Plymouth,WI,USA,03:38:23.5,finished
 1560,321,"Schneider, William J",William J,Schneider,M,42,,Appleton,WI,USA,03:38:26.1,finished
@@ -1744,7 +1744,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 1743,4103,"Johansen, Mary E",Mary E,Johansen,F,44,,Hayward,WI,USA,03:47:21.4,finished
 1744,11011,"Seay, R Kevin",R Kevin,Seay,M,38,,Sussex,WI,USA,03:47:23.5,finished
 1745,3493,"Prucha, Michael J",Michael J,Prucha,M,33,,Mukwonago,WI,USA,03:47:24.8,finished
-1746,4223,"Kang, Reet",Reet,Kang,F,38,,St Louis Park,MN,USAWomen's Birkebeiner,03:47:27.2,finished
+1746,4223,"Kang, Reet",Reet,Kang,F,38,,St Louis Park,MN,USA,03:47:27.2,finished
 1747,4441,"Bergin, Kathy",Kathy,Bergin,F,52,,Cable,WI,USA,03:47:28.4,finished
 1748,4345,"Thal, Richard L",Richard L,Thal,M,51,,Madison,WI,USA,03:47:28.9,finished
 1749,4222,"Cody, Elizabeth S",Elizabeth S,Cody,F,46,,Boise,ID,USA,03:47:30.3,finished
@@ -1965,7 +1965,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 1964,3453,"Tremaine, William J",William J,Tremaine,M,51,,Rochester,MN,USA,03:59:23.3,finished
 1965,4310,"Paulik, Patrick",Patrick,Paulik,M,32,,Mercer,WI,USA,03:59:31.4,finished
 1966,5315,"Wasielewski, Jared",Jared,Wasielewski,M,23,,Eagle,WI,USA,03:59:32.4,finished
-1967,5388,"Queenan, Katie",Katie,Queenan,F,29,,St Louis Park,MN,USAWomen's Birkebeiner,03:59:45.9,finished
+1967,5388,"Queenan, Katie",Katie,Queenan,F,29,,St Louis Park,MN,USA,03:59:45.9,finished
 1968,5227,"Curry, George V",George V,Curry,M,45,,Schaumburg,IL,USA,03:59:48.3,finished
 1969,5223,"Puetz, Jeff",Jeff,Puetz,M,40,,West Bend,WI,USA,03:59:52.1,finished
 1970,5348,"Kelker, Steve",Steve,Kelker,M,34,,Minneapolis,MN,USA,03:59:54.3,finished
@@ -1994,7 +1994,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 1993,4413,"Kohn, Leon D",Leon D,Kohn,M,65,,Duluth,MN,USA,04:01:08.1,finished
 1994,4172,"Schmidt, John",John,Schmidt,M,55,,Minneapolis,MN,USA,04:01:08.3,finished
 1995,373,"Remington, Patrick",Patrick,Remington,M,48,,Madison,WI,USA,04:01:12.0,finished
-1996,5314,"Kelly, Carrie",Carrie,Kelly,F,46,,Bay,WI,USAWomen's Birkebeiner,04:01:12.8,finished
+1996,5314,"Kelly, Carrie",Carrie,Kelly,F,46,,Bay,WI,USA,04:01:12.8,finished
 1997,5124,"Bachmeier, Dean E",Dean E,Bachmeier,M,44,,Edina,MN,USA,04:01:17.3,finished
 1998,5087,"Egan, Zach",Zach,Egan,M,33,,Chicago,IL,USA,04:01:17.9,finished
 1999,5479,"Rist, Harold A",Harold A,Rist,M,45,,Lyndon Station,WI,,04:01:21.3,finished
@@ -2280,7 +2280,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2279,4435,"Roll, Brian M",Brian M,Roll,M,46,,Palos Heights,IL,USA,04:19:30.6,finished
 2280,6162,"Wallschlaeger, Wolfgang",Wolfgang,Wallschlaeger,M,53,,Combined Locks,WI,,04:19:36.1,finished
 2281,5274,"Stricker, Tom L",Tom L,Stricker,M,35,,,WI,USA,04:19:36.2,finished
-2282,4364,"Hausladen, Mary Ellen",Mary Ellen,Hausladen,F,39,,St Louis Park,MN,USAWomen's Birkebeiner,04:19:38.4,finished
+2282,4364,"Hausladen, Mary Ellen",Mary Ellen,Hausladen,F,39,,St Louis Park,MN,USA,04:19:38.4,finished
 2283,11114,"Bohl, Al W",Al W,Bohl,M,42,,New Richmond,WI,,04:19:39.0,finished
 2284,4011,"Ellertson, Dennis R",Dennis R,Ellertson,M,54,,,IL,USA,04:19:47.9,finished
 2285,3404,"Rude, Robert T",Robert T,Rude,M,59,,Cumberland,RI,USA,04:19:51.3,finished
@@ -2720,7 +2720,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2719,5334,"Poethke, Steven K",Steven K,Poethke,M,42,,Rice Lake,WI,USA,05:04:10.5,finished
 2720,5511,"Chernik, Roger C",Roger C,Chernik,M,55,,Racine,WI,USA,05:04:11.5,finished
 2721,3110,"Heille, Michael F",Michael F,Heille,M,42,,Avon,IL,USA,05:04:29.8,finished
-2722,5268,"Torkelson, Marie J",Marie J,Torkelson,F,46,,Cannon Falls,MN,USAWomen's Birkebeiner,05:04:36.3,finished
+2722,5268,"Torkelson, Marie J",Marie J,Torkelson,F,46,,Cannon Falls,MN,USA,05:04:36.3,finished
 2723,8208,"Hed, Wally G",Wally G,Hed,M,69,,Cambridge,MN,USA,05:04:41.8,finished
 2724,2525,"Stamm, Bennie",Bennie,Stamm,M,55,,Argyle,WI,USA,05:04:56.6,finished
 2725,11012,"Schultz, Carl E",Carl E,Schultz,M,42,,Delafield,WI,USA,05:05:15.1,finished
@@ -2886,7 +2886,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2885,6066,"Einspanier, Andrew T",Andrew T,Einspanier,M,51,,Iron River,WI,USA,05:40:30.8,finished
 2886,7298,"Flottmeyer, William P",William P,Flottmeyer,M,36,,La Crosse,WI,USA,05:41:04.1,finished
 2887,4518,"Chubb, Robert W",Robert W,Chubb,M,59,,Cumberland,WI,USA,05:41:32.4,finished
-2888,8196,"Hawkins, Sally J",Sally J,Hawkins,F,43,,Park,MN,USAWomen's Birkebeiner,05:41:40.2,finished
+2888,8196,"Hawkins, Sally J",Sally J,Hawkins,F,43,,Park,MN,USA,05:41:40.2,finished
 2889,3023,"Lohmann, Paul M",Paul M,Lohmann,M,49,,Woodbury,MN,USA,05:41:54.0,finished
 2890,6335,"Degnan, Thomas J",Thomas J,Degnan,M,43,,Woodridge,IL,USA,05:42:20.7,finished
 2891,9137,"Shelton, Paul",Paul,Shelton,M,43,,Hinsdale,IL,USA,05:42:50.9,finished
@@ -2895,12 +2895,12 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2894,6379,"Engh, Michael",Michael,Engh,M,44,,Wayzata,MN,USA,05:43:45.7,finished
 2895,8095,"Friedman, Mark L",Mark L,Friedman,M,51,,Naperville,IL,USA,05:44:02.6,finished
 2896,6190,"Sullivan, Maureen M",Maureen M,Sullivan,F,32,,St Paul,MN,USA,05:44:40.1,finished
-2897,7056,"Gerst, Cynthia G",Cynthia G,Gerst,F,42,,Coon Rapids,MN,USAWomen's Birkebeiner,05:44:46.8,finished
+2897,7056,"Gerst, Cynthia G",Cynthia G,Gerst,F,42,,Coon Rapids,MN,USA,05:44:46.8,finished
 2898,8000,"Agostini, Laura M",Laura M,Agostini,F,43,,Madison,WI,USA,05:45:11.9,finished
 2899,6315,"Vandenberg, Al R",Al R,Vandenberg,M,66,,Green Bay,WI,USA,05:45:13.9,finished
 2900,11041,"Sween, Christian R",Christian R,Sween,M,32,,Wausau,WI,USA,05:45:37.6,finished
 2901,7180,"Daehler, Dwayne P",Dwayne P,Daehler,M,58,,Cambridge,MN,USA,05:46:35.2,finished
-2902,6112,"Thymian, Susan M",Susan M,Thymian,F,56,,Moundsview,MN,USAWomen's Birkebeiner,05:46:36.3,finished
+2902,6112,"Thymian, Susan M",Susan M,Thymian,F,56,,Moundsview,MN,USA,05:46:36.3,finished
 2903,7272,"Thompson, Jeffrey A",Jeffrey A,Thompson,M,46,,Joliet,IL,USA,05:46:45.3,finished
 2904,9114,"Bell, Brigette A",Brigette A,Bell,F,43,,Elmhurst,IL,USA,05:47:16.5,finished
 2905,7007,"Harshberger, Bruce E",Bruce E,Harshberger,M,58,,Willmar,MN,USA,05:47:23.4,finished
@@ -2941,7 +2941,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2940,8149,"Brown, Willis",Willis,Brown,M,49,,Madison,WI,USA,05:58:31.3,finished
 2941,8059,"Anderson, Jay L",Jay L,Anderson,M,36,,Eau Claire,WI,USA,05:59:21.9,finished
 2942,7200,"Anders, Thomas J",Thomas J,Anders,M,43,,Conrath,WI,USA,05:59:36.6,finished
-2943,8063,"Wilkens, Deanna R",Deanna R,Wilkens,F,48,,Maple Grove,MN,USAWomen's,06:00:40.1,finished
+2943,8063,"Wilkens, Deanna R",Deanna R,Wilkens,F,48,,Maple Grove,MN,USA,06:00:40.1,finished
 2944,7178,"Burch, Robin R",Robin R,Burch,F,49,,Eau Claire,WI,USA,06:01:18.3,finished
 2945,10150,"Morrissey, Tom",Tom,Morrissey,M,35,,Elmhurst,IL,USA,06:01:18.6,finished
 2946,7051,"Bethke, Janet O",Janet O,Bethke,F,43,,Eau Claire,WI,USA,06:01:20.1,finished
@@ -2970,7 +2970,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 2969,8150,"Peickert, Wilfried R",Wilfried R,Peickert,M,65,,Madison,WI,USA,06:08:04.4,finished
 2970,11124,"Driscoll, Kevin",Kevin,Driscoll,M,24,,Madison,WI,USA,06:08:42.7,finished
 2971,7192,"Paulu, Boyd R",Boyd R,Paulu,M,52,,Arden Hills,MN,USA,06:08:45.2,finished
-2972,9102,"Walker, Tina",Tina,Walker,F,26,,St Louis Park,MN,USAWomen's Birkebeiner,06:09:20.9,finished
+2972,9102,"Walker, Tina",Tina,Walker,F,26,,St Louis Park,MN,USA,06:09:20.9,finished
 2973,8200,"Boebel, Steven L",Steven L,Boebel,M,46,,Brookfield,WI,USA,06:09:36.7,finished
 2974,6175,"Gosa Jr, Gerald J",Gerald J,Gosa Jr,M,49,,Kewaskum,WI,USA,06:10:10.3,finished
 2975,10111,"Wray, Mary E",Mary E,Wray,F,49,,London,,GBR,06:10:32.5,finished
@@ -3016,7 +3016,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 3015,10146,"Krause, Kevin R",Kevin R,Krause,M,32,,Walworth,WI,USA,06:28:49.9,finished
 3016,3371,"Thompson, Mark C",Mark C,Thompson,M,44,,Sun Prairie,WI,USA,06:28:52.0,finished
 3017,11136,"Barrett, Bruce P",Bruce P,Barrett,M,41,,Madison,WI,USA,06:28:53.2,finished
-3018,8071,"Johnson, Judie M",Judie M,Johnson,F,46,,Grand Marais,MN,USAWomen's,06:29:12.1,finished
+3018,8071,"Johnson, Judie M",Judie M,Johnson,F,46,,Grand Marais,MN,USA,06:29:12.1,finished
 3019,8102,"Palma, Beth Marie",Beth Marie,Palma,F,41,,Washburn,WI,USA,06:29:43.3,finished
 3020,8144,"Means, James W",James W,Means,M,42,,West Chicago,IL,USA,06:31:04.1,finished
 3021,9160,"Abd-al-Haleem, Umar",Umar,Abd-al-Haleem,M,57,,Minneapolis,MN,USA,06:31:28.5,finished
@@ -3035,7 +3035,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 3034,7297,"Kundert, Kevin A",Kevin A,Kundert,M,41,,Oshkosh,WI,USA,06:35:17.5,finished
 3035,6104,"Webb, David C",David C,Webb,M,62,,Wisc Rapids,WI,USA,06:35:39.7,finished
 3036,10070,"Dexheimer, Jeffrey R",Jeffrey R,Dexheimer,M,22,,White Bear Lake,MN,,06:36:13.8,finished
-3037,10069,"Petersen, Jennifer",Jennifer,Petersen,F,19,,Little Canada,MN,USAWomen's Birkebeiner,06:36:14.0,finished
+3037,10069,"Petersen, Jennifer",Jennifer,Petersen,F,19,,Little Canada,MN,USA,06:36:14.0,finished
 3038,6242,"Bonneville, John L",John L,Bonneville,M,54,,Rice Lake,WI,USA,06:38:11.3,finished
 3039,9155,"Callies, Amy",Amy,Callies,F,28,,Milwaukee,WI,USA,06:38:43.1,finished
 3040,8126,"Okoniewski, Steve J",Steve J,Okoniewski,M,52,,Green Bay,WI,USA,06:39:19.8,finished
@@ -3115,7 +3115,7 @@ place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
 3114,8131,"Cohen, Michael D",Michael D,Cohen,M,39,,Mequon,WI,USA,07:41:12.9,finished
 3115,8195,"Riendl, Anne M",Anne M,Riendl,F,52,,Waukesha,WI,USA,07:41:25.2,finished
 3116,10152,"Roberts, Michael A",Michael A,Roberts,M,45,,Skokie,IL,USA,07:43:46.8,finished
-3117,10080,"Wittig, Dawn D",Dawn D,Wittig,F,48,,Sturgeon Bay,WI,USAWomen's Birkebeiner,07:44:39.1,finished
+3117,10080,"Wittig, Dawn D",Dawn D,Wittig,F,48,,Sturgeon Bay,WI,USA,07:44:39.1,finished
 3118,10101,"Garretson, Skip",Skip,Garretson,M,46,,Arden Hills,MN,USA,07:48:07.0,finished
 3119,9079,"Wittig, Fred",Fred,Wittig,M,60,,Sturgeon Bay,WI,USA,07:54:26.0,finished
 3120,8127,"Mc Alpine, James B",James B,Mc Alpine,M,62,,Bolton,MA,USA,07:54:50.0,finished

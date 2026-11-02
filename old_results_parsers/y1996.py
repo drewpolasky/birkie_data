@@ -22,8 +22,12 @@
 #one free place among a line's readings, or as many free places as lines between two kept ones); the class ranks are
 #checked the same way within each class. names and towns are picked from four readings: the known ones from other
 #years first, else the one the others are the likeliest misreadings of
+#
+#the kortelopet's list (k1996.py) is printed the same way on pages of its own and read by the same code, with its own
+#pages, columns, classes and length swapped in by use_race()
 import concurrent.futures
 import functools
+import importlib
 import json
 import math
 import os
@@ -55,8 +59,13 @@ NATIONS = {'USA', 'CAN', 'GER', 'NOR', 'SWE', 'FIN', 'ITA', 'AUT', 'SUI', 'FRA',
 PROVINCES = {'ONT': 'ON', 'MAN': 'MB', 'ALB': 'AB', 'SAS': 'SK', 'SASK': 'SK', 'QUE': 'QC', 'PQ': 'QC'}
 AGES = ['18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70-74', '75-79',
         '80-84', '85-89']
-#pace is the time over 52 km, in whole seconds per km rounded down
+#pace is the time over 52 km, in whole seconds per km rounded down, and the minutes a km it can show
 KM = 52
+PACE_MINUTES = (2, 12)
+#halves of a page with no results (a photo), as {page: (half, ...)}
+NO_RESULTS = {}
+#the distance between the two halves' NAT columns, for a half whose own can't be found
+HALF_STEP = 1157
 #readings of each strip, and the whole page's
 SOURCES = ['s2', 's3', 'f2']
 #readings of the name and hometown columns in chunks, and the order they're trusted in when they all differ (by the
@@ -92,11 +101,19 @@ def nat_lines(w):
     fits = []
     for half in (nat[nat['left'] < mid], nat[nat['left'] >= mid]):
         x, y = half['left'].values.astype(float), half['top'].values.astype(float)
+        if len(x) < 10:
+            fits.append(None)
+            continue
         keep = np.abs(x - np.median(x)) < 40
         for _ in range(3):
             b, a = np.polyfit(y[keep], x[keep], 1)
             keep = np.abs(x - (a + b * y)) < 8
         fits.append((a, b))
+    #a half with no results beside one that has them (a photo in its place): the other's line, a half step over
+    if fits[0] is None:
+        fits[0] = (fits[1][0] - HALF_STEP, fits[1][1])
+    if fits[1] is None:
+        fits[1] = (fits[0][0] + HALF_STEP, fits[0][1])
     return fits
 
 
@@ -187,6 +204,8 @@ def page_rows(page):
     gw = glyph_words(page)
     rows = []
     for half in (0, 1):
+        if half in NO_RESULTS.get(page, ()):
+            continue
         hw = w[w['half'] == half]
         centers = lines_of(hw)
         if not len(centers):
@@ -217,8 +236,8 @@ def page_rows(page):
     return rows
 
 
-def raw_rows(pages=PAGES):
-    return pd.DataFrame([r for p in pages for r in page_rows(p)])
+def raw_rows(pages=None):
+    return pd.DataFrame([r for p in (PAGES if pages is None else pages) for r in page_rows(p)])
 
 
 #---------------------------------------------------------------- fields
@@ -252,7 +271,7 @@ def read_pace(text):
     if not m:
         d = num(t)
         m = re.fullmatch(r'(\d{1,2})(\d\d)', d) if len(d) in (3, 4) else None
-    if not m or int(m.group(2)) > 59 or not 2 <= int(m.group(1)) <= 12:
+    if not m or int(m.group(2)) > 59 or not PACE_MINUTES[0] <= int(m.group(1)) <= PACE_MINUTES[1]:
         return np.nan
     return int(m.group(1)) * 60 + int(m.group(2))
 
@@ -798,7 +817,8 @@ def finish(raw):
     return df.assign(status='finished', tech='')
 
 
-def parse(year=YEAR):
+def parse(year=YEAR, race='birkie'):
+    use_race(race)
     return finish(raw_rows())
 
 
@@ -830,9 +850,10 @@ NEIGHBOURS = 9
 OCR_WORKERS = 4
 
 
-def ocr(year=YEAR):
+def ocr(year=YEAR, race='birkie'):
     #the whole page first, since the page's lean and its columns come from that reading, and the glyphs last, since
     #the characters they're told apart by are those the other readings agree on
+    use_race(race)
     with concurrent.futures.ThreadPoolExecutor(OCR_WORKERS) as pool:
         list(pool.map(read_page, PAGES))
         jobs = [job for page in PAGES for job in strip_jobs(page)]
@@ -887,7 +908,7 @@ def level(page):
 def strip_jobs(page):
     level(page)
     return [(page, name, box, STRIPS[name[1:]][2], scale) for name, box in geometry(page)['strips'].items()
-            for scale in STRIPS[name[1:]][3]]
+            for scale in STRIPS[name[1:]][3] if 'LR'.index(name[0]) not in NO_RESULTS.get(page, ())]
 
 
 def read_strip(job):
@@ -980,6 +1001,8 @@ def page_glyphs(page):
     im = np.array(Image.open(ocr_path(page, 'level', '.png'))) < 128
     out = []
     for half in (0, 1):
+        if half in NO_RESULTS.get(page, ()):
+            continue
         nat = g['nat'][half]
         for field, a, b in GLYPH_FIELDS:
             x0, x1 = int(round(nat + a)), int(round(nat + b))
@@ -1084,3 +1107,17 @@ def read_glyphs():
             'dist']
     for p, grp in glyphs.groupby('page'):
         grp.sort_values(['half', 'line_y', 'left'])[cols].round(3).to_csv(ocr_path(p, 'glyphs'), sep='\t', index=False)
+
+
+#---------------------------------------------------------------- the kortelopet
+
+#what the kortelopet's list (k1996.py) has of its own: its pages, the columns right of the nation, its classes and its
+#length. the birkebeiner's are kept to switch back to
+LAYOUT = ('PAGES', 'EDGES', 'AGES', 'KM', 'PACE_MINUTES', 'NO_RESULTS', 'STRIPS', 'GLYPH_FIELDS')
+BIRKIE = {name: globals()[name] for name in LAYOUT}
+
+
+def use_race(race):
+    #read the birkebeiner's list ('birkie') or the kortelopet's ('kortie')
+    layout = BIRKIE if race == 'birkie' else vars(importlib.import_module('old_results_parsers.k{}'.format(YEAR)))
+    globals().update({name: layout[name] for name in LAYOUT})

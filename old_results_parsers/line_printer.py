@@ -51,6 +51,10 @@ DIGITS = '0123456789'
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 OCR_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.-/%'&"
 OCR_WORKERS = 4
+#the list being read: the birkebeiner's, laid out by each year's y<year>.py, or the kortelopet's, printed after it in
+#the same printer's table, by its k<year>.py. parse() and ocr() set it
+RACE_MODULES = {'birkie': 'y', 'kortie': 'k'}
+race = 'birkie'
 
 
 class Printer:
@@ -174,6 +178,8 @@ class Printer:
     time_columns = (15, 17, 18, 20, 21, 23)
     pace_columns = (105, 106, 108, 109)
     age_columns = (90, 91, 93, 94)
+    #the age classes the table prints (the kortelopet's start with its juniors')
+    ages = ('18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70+')
     #the characters tesseract may read (lower case letters are learned as such, and read as their capitals), and the
     #marks learned from its reading too, where the printer puts them in names (1981's and 1982's commas and points)
     ocr_characters = OCR_CHARACTERS
@@ -191,6 +197,10 @@ class Printer:
     #among small letters is an l, and a name or town word not seen in the clean results is the one some of its I's as L
     #make, where there's one
     small_l = False
+    #where the network reads every one of a capital as another (1989's kortelopet, Y as T): {letter read: letter
+    #meant}, a name or town word not seen in the clean results being the one some of them as the letter meant make,
+    #as for small_l
+    swapped = {}
     #{country as printed: its code}, where the printer writes the country out
     nation_names = {}
     #the characters each column can hold, so a 0 isn't read as a D in a time, or an M as an N in the sex column
@@ -210,7 +220,7 @@ LINE_PRINTER = Printer()
 
 
 def layout(year):
-    #the year's module:
+    #the year's module for the race being read (k<year>.py for the kortelopet, laid out the same way):
     #   PAGES          {page: gender (X for men and women in one list), or a gender for each block where a list ends
     #                  partway, or a tuple with the genders of each block's lists, top down, where a block holds the
     #                  end of one and the start of the next ('MF')}
@@ -243,13 +253,30 @@ def layout(year):
     #                  where it cuts them aslant, each line keeping those wholly on the scan}
     #   HAND           {(page, block, the line's top): what the scan can't give}: 'drop' for a line that's no result (a
     #                  correction pasted over the table), or the fields as they should be
+    #   UNFOUND        {(gender, place): the result's fields}, for a line printed in another face or set off the
+    #                  rest that isn't found as a line, its place kept by the gap it leaves
     #   SURNAME_FIRST  True where the name is printed surname first
     #and for a page that sets the same table's fields otherwise (a first page printed upright):
     #   PAGE_PRINTERS  {page: its Printer}
     #   BLOCK_EDGES    {page: each block's left edge}
     #   COLUMN_MAPS    {page: [(first column, column after the last, the year's column the first goes to, and
     #                  'right' for a field printed left aligned that the year prints right aligned)]}
-    return importlib.import_module('old_results_parsers.y{}'.format(year))
+    return importlib.import_module('old_results_parsers.{}{}'.format(RACE_MODULES[race], year))
+
+
+def use_race(name):
+    #read the other race's list: what's kept of the pages' geometry is its layout's, so it's cleared
+    global race
+    if name != race:
+        race = name
+        for kept in (upright, on_scan, block_ink, blocks, block_lines, block_glyphs):
+            kept.cache_clear()
+
+
+def page_file(year, page, name):
+    #a file kept for one of the year's pages, in old_results/ocr/<year>/: <page>_<name>, or <page>_kortie_<name> for
+    #the kortelopet's reading (a page can hold the end of one list and the start of the other)
+    return os.path.join(ocr_dir(year), '{:03d}{}_{}'.format(page, '' if race == 'birkie' else '_' + race, name))
 
 
 def page_printer(year, page):
@@ -912,7 +939,7 @@ def block_glyphs(year, page, k):
 
 def tesseract_words(year, page, k, scale=2):
     #tesseract's words in the block, boxes in the upright page's pixels
-    path = os.path.join(ocr_dir(year), '{:03d}_b{}.tsv'.format(page, k + 1))
+    path = page_file(year, page, 'b{}.tsv'.format(k + 1))
     if not os.path.exists(path):
         return pd.DataFrame(columns=['text', 'left', 'top', 'width', 'height', 'conf'])
     words = pd.read_csv(path, sep='\t', quoting=3, dtype={'text': str}, keep_default_na=False)
@@ -1125,9 +1152,6 @@ def capital_i(text, alt, lettered):
                         alt[i, j], text[i, j] = text[i, j], want
 
 
-VALID_AGES = ['1824', '2529', '3034', '3539', '4044', '4549', '5054', '5559', '6064', '6569']
-
-
 def pinned_cells(keys, text, p, pace_km):
     #(line, column, digit) that the tables pin down whatever the reading: the leading digits of a time that the times
     #placed just before and after it share, the PACE column's digits that every time within a second or so of the
@@ -1154,9 +1178,10 @@ def pinned_cells(keys, text, p, pace_km):
                     chars = {pace[j + (j >= 2)] for pace in paces}
                     if len(chars) == 1 and chars != {' '}:
                         out.append((n, col, chars.pop()))
+    ages = [a.replace('-', '') for a in p.ages if '-' in a]
     for n, line in enumerate(lines):
         age = ''.join(line[c] for c in p.age_columns)
-        close = [a for a in VALID_AGES if sum(x == y for x, y in zip(a, age)) >= 3]
+        close = [a for a in ages if sum(x == y for x, y in zip(a, age)) >= 3]
         if len(close) == 1:
             out += [(n, c, ch) for c, ch in zip(p.age_columns, close[0])]
     return out
@@ -1343,7 +1368,7 @@ def read_year(year):
 
 
 def grid_path(year, page):
-    return os.path.join(ocr_dir(year), '{:03d}_grid.tsv'.format(page))
+    return page_file(year, page, 'grid.tsv')
 
 
 def grid(year):
@@ -1365,7 +1390,6 @@ def grid(year):
 
 #---------------------------------------------------------------- the results
 
-AGES = ['18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70+']
 PROVINCES = {'ONT': 'ON', 'MAN': 'MB', 'QUE': 'QC', 'QU': 'QC', 'SAS': 'SK', 'SA': 'SK', 'SASK': 'SK', 'ALT': 'AB',
              'ALB': 'AB', 'BC': 'BC', 'NB': 'NB', 'NS': 'NS', 'PEI': 'PE', 'NFL': 'NL'}
 #the first three digits of each state's zip codes
@@ -1605,8 +1629,10 @@ def class_label(row, gender, p, codes=None, code=None, alt=None):
         for js in itertools.combinations(weak, k):
             t = ''.join(alt[j] if j in js else ch for j, ch in enumerate(text))[1:]
             m = re.fullmatch(r'\s*[MF](\d\d)[- ](\d\d)\s*', t)
-            age = '{}-{}'.format(*m.groups()) if m else '70+' if re.fullmatch(r'\s*[MF]70[-+]\s*', t) else ''
-            if age in AGES:
+            #(and an open class, 70+, or the 1986 kortelopet's 19+)
+            over = re.fullmatch(r'\s*[MF](\d\d)[-+]\s*', t)
+            age = '{}-{}'.format(*m.groups()) if m else over.group(1) + '+' if over else ''
+            if age in p.ages:
                 found.setdefault(k, set()).add(age)
         if len(found.get(k, ())) == 1:
             return '{} {}'.format(gender, found[k].pop())
@@ -1797,14 +1823,20 @@ def field_text(row, field, p, unsure=2, common=3, surname_first=False):
                 counts = first if named and m is named[0] else last if named and m is named[-1] else either
         if counts[word]:
             continue
-        if p.small_l and 'I' in word[1:]:
-            #(a word whose small l's are read as I, BIII: the word seen most often of those some of them as L make)
-            js = [j for j in range(1, len(word)) if word[j] == 'I']
+        #(a word whose small l's are read as I, BIII: the word seen most often of those some of them as L make. and the
+        #same for a capital read as another, from the word's first letter)
+        swaps = [(1, 'I', 'L')] if p.small_l and 'I' in word[1:] else []
+        swaps += [(0, read, meant) for read, meant in p.swapped.items() if read in word]
+        fits = {}
+        for first_j, read, meant in swaps:
+            js = [j for j in range(first_j, len(word)) if word[j] == read]
             fits = {w: counts[w] for k in range(1, len(js) + 1) for chosen in itertools.combinations(js, k)
-                    for w in [''.join('L' if j in chosen else ch for j, ch in enumerate(word))] if counts[w] >= common}
+                    for w in [''.join(meant if j in chosen else ch for j, ch in enumerate(word))] if counts[w] >= common}
             if fits:
-                chars[start:start + len(word)] = max(fits, key=fits.get)
-                continue
+                break
+        if fits:
+            chars[start:start + len(word)] = max(fits, key=fits.get)
+            continue
         if field == 'name' and re.match(r'O[IT{}]'.format(p.comma_letters), word) and sure[start + 1] <= '4' \
                 and counts['O' + word[2:]] >= common:
             chars[start + 1] = "'"
@@ -1844,13 +1876,18 @@ def shortened(short, full):
                              and re.fullmatch('.*'.join(short) + '.*', full) is not None)
 
 
+#(state, town): towns printed whole that a town in the clean results fits as if shortened (DOWNS: their DOWNERS is
+#Downers Grove cut short)
+WHOLE_TOWNS = {('IL', 'DOWNS')}
+
+
 def expand_town(city, state, common=2, ahead=10):
     #a town not seen in that state, written out as the town seen there (at least `common` times) that it shortens,
     #when there's one, or one seen `ahead` times as often as the others (the clean results misspell a few). a letter
     #after a town seen there is a speck or a rule's dash read as one (1980's EDINA L), and is dropped
     towns = town_counts().get(state)
     key = city.upper().replace('ST. ', 'ST ')
-    if not towns or not city or towns[key]:
+    if not towns or not city or towns[key] or (state, key) in WHOLE_TOWNS:
         return city
     words = key.split()
     if len(words) > 1 and len(words[-1]) == 1 and towns[' '.join(words[:-1])]:
@@ -1936,7 +1973,8 @@ def repair_bibs(res, bibs):
     return out
 
 
-def parse(year):
+def parse(year, race='birkie'):
+    use_race(race)
     p = printer(year)
     df = grid(year)
     df['page'] = df['page'].astype(int)
@@ -1959,8 +1997,14 @@ def parse(year):
         printed = first[gender] - 1
         for i, row in lst.iterrows():
             printed += 0 if added[i] else 1 + skips.get((int(row['page']), int(row['block']), int(row['line'])), 0)
-            #a line cut off the scan keeps its place, but has nothing to read
+            #a line cut off the scan keeps its place, but has nothing to read, unless the year's UNFOUND gives it
             if row['top'] == '':
+                given = getattr(layout(year), 'UNFOUND', {}).get((gender, i + first[gender]))
+                if given:
+                    out.append({'place': i + first[gender], 'gender': gender, 'code': '', 'status': 'finished',
+                                'tech': '', 'page': row['page'], 'top': '', **given})
+                    width = p.fields['bib'][1] - p.fields['bib'][0]
+                    bibs.append(tuple(given['bib'].rjust(width) for _ in range(2)) + ('9' * width,))
                 continue
             st, nat = state_and_country(row, p)
             city = without_postcode(row, field_text(row, 'town', p), nat, p)
@@ -2122,7 +2166,7 @@ def digits_only(text):
 
 def ocr_block(year, page, k, scale=2):
     #tesseract's reading of one block, at twice the size, as <page>_b<k>.tsv (boxes in the doubled crop's pixels)
-    out = os.path.join(ocr_dir(year), '{:03d}_b{}'.format(page, k + 1))
+    out = page_file(year, page, 'b{}'.format(k + 1))
     if os.path.exists(out + '.tsv'):
         return out
     im, _ = block_image(year, page, k, scale)
@@ -2134,8 +2178,9 @@ def ocr_block(year, page, k, scale=2):
     return out
 
 
-def ocr(year):
+def ocr(year, race='birkie'):
     #tesseract on each block, then the glyph reading of every line
+    use_race(race)
     jobs = block_order(year)
     with concurrent.futures.ThreadPoolExecutor(OCR_WORKERS) as pool:
         for out in pool.map(lambda job: ocr_block(year, *job), jobs):

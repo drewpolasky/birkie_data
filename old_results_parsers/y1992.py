@@ -2,7 +2,7 @@
 #   RANK  CLS  FINAL TIME  BIB  NAME  HOMETOWN  ST  NAT  CLASS ("M25-29")  CL RANK  25%  PACE (MN/KM)
 #the men's list (3471 places) runs from page 26 to the top of page 42, the women's (511) from the bottom of page 42 to
 #page 45. each list places classic and skate skiers together; a C in the CLS column marks a classic skier. pages 46-54
-#are the kortelopet, page 20 the birkie's age class awards
+#are the kortelopet, in the same font and read the same way (k1992.py), page 20 the birkie's age class awards
 #
 #tesseract reads this font poorly (a "2:" often comes out as "22:", 1 and 3 swap), so each character is cut out of the
 #page by the font's fixed pitch and read by comparing it with characters whose reading is known: digits from the rank
@@ -13,6 +13,7 @@
 #with place, age class ranks count up by one
 import bisect
 import functools
+import importlib
 import os
 import re
 import subprocess
@@ -35,6 +36,21 @@ COURSE_KM = 52
 CANVAS = (20, 14)
 #the font's capitals and digits are 11 or 12 pixels tall
 CAP_HEIGHT = 12
+#the list being read: the birkebeiner's, laid out by this module's PAGES, LIST_SIZES, WOMEN_FROM, COURSE_KM, FIELDS,
+#PACE and UPSIDE_DOWN, or the kortelopet's, printed after it in the same font and laid out the same way by k1992.py.
+#parse() and ocr() set it
+RACE_MODULES = {'birkie': 'y', 'kortie': 'k'}
+race = 'birkie'
+
+
+def layout():
+    return importlib.import_module('old_results_parsers.{}{}'.format(RACE_MODULES[race], YEAR))
+
+
+def use_race(name):
+    #the pages' readings are kept by page, and the two lists' pages are apart, so nothing kept needs clearing
+    global race
+    race = name
 
 
 #---------------------------------------------------------------- page geometry
@@ -207,7 +223,7 @@ class Half:
     def faded_lead(self, i, field):
         #whether the cell before a right-aligned number's first digit, inside its field, holds a few specks of ink: a
         #leading digit printed too faintly to read
-        k0, k1 = FIELDS[field]
+        k0, k1 = layout().FIELDS[field]
         c = self.cells(i)
         ks = [k for k in range(k0, k1 + 1) if k in c]
         if not ks or min(ks) == k0:
@@ -274,6 +290,11 @@ class Half:
 FIELDS = {'rank': (-12, -9), 'cls': (-7, -3), 'time': (0, 8), 'bib': (11, 14), 'name': (16, 41), 'city': (42, 58),
           'state': (59, 61), 'country': (62, 65), 'class': (67, 72), 'class_rank': (74, 77), 'club': (79, 81),
           'pace': (83, 88)}
+#the PACE column's digits: the minutes' and the seconds' two. (a layout with room for a pace of ten minutes or more
+#puts the tens of minutes' place first)
+PACE = (84, 86, 87)
+#the age classes the CLASS column prints
+AGES = ('18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70+')
 
 
 @functools.lru_cache(maxsize=None)
@@ -283,10 +304,12 @@ def half(page, side):
 
 def result_rows():
     #every result row in reading order, split into runs where the rows stop (a table's end). the men's list fills
-    #pages 26-41 and the first run of page 42, the women's list the rest; each list's places count up by one down the
-    #columns (the rows found match the last places printed exactly, and the rank digits read back the same)
+    #pages 26-41 and the first run of page 42, the women's list the rest (the kortelopet's split the same way on page
+    #51); each list's places count up by one down the columns (the rows found match the last places printed exactly,
+    #and the rank digits read back the same)
+    lay = layout()
     out = []
-    for page in PAGES:
+    for page in lay.PAGES:
         for side in (0, 1):
             h = half(page, side)
             rows = h.results
@@ -298,12 +321,13 @@ def result_rows():
                 out.append({'page': page, 'side': side, 'run': run, 'i': i, 'y': a,
                             'top': int(round(h.page_xy(h.phases[i], a)[1])), 'bib_faded': h.faded_lead(i, 'bib')})
     rows = pd.DataFrame(out)
-    women = (rows['page'] > WOMEN_FROM[0]) | ((rows['page'] == WOMEN_FROM[0]) & (rows['run'] >= WOMEN_FROM[1]))
+    women_from = lay.WOMEN_FROM
+    women = (rows['page'] > women_from[0]) | ((rows['page'] == women_from[0]) & (rows['run'] >= women_from[1]))
     rows['gender'] = np.where(women, 'F', 'M')
     rows['place'] = rows.groupby('gender').cumcount() + 1
     found = rows.groupby('gender').size().to_dict()
-    if found != LIST_SIZES:
-        print('1992: found {} results, the lists end at {}: places are off'.format(found, LIST_SIZES))
+    if found != lay.LIST_SIZES:
+        print('1992 {}: found {} results, the lists end at {}: places are off'.format(race, found, lay.LIST_SIZES))
     return rows
 
 
@@ -314,7 +338,7 @@ def glyph_table(rows):
         h = half(page, side)
         cells = h.cells(i)
         a, b = h.rows[i]
-        for field, (k0, k1) in FIELDS.items():
+        for field, (k0, k1) in layout().FIELDS.items():
             for k in range(k0, k1 + 1):
                 if k in cells:
                     bitmap, (top, height, width) = h.glyph(i, *cells[k])
@@ -352,10 +376,11 @@ OCR_READINGS = (('', 1), ('_x2', 2), ('_x2r', 2))
 UPSIDE_DOWN = [43]
 
 
-def ocr(year=YEAR):
+def ocr(year=YEAR, race='birkie'):
     #the pages the pipeline turned upside down, read as they are at twice the size with the results' characters, as
     #<page>_x2r.tsv
-    for page in UPSIDE_DOWN:
+    use_race(race)
+    for page in layout().UPSIDE_DOWN:
         out = os.path.join(OCR_DIR, str(year), '{:03d}_x2r'.format(page))
         if os.path.exists(out + '.tsv'):
             continue
@@ -412,9 +437,11 @@ def training_set(table, rows, letters, per_class=3000):
     pos = -9 - rank['k'].values
     digit = pd.Series([p[::-1][n] if n < len(p) else '' for p, n in zip(place, pos)], index=rank.index)
     cls = table[table['field'] == 'class']
-    long_class = set(cls.loc[cls['k'] == 72, 'row'])
-    mf = cls[cls['k'] == 67]
-    sign = cls[cls['k'] == 70]
+    #(the M or F is the class field's first character, the hyphen or plus its fourth)
+    c0 = layout().FIELDS['class'][0]
+    long_class = set(cls.loc[cls['k'] == c0 + 5, 'row'])
+    mf = cls[cls['k'] == c0]
+    sign = cls[cls['k'] == c0 + 3]
     out = pd.concat([digit[digit != ''],
                      pd.Series(rows['gender'].values[mf['row']], index=mf.index),
                      pd.Series(['-' if r in long_class else '+' for r in sign['row']], index=sign.index),
@@ -664,8 +691,30 @@ def read_state(reading, cells, country):
     return PROVINCES_3.get(code, code)
 
 
+def read_age(reading, cells, c0, ages):
+    #the class's ages ("25-29" from "M25-29", "70+"), its M or F at c0: the digits as read when they make one of the
+    #race's classes, else the class they read nearest to (a blotted 3 read as a 4 makes "45-39")
+    if all(k in cells for k in (c0 + 1, c0 + 2, c0 + 4, c0 + 5)):
+        idxs = [cells[k] for k in (c0 + 1, c0 + 2, c0 + 4, c0 + 5)]
+        age = '{}{}-{}{}'.format(*reading.read(idxs, DIGITS))
+        alike = [a for a in ages if '-' in a]
+    elif all(k in cells for k in (c0 + 1, c0 + 2, c0 + 3)) and c0 + 4 not in cells:
+        idxs = [cells[k] for k in (c0 + 1, c0 + 2)]
+        age = '{}{}+'.format(*reading.read(idxs, DIGITS))
+        alike = [a for a in ages if a.endswith('+')]
+    else:
+        return ''
+    if age in ages or not alike:
+        return age
+    return min(alike, key=lambda a: reading.cost(idxs, a.replace('-', '').rstrip('+')))
+
+
 def assemble(rows, reading):
     #every row's fields as read
+    lay = layout()
+    c0 = lay.FIELDS['class'][0]
+    #the pace's minute and seconds digits, after the tens of minutes' where the layout has room for them
+    tens, units = lay.PACE[:-3], lay.PACE[-3:]
     recs = []
     for r in rows.index:
         f = lambda name: reading.field(r, name)
@@ -673,16 +722,11 @@ def assemble(rows, reading):
         rec = {'time_glyphs': [t.get(k) for k in TIME_DIGITS]}
         rec['time'] = '{}:{}{}:{}{}.{}'.format(*reading.read([t[k] for k in TIME_DIGITS], DIGITS)) \
             if all(k in t for k in TIME_DIGITS) else ''
-        rec['pace'] = '{}:{}{}'.format(*reading.read([p[k] for k in (84, 86, 87)], DIGITS)) \
-            if all(k in p for k in (84, 86, 87)) else ''
-        rec['bib'] = '' if rows.loc[r, 'bib_faded'] else number(reading, f('bib'), FIELDS['bib'][1])
-        if all(k in c for k in (68, 69, 71, 72)):
-            rec['age'] = '{}{}-{}{}'.format(*reading.read([c[k] for k in (68, 69, 71, 72)], DIGITS))
-        elif all(k in c for k in (68, 69, 70)) and 71 not in c:
-            rec['age'] = '{}{}+'.format(*reading.read([c[k] for k in (68, 69)], DIGITS))
-        else:
-            rec['age'] = ''
-        rec['class_rank'] = number(reading, f('class_rank'), FIELDS['class_rank'][1])
+        rec['pace'] = reading.read([p[k] for k in tens if k in p], DIGITS) + \
+            '{}:{}{}'.format(*reading.read([p[k] for k in units], DIGITS)) if all(k in p for k in units) else ''
+        rec['bib'] = '' if rows.loc[r, 'bib_faded'] else number(reading, f('bib'), lay.FIELDS['bib'][1])
+        rec['age'] = read_age(reading, c, c0, lay.AGES)
+        rec['class_rank'] = number(reading, f('class_rank'), lay.FIELDS['class_rank'][1])
         rec['name'] = read_name(reading, f('name'))
         rec['city'] = read_town(reading, f('city'))
         rec['country'] = reading.read([v for _, v in sorted(f('country').items())], LETTERS)
@@ -732,8 +776,9 @@ def damaged(reading, idx):
 def repair_times(df, reading, margin=8):
     #a time out of order with the times around it (the longest rising run of each list) has each of its digits tried
     #as every other digit; a time with a damaged digit has that digit tried as every digit. a change is made when only
-    #one fits between its neighbours and the printed pace (time / 52 km, to the second), or one fits far better than any
-    #other; otherwise the time is left blank
+    #one fits between its neighbours and the printed pace (time / COURSE_KM, to the second), or one fits far better than
+    #any other; otherwise the time is left blank
+    course_km = layout().COURSE_KM
     df = df.copy()
     for _, lst in df.groupby('gender'):
         lst = lst.sort_values('place')
@@ -756,7 +801,7 @@ def repair_times(df, reading, margin=8):
                     continue
                 t = '{}:{}:{}.{}'.format(d[0], d[1:3], d[3:5], d[5])
                 s = parse_seconds(t)
-                if lo <= s <= hi and not (np.isfinite(pace_s) and abs(s / COURSE_KM - pace_s) > 1):
+                if lo <= s <= hi and not (np.isfinite(pace_s) and abs(s / course_km - pace_s) > 1):
                     g = glyphs[j]
                     fits.append((reading.d[g, CLASSES.index(c)] - reading.d[g, CLASSES.index(now[j])], t))
             fits.sort()
@@ -821,8 +866,9 @@ def output(df):
     return out.reset_index(drop=True)
 
 
-def parse(year):
+def parse(year=YEAR, race='birkie'):
     from results_loader import load_all_results
+    use_race(race)
     rows = result_rows()
     table, bitmaps = glyph_table(rows)
     clean = load_all_results()

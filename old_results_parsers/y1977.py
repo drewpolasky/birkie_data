@@ -48,6 +48,10 @@ TABLE_TOP = {2: 204, 3: 180, 4: 160, 5: 171, 6: 275, 7: 164, 8: 198, 9: 193, 10:
 CLASSES = {'C1': ('M', 'M 19-34', 'birkie'), 'C2': ('M', 'M 35-42', 'birkie'), 'C3': ('M', 'M 43-49', 'birkie'),
            'C4': ('M', 'M 50-56', 'birkie'), 'C5': ('M', 'M 57+', 'birkie'), 'C6': ('F', 'F 19-34', 'birkie'),
            'C7': ('F', 'F 35+', 'birkie')}
+#(page, column, the line's top): what's printed, where the reading is moved to a known name or town that isn't it (L
+#CROSSE, written out, would lose its L as a speck)
+HAND = {(6, 0, 1784): {'name': 'BERG, SVEIN PETTER'}, (6, 0, 2558): {'name': 'FEHLANDT, WILLIAM'},
+        (15, 0, 2137): {'town': 'La Crosse, WI'}, (20, 0, 1444): {'name': 'BRUUN, RAGNAR'}}
 
 
 def parse(year=YEAR):

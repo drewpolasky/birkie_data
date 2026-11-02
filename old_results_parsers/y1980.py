@@ -57,7 +57,8 @@ TABLE_TOP = {3: 1300, 4: 274, 5: 352, 6: 248, 7: 211, 8: 248, 9: 280, 10: 181, 1
 #with the line above on time, place and class rank, as printed, and a line typed over page 5's in that face, tied with
 #the line above on time and class rank. and as printed, three times the glyphs misplace or misread (one printed a
 #column left of the rest, one after a speck, one with a broken 0), and the note under the table's end on page 12 and
-#the rule under it, which are no results
+#the rule under it, which are no results. and a surname read as another the clean results know better (FENNELL as
+#KENNELL)
 HAND = {(7, 1, 822): {'name': 'DAVID C SUND', 'first': 'DAVID C', 'last': 'SUND', 'bib': '1187', 'age_group': 'M 25-29',
                       'class_rank': '311', 'city': 'MADISON', 'state': 'WI', 'country': 'USA', 'time': '4:54:33.10'},
         (9, 2, 1976): {'name': 'MARY BETH FRASCH', 'first': 'MARY BETH', 'last': 'FRASCH', 'bib': '2879',
@@ -78,7 +79,8 @@ HAND = {(7, 1, 822): {'name': 'DAVID C SUND', 'first': 'DAVID C', 'last': 'SUND'
         (11, 1, 518): {'age_group': 'M 35-39', 'class_rank': '266'},
         (11, 1, 542): {'age_group': 'F 25-29', 'class_rank': '96'},
         (12, 1, 1665): {'age_group': 'M 19-24', 'class_rank': '502'},
-        (12, 2, 2709): {'drop': True}, (12, 2, 2773): {'drop': True}}
+        (12, 2, 2709): {'drop': True}, (12, 2, 2773): {'drop': True},
+        (12, 1, 2303): {'name': 'ANNE FENNELL', 'first': 'ANNE', 'last': 'FENNELL'}}
 
 
 def parse(year=YEAR):

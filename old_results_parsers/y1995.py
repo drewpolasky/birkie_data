@@ -1,9 +1,9 @@
 #1995 birch scroll: "MEN'S DYNO AMERICAN BIRKEBEINER RESULTS" on pages 37-52 (places 1-3472) and "WOMEN'S ..." on pages
-#53-55 (places 1-558), then the kortelopet (56-64), which is left out, as are the class winners (page 8). two results to
-#a line, each with RANK, FINAL TIME (h:mm:ss, no tenths), BIB, NAME, HOMETOWN, ST, NAT, CLASS ("M30-34", "M70+"), CLASS
-#RANK, 25% ("Y") and PACE MN/KM (the time over 52 km in min.sec, cut to the second). one list per gender, classic and
-#skate skiers together with no technique marked, so tech is left blank. every full column holds 110 places, 25 pixels
-#apart.
+#53-55 (places 1-558), then the kortelopet (56-64), read the same way by k1995.py (use_race, at the end), and the class
+#winners (page 8), left out. two results to a line, each with RANK, FINAL TIME (h:mm:ss, no tenths), BIB, NAME,
+#HOMETOWN, ST, NAT, CLASS ("M30-34", "M70+"), CLASS RANK, 25% ("Y") and PACE MN/KM (the time over 52 km in min.sec, cut
+#to the second). one list per gender, classic and skate skiers together with no technique marked, so tech is left
+#blank. every full column holds 110 places, 25 pixels apart.
 #
 #the scans are two-tone (old_results/pages/1995/NNN.png; 'top' is in their pixels), and this parser reads them as well as
 #the OCR. ocr() straightens each results page by its angle in SKEW (PIL: the page at twice or three times the size,
@@ -51,6 +51,8 @@ DISTANCE_KM = 52
 COLUMNS = [('rank', -130), ('time', -12), ('bib', 92), ('name', 158), ('town', 455), ('st', 678), ('nat', 742),
            ('cls', 800), ('crank', 880), ('y', 930), ('pace', 962), ('end', 1045)]
 CLASSES = ['18-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70+']
+#a pace's minutes: one figure
+PACE_MINUTES = r'\d'
 NATIONS = {'USA', 'CAN', 'SUI', 'SWE', 'CZE', 'CZ', 'NOR', 'AUT', 'GER', 'ITA', 'FIN', 'FRA', 'RUS', 'SLO', 'AUS',
            'JPN', 'DEN', 'NED', 'BEL', 'AND', 'POL', 'SVK', 'GBR', 'EST', 'KOR', 'ESP', 'KAZ', 'UKR', 'BLR', 'JAP',
            'ISL', 'NZL', 'ARG', 'CHI', 'MEX', 'IRL', 'HUN', 'SLK', 'LAT', 'LTU', 'CRO', 'BRA', 'RSA'}
@@ -61,7 +63,8 @@ PROVINCES = {'ONT': 'ON', 'MAN': 'MB', 'QUE': 'QC', 'SAS': 'SK', 'ALB': 'AB'}
 STRIPS = ['n2']
 
 
-def parse(year):
+def parse(year, race='birkie', table=None):
+    use_race(race, table or BIRKIE)
     return finish(read_lists())
 
 
@@ -121,8 +124,9 @@ CROPS = [('c3', 3, -150, 1060, True), ('n2', 2, 150, 685, False)]
 OCR_WORKERS = 4
 
 
-def ocr(year=YEAR):
+def ocr(year=YEAR, race='birkie', table=None):
     #each results page read whole first, since where its columns are comes from that reading
+    use_race(race, table or BIRKIE)
     with concurrent.futures.ThreadPoolExecutor(OCR_WORKERS) as pool:
         list(pool.map(read_page, SKEW))
         jobs = [(page, i, crop) for page in SKEW for crop in CROPS for i in range(len(column_boxes(page, crop)))]
@@ -246,7 +250,8 @@ def half_rows(page, edge, reading, strip=False):
             crank = [r for r in fields['crank'] if re.search(r'\d', r['text'])]
             record['crank_l'] = min(r['left'] for r in crank) - edge if crank else np.nan
             record['crank_r'] = max(r['left'] + r['width'] for r in crank) - edge if crank else np.nan
-            record['y_left'] = min(r['left'] for r in fields['y']) - edge if fields['y'] else np.nan
+            #(the kortelopet's table has no 25% column)
+            record['y_left'] = min(r['left'] for r in fields['y']) - edge if fields.get('y') else np.nan
             rows.append(record)
     return pd.DataFrame(rows)
 
@@ -265,7 +270,7 @@ def read_row(fields, strip=False):
     time_raw = text_of(fields['time'])
     cls_text = text_of(fields['cls'])
     cls = read_class(cls_text) if cls_text else None
-    pace = re.search(r'(\d)\W?(\d\d)\W*$', text_of(fields['pace']))
+    pace = re.search(r'(' + PACE_MINUTES + r')\W?(\d\d)\W*$', text_of(fields['pace']))
     clues = sum([bool(re.search(r'\d.*\d.*\d.*\d', time_raw)), cls is not None, pace is not None,
                  bool(digits(text_of(fields['bib']))), bool(fields['name'])])
     if clues < (1 if strip else 3):
@@ -379,6 +384,22 @@ def read_column(page, i, edge, start):
     strips = [s[s['place'].isin(full)] for s in strips]
     both = pd.concat(readings + strips, ignore_index=True)
     both = both[both['place'].notna()]
+    #nor is a line above the table (the page's banner) or below a column that stops short (a photo, an advertisement),
+    #which sits rows away from the results: the results run on, with no more than two rows lost together, from those
+    #whose rank OCR read as their place
+    agree = main.loc[main['place_agrees'], 'place']
+    if len(agree):
+        places = sorted(set(both['place']))
+        lo, hi = agree.min(), agree.max()
+        for p in reversed([p for p in places if p < lo]):
+            if lo - p > 3:
+                break
+            lo = p
+        for p in [p for p in places if p > hi]:
+            if p - hi > 3:
+                break
+            hi = p
+        both = both[both['place'].between(lo, hi)]
     return pd.DataFrame([merge(g) for _, g in both.groupby('place')])
 
 
@@ -499,6 +520,8 @@ def fix_squashed(name):
 GLYPH_W, GLYPH_H = 16, 22
 #where each number sits, as offsets from the left edge of the FINAL TIME column (straightened page pixels)
 NUMBER_BANDS = {'rank': (-135, -10), 'time': (-20, 72), 'bib': (55, 158), 'crank': (860, 945), 'pace': (955, 1032)}
+#the widest blank, in pixels, between two figures of a bib
+BIB_GAP = 6
 
 
 @functools.lru_cache(maxsize=4)
@@ -660,7 +683,7 @@ def read_figures(df):
         alts = [a for a in r['time_alts'] if a != t]
         cols['time_alts'].append(([t] + alts if m >= SURE else alts + [t]) if t else alts)
         cols['time_raws'].append(list(r['time_raws']) + ([text] if t else []))
-        text, m = read_number(reader, page, edge, y, 'bib')
+        text, m = read_number(reader, page, edge, y, 'bib', gap=BIB_GAP)
         alts = [a for a in r['bib_alts'] if a != text]
         if text.isdigit() and (m >= SURE or text in r['bib_alts']):
             cols['bib'].append(text)
@@ -671,18 +694,20 @@ def read_figures(df):
             cols['bib_alts'].append(list(r['bib_alts']))
             cols['bib_margin'].append(0.0)
         #the class rank: between where OCR found it and the 25% mark after it
-        right = min(945, r['y_left'] - 3) if np.isfinite(r['y_left']) else 945
+        c0, c1 = NUMBER_BANDS['crank']
+        right = min(c1, r['y_left'] - 3) if np.isfinite(r['y_left']) else c1
         if np.isfinite(r['crank_l']):
             o0, o1 = r['crank_l'] - 6, min(right, r['crank_r'] + 6)
         else:
-            o0, o1 = 860, right
+            o0, o1 = c0, right
         text, m = read_number(reader, page, edge, y, 'crank', o0, o1)
         alts = [a for a in r['class_ranks'] if a != text]
         ok = text.isdigit() and len(text) <= 3
         cols['class_ranks'].append(([text] + alts if m >= SURE else alts + [text]) if ok else alts)
         #the pace, min.sec: the point is too small to be a figure, so the gap it leaves is allowed
         text, m = read_number(reader, page, edge, y, 'pace', gap=13)
-        p = int(text[0]) * 60 + int(text[1:]) if re.fullmatch(r'\d\d\d', text) and int(text[1:]) < 60 else np.nan
+        p = int(text[:-2]) * 60 + int(text[-2:]) if re.fullmatch(PACE_MINUTES + r'\d\d', text) and int(text[-2:]) < 60 \
+            else np.nan
         alts = [a for a in r['paces'] if a != p]
         cols['paces'].append(([p] + alts if m >= SURE else alts + [p]) if np.isfinite(p) else alts)
     for c, v in cols.items():
@@ -1347,3 +1372,20 @@ def repair_times(lst):
     lst['time'] = out
     lst['time_fix'] = how
     return lst
+
+
+#---------------------------------------------------------------- the race read
+
+#the birkebeiner's lists and table, as set out above. the kortelopet's (k1995.py) gives its own pages, their tilts, its
+#table's columns, classes and PACE distance, its paces' minutes and its bibs' gaps in their place. parse() and ocr() set
+#it
+BIRKIE = dict(LISTS=LISTS, SKEW=SKEW, COLUMNS=COLUMNS, CROPS=CROPS, NUMBER_BANDS=NUMBER_BANDS, WORD_BANDS=WORD_BANDS,
+              CLASSES=CLASSES, DISTANCE_KM=DISTANCE_KM, PACE_MINUTES=PACE_MINUTES, BIB_GAP=BIB_GAP)
+race = 'birkie'
+
+
+def use_race(name, table):
+    global race, LISTS, SKEW, COLUMNS, CROPS, NUMBER_BANDS, WORD_BANDS, CLASSES, DISTANCE_KM, PACE_MINUTES, BIB_GAP
+    race = name
+    (LISTS, SKEW, COLUMNS, CROPS, NUMBER_BANDS, WORD_BANDS, CLASSES, DISTANCE_KM, PACE_MINUTES,
+     BIB_GAP) = (table[k] for k in BIRKIE)

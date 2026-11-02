@@ -5,7 +5,8 @@
 #2000 was cancelled. everything goes in old_results/: the downloads in old_results/pdfs/, each scanned page as an image in
 #old_results/pages/ and its OCR (tesseract, with every word's box) in old_results/ocr/, none of them in git. the results go
 #in old_results/<year>/birkie <year>.csv in the plain format results_loader reads (with a 'tech' column, since a year's
-#list can mix techniques), checked by check_results.py
+#list can mix techniques), checked by check_results.py. the kortelopet's results, in the same files, go in
+#old_results/<year>/kortie <year>.csv, each scanned year's read by old_results_parsers/k<year>.py
 #
 #example usage:
 #python birkie_archive.py download          every file, about 380 MB
@@ -38,6 +39,9 @@ PDF_DIR = os.path.join(OUT_DIR, 'pdfs')
 BIRKIE_URL = 'https://www.birkie.com/'
 TEXT_PDFS = {1999: ['Results/1999/Birkie/99bmen.pdf', 'Results/1999/Birkie/99bfem.pdf'],
              2001: ['Results/2001/Birkie/Abmen2001.pdf', 'Results/2001/Birkie/Abfem2001.pdf']}
+#and the kortelopet's, laid out the same way
+KORTIE_TEXT_PDFS = {1999: ['Results/1999/Korte/99kmen.pdf', 'Results/1999/Korte/99kfem.pdf'],
+                    2001: ['Results/2001/Korte/Akmen2001.pdf', 'Results/2001/Korte/Akfem2001.pdf']}
 SCANS = {1973: 'wp-content/uploads/2020/05/1973-Results.pdf', 1974: 'wp-content/uploads/2020/05/1974-results.pdf',
          1975: 'wp-content/uploads/2020/05/1975-results.pdf', 1976: 'wp-content/uploads/2020/05/1976-results.pdf',
          1977: 'wp-content/uploads/2020/05/1977-results.pdf', 1979: 'wp-content/uploads/2023/05/1979-results.pdf',
@@ -64,7 +68,7 @@ def main():
     if args.step == 'download':
         for year, paths in sorted({**TEXT_PDFS, **{y: [p] for y, p in SCANS.items()}}.items()):
             if not args.years or year in args.years:
-                for p in paths:
+                for p in paths + KORTIE_TEXT_PDFS.get(year, []):
                     print(year, pdf_path(p))
     elif args.step == 'pages':
         for year in years(SCANS):
@@ -84,18 +88,23 @@ def main():
                     print(n, 'of', len(pages), 'at twice the size', path)
         #then each year with its own parser reads its results pages again in its own ways
         for year in years(SCANS):
-            module = year_module(year)
-            if module and hasattr(module, 'ocr'):
-                print(year, 'own OCR')
-                module.ocr(year)
+            for module in (year_module(year), year_module(year, 'k')):
+                if module and hasattr(module, 'ocr'):
+                    print(year, 'own OCR', module.__name__)
+                    module.ocr(year)
     elif args.step == 'parse':
         for year, paths in TEXT_PDFS.items():
             if not args.years or year in args.years:
                 write(year, pd.concat([division_text(pdf_path(p)) for p in paths], ignore_index=True))
+                write(year, pd.concat([division_text(pdf_path(p)) for p in KORTIE_TEXT_PDFS[year]], ignore_index=True),
+                      'kortie')
         for year in years(SCANS):
             parser = year_parser(year)
             if parser:
                 write(year, parser(year))
+            kortie = year_module(year, 'k')
+            if kortie:
+                write(year, kortie.parse(year), 'kortie')
 
 
 def pdf_path(url_path):
@@ -111,10 +120,10 @@ def pdf_path(url_path):
 
 #---------------------------------------------------------------- scans
 
-def year_module(year):
+def year_module(year, prefix='y'):
     #a year's own module, old_results_parsers/y<year>.py, when it has one: parse(year) for its results and, for some,
-    #ocr(year) for the readings of its pages it needs beyond the plain ones
-    name = 'old_results_parsers.y{}'.format(year)
+    #ocr(year) for the readings of its pages it needs beyond the plain ones. k<year>.py the same for its kortelopet
+    name = 'old_results_parsers.{}{}'.format(prefix, year)
     try:
         return importlib.import_module(name)
     except ModuleNotFoundError as e:
@@ -416,9 +425,9 @@ def parse_seconds(t):
     return int(h) * 3600 + int(m) * 60 + float(s)
 
 
-def write(year, results):
+def write(year, results, race='birkie'):
     os.makedirs(os.path.join(OUT_DIR, str(year)), exist_ok=True)
-    path = os.path.join(OUT_DIR, str(year), 'birkie {}.csv'.format(year))
+    path = os.path.join(OUT_DIR, str(year), '{} {}.csv'.format(race, year))
     results.reindex(columns=OUT_COLUMNS).to_csv(path, index=False)
     print('{}: {} results ({} men, {} women)'.format(path, len(results), (results['gender'] == 'M').sum(),
                                                      (results['gender'] == 'F').sum()))

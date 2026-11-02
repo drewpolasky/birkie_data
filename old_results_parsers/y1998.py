@@ -12,12 +12,16 @@
 #class total, the age falls in the class, the gaps in a cell show how many words it holds, the width of a bib how many
 #digits, and no two skiers share a bib
 #
+#the kortelopet's lists (k1998.py) are printed in the same table on the pages after the birkebeiner's and read by the
+#same code, with their own pages and classes swapped in by use_race()
+#
 #example usage:
 #python -m old_results_parsers.y1998 ocr          clean, straighten and OCR the results pages (4 tesseracts at once)
 #python birkie_archive.py parse --years 1998      the results into old_results/1998/
 import collections
 import concurrent.futures
 import functools
+import importlib
 import itertools
 import json
 import os
@@ -35,8 +39,16 @@ from birkie_archive import (OCR_DIR, PAGE_DIR, TESSERACT, DIGITS, LOOKALIKE, dig
 from results_loader import load_all_results, compact, split_first_last, US_STATES, CA_PROVINCES
 
 YEAR = 1998
+#each list's pages in order; a page with more than one table (TABLES) names the one as (page, its number from the top)
 MEN_PAGES = list(range(17, 25)) + list(range(29, 40))
 WOMEN_PAGES = list(range(40, 44))
+#{page: the rows each of its tables' headings are found in, top down}, for a page with more than one
+TABLES = {}
+HEADINGS_ROWS = (0, 700)
+#the classes besides the five year ones (from FIVE_YEAR_FROM up), and whether a pace can run to mm:ss
+YOUNG_CLASSES = [(18, 24)]
+FIVE_YEAR_FROM = 0
+LONG_PACES = False
 DISTANCE_KM = 23
 SCRATCH = os.path.join('old_results', 'scratch', str(YEAR))
 WORKERS = 4
@@ -136,11 +148,12 @@ def ocr_pass(page, suffix, scale, psm, filt):
     return out
 
 
-def strip_bounds(page):
-    #each half's (left, right) of each strip's column on the cleaned page, and the top of the tables. a name and a
-    #hometown can run close together, so the edge between them is the faintest column of ink near where it should be
+def strip_bounds(page, rows=HEADINGS_ROWS):
+    #each half's (left, right) of each strip's column on the cleaned page, and the top of the tables (of the table
+    #whose headings are in rows). a name and a hometown can run close together, so the edge between them is the
+    #faintest column of ink near where it should be
     words = {s: pass_words(page, s, scale) for s, scale, _, _ in PASSES}
-    lefts, tops = header(page, words)
+    lefts, tops = header(page, words, rows)
     ink = np.array(Image.open(clean_page(page))) < 128
     out = {}
     for half, (rk, top) in enumerate(zip(lefts, tops)):
@@ -163,9 +176,12 @@ def strip_pass(page, suffix, col, scale, psm, filt, whitelist):
         return out
     clean = np.array(Image.open(clean_page(page)))
     keep = np.full(clean.shape, 255, dtype=np.uint8)
-    for b in strip_bounds(page).values():
-        x0, x1 = b[col]
-        keep[b['top']:, x0:x1] = clean[b['top']:, x0:x1]
+    tables = TABLES.get(page, [HEADINGS_ROWS])
+    for rows, after in zip(tables, tables[1:] + [(None, None)]):
+        #(each table down to the next one's headings)
+        for b in strip_bounds(page, rows).values():
+            x0, x1 = b[col]
+            keep[b['top']:after[0], x0:x1] = clean[b['top']:after[0], x0:x1]
     image = Image.fromarray(keep)
     if scale != 1:
         image = image.resize((image.width * scale, image.height * scale), Image.BICUBIC)
@@ -182,8 +198,9 @@ def strip_pass(page, suffix, col, scale, psm, filt, whitelist):
     return out
 
 
-def ocr(year=YEAR):
-    pages = MEN_PAGES + WOMEN_PAGES
+def ocr(year=YEAR, race='birkie'):
+    use_race(race)
+    pages = list_pages()
     with concurrent.futures.ThreadPoolExecutor(WORKERS) as pool:
         list(pool.map(clean_page, pages))
         jobs = [(p, *job) for job in PASSES for p in pages]
@@ -204,11 +221,11 @@ def pass_words(page, suffix, scale):
 
 #---------------------------------------------------------------- the tables on a page
 
-def header(page, words):
-    #the left of each half's RK heading, from every heading any pass read, and the headings' line
+def header(page, words, rows=HEADINGS_ROWS):
+    #the left of each half's RK heading, from every heading any pass read in rows, and the headings' line
     found = []
     for w in words.values():
-        w = w[w['top'] < 700]
+        w = w[(w['top'] >= rows[0]) & (w['top'] < rows[1])]
         for _, r in w.iterrows():
             t = r['text'].strip('_.,:;').upper()
             t = 'DIV.' if t == 'DIV' and r['text'].endswith('.') else t
@@ -356,13 +373,15 @@ def ink_width(ink, x0, x1, y0, y1):
     return glyphs[-1][1] - glyphs[0][0] if glyphs else 0
 
 
-def page_rows(page, gender):
+def page_rows(page, gender, table=1):
+    #the rows of one of the page's tables (the first from the top unless it has more, TABLES)
+    heads = TABLES.get(page, [HEADINGS_ROWS])[table - 1]
     meta = page_meta(page)
     ink = np.array(Image.open(clean_page(page))) < 128
     words = {s: pass_words(page, s, scale) for s, scale, _, _ in PASSES}
     strips = {s: (col, pass_words(page, s, scale)) for s, col, scale, _, _, _ in STRIPS}
-    lefts, tops = header(page, words)
-    bounds = strip_bounds(page)
+    lefts, tops = header(page, words, heads)
+    bounds = strip_bounds(page, heads)
     rows = []
     for half, (rk, top) in enumerate(zip(lefts, tops)):
         if np.isnan(rk):
@@ -784,6 +803,8 @@ def pace_reads(text):
     d = digits(text)
     if len(d) == 3 and int(d[1:]) < 60:
         return [int(d[0]) * 60 + int(d[1:])]
+    if LONG_PACES and len(d) == 4 and int(d[2:]) < 60:
+        return [int(d[:2]) * 60 + int(d[2:])]
     return []
 
 
@@ -919,12 +940,14 @@ def resolve_places(lst):
 
 
 def resolve_divisions(lst):
-    #each row's class, by its DIV reading, its age and its class total. the classes are 18-24 and the five year ones
-    #from 25-29 up that are read cleanly at least twice, and each class's total is the one its rows show most
+    #each row's class, by its DIV reading, its age and its class total. the classes are 18-24 (the kortelopet's
+    #juniors' and 19-24) and the five year ones from 25-29 up that are read cleanly at least twice, and each class's
+    #total is the one its rows show most
     reads = [[division(t) for t in r] for r in lst['DIV']]
     gender = lst['gender'].iloc[0]
     clean = collections.Counter((d[1], d[2]) for r in reads for d in r if d and d[0] == gender)
-    classes = [c for c, n in clean.items() if n >= 2 and (c == (18, 24) or (c[0] % 5 == 0 and c[1] - c[0] == 4))]
+    classes = [c for c, n in clean.items()
+               if n >= 2 and (c in YOUNG_CLASSES or (c[0] % 5 == 0 and c[1] - c[0] == 4 and c[0] >= FIVE_YEAR_FROM))]
     majority = []
     for r in reads:
         n = collections.Counter((d[1], d[2]) for d in r if d and (d[1], d[2]) in classes)
@@ -952,11 +975,16 @@ def resolve_divisions(lst):
     return out, ages, totals
 
 
-def resolve_class_ranks(lst, classes):
-    #the class rank each row reads most, then a rank between two of its class that are two apart is the one between
+def resolve_class_ranks(lst, classes, totals=None):
+    #the class rank each row reads most, of those no more than its class's total when some are (the total can run into
+    #the rank's cell: "27 70" on the kortelopet's dusty page 48), then a rank between two of its class that are two
+    #apart is the one between
     ranks = []
-    for r in lst['PL']:
-        ranks.append(vote([number(t, 4) for t in r]))
+    for r, c in zip(lst['PL'], classes):
+        reads = [number(t, 4) for t in r]
+        total = (totals or {}).get(c, '')
+        possible = [v for v in reads if v and total and int(v) <= int(total)]
+        ranks.append(vote(possible or reads))
     ranks = [int(r) if r else None for r in ranks]
     by_class = collections.defaultdict(list)
     for i, c in enumerate(classes):
@@ -1002,16 +1030,22 @@ def country(texts):
 
 def read_lists():
     #every row of the men's and the women's lists, with each column's readings
-    return {gender: pd.DataFrame([r for p in pages for r in page_rows(p, gender)])
+    tables = lambda pages: [p if isinstance(p, tuple) else (p, 1) for p in pages]
+    return {gender: pd.DataFrame([r for p, t in tables(pages) for r in page_rows(p, gender, t)])
             for gender, pages in (('M', MEN_PAGES), ('F', WOMEN_PAGES))}
+
+
+def list_pages():
+    #every page the lists are on, once
+    return list(dict.fromkeys(p[0] if isinstance(p, tuple) else p for p in MEN_PAGES + WOMEN_PAGES))
 
 
 def resolve(lists):
     out, support = [], []
     for gender, lst in lists.items():
         places, _ = resolve_places(lst)
-        classes, ages, _ = resolve_divisions(lst)
-        ranks = resolve_class_ranks(lst, classes)
+        classes, ages, totals = resolve_divisions(lst)
+        ranks = resolve_class_ranks(lst, classes, totals)
         times = resolve_times(lst)
         ndigits = bib_digits(lst)
         support += [bib_support(r, column_weights('BIB'), ndigits.get(i)) for i, r in lst['BIB'].items()]
@@ -1040,9 +1074,23 @@ def resolve(lists):
     return out
 
 
-def parse(year=YEAR):
-    ocr(year)
+def parse(year=YEAR, race='birkie'):
+    ocr(year, race)
     return resolve(read_lists())
+
+
+#---------------------------------------------------------------- the kortelopet
+
+#what the kortelopet's lists (k1998.py) have of their own: their pages and their classes. the birkebeiner's are kept to
+#switch back to
+LAYOUT = ('MEN_PAGES', 'WOMEN_PAGES', 'TABLES', 'YOUNG_CLASSES', 'FIVE_YEAR_FROM', 'LONG_PACES')
+BIRKIE = {name: globals()[name] for name in LAYOUT}
+
+
+def use_race(race):
+    #read the birkebeiner's lists ('birkie') or the kortelopet's ('kortie')
+    layout = BIRKIE if race == 'birkie' else vars(importlib.import_module('old_results_parsers.k{}'.format(YEAR)))
+    globals().update({name: layout[name] for name in LAYOUT})
 
 
 if __name__ == '__main__':

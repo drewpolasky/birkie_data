@@ -20,11 +20,15 @@
 #time. a time is checked against its neighbours (times never go down as the ranks go up) and its pace (the time over
 #52 km), a class rank against the ranks before it in its class
 #
+#the kortelopet's lists (k1997.py) are printed in the same table on pages of their own and read by the same code, with
+#their own pages, columns, classes and length swapped in by use_race()
+#
 #example usage:
 #python -m old_results_parsers.y1997 ocr          the strips' OCR, 4 tesseracts at once (kept in old_results/ocr/1997/)
 #python birkie_archive.py parse --years 1997      the results into old_results/1997/
 import concurrent.futures
 import functools
+import importlib
 import json
 import os
 import re
@@ -40,7 +44,15 @@ from birkie_archive import OCR_DIR, PAGE_DIR, TESSERACT, OUT_COLUMNS, known_town
 from results_loader import load_all_results, compact, split_first_last, normalize_location, US_STATES, CA_PROVINCES
 
 YEAR = 1997
+#each list's pages in order; a page with two tables (TABLES) names the one as (page, '' for the first or '2' for the
+#second), whose halves are L and R or L2 and R2
 LISTS = {'M': [28, 29, 30, 31] + list(range(36, 52)), 'F': [52, 53, 54, 55]}
+#{page: the rows each of its tables' heading rule falls in, top down}, for a page with more than one
+TABLES = {}
+HEADING_RULE = (250, 800)
+#{(page, side): [(x from the FINAL TIME column, rows)]}: a half page whose columns from x on sit that many rows above
+#its time column's lines (pasted up out of line), the moves adding up left to right
+OUT_OF_LINE = {}
 #where each field's strip sits, in pixels from the left of the FINAL TIME column (the time's first digit)
 STRIPS = {'rank': (-112, -47), 'time': (-6, 88), 'bib': (82, 152), 'name': (152, 638), 'pace': (938, 1004),
           'st': (634, 696), 'nat': (697, 752), 'class': (752, 836), 'crank': (834, 886)}
@@ -67,8 +79,15 @@ RANK_INK = (-100, -46)
 MARK = (-42, -10)
 BIB = (87, 152)
 PACE_LEFT = 957
+#where a right aligned pace ends, for a list whose paces run to mm.ss (None: always m.ss, laid out from PACE_LEFT), an
+#m.ss pace's ink spanning PACE_LEFT to PACE_RIGHT
+PACE_RIGHT = None
 CLASS_LEFT = 760
 CRANK = (834, 886)
+#where the class and class rank sit, for how far below the line's middle they're printed
+CLASS_SPAN = (740, 900)
+#the left aligned columns that find the FINAL TIME column: the time, name, nation and class
+LEFT_ALIGNED = (0, 164, 706, 760)
 LETTERS = {'st': (632, 698), 'nat': (698, 754)}
 #a time's six digits and its pace's three, as the centers of their cells from the time's (pace's) left edge, and the
 #punctuation's
@@ -76,6 +95,9 @@ TIME_SLOTS = [3.75, 19.25, 29.75, 45.25, 55.75, 71.25]
 TIME_PUNCT = [11.5, 37.5, 63.5]
 PACE_SLOTS = [3.5, 19.0, 29.5]
 PACE_PUNCT = [11.0]
+#and a pace of mm.ss, from its left a digit's advance before an m.ss pace's
+WIDE_PACE_SLOTS = [3.5, 14.0, 29.5, 40.0]
+WIDE_PACE_PUNCT = [21.5]
 #rows of page above and below a line's band
 PAD = 12
 DARK = 128
@@ -119,7 +141,8 @@ def best_angle(dark, low, high, step):
 
 
 def geometry(page):
-    #each half page's turn, x range, FINAL TIME left and lines, kept as <page>_geom.json next to the OCR
+    #each half page's turn, x range, FINAL TIME left and lines, kept as <page>_geom.json next to the OCR; on a page
+    #with two tables, each half of each table
     path = ocr_base(page) + '_geom.json'
     if os.path.exists(path):
         with open(path) as f:
@@ -133,12 +156,20 @@ def geometry(page):
     turned = upright(page, angle) < DARK
     middle = turned[600:3000, 1100:1450].sum(0)
     rule = 1100 + int(np.argmax(middle))
+    if middle.max() < 0.4 * 2400:
+        #a rule that leans against the page (the kortelopet's page 56), where it runs in each stretch of 400 rows
+        rule = 1100 + int(np.median([np.argmax(turned[y:y + 400, 1100:1450].sum(0)) for y in range(600, 3000, 400)]))
     halves = []
-    for side, (x0, x1) in (('L', (0, rule - 8)), ('R', (rule + 8, image.shape[1]))):
-        a = best_angle(dark[300:3250, x0:x1][::2, ::2], angle - 0.4, angle + 0.4, 0.02)
-        half = upright(page, a)[:, x0:x1] < DARK
-        t0 = time_left(half)
-        halves.append({'side': side, 'angle': a, 'x0': x0, 'x1': x1, 't0': t0, 'lines': text_lines(half, t0)})
+    for n, rules in enumerate(TABLES.get(page, [HEADING_RULE]), 1):
+        for side, (x0, x1) in (('L', (0, rule - 8)), ('R', (rule + 8, image.shape[1]))):
+            a = best_angle(dark[300:3250, x0:x1][::2, ::2], angle - 0.4, angle + 0.4, 0.02)
+            if abs(a - angle) > 0.39:
+                #a half that leans further against the page than that (page 56's right hand half, by a degree)
+                a = best_angle(dark[300:3250, x0:x1][::2, ::2], angle - 1.5, angle + 1.5, 0.02)
+            half = upright(page, a)[:, x0:x1] < DARK
+            t0 = time_left(half)
+            halves.append({'side': side + (str(n) if n > 1 else ''), 'angle': a, 'x0': x0, 'x1': x1, 't0': t0,
+                           'lines': text_lines(half, t0, rules)})
     out = {'page': page, 'angle': angle, 'rule': rule, 'halves': halves}
     with open(path, 'w') as f:
         json.dump(out, f)
@@ -152,17 +183,20 @@ def time_left(half):
     mean = lambda a, b: (cum[b] - cum[a]) / (b - a)
     best, best_x = -1, None
     for x in range(20, half.shape[1] - 1010):
-        score = sum(mean(x + o, x + o + 12) - mean(x + o - 14, x + o - 2) for o in (0, 164, 706, 760))
+        score = sum(mean(x + o, x + o + 12) - mean(x + o - 14, x + o - 2) for o in LEFT_ALIGNED)
         if score > best:
             best, best_x = score, x
     return int(best_x)
 
 
-def text_lines(half, t0):
+def text_lines(half, t0, heading=HEADING_RULE):
     #the results' lines, as (top, bottom) pixel rows: runs of ink in the time column, below the rule under the
-    #headings, until a gap of several lines
+    #headings (found in the rows heading spans), until a gap of several lines
     width = half[:, max(t0 - 100, 0):t0 + 1000].mean(1)
-    rules = [y for y in range(250, 800) if width[y] > 0.6]
+    rules = [y for y in range(*heading) if width[y] > 0.6]
+    if not rules:
+        #a rule printed faintly (page 56's right hand one)
+        rules = [y for y in range(*heading) if width[y] > 0.45]
     start = max(rules) + 3 if rules else 400
     ink = half[:, t0 - 2:t0 + 84].sum(1)
     runs, y, n = [], start, len(ink)
@@ -218,12 +252,28 @@ def line_shifts(page, side):
 
 def columns():
     #every column of results in order: (gender, page, half)
-    return [(gender, page, half) for gender, pages in LISTS.items() for page in pages
-            for half in geometry(page)['halves']]
+    out = []
+    for gender, pages in LISTS.items():
+        for entry in pages:
+            page, table = entry if isinstance(entry, tuple) else (entry, '')
+            out += [(gender, page, half) for half in geometry(page)['halves'] if half['side'][1:] == table]
+    return out
+
+
+def list_pages():
+    #every page the lists are on, once
+    return list(dict.fromkeys(e[0] if isinstance(e, tuple) else e for pages in LISTS.values() for e in pages))
 
 
 def column_gray(page, half):
-    return upright(page, half['angle'])[:, half['x0']:half['x1']]
+    gray = upright(page, half['angle'])[:, half['x0']:half['x1']]
+    moves = OUT_OF_LINE.get((page, half['side']))
+    if moves:
+        #the columns pasted up out of line, moved back down into it
+        gray = gray.copy()
+        for x, rows in moves:
+            gray[:, half['t0'] + x:] = np.roll(gray[:, half['t0'] + x:], rows, axis=0)
+    return gray
 
 
 def to_page(page, half, x, y):
@@ -513,13 +563,20 @@ def read_column(gender, page, half):
     bands, mids = line_bands(page, half)
     ranks = column_ranks()[(page, half['side'])]
     t0s = [half['t0'] + d for d in line_shifts(page, half['side'])]
-    drop_class = own_or_smooth([middle_offset(b, t0 + 740, t0 + 900, m) for b, m, t0 in zip(bands, mids, t0s)])
+    drop_class = own_or_smooth([middle_offset(b, t0 + CLASS_SPAN[0], t0 + CLASS_SPAN[1], m)
+                                for b, m, t0 in zip(bands, mids, t0s)])
     drop_pace = own_or_smooth([middle_offset(b, t0 + PACE_LEFT - 30, t0 + PACE_LEFT + 55, m) for b, m, t0 in
                                zip(bands, mids, t0s)])
     right = []
     for band, mid, t0, d in zip(bands, mids, t0s, drop_pace):
-        boxes = components(band, t0 + PACE_LEFT - 30, t0 + PACE_LEFT + 55, mid + d)
-        right.append(boxes[0][0] - t0 - PACE_LEFT if boxes else np.nan)
+        if PACE_RIGHT:
+            #a right aligned pace by where it ends, as far from where its m.ss would start (the class rank ends just
+            #left of where a mm.ss pace starts), unless it ends in a 1, which is narrower
+            boxes = components(band, t0 + PACE_RIGHT - 45, t0 + PACE_RIGHT + 20, mid + d)
+            right.append(boxes[-1][1] - t0 - PACE_RIGHT if boxes and boxes[-1][1] - boxes[-1][0] >= 7 else np.nan)
+        else:
+            boxes = components(band, t0 + PACE_LEFT - 30, t0 + PACE_LEFT + 55, mid + d)
+            right.append(boxes[0][0] - t0 - PACE_LEFT if boxes else np.nan)
     right = [int(round(v)) for v in smooth(right)]
     #and the class column by where its M or F starts
     shift = []
@@ -532,7 +589,11 @@ def read_column(gender, page, half):
         x, y = to_page(page, half, t0, line[0])
         time = cells(band, t0, TIME_SLOTS, TIME_PUNCT, mid)
         bib, crank = [], []
-        pace = cells(band, t0 + PACE_LEFT + r, PACE_SLOTS, PACE_PUNCT, mid + drop_pace[i])
+        if PACE_RIGHT and has_ink(band, t0 + PACE_LEFT + r - 11, t0 + PACE_LEFT + r - 2, mid + drop_pace[i]):
+            #a right aligned pace with a digit before its m.ss is mm.ss
+            pace = cells(band, t0 + PACE_LEFT + r - ADVANCE, WIDE_PACE_SLOTS, WIDE_PACE_PUNCT, mid + drop_pace[i])
+        else:
+            pace = cells(band, t0 + PACE_LEFT + r, PACE_SLOTS, PACE_PUNCT, mid + drop_pace[i])
         rows.append({'gender': gender, 'page': page, 'side': half['side'], 'line': i, 'top': int(round(y)),
                      'rank': rank, 'classic': has_ink(band, t0 + MARK[0], t0 + MARK[1], mid), 'right': r,
                      'glyphs': {'time': time[0], 'bib': components(band, t0 + BIB[0], t0 + BIB[1], mid, bib),
@@ -643,8 +704,9 @@ def recut(rows, suspect=3.0, reach=6):
 
 #---------------------------------------------------------------- the results
 
-def parse(year=YEAR):
+def parse(year=YEAR, race='birkie'):
     #every finisher in the men's and women's lists, in the order printed
+    use_race(race)
     df = results()
     return df[[c for c in OUT_COLUMNS if c in df.columns]]
 
@@ -659,6 +721,7 @@ def results():
     df = pd.DataFrame(rows)
     df['name'] = letter_initials(df)
     df['country'] = repair_nations(df['country'])
+    df['bib'] = unique_bibs(df)
     df['state'] = [repair_state(s, c, n) for s, c, n in zip(df['state'], df['city'], df['country'])]
     df['state'] = states_by_picture(df)
     df['city'] = [vote_town(t, s, c) for t, s, c in zip(df['towns'], df['state'], df['country'])]
@@ -688,11 +751,20 @@ def record(r, words):
         #NO AGE, class rank 9999
         group, crank = (), ''
     time = number(r['digits']['time'])
+    tess = tess_digits(words['time'])
+    if '?' in time:
+        #a glyph that couldn't be read is tesseract's digit, where tesseract's reading (less a stray digit at either
+        #end) agrees with every other glyph
+        for t in [tess] + ([tess[1:], tess[:-1]] if len(tess) == 7 else []):
+            if len(t) == len(time) and all(g in ('?', c) for g, c in zip(time, t)):
+                time = t
+                break
     pace = number(r['digits']['pace'])
     name = vote_name(names)
     return {'place': r['rank'], 'gender': r['gender'], 'page': r['page'], 'top': r['top'],
             'tech': 'classic' if r['classic'] else 'skate',
             'bib': read_count(r['digits']['bib'], tess_digits(words['bib'])),
+            'bib_glyphs': r['digits']['bib'], 'bib_tess': tess_digits(words['bib']),
             'name': name, 'names': names, 'city': towns[0], 'towns': towns,
             'initials': initials(r, words[list(NAME_READINGS)[names.index(name)]]) if name else [],
             'state': with_narrow(letters_of(words['st']), r['letters']['st']),
@@ -783,6 +855,32 @@ def vote_town(readings, state, country):
                                         readings.count(t)))
 
 
+def unique_bibs(df):
+    #every skier had a bib of their own. a bib read for two is kept by those with no other reading of it, and the others
+    #take their one other reading (tesseract's, or a glyph's runner up) that no one else has; when each has one, the
+    #one whose glyphs are nearest their samples keeps it
+    bibs = df['bib'].tolist()
+    used = set(bibs)
+    for bib in [b for b in dict.fromkeys(bibs) if b and bibs.count(b) > 1]:
+        rows = [i for i, b in enumerate(bibs) if b == bib]
+        other, doubt = {}, {}
+        for i in rows:
+            glyphs, tess = df['bib_glyphs'].iat[i], df['bib_tess'].iat[i]
+            alts = {tess} if len(tess) == len(bib) else set()
+            if len(glyphs) == len(bib):
+                alts |= {bib[:j] + g[1] + bib[j + 1:] for j, g in enumerate(glyphs) if g and g[1]}
+            alts = {a for a in alts if a not in used and not a.startswith('0')}
+            other[i] = alts.pop() if len(alts) == 1 else None
+            doubt[i] = sum(g[3] if g else 10 for g in glyphs)
+        keep = [i for i in rows if other[i] is None] or [min(rows, key=doubt.get)]
+        if len(keep) == 1:
+            for i in rows:
+                if i not in keep:
+                    bibs[i] = other[i]
+                    used.add(other[i])
+    return bibs
+
+
 def read_count(glyphs, tess):
     #a bib or class rank: the glyphs' reading, unless a glyph couldn't be read and tesseract's reading has as many
     #digits
@@ -808,9 +906,9 @@ def hms(s):
 
 def pace_seconds(text):
     #the pace, minutes.seconds per km, in seconds
-    if not re.fullmatch(r'\d{3}', text) or int(text[1:]) > 59:
+    if not re.fullmatch(r'\d{3,4}', text) or int(text[-2:]) > 59:
         return np.nan
-    return int(text[0]) * 60 + int(text[1:])
+    return int(text[:-2]) * 60 + int(text[-2:])
 
 
 def pace_fits(s, pace):
@@ -1053,8 +1151,11 @@ def read_strip(job):
     t0, margin = half['t0'], 12
     canvas = np.full((len(half['lines']) * STACK + 2 * margin, b - a + 2 * margin), 255, np.uint8)
     for i, (y0, y1) in enumerate(half['lines']):
-        band = gray[y0 - 3:min(y1 + 4, y0 - 3 + STACK - 4), t0 + shifts[i] + a:t0 + shifts[i] + b]
-        canvas[margin + i * STACK:margin + i * STACK + band.shape[0], margin:margin + band.shape[1]] = band
+        #(a strip that would start left of the half page, as the ranks on page 62's right hand side would, starts at
+        #its edge, in its place on the canvas)
+        cut = max(-(t0 + shifts[i] + a), 0)
+        band = gray[y0 - 3:min(y1 + 4, y0 - 3 + STACK - 4), t0 + shifts[i] + a + cut:t0 + shifts[i] + b]
+        canvas[margin + i * STACK:margin + i * STACK + band.shape[0], margin + cut:margin + cut + band.shape[1]] = band
     scale = strip_scale(field)
     image = Image.fromarray(canvas)
     image = image.resize((image.width * scale, image.height * scale), Image.LANCZOS)
@@ -1090,14 +1191,34 @@ def strip_lines(page, half, field):
     return out
 
 
-def ocr(year=YEAR, pages=None):
+def ocr(year=YEAR, pages=None, race='birkie'):
     #every strip of every page read, MAX_TESSERACT at a time
-    pages = pages or [p for ps in LISTS.values() for p in ps]
+    use_race(race)
+    pages = pages or list_pages()
     jobs = [(page, half, field) for page in pages for half in geometry(page)['halves'] for field in STRIPS]
     with concurrent.futures.ThreadPoolExecutor(MAX_TESSERACT) as pool:
         for n, out in enumerate(pool.map(read_strip, jobs), 1):
             if n % 20 == 0:
                 print(n, 'of', len(jobs), out, flush=True)
+
+
+#---------------------------------------------------------------- the kortelopet
+
+#what the kortelopet's lists (k1997.py) have of their own: their pages, where the class, class rank and pace sit, their
+#classes and their length. the birkebeiner's are kept to switch back to
+LAYOUT = ('LISTS', 'TABLES', 'OUT_OF_LINE', 'STRIPS', 'PACE_RIGHT', 'CLASS_LEFT', 'CRANK', 'CLASS_SPAN', 'LEFT_ALIGNED',
+          'DISTANCE_KM', 'CLASSES')
+BIRKIE = {name: globals()[name] for name in LAYOUT}
+
+
+def use_race(race):
+    #read the birkebeiner's lists ('birkie') or the kortelopet's ('kortie'). what's kept of the lists' lines and
+    #digits is the other race's, so it's cleared
+    layout = BIRKIE if race == 'birkie' else vars(importlib.import_module('old_results_parsers.k{}'.format(YEAR)))
+    if any(globals()[name] is not layout[name] for name in LAYOUT):
+        globals().update({name: layout[name] for name in LAYOUT})
+        for kept in (line_shifts, column_ranks, digit_samples, digit_model):
+            kept.cache_clear()
 
 
 if __name__ == '__main__':

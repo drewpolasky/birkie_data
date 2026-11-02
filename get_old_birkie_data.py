@@ -7,9 +7,15 @@
 #was the first separate classic race (53 km), and 2007 was cut to 25 km for skate only, so it isn't here.
 #2002-2006 are written in the plain format results_loader reads for the pre-birkie. the pdfs are kept in birkie_pdfs/
 #
+#--race kortie does the same for the kortelopet ('kortie <tech> <year>.csv'), from the same timing companies' lists:
+#2002 and 2003 one pdf for each gender and technique (2003's by age group), 2004 and 2005 one overall list, 2006 the
+#pages after the birkie's in the same pdf, and 2008 the searchable site. classic was its own division of the one race
+#until 2008, as in the birkie. 2007's kortelopet was an untimed 18 km tour, with no results
+#
 #example usage:
 #python get_old_birkie_data.py                 every year
 #python get_old_birkie_data.py --years 2006    one year
+#python get_old_birkie_data.py --race kortie   the kortelopet's
 import argparse
 import os
 import re
@@ -30,29 +36,49 @@ SOURCES = {2002: ('division_list', ['Results/2002/Birkie/birkie_m_gender.pdf', '
            2005: ('division_list', ['Results/2005/Birkie/birkie_overall_05.pdf']),
            2006: ('two_column', ['wp-content/uploads/2025/02/2006-RESULTS-ONLY-002.pdf']),
            2008: ('searchable', {'skate': 30, 'classic': 20})}
+KORTIE_SOURCES = {2002: ('division_files', {('M', 'skate'): 'Results/2002/Korte/korte_m_fs_div.pdf',
+                                            ('F', 'skate'): 'Results/2002/Korte/korte_f_fs_div.pdf',
+                                            ('M', 'classic'): 'Results/2002/Korte/korte_m_cl_div.pdf',
+                                            ('F', 'classic'): 'Results/2002/Korte/korte_f_cl_div.pdf'}),
+                  2003: ('division_files', {('M', 'skate'): 'Results/2003/Korte/k_m_fs_age_03.pdf',
+                                            ('F', 'skate'): 'Results/2003/Korte/k_f_fs_age_03.pdf',
+                                            ('M', 'classic'): 'Results/2003/Korte/k_m_cl_age_03.pdf',
+                                            ('F', 'classic'): 'Results/2003/Korte/k_f_cl_age_03.pdf'}),
+                  2004: ('division_list', ['Results/2004/Korte/korte_ovl_04.pdf']),
+                  2005: ('division_list', ['Results/2005/Korte/korte_overall_05.pdf']),
+                  2006: ('two_column', ['wp-content/uploads/2025/02/2006-RESULTS-ONLY-002.pdf']),
+                  2008: ('searchable', {'skate': 31, 'classic': 21})}
+#a time under an hour printed as minutes (2005's kortelopet, 58:33.4)
+MINUTES = re.compile(r'^\d{1,2}:\d{2}\.\d+$')
 LEGACY_HEADER = 'Name, Overall Place, Gender Place, Division Place, Finish Time, Bib Number, City, State \n'
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--years", type=int, nargs='*', default=sorted(SOURCES))
+    parser.add_argument("--years", type=int, nargs='*')
+    parser.add_argument("--race", choices=['birkie', 'kortie'], default='birkie')
     parser.add_argument("--out", type=str, default=OUT_DIR)
     args = parser.parse_args()
 
-    for year in args.years:
-        source, where = SOURCES[year]
+    sources = SOURCES if args.race == 'birkie' else KORTIE_SOURCES
+    for year in args.years or sorted(sources):
+        source, where = sources[year]
         os.makedirs(os.path.join(args.out, str(year)), exist_ok=True)
         if source == 'searchable':
             for tech, event in where.items():
-                write_legacy(searchable(event), os.path.join(args.out, str(year), 'birkie {} {}.csv'.format(tech, year)))
+                write_legacy(searchable(event),
+                             os.path.join(args.out, str(year), '{} {} {}.csv'.format(args.race, tech, year)))
             continue
-        reader = {'division_list': division_list, 'two_column': two_column}[source]
-        results = pd.concat([reader(pdf_path(p)) for p in where], ignore_index=True)
+        if source == 'division_files':
+            results = pd.concat([division_file(pdf_path(p), *key) for key, p in where.items()], ignore_index=True)
+        else:
+            reader = {'division_list': division_list, 'two_column': two_column}[source]
+            results = pd.concat([reader(pdf_path(p), args.race) for p in where], ignore_index=True)
         results['status'] = 'finished'
         for tech, rows in results.groupby('tech'):
             #overall place among this technique's finishers, by time
             rows = rows.assign(place=rows['time'].map(seconds).rank(method='min').astype(int))
-            path = os.path.join(args.out, str(year), 'birkie {} {}.csv'.format(tech, year))
+            path = os.path.join(args.out, str(year), '{} {} {}.csv'.format(args.race, tech, year))
             rows.sort_values('place').reindex(columns=COLUMNS).to_csv(path, index=False)
             print('{}: {} finishers ({} men, {} women)'.format(path, len(rows), (rows['gender'] == 'M').sum(),
                                                                (rows['gender'] == 'F').sum()))
@@ -93,8 +119,19 @@ def lines_of(page, **kwargs):
 #---------------------------------------------------------------- 2002-2005 division lists
 
 DIVISION = re.compile(r"^(Men|Women)\W?s$")
+#a division run into the nation or state before it, where the hometown is long ("USAWomen's", "WI,Women's")
+GLUED = re.compile(r"^(.*?\S)((?:Women|Men)\W?s)$")
 
-def division_list(path):
+def division_list(path, race='birkie'):
+    return blank_divisions(division_rows(path))
+
+
+def division_file(path, gender, tech):
+    #a list of one gender and technique, whose lines give no division (2002's and 2003's kortelopet)
+    return division_rows(path).assign(gender=gender, tech=tech).drop(columns='places')
+
+
+def division_rows(path):
     #one result a line: places, bib, "Last, First", "City, State, Nation", division ("Men's Birkebeiner", "Men's
     #Classic", "Women's Freestyle"), age, time, pace. name and hometown are split by the hometown column's left edge
     rows = []
@@ -102,12 +139,19 @@ def division_list(path):
         for page in pdf.pages:
             city_x = min((w['x0'] for w in page.extract_words() if w['text'] == 'City,'), default=None)
             for words in lines_of(page):
+                words = [part for w in words for part in
+                         ([{**w, 'text': g} for g in GLUED.match(w['text']).groups()] if GLUED.match(w['text']) else [w])]
                 text = [w['text'] for w in words]
-                t = next((i for i, x in enumerate(text) if TIME.match(x)), None)
+                t = next((i for i, x in enumerate(text) if TIME.match(x) or MINUTES.match(x)), None)
                 if t is None or city_x is None or not text[0].isdigit():
                     continue
+                if MINUTES.match(text[t]):
+                    text[t] = '0:' + text[t]
                 g = next((i for i, x in enumerate(text[:t]) if DIVISION.match(x)), None)
                 end = g if g is not None else t
+                #(a list with no division column can give the age group there instead: 2002's kortelopet, "M 17-18")
+                group = g is None and t >= 2 and text[t - 2] in ('M', 'F') and re.fullmatch(r'\d\d-\d\d', text[t - 1])
+                end = t - 2 if group else end
                 age = text[t - 1] if t - 1 > (g if g is not None else 0) and text[t - 1].isdigit() else ''
                 division = ' '.join(text[g:t - 1 if age else t]) if g is not None else ''
                 first_word = next(i for i, x in enumerate(text) if not x.isdigit())
@@ -116,10 +160,11 @@ def division_list(path):
                 last, _, first = [p.strip() for p in name.partition(',')]
                 rows.append({'places': [int(x) for x in text[:first_word - 1]], 'bib': text[first_word - 1],
                              'name': name, 'first': first, 'last': last, 'age': age, 'time': text[t],
+                             **({'age_group': ' '.join(text[t - 2:t])} if group else {}),
                              'gender': ('F' if text[g].startswith('Women') else 'M') if division else '',
                              'tech': ('classic' if 'Classic' in division else 'skate') if division else '',
                              **hometown([w['text'] for w in town])})
-    return blank_divisions(pd.DataFrame(rows))
+    return pd.DataFrame(rows)
 
 
 def blank_divisions(df):
@@ -140,19 +185,28 @@ def blank_divisions(df):
 
 TIME_IN = re.compile(r'(\d{2}:\d{2}:\d{2}\.\d)')
 
-def two_column(path):
+def two_column(path, race='birkie'):
     #RK, TIME, BIB, NAME, HOMETOWN, ST, CO, CLASS ("M 30-34"), class rank, 25% club, pace, in each half of the page.
     #classic skiers are printed in blue, with a Y in the CL column that runs into the time ("1045Y03:23:19.8").
-    #the kortelopet starts partway down the last women's page and fills the pages after
+    #the kortelopet starts partway down the last women's page and fills the pages after, its title on each
     rows = []
+    started = False
     with pdfplumber.open(path) as pdf:
         for page in pdf.pages:
             lines = lines_of(page, extra_attrs=['non_stroking_color'])
-            if not any('BIRKEBEINER' in w['text'] for w in lines[0]):
+            korte = next((i for i, l in enumerate(lines) if any('KORTELOPET' in w['text'] for w in l)), None)
+            if race == 'birkie':
+                if not any('BIRKEBEINER' in w['text'] for w in lines[0]):
+                    continue
+                lines = lines[:len(lines) if korte is None else korte]
+            else:
+                started = started or korte is not None
+                if not started:
+                    continue
+                lines = lines[korte or 0:]
+            header = next((l for l in lines if any(w['text'] == 'HOMETOWN' for w in l)), None)
+            if header is None:
                 continue
-            korte = next((i for i, l in enumerate(lines) if any('KORTELOPET' in w['text'] for w in l)), len(lines))
-            lines = lines[:korte]
-            header = next(l for l in lines if any(w['text'] == 'HOMETOWN' for w in l))
             middle = page.width / 2
             for half in (lambda x: x < middle, lambda x: x >= middle):
                 cols = {w['text']: w['x0'] - 3 for w in header if half(w['x0'])}

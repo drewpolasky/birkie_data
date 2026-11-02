@@ -18,7 +18,8 @@ link) and `name_shared` (how many athletes share that exact name), to filter out
 
 Birkie results before 2009:
 
-python get_old_birkie_data.py       writes yearly_data/<year>/birkie <tech> <year>.csv for 2002-2006 and 2008
+python get_old_birkie_data.py                 writes yearly_data/<year>/birkie <tech> <year>.csv for 2002-2006 and 2008
+python get_old_birkie_data.py --race kortie   the same for the Kortelopet, yearly_data/<year>/kortie <tech> <year>.csv
 
 The Birkie's results page goes back further than the searchable results: PDFs for 2002-2005 (White River Sports
 Timing, then Finish Line Sports) and one for 2006 (two columns a page, classic skiers printed in blue), cached in
@@ -27,7 +28,11 @@ raced the skate course in one 51 km race with the skaters, as their own division
 blank for some classic skiers, who are placed by their division places). 2002 was cut to 46.7 km, 2007 to 25 km (not
 included), and 2008's first separate classic race was 53 km. 2002-2005 have exact ages and middle initials, 2006 age
 groups, and 2008 neither ages nor genders, which come from the places as for 2009-2015. 75% of these results link to
-someone who also raced from 2009 on.
+someone who also raced from 2009 on. The Kortelopet's come from the same timing companies' lists (2002 and 2003 a pdf
+for each gender and technique, 2004 and 2005 one overall list, 2006 the pages after the Birkie's in the same pdf, 2008
+the searchable site), with classic its own division of the one race until 2008, as in the Birkie. The pdfs' text runs
+a few skiers' division into their country ("USAWomen's Birkebeiner"), which is split off; the Birkie's 2002-2004 skate
+files had kept it in 49 country fields.
 
 
 Results before 2002 (kept out of the models for now):
@@ -36,12 +41,15 @@ python birkie_archive.py download      the pdfs and scans into old_results/pdfs/
 python birkie_archive.py pages         each scanned page as an image in old_results/pages/
 python birkie_archive.py ocr           Tesseract OCR of every page into old_results/ocr/, then each year's own readings
                                        of its results pages, a few hours in all
-python birkie_archive.py parse         writes old_results/<year>/birkie <year>.csv
+python birkie_archive.py parse         writes old_results/<year>/birkie <year>.csv and kortie <year>.csv (below)
 python check_results.py                reliability checks, written to old_results/reliability.csv
+python check_results.py --race kortie  the same for the Kortelopet, written to old_results/reliability_kortie.csv
 python average_times.py                graphs/average_finish_time.png, the average finish time each year since 1973 (a
                                        dashed line where the race turned for good to run from Cable to Hayward, 1993)
 python finishers.py                    graphs/finishers_per_year.png, the number of finishers each year since 1973 by
-                                       technique where it's known, with the finishers the scans lose outlined
+                                       technique where it's known, with the finishers the scans lose outlined, and
+                                       graphs/finishers_kortie_haakon.png, the Kortelopet's since 1973 and the Prince
+                                       Haakon's since 2010
 
 1999 and 2001 are text pdfs on birkie.com, one list for men and one for women, with hometown, state, nation, age class
 and class rank but no technique: classic skiers were ranked with the skaters and their bibs aren't in a range of their
@@ -52,8 +60,8 @@ it holds together: places that count up with no gaps or repeats, times that neve
 read as real times, age class ranks that count up within each class, no repeated bibs, last and first names and towns
 that turn up in other years' clean results, states that exist, and fastest finishers that match the Birkie's champions
 list. The clean years 2002-2008 run through the same checks as a yardstick: they pass the first five completely, with
-93-96% of last names and 98-99% of towns seen in other years. 1999 and 2001 pass the first five completely too, with
-87% and 91% of last names seen elsewhere (further from 2002 on, more skiers never raced again) and both winners matching.
+94-96% of last names and 98-99% of towns seen in other years. 1999 and 2001 pass the first five completely too, with
+88% and 92% of last names seen elsewhere (further from 2002 on, more skiers never raced again) and both winners matching.
 The checks also caught 84 Kortelopet finishers in the 2006 Birkie lists, since fixed.
 
 The scans are read with Tesseract (installed separately), which keeps each word's position, with pypdfium2 decoding the
@@ -85,32 +93,32 @@ Every place from 1 to the last one printed is there for both genders in every ye
 and 1989 (below):
 
 year  finishers  technique                    last names   towns     sample of 40 rows checked by eye against the scan
-1973         33  none printed                     67%       none      every time checked: all right
-1974         60  none printed                     62%       none      every time checked: 1 a digit off
-1975        161  none printed                     71%        95%      times all checked: 8 a digit off; 3 names, 1 town
-1976        654  none printed                     67%        93%      2 names, 2 faint hundredths (4 more since fixed)
-1977       1281  none printed                     56%        88%      16 names, 14 towns or states (5 since fixed)
-1978       1678  none printed                     62%        85%      5 names, 2 towns wrong (1 since fixed)
-1979       2285  none printed                     69%        85%      2 names, 1 town wrong; 5 times cut by the scan
+1973         33  none printed                     70%       none      every time checked: all right
+1974         60  none printed                     63%       none      every time checked: 1 a digit off
+1975        161  none printed                     73%        95%      times all checked: 8 a digit off; 3 names, 1 town
+1976        654  none printed                     68%        94%      2 names, 2 faint hundredths (4 more since fixed)
+1977       1281  none printed                     57%        88%      16 names, 14 towns or states (5 since fixed)
+1978       1678  none printed                     62%        86%      5 names, 2 towns wrong (1 since fixed)
+1979       2285  none printed                     70%        85%      2 names, 1 town wrong; 5 times cut by the scan
 1980       3055  none printed                     64%        93%      2 names wrong (a stray mark read as a letter)
-1981       2358  none printed                     66%        90%      23 rows wrong (9 still: first names, initials)
-1982       3844  none printed                     65%        92%      9 rows with a name, town or state wrong (8 since fixed)
-1983       4974  none printed                     64%        92%      7 rows wrong: 3 names, 2 bibs, 1 class, 2 hometowns
-1984       4881  none printed                     68%        95%      1 name wrong (a two-word surname split, since fixed)
-1985       3388  none printed                     69%        91%      2 names wrong (a suffix put first, since fixed)
-1986       3526  none printed                     71%        94%      1 class rank wrong
-1987       3332  none printed                     70%        92%      2 names, 1 town and state wrong (one row garbled)
-1988       3253  none printed                     72%        94%      1 name wrong, 1 town with a postcode left in it
-1989       3183  none printed                     73%        92%      1 bib, 2 towns wrong (3 X read as K, since fixed)
-1990       3393  none printed                     77%        94%      1 name wrong (and a country, since fixed)
-1991       3719  none printed                     76%        94%      1 time a tenth off
-1992       3982  classic marked C (524)           78%        94%      no errors
-1993       4026  none printed                     78%        95%      2 towns wrong
-1994       4090  none printed                     79%        95%      3 names wrong (2 a space lost by a middle initial)
-1995       4030  none printed                     81%        96%      1 town or state wrong (3 more in 80 more rows)
+1981       2358  none printed                     68%        90%      23 rows wrong (9 still: first names, initials)
+1982       3844  none printed                     66%        92%      9 rows with a name, town or state wrong (8 since fixed)
+1983       4974  none printed                     65%        92%      7 rows wrong: 3 names, 2 bibs, 1 class, 2 hometowns
+1984       4881  none printed                     69%        95%      1 name wrong (a two-word surname split, since fixed)
+1985       3388  none printed                     70%        91%      2 names wrong (a suffix put first, since fixed)
+1986       3526  none printed                     72%        95%      1 class rank wrong
+1987       3332  none printed                     71%        92%      2 names, 1 town and state wrong (one row garbled)
+1988       3253  none printed                     74%        94%      1 name wrong, 1 town with a postcode left in it
+1989       3183  none printed                     74%        92%      1 bib, 2 towns wrong (3 X read as K, since fixed)
+1990       3393  none printed                     78%        94%      1 name wrong (and a country, since fixed)
+1991       3719  none printed                     78%        94%      1 time a tenth off
+1992       3982  classic marked C (524)           79%        95%      no errors
+1993       4026  none printed                     79%        95%      2 towns wrong
+1994       4090  none printed                     80%        95%      3 names wrong (2 a space lost by a middle initial)
+1995       4030  none printed                     82%        96%      1 town or state wrong (3 more in 80 more rows)
 1996       4369  none printed                     82%        95%      no errors
-1997       4960  classic marked C (827)           81%        94%      3 names wrong (11 in 369 rows, technique always right)
-1998       4250  classic marked Y (402)           85%        96%      no errors
+1997       4960  classic marked C (827)           82%        94%      3 names wrong (11 in 369 rows, technique always right)
+1998       4250  classic marked Y (402)           86%        96%      no errors
 
 The places, order, times and class rank checks pass for 99.9% or more of each year's results, but for 1990's order
 (99.7%: five times are left blank where no reading fits between the times around them), 1989's places and class ranks,
@@ -132,7 +140,7 @@ men's places 1 to 240 (its printed page 26 starts at 241, with no page missing f
 places 802 and 803 off the foot of a page scanned turned three and a half degrees, so its men's places start at 241 and
 its men's classes partway; it's left off the average time plot. The line printer years' RANK column, read on its own,
 counts up with the lines in every list (1983's but for the lines typed in after it was printed), so no line is missing
-or extra. The last name and town shares are a little below 1999's (87% and 96%) because the further back a year is, the
+or extra. The last name and town shares are a little below 1999's (88% and 96%) because the further back a year is, the
 fewer of its skiers raced again from 2002 on; checks of the unknown last names found most are real names. In the 720
 sampled rows no place or gender was wrong and one age class was (1983's, a typed 6 read as 7), and counts of whole pages
 found no row missing or that wasn't a Birkebeiner finisher. The errors were 36 names (lookalike capitals, a middle
@@ -145,6 +153,10 @@ was read after it (MNR: MN), and a country that reads as none is USA beside a st
 characters in print and are written out where only one known town fits (STVNS POINT is written STEVENS POINT). The pace
 columns put the course at 52.5 km in 1988, 55 in 1989, 53.5 in 1990 and 52 from 1992 to 1997. 1991 started from an
 alternate start for lack of snow, and its pace is over 46 km; 1998 was cut to 23 km. The times check allows for both.
+Adding the Kortelopet's 2002-2008 results to the clean results the readers check names and towns against changed 70 of
+these rows, nearly all a name or town moved to what's printed (24 of them 1977's) and two 1975 times read again as
+printed; the five it moved away from the print (two 1977 names and a town, 1980's FENNELL and 1989's VICK) are set by
+hand, and DOWNS, IL is kept from being written out as the clean results' DOWNERS (Downers Grove cut short).
 
 1973 to 1977 list each class on its own, so their places are counted by time across the classes, and the places and
 order checks pass by construction; within each class the reader puts the times in order. Every 1973-1975 time was also
@@ -217,6 +229,86 @@ first name clearly is, and a woman's first name in a man's class leaves the clas
 misprinted (3:22:82:27, 6:02:65:00, 7:25:78:00) and left blank, two over ten hours and three lines a speck or smudge
 keeps from their grid are set by hand, and Shirley Pommier is listed twice, printed at 3:21:39.40 and typed in again at
 3:45:24, both kept as printed. The champions list gives its course as 50 km.
+
+
+Kortelopet results before 2009:
+
+The Kortelopet has run beside the Birkie since 1973, 18 to 29 km by the champions list, and its results are in the same
+magazines, booklets and pdfs, after the Birkie's. `birkie_archive.py parse` reads them into
+old_results/<year>/kortie <year>.csv with old_results_parsers/k<year>.py, most years with the Birkie's reader and
+printer: its table drops the 25% column, so its fields sit a column or more off the Birkie's, and its classes add the
+juniors' (13-14, 15-16 and 17-18, with 19-24 in place of 18-24). The early races were for juniors and women (1973's,
+from Seeley, for men under 20 and women; 1974's to 1976's for women and juniors), and from 1978 to 1986 for juniors and
+everyone 19 and over in one class. 2000's and 2017's were cancelled with the Birkie, and 2007's was an untimed 18 km
+tour.
+
+year  finishers  read from                               technique              last names  towns
+1973         17  typed sheets, class by class            none printed                82%     none
+1974         29  typed sheets, class by class            none printed                79%     none
+1975         93  typed booklet, class by class           none printed                77%      98%
+1976        201  typed booklet, class by class           none printed                67%      94%
+1977          -  no Kortelopet list in the scan
+1978        571  typeset, class by class                 none printed                62%      96%
+1979        947  typewritten, class by class             none printed                65%      91%
+1980        294  typewritten, class by class (men only)  none printed                68%      93%
+1981        719  typeset, class by class                 none printed                62%      96%
+1982       1239  dot matrix, by place                    none printed                59%      87%
+1983          -  dot matrix booklet, not read
+1984       1235  the Birkie's dot matrix printer         none printed                63%      95%
+1985       1033  the Birkie's dot matrix printer         none printed                66%      91%
+1986       1092  the Birkie's printer                    none printed                70%      96%
+1987       1348  the Birkie's printer                    none printed                66%      93%
+1988       1461  the Birkie's line printer               none printed                64%      94%
+1989       1748  the Birkie's line printer               none printed                64%      88%
+1990       1777  the Birkie's line printer               none printed                67%      93%
+1991       1800  the Birkie's line printer, sideways     none printed                71%      95%
+1992       1798  the Birkie's line printer               classic marked C (278)      71%      95%
+1993       1656  typeset                                 none printed                73%      94%
+1994       1702  typeset                                 none printed                74%      96%
+1995       1766  typeset                                 none printed                77%      96%
+1996       1958  typeset, alphabetical                   none printed                76%      96%
+1997       2095  typeset                                 classic marked C (691)      75%      96%
+1998       1290  Burns Computer Services                 classic marked Y (257)      82%      97%
+1999       1443  text pdf                                none printed                83%      97%
+2001       1514  text pdf                                none printed                88%      97%
+
+The places, order and times checks pass for 99.5% or more of every year's results but 1979's (98%: 17 times the scan
+cuts off, below), 1980's places and order (79% and 99.3%: the 61 boys slower than the last man read have no place,
+below) and 1984's (87%, 98.9% and 99.4%, for its missing lines, below). The class ranks pass for 99% or more but in 1976
+(98.5%: a time typed out of order within its class, kept), 1987 (96%: 32 lines whose class can't be read), 1984 (93%,
+for its missing lines) and 1999 (86%, as printed: the pdf's women's class ranks skip and repeat). Both winners match the
+champions list in every year but 1984 (the women's winner is on the missing page) and 1990 (the men's winner reads
+1:24:26.5 on the scan, where the list has 1:24:28.5); 1980 has only the men's. The last name shares run lower than the
+Birkie's, and 2002-2008's clean Kortelopet results have 91-96% of last names seen in other years: more of its skiers are
+juniors or one-timers who never raced again.
+
+1973 to 1978 and 1981 are class by class lists read by class_lists.py, as the Birkie's of 1973 to 1977 are, 1975's from
+the same pages as its Birkie's. 1978's classes run down magazine pages each scanned in two halves, and a black band
+where the halves meet loses four lines (counted in the class ranks after them). 1979's and 1980's are typewritten class
+by class too, set sideways, and read by old_results_parsers/kortie_lists.py, which also reads 1982's. The 1979 scan
+blanks out parts of its Kortelopet pages, but the 1980 scan holds a second copy of them (its pages 23 to 26, among a
+copy of the spring 1979 Birch Scroll that also holds the 1979 Birkie's slowest finishers, not yet read), so 1979 is read
+from that, with the 1979 scan's copy a second reading of each line (947 lines, every class numbered without a gap, where
+the 1982 Birch Scroll's statistics give 949). The scans' right edges cut off the times at the foot of some columns: the
+junior boys 13-14 from 33 to 49 have none, and are left without a place, and some show only the minutes or tens of
+seconds (each taken as the middle). The 1980 scan holds only the Kortelopet's first two pages: the men's classes, the
+novice men 19 and over to their 69th (294 of the 996 finishers the 1982 Birch Scroll's statistics give), so the 61 boys
+slower than him have no place. 1982's is one list by overall place, every place from 1 to 1239 (the statistics' count),
+in a dot matrix whose digits print broken, so its times, bibs and class codes are read again digit by digit; the codes,
+numbers with no key, are taken from skiers who also raced in 1979 or 1980 (1-4 the boys' and men's, 5-8 the girls' and
+women's), and its names and towns read the worst of any year (17 of 40 sampled rows had a letter or initial wrong in
+one, though every time, bib and class was right).
+
+1983's list, after the Birkie's in its booklet of unofficial results, isn't read: its dot matrix reads too poorly with
+the Birkie's reader to keep. From 1984 to 1998 each Kortelopet table follows the Birkie's in its issue, printed and read
+the same way, and 1999's and 2001's are text pdfs like the Birkie's. 1984's scanned issue has no page with the women's
+places 1 to 135, its page 41 (women 730 to 773, printed narrower under a column of thanks) isn't read, and the scan cuts
+up to six lines off its pages' feet (31 in all), so the plot outlines 210 finishers missing. 1984's and 1985's class
+codes, numbers with no key, are taken from the classes' sizes and times. 1987's page 37 copy is stretched unevenly, and
+its third block's bibs and names read poorly (about 30 lines, as the Birkie's women's block above it). 1989 has two
+women set by hand that the reader finds no line for. The pace columns put the course at 29 km 1988 to 1990, 21 km in
+1991 (an alternate start, as the Birkie's), 26 km in 1992 to 1994 (the champions list gives 29 for 1992 and 1993), 25 km
+1995 to 1997 (26 for 1995) and 23 km in 1998, cut short with the Birkie (25).
 
 
 Pre-Birkie results:

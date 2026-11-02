@@ -24,6 +24,8 @@ PRINTER = line_printer.Printer(line_height=(12, 24))
 #the men's list here starts at place 241, and two lines are cut off the foot of page 27's first block
 FIRST_PLACE = {'M': 241}
 MISSING_LINES = {(27, 1): 2}
+#a surname read right but moved to another the clean results know better (VICK as FICK)
+HAND = {(33, 1, 569): {'name': 'RICHARD A VICK'}}
 
 
 def parse(year=YEAR):
