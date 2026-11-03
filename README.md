@@ -368,20 +368,51 @@ join to `hometowns.csv` on city and state. Hometowns outside the lower 48 have n
 
 Does snow at home make for a faster Birkie?
 
-python snow_effect.py       writes graphs/snow_at_home.png and linked_data/snow_performance.csv
+python snow_effect.py       writes graphs/snow_at_home.png and linked_data/snow_performance.csv, with the snowmaking
+                            venues from snowmaking_venues.csv
+python snowmaking_openings.py       writes graphs/snowmaking_openings.png and linked_data/snowmaking_openings.csv
 
 Counts each skier's skiable days at home (4+ inches within 10 km) from November 1 to the day before the race, and adds
 them to the year to year model, split into the town's normal winter and how far this winter was above or below it.
 The race's conditions take out everything the whole field shared that year, so the winter effect comes only from
 skiers whose winter at home was snowier or leaner than normal there, compared with skiers from other places in the
-same race. A winter with 30 more skiable days than normal is worth about 0.4% (0.2-0.6%), well under a minute for a
-3 hour skier. It holds for skate and classic, without the local skiers, for skiers who never moved, with every
+same race. A winter with 30 more skiable days than normal is worth about 0.4% (0.25-0.63%), well under a minute for
+a 3 hour skier. It holds for skate and classic, without the local skiers, for skiers who never moved, with every
 definition of a skiable day, and with a time trend for each state. The following winter's snow, which can't have
-helped (a placebo), shows no gain (-0.15%, -0.31 to 0.00). The gain is biggest in towns that normally get little
+helped (a placebo), shows no gain (-0.17%, -0.30 to 0.01). The gain is biggest in towns that normally get little
 snow and for slower skiers, and close to zero in towns that already get 60+ days. Moving somewhere with 30 more
-skiable days in a normal winter goes with being 1.7% faster, but that includes whatever else came with the move.
+skiable days in a normal winter goes with being 1.6% faster, but that includes whatever else came with the move.
+
+Skiers near a cross-country venue that makes snow can ski in a lean winter too, so every fit also has whether one was
+open within 25 km of home that winter. `snowmaking_venues.csv` lists 18 venues in Minnesota, Wisconsin and Michigan
+with their first season of snowmaking and a source for each: Elm Creek (2004-05), Lapham Peak (2005-06), Theodore
+Wirth (2006-07), Hyland (2013-14), Elver Park (2016-17 or 2017-18), Duluth and the Birkie trailhead (2018-19), CXC in
+Middleton (2021-22), Battle Creek (2022-23), Gamehaven in Rochester (2023-24) and smaller ones. Each is placed at its
+town, and the few whose first season isn't known count as open all along. 40% of results had one nearby. It doesn't
+confound the winter effect: 0.40% with it in the model and 0.39% without, and the same counting venues within 15 or
+50 km. But the winter effect is about a third as big for skiers who had a venue nearby that winter (0.21%, 0.10-0.43)
+as for those who didn't (0.62%, 0.41-0.80), as if machine-made snow stood in for some of the natural snow. That may be
+the places rather than the snow, though, since the Twin Cities had venues all along. In the 62 towns that gained one
+(Madison and Duluth the most), the winter effect is near zero both before it opened and after (0.11% and 0.03%, each
+-0.4 to about 0.9), too uncertain to tell apart. Gaining a venue nearby goes with being 0.8% faster (0.2-1.3%), but
+that comes from skiers who moved. For skiers who never moved, a venue opening near them shows nothing (0.1%, -1.0 to
+0.8).
 
 ![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/snow_at_home.png?raw=true)
+
+`snowmaking_openings.py` looks at the openings race by race. It follows the 530 skiers who never moved, in the 65
+towns where a venue first came within 25 km since 2009 and who raced both before and after it opened, against the
+last Birkie before the opening, with the whole field's year and the snow at home taken out. Their first Birkie after
+was 0.2% faster (-0.8 to +1.4), the next two about the same (0.2% and 0.3%), and their Birkies before the opening
+weren't different either (0.2% two races before, 0.6% three or more): no sign of a change, though nothing smaller
+than about 1% could be seen. Venue by venue it goes both ways. The first Birkie after Hyland opened was 1.3% slower
+for skiers near it (0.4 to 2.5%; 95% of them already had Wirth or Elm Creek), after Battle Creek 0.2% slower, after
+Elver Park 0.1% faster and after CXC 1.3% faster, with CXC's later Birkies 2.1% faster (0.0 to 2.7), though 96% of its
+skiers already had Elver Park. With 14 estimates, one or two clearing zero is about what chance gives. Duluth's,
+Rochester's and Standing Rocks' skiers come from one or a few towns, so resampling hometowns can't put a useful range
+on them, and Mora and the Birkie trailhead have under 10 nearby skiers who raced before and after.
+
+![Image](https://github.com/drewpolasky/birkie_data/blob/master/graphs/snowmaking_openings.png?raw=true)
 
 
 Front vs back of the field:

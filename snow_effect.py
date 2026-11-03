@@ -14,6 +14,10 @@
 #that year's results (snow_data/ from snow_depth.py). everyone from one town shares its winter, so the uncertainty
 #comes from resampling whole hometowns.
 #
+#a skier near a cross-country venue that makes snow (snowmaking_venues.csv) can ski in a lean winter, so every fit
+#also has whether one was open within 25 km of home that winter. it changes for a skier when a venue opens near them
+#or they move, so it's measured the same way as the town effect, and a check splits the winter effect by it.
+#
 #example usage:
 #python snow_effect.py
 import argparse
@@ -24,7 +28,7 @@ import numpy as np
 import pandas as pd
 
 from performance_changes import load_linked, build_panel, fit_model, bootstrap, style, COLORS, INK, INK_2, GRID, SURFACE
-from snow_depth import km_between
+from snow_depth import km_between, gazetteer, place_key
 
 #race day each year. 2017 was cancelled, but its winter still counts toward town normals and 2016's placebo
 RACE_DAYS = {2009: '2009-02-21', 2010: '2010-02-27', 2011: '2011-02-26', 2012: '2012-02-25', 2013: '2013-02-23',
@@ -46,6 +50,11 @@ COURSE = (46.11, -91.39)        #halfway between cable and hayward
 LOCAL_KM = 50
 MIDWEST = ['MN', 'WI', 'MI', 'IL', 'IA']
 TREND_MIN_RESULTS = 300         #states with this many results get their own time trend in that check
+#cross-country venues with snowmaking, each placed at its town and counted from the race that ended its first season.
+#one whose first season isn't known (a few small ones) counts for every race
+VENUES = 'snowmaking_venues.csv'
+SNOWMAKING_KM = 25
+SNOWMAKING_CHECK_KM = [15, 50]
 N_BOOTSTRAP = 200
 N_CHECK_BOOTSTRAP = 100
 #towns shown for context, in the categorical color order from the dataviz guidance
@@ -71,7 +80,7 @@ def main():
     print_summary(fit, bins_fit, bins_boot, checks)
     plot_snow(bins_fit, bins_boot, checks, towns, depth)
     out = fit['panel'][['skier', 'name', 'year', 'tech', 'city', 'state', 'hometown_id', 'race_day', 'days',
-                        'days_normal', 'days_novdec', 'days_janrace', 'time_s', 'resid']]
+                        'days_normal', 'days_novdec', 'days_janrace', 'snowmaking', 'time_s', 'resid']]
     out.to_csv(os.path.join(os.path.dirname(args.linked) or '.', 'snow_performance.csv'), index=False)
 
 
@@ -101,6 +110,24 @@ def lookup(days, hometown_id, race_day):
     return days.reindex(pd.MultiIndex.from_arrays([hometown_id, race_day])).values
 
 
+def snowmaking_venues(path=VENUES):
+    #each venue at its town (placed the same way as the hometowns), and the first race it was open for: the one that
+    #ended its first season ('2006-07' is the 2007 race)
+    venues = pd.read_csv(path)
+    venues['key'] = venues['town'].map(place_key)
+    venues = venues.merge(gazetteer()[['key', 'state', 'lat', 'lng']], on=['key', 'state'], how='left')
+    venues['from_year'] = venues['first_season'].str.extract(r'^(\d{4})-', expand=False).astype(float).add(1).fillna(0)
+    return venues
+
+
+def snowmaking_access(p, venues, km):
+    #1 when a venue open that winter was within km of the hometown
+    near = np.zeros(len(p), dtype=bool)
+    for _, v in venues.iterrows():
+        near |= (km_between(p['lat'], p['lng'], v['lat'], v['lng']) <= km).values & (p['year'] >= v['from_year']).values
+    return pd.Series(near.astype(float), index=p.index).where(p['lat'].notna())
+
+
 def snow_panel(linked, towns, depth):
     #birkie skate and classic finishes by skiers with 2+ of them, with the snow at the hometown they listed that year
     p = pd.concat([build_panel(linked, 'birkie', tech) for tech in ['skate', 'classic']], ignore_index=True)
@@ -113,6 +140,10 @@ def snow_panel(linked, towns, depth):
     p['hometown_id'] = p['hometown_id'].fillna(-1).astype(int)
     p['course_km'] = km_between(p['lat'], p['lng'], *COURSE)
     p['race_day'] = race_dates(p)
+    venues = snowmaking_venues()
+    p['snowmaking'] = snowmaking_access(p, venues, SNOWMAKING_KM)
+    for km in SNOWMAKING_CHECK_KM:
+        p['snowmaking_{}km'.format(km)] = snowmaking_access(p, venues, km)
 
     saturdays = pd.to_datetime(list(RACE_DAYS.values()))
     definitions = {'days': ('depth_10km_mm', SKIABLE_MM, 'season'), 'days_nearest': ('depth_mm', SKIABLE_MM, 'season'),
@@ -139,17 +170,21 @@ def snow_panel(linked, towns, depth):
 
 #---------------------------------------------------------------- model
 
-def snow_columns(panel, name='days'):
-    #this winter's departure from the town's normal, and the town's normal, both per PER skiable days
-    return pd.DataFrame({'winter': (panel[name] - panel[name + '_normal']) / PER,
-                         'town': panel[name + '_normal'] / PER}, index=panel.index)
+def snow_columns(panel, name='days', access='snowmaking'):
+    #this winter's departure from the town's normal, and the town's normal, both per PER skiable days, and whether a
+    #snowmaking venue was near home that winter (access=None leaves it out)
+    columns = pd.DataFrame({'winter': (panel[name] - panel[name + '_normal']) / PER,
+                            'town': panel[name + '_normal'] / PER}, index=panel.index)
+    if access:
+        columns['snowmaking'] = panel[access]
+    return columns
 
 
 def binned(panel):
     #one column per bin of this winter's departure from normal, against a winter within 10 days of normal
     bins = pd.cut(panel['days'] - panel['days_normal'], [-np.inf] + WINTER_BINS + [np.inf], labels=WINTER_LABELS)
     columns = pd.get_dummies(bins, dtype=float).drop(columns=WINTER_LABELS[2]).add_prefix('winter ')
-    return columns.join(snow_columns(panel)[['town']])
+    return columns.join(snow_columns(panel)[['town', 'snowmaking']])
 
 
 def fit_snow(panel, extra, n_boot=N_BOOTSTRAP):
@@ -172,8 +207,8 @@ def estimate(fit, boot, column):
 
 
 def robustness(panel, fit, boot):
-    #the winter effect from the main fit, then from other samples, other definitions of a skiable day and a placebo,
-    #and last the town effect
+    #the winter effect from the main fit, then from other samples, other definitions of a skiable day, a placebo and
+    #other takes on snowmaking near home, and last the town and snowmaking effects
     rows = []
 
     def add(group, label, f, b, column='winter'):
@@ -184,6 +219,7 @@ def robustness(panel, fit, boot):
         p = panel if mask is None else panel[mask]
         f, b = fit_snow(p, snow_columns(p) if extra is None else extra.loc[p.index], N_CHECK_BOOTSTRAP)
         add(group, label, f, b, column='winter' if extra is None else extra.columns[0])
+        return f, b
 
     def split(group, labels, codes):
         #a separate winter effect for each group of results (codes 0, 1, 2.., NaN to leave out), one town effect
@@ -199,7 +235,8 @@ def robustness(panel, fit, boot):
     run('who', 'Classic', panel['tech'] == 'classic')
     run('who', 'Only MN, WI, MI, IL and IA', panel['state'].isin(MIDWEST))
     run('who', 'Not counting skiers within {} km of the course'.format(LOCAL_KM), panel['course_km'] > LOCAL_KM)
-    run('who', 'Only skiers who never changed hometown', panel.groupby('skier')['hometown_id'].transform('nunique') == 1)
+    stayed = run('who', 'Only skiers who never changed hometown',
+                 panel.groupby('skier')['hometown_id'].transform('nunique') == 1)
     usual = pd.cut(panel['days_normal'], NORMAL_GROUPS + [np.inf], right=False, labels=False)
     split('who', ['Towns that normally get under 30 skiable days', 'Towns that normally get 30-60',
                   'Towns that normally get 60+'], usual)
@@ -208,13 +245,21 @@ def robustness(panel, fit, boot):
     third = ability.groupby('tech')['ability'].transform(lambda s: pd.qcut(s, 3, labels=False))
     split('who', ['The fastest third of skiers', 'The middle third', 'The slowest third'],
           panel['athlete_id'].map(third))
+    split('who', ['Skiers with snowmaking within {} km that winter'.format(SNOWMAKING_KM), 'Skiers without'],
+          panel['snowmaking'].map({1.0: 0, 0.0: 1}))
+    #the towns near a venue aren't like the others (the twin cities had theirs all along), so the same split again
+    #within only the towns that gained one, before and after it opened
+    gained = panel.groupby('hometown_id')['snowmaking'].transform('nunique') > 1
+    split('who', ['Towns that gained a venue, after it opened', 'The same towns, before'],
+          panel['snowmaking'].map({1.0: 0, 0.0: 1}).where(gained))
 
     run('definition', 'Snow in the nearest 1 km cell, not within 10 km', extra=snow_columns(panel, 'days_nearest'))
     run('definition', 'Counting days with 2+ inches', extra=snow_columns(panel, 'days_2in'))
     run('definition', 'Counting days with 8+ inches', extra=snow_columns(panel, 'days_8in'))
     early, late = snow_columns(panel, 'days_novdec'), snow_columns(panel, 'days_janrace')
     f, b = fit_snow(panel, pd.DataFrame({'novdec': early['winter'], 'janrace': late['winter'],
-                                         'town': snow_columns(panel)['town']}), N_CHECK_BOOTSTRAP)
+                                         'town': snow_columns(panel)['town'], 'snowmaking': panel['snowmaking']}),
+                    N_CHECK_BOOTSTRAP)
     add('definition', 'Only November-December (January to race day also in)', f, b, 'novdec')
     add('definition', 'Only January to race day (November-December also in)', f, b, 'janrace')
 
@@ -226,8 +271,18 @@ def robustness(panel, fit, boot):
     run('confounding', 'With a time trend for each state', extra=snow_columns(panel).join(trend))
     placebo = pd.DataFrame({'next': (panel['days_next'] - panel['days_normal']) / PER}).join(snow_columns(panel))
     run('confounding', 'Placebo: the following winter (should be 0)', extra=placebo)
+    run('confounding', 'Without snowmaking near home in the model', extra=snow_columns(panel, access=None))
+    for km in SNOWMAKING_CHECK_KM:
+        run('confounding', 'Snowmaking within {} km of home, not {}'.format(km, SNOWMAKING_KM),
+            extra=snow_columns(panel, access='snowmaking_{}km'.format(km)))
 
     add('town', 'Moving to a town with 30 more skiable days in a normal winter', fit, boot, 'town')
+    #most skiers who gained or lost a venue nearby moved, which brings everything else a move does. for skiers who
+    #never moved it can only be a venue opening near them
+    add('access', 'A snowmaking venue within {} km of home (opened or moved near)'.format(SNOWMAKING_KM), fit, boot,
+        'snowmaking')
+    add('access', 'A snowmaking venue opening within {} km, skiers who never moved'.format(SNOWMAKING_KM), *stayed,
+        'snowmaking')
     return pd.DataFrame(rows)
 
 
@@ -243,6 +298,11 @@ def print_summary(fit, bins_fit, bins_boot, checks):
               p['days'].median(), winter.std(), (winter - winter.groupby(p['condition']).transform('mean')).std()))
     moved = p.groupby('skier')['hometown_id'].transform('nunique') > 1
     print('{:.0%} of skiers listed more than one hometown'.format(p.loc[moved, 'skier'].nunique() / p['skier'].nunique()))
+    changed = p.groupby('skier')['snowmaking'].transform('nunique') > 1
+    print('{:.0%} of results had a snowmaking venue within {} km of home, and {} skiers gained or lost one between '
+          'their races ({} of them without moving)'.format(p['snowmaking'].mean(), SNOWMAKING_KM,
+                                                           p.loc[changed, 'skier'].nunique(),
+                                                           p.loc[changed & ~moved, 'skier'].nunique()))
 
     main = checks.iloc[0]
     town = checks[checks['group'] == 'town'].iloc[0]
@@ -251,6 +311,9 @@ def print_summary(fit, bins_fit, bins_boot, checks):
                                                            main['pct_faster'] / 100 * 180))
     print('moving to a town with {} more skiable days in a normal winter: {:.2f}% faster [{:.2f} to {:.2f}] '
           '(snow plus whatever else came with the move)'.format(PER, town['pct_faster'], town['lo'], town['hi']))
+    for _, access in checks[checks['group'] == 'access'].iterrows():
+        print('{}: {:.2f}% faster [{:.2f} to {:.2f}]'.format(access['check'].lower(), access['pct_faster'],
+                                                             access['lo'], access['hi']))
 
     print('\n% faster than in a winter within 10 days of normal at home:')
     counts = pd.cut(bins_fit['panel']['days'] - bins_fit['panel']['days_normal'], [-np.inf] + WINTER_BINS + [np.inf],
@@ -320,28 +383,38 @@ def plot_snow(bins_fit, bins_boot, checks, towns, depth):
 
     #every check, per 30 more skiable days
     ax = fig.add_subplot(grid[:, 1])
-    gap = {'main': 0, 'who': 1, 'definition': 2, 'confounding': 3, 'town': 4}
+    gap = {'main': 0, 'who': 1, 'definition': 2, 'confounding': 3, 'town': 4, 'access': 5}
     y = -(np.arange(len(checks)) + checks['group'].map(gap).values * 0.8)
     main = checks.iloc[0]
-    weather = checks[checks['group'] != 'town']
+    weather = checks[~checks['group'].isin(['town', 'access'])]
     x_min, x_max = min(-0.4, weather['lo'].min() - 0.1), weather['hi'].max() + 0.3
     ax.axvspan(main['lo'], main['hi'], color=COLORS['M'], alpha=0.12, linewidth=0)
     ax.axvline(0, color=INK_2, linewidth=0.8)
     for yi, (_, r) in zip(y, checks.iterrows()):
-        if r['hi'] > x_max:
+        numbers = '{:+.2f}% [{:.2f} to {:.2f}]'.format(r['pct_faster'], r['lo'], r['hi'])
+        if r['pct_faster'] > x_max:
             #the town effect is far bigger than any winter's, so it's drawn off the scale with its numbers
             ax.plot(x_max - 0.02, yi, '>', color=INK_2, markersize=8)
-            ax.annotate('{:+.2f}% [{:.2f} to {:.2f}], off the scale'.format(r['pct_faster'], r['lo'], r['hi']),
-                        (x_max - 0.02, yi), xytext=(-10, 0), textcoords='offset points', ha='right', va='center',
-                        fontsize=7, color=INK_2)
-            ax.annotate('not just the weather: it carries whatever else came with the move', (x_max - 0.02, yi),
-                        xytext=(-10, -11), textcoords='offset points', ha='right', fontsize=7, color=INK_2)
+            ax.annotate(numbers + ', off the scale', (x_max - 0.02, yi), xytext=(-10, 0), textcoords='offset points',
+                        ha='right', va='center', fontsize=7, color=INK_2)
+            if r['group'] == 'town':
+                ax.annotate('not just the weather: it carries whatever else came with the move', (x_max - 0.02, yi),
+                            xytext=(-10, -11), textcoords='offset points', ha='right', fontsize=7, color=INK_2)
             continue
-        ax.plot([r['lo'], r['hi']], [yi, yi], color=COLORS['M'], linewidth=1.5)
+        #a range running off the scale (the snowmaking effects) is cut at the edge, with its numbers written out
+        lo, hi = max(r['lo'], x_min), min(r['hi'], x_max)
+        ax.plot([lo, hi], [yi, yi], color=COLORS['M'], linewidth=1.5)
+        for end, edge, marker in [(r['lo'] < x_min, x_min, '<'), (r['hi'] > x_max, x_max, '>')]:
+            if end:
+                ax.plot(edge, yi, marker, color=COLORS['M'], markersize=5)
         ax.plot(r['pct_faster'], yi, 'D' if r['group'] == 'main' else 'o', color=COLORS['M'],
                 markersize=9 if r['group'] == 'main' else 7, markeredgecolor=SURFACE, markeredgewidth=1.5)
-        ax.annotate('{:+.2f}%'.format(r['pct_faster']), (r['hi'], yi), xytext=(5, 0), textcoords='offset points',
-                    va='center', fontsize=7, color=INK_2)
+        if r['hi'] > x_max:
+            ax.annotate(numbers, (lo, yi), xytext=(-5, 0), textcoords='offset points', ha='right', va='center',
+                        fontsize=7, color=INK_2)
+        else:
+            ax.annotate(numbers if r['lo'] < x_min else '{:+.2f}%'.format(r['pct_faster']), (hi, yi), xytext=(5, 0),
+                        textcoords='offset points', va='center', fontsize=7, color=INK_2)
     ax.set_yticks(y)
     ax.set_yticklabels(checks['check'], fontsize=8)
     ax.set_ylim(y.min() - 1, 0.8)
