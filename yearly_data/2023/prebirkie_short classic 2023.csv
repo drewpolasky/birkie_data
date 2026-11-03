@@ -1,0 +1,76 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,126,"Duffy, Hugh",Hugh,Duffy,M,57,Male 50-59,Center City,MN,,01:28:59,finished
+2,496,"Hedberg, Luke",Luke,Hedberg,M,42,Male 40-49,Lakeville,MN,,01:32:48,finished
+3,323,"Webster, Jon",Jon,Webster,M,50,Male 50-59,Hayward,WI,,01:33:33,finished
+4,299,"Carlen, James",James,Carlen,M,54,Male 50-59,Saint Paul,MN,,01:35:12,finished
+5,354,"Hallett, John",John,Hallett,M,58,Male 50-59,Oconomowoc,WI,,01:41:32,finished
+6,137,"Wurdinger, Scott",Scott,Wurdinger,M,65,Male 60-69,Mound,MN,,01:43:38,finished
+7,365,"Scheckman, Jacob",Jacob,Scheckman,M,38,Male 30-39,Minneapolis,MN,,01:47:58,finished
+8,332,"May, Ted",Ted,May,M,70,Male 70+,Bayfield,WI,,01:49:51,finished
+9,593,"Lee, Duane",Duane,Lee,M,68,Male 60-69,Lindstrom,MN,,01:50:50,finished
+10,446,"Kuznia, Ken",Ken,Kuznia,M,61,Male 60-69,Saint Paul,MN,,01:50:53,finished
+11,331,"Mikkelson, Audun",Audun,Mikkelson,M,64,Male 60-69,Hayward,WI,,01:53:05,finished
+12,179,"Hoban, Rich",Rich,Hoban,M,63,Male 60-69,Stillwater,MN,,01:53:47,finished
+13,436,"McDermott, Thomas",Thomas,McDermott,M,20,Male 20-29,St. Peter,MN,,01:54:37,finished
+14,210,"Maki, Jim",Jim,Maki,M,55,Male 50-59,Wausau,WI,,01:56:50,finished
+15,505,"Gabriel, Paul",Paul,Gabriel,M,71,Male 70+,Ogema,WI,,01:57:56,finished
+16,130,"Wells, Bradley",Bradley,Wells,M,58,Male 50-59,Wauwatosa,WI,,01:57:57,finished
+17,326,"Papendieck, Marc",Marc,Papendieck,M,59,Male 50-59,Edgerton,WI,,02:02:13,finished
+18,550,"Raymond, Ron",Ron,Raymond,M,59,Male 50-59,Roberts,WI,,02:02:18,finished
+19,289,"Scheider, Doug",Doug,Scheider,M,71,Male 70+,Solon Springs,WI,,02:02:38,finished
+20,184,"Church, Mary-Anne",Mary-Anne,Church,F,,,Keewatin,ON,,02:03:38,finished
+21,444,"Hasbargen, Tera",Tera,Hasbargen,F,36,Female 30-39,Duluth,MN,,02:04:37,finished
+22,266,"Miller, Kathleen",Kathleen,Miller,F,62,Female 60-69,Minneapolis,MN,,02:05:42,finished
+23,293,"Huelsmann, Jennifer",Jennifer,Huelsmann,F,53,Female 50-59,Hayward,WI,,02:08:51,finished
+24,306,"Helou, Kate",Kate,Helou,F,20,Female 20-29,Collegeville,MN,,02:11:03,finished
+25,492,"LaJoie, Ronnie",Ronnie,LaJoie,F,44,Female 40-49,Iron River,WI,,02:12:14,finished
+26,301,"Greenman, Steve",Steve,Greenman,M,66,Male 60-69,Austin,MN,,02:12:37,finished
+27,96,"Wood, Andrew",Andrew,Wood,M,70,Male 70+,Rochester,MN,,02:12:51,finished
+28,339,"Shydlowski, Linda",Linda,Shydlowski,F,52,Female 50-59,Cable,WI,,02:14:49,finished
+29,154,"Pfeifer, Liese",Liese,Pfeifer,F,70,Female 70+,Waunakee,WI,,02:15:32,finished
+30,443,"Kuznia, Annette",Annette,Kuznia,F,59,Female 50-59,Saint Paul,MN,,02:15:52,finished
+31,101,"Rebischke, Jessica",Jessica,Rebischke,F,26,Female 20-29,Eden Prairie,MN,,02:18:54,finished
+32,89,"Rowley, Greg",Greg,Rowley,M,49,Male 40-49,Rochester,MN,,02:18:47,finished
+33,569,"Campobasso, Paul",Paul,Campobasso,M,62,Male 60-69,New Brighton,MN,,02:19:29,finished
+34,128,"Dahmen, Terry",Terry,Dahmen,M,69,Male 60-69,Cable,WI,,02:20:44,finished
+35,169,"Winchester, Darren",Darren,Winchester,M,56,Male 50-59,Hayward,WI,,02:23:32,finished
+36,280,"Van Sicklen, Mike",Mike,Van Sicklen,M,70,Male 70+,Dodgeville,WI,,02:27:05,finished
+37,83,"Ungurian, Danielle",Danielle,Ungurian,F,22,Female 20-29,Inver Grove Heights,MN,,02:29:21,finished
+38,381,"Lucas, Jack",Jack,Lucas,M,25,Male 20-29,Minneapolis,MN,,02:30:12,finished
+39,445,"Hoffman, James",James,Hoffman,M,58,Male 50-59,Black River Falls,WI,,02:34:08,finished
+40,531,"Olmstead, Dennis",Dennis,Olmstead,M,68,Male 60-69,Eden Prairie,MN,,02:34:20,finished
+41,435,"Johnson, Tessa",Tessa,Johnson,F,22,Female 20-29,Saint Paul,MN,,02:34:34,finished
+42,521,"Champlin, Sara",Sara,Champlin,F,40,Female 40-49,Minneapolis,MN,,02:35:48,finished
+43,34,"Delforge, David",David,Delforge,M,74,Male 70+,Chanhassen,MN,,02:37:01,finished
+44,490,"Bolla, Jane",Jane,Bolla,F,65,Female 60-69,Minneapolis,MN,,02:34:10,finished
+45,355,"McKee, Matthew",Matthew,McKee,M,50,Male 50-59,Evergreen Park,IL,,02:42:24,finished
+46,40,"Anderson, Jim",Jim,Anderson,M,70,Male 70+,Cable,WI,,02:42:34,finished
+47,142,"Gilbertson, Rebecca",Rebecca,Gilbertson,F,44,Female 40-49,Duluth,MN,,02:42:55,finished
+48,136,"Raes, Ron",Ron,Raes,M,58,Male 50-59,Waunakee,WI,,02:48:43,finished
+49,94,"Nelson, Jeffrey",Jeffrey,Nelson,M,66,Male 60-69,Belvidere,IL,,02:52:16,finished
+50,416,"Cattanach, Robert",Robert,Cattanach,M,74,Male 70+,Saint Paul,MN,,02:49:50,finished
+51,187,"Baker, John",John,Baker,M,60,Male 60-69,North Saint Paul,MN,,02:52:38,finished
+52,102,"Winter, Jim",Jim,Winter,M,75,Male 70+,Delafield,WI,,02:53:30,finished
+53,548,"Weiss, Kelly",Kelly,Weiss,F,39,Female 30-39,Houghton,MI,,02:53:24,finished
+54,44,"Klein, Carl",Carl,Klein,M,72,Male 70+,Wausau,WI,,02:54:48,finished
+55,325,"Mattingly, Kelly",Kelly,Mattingly,M,64,Male 60-69,Janesville,WI,,02:56:51,finished
+56,140,"Blum, John",John,Blum,M,65,Male 60-69,Hudson,WI,,02:58:51,finished
+57,183,"Randolph, Joseph",Joseph,Randolph,M,66,Male 60-69,Drummond,WI,,02:59:03,finished
+58,157,"Arvidson, Mark",Mark,Arvidson,M,61,Male 60-69,Eden Prairie,MN,,03:00:10,finished
+59,414,"Meendering, Grady",Grady,Meendering,M,25,Male 20-29,Springfield,MN,,03:05:02,finished
+60,312,"Kearley, Ruth",Ruth,Kearley,F,61,Female 60-69,Madison,WI,,03:05:28,finished
+61,309,"Small, Douglas",Douglas,Small,M,65,Male 60-69,Granger,IN,,03:06:25,finished
+62,134,"Bjorklund, John",John,Bjorklund,M,57,Male 50-59,Spooner,WI,,03:10:15,finished
+63,487,"Dolence, Ann",Ann,Dolence,F,64,Female 60-69,Duluth,MN,,03:10:49,finished
+64,35,"Thorp, David",David,Thorp,M,69,Male 60-69,Chanhassen,MN,,03:14:54,finished
+65,37,"Behrend, Katie",Katie,Behrend,F,40,Female 40-49,Saint Paul,MN,,03:14:52,finished
+66,409,"Meendering, Darrin",Darrin,Meendering,M,56,Male 50-59,Springfield,MN,,03:16:20,finished
+67,82,"Bates, Alan",Alan,Bates,M,72,Male 70+,Janesville,WI,,03:19:45,finished
+68,449,"Kolwitz, Alisa",Alisa,Kolwitz,F,37,Female 30-39,Ashland,WI,,03:57:11,finished
+69,132,"Lawrence, Deborah",Deborah,Lawrence,F,65,Female 60-69,Spooner,WI,,03:57:13,finished
+70,155,"Hagberg, Cody",Cody,Hagberg,M,29,Male 20-29,Hayward,WI,,03:57:24,finished
+71,248,"Peter, Richard",Richard,Peter,M,78,Male 70+,Rochester,MN,,03:55:58,finished
+72,247,"Knapp, Barry",Barry,Knapp,M,75,Male 70+,Rochester,MN,,03:55:51,finished
+73,56,"Bothun, Darald",Darald,Bothun,M,76,Male 70+,Rochester,MN,,04:10:29,finished
+74,356,"McKee, Daniel",Daniel,McKee,M,52,Male 50-59,Chicago,IL,,04:22:41,finished
+,318,"Olson, Keith",Keith,Olson,M,60,Male 60-69,Springfield,MN,,,DNF

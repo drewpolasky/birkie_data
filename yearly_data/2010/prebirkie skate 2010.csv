@@ -1,0 +1,377 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,1020,"Mydra, Jan",Jan,Mydra,M,38,,Palos Heights,IL,,01:57:32.1,finished
+2,1035,"Schneider, John",John,Schneider,M,44,,Plymouth,MN,,01:59:15.5,finished
+3,1244,"Schuetz, Dan",Dan,Schuetz,M,35,,Denver,CO,,01:59:17.5,finished
+4,1329,"Dreger, Ross",Ross,Dreger,M,43,,Marathon,WI,,01:59:18.2,finished
+5,1227,"Vetter, Nick",Nick,Vetter,M,26,,Eagan,MN,,01:59:18.9,finished
+6,1149,"Halverson, Chris",Chris,Halverson,M,47,,Madison,WI,,01:59:19.6,finished
+7,1384,"Krenz, Thomas",Thomas,Krenz,M,48,,Chisago City,MN,,01:59:21.7,finished
+8,1263,"Ping, Ryan",Ryan,Ping,M,33,,Winona,MN,,01:59:36.7,finished
+9,1205,"Sonnesyn, Steve",Steve,Sonnesyn,M,50,,Plymouth,MN,,02:01:53.6,finished
+10,1235,"Flynn, Shannon",Shannon,Flynn,M,23,,Spooner,WI,,02:02:34.5,finished
+11,1255,"Swift, Tim",Tim,Swift,M,46,,Hayward,WI,,02:02:38.5,finished
+12,1309,"Brown, Scott",Scott,Brown,M,37,,Minneapolis,MN,,02:02:41.8,finished
+13,1101,"Greene, Greg",Greg,Greene,M,54,,Oshkosh,WI,,02:03:07.6,finished
+14,1179,"Ree, Scott",Scott,Ree,M,46,,Plymouth,MN,,02:03:08.0,finished
+15,1274,"Jackson, Chris",Chris,Jackson,M,42,,Westby,WI,,02:03:08.8,finished
+16,1250,"Laszio, Alberti",Alberti,Laszio,M,38,,Plymouth,MN,,02:03:30.4,finished
+17,1348,"Lynch, John",John,Lynch,M,43,,st. Anthony Village,MN,,02:03:33.6,finished
+18,1061,"Limberg, Allen",Allen,Limberg,M,52,,Wausau,WI,,02:04:57.6,finished
+19,1206,"Cavanaugh, Mike",Mike,Cavanaugh,M,43,,Wausau,WI,,02:04:58.7,finished
+20,1378,"Coenen, Jesse",Jesse,Coenen,M,26,,Madison,WI,,02:05:29.5,finished
+21,1306,"Choate, Michael",Michael,Choate,M,52,,Elmwood Park,IL,,02:05:31.0,finished
+22,1044,"Niemi, Paulette",Paulette,Niemi,F,42,,Ironwood,MI,,02:05:42.5,finished
+23,1153,"Gladitsch, Carl",Carl,Gladitsch,M,23,,Bloomer,WI,,02:05:46.3,finished
+24,1302,"Matush, Thomas",Thomas,Matush,M,40,,Hayward,WI,,02:05:47.2,finished
+25,1241,"Magozzi, Jason",Jason,Magozzi,M,41,,Saint Paul,MN,,02:06:15.1,finished
+26,1291,"Koeneman, Brian",Brian,Koeneman,M,42,,Mankato,MN,,02:06:21.9,finished
+27,1268,"Goold, Todd",Todd,Goold,M,38,,Hayward,WI,,02:06:29.3,finished
+28,1128,"Jackson, Hinde",Hinde,Jackson,M,20,,Madison,WI,,02:07:03.9,finished
+29,1316,"Meanwell, Walter",Walter,Meanwell,M,48,,Madison,WI,,02:07:11.6,finished
+30,1106,"Baldus, Bill",Bill,Baldus,M,45,,Minneapolis,MN,,02:07:57.6,finished
+31,1367,"Kotcon, Dennis",Dennis,Kotcon,M,48,,Florence,WI,,02:08:01.3,finished
+32,1360,"Krueger, Casey",Casey,Krueger,M,26,,Aurora,MN,,02:08:07.0,finished
+33,1138,"Rudd, Kim",Kim,Rudd,F,38,,Plymouth,MN,,02:08:16.3,finished
+34,1363,"Harvieux, Patti",Patti,Harvieux,F,44,,Duluth,MN,,02:08:22.9,finished
+35,1125,"Von Bauer, Henning",Henning,Von Bauer,M,48,,Madison,WI,,02:08:27.8,finished
+36,1009,"Peatrowsky, Joe",Joe,Peatrowsky,M,27,,Saint Michael,MN,,02:10:18.4,finished
+37,1239,"Prevot, Roger",Roger,Prevot,M,50,,Chicago,IL,,02:10:19.4,finished
+38,1297,"Bradley, Jeff",Jeff,Bradley,M,48,,Davenport,IA,,02:10:22.2,finished
+39,1036,"Evans, Jason",Jason,Evans,M,29,,Lake Nebagamon,WI,,02:10:42.1,finished
+40,1168,"Mannion, Jamie",Jamie,Mannion,M,52,,La Crosse,WI,,02:10:47.9,finished
+41,1225,"Worley, David",David,Worley,M,43,,Duluth,MN,,02:10:49.0,finished
+42,1230,"Piehler, Timothy",Timothy,Piehler,M,31,,Minneapolis,MN,,02:11:07.4,finished
+43,1323,"Reckinger, Nick",Nick,Reckinger,M,28,,Green Bay,WI,,02:11:27.6,finished
+44,1347,"Kalmes, Eric",Eric,Kalmes,M,35,,Lino Lakes,MN,,02:11:35.9,finished
+45,1204,"Reker, Kevin",Kevin,Reker,M,41,,Little Canada,MN,,02:11:37.6,finished
+46,1054,"Manske, Bruce",Bruce,Manske,M,53,,Lindstrom,MN,,02:11:38.8,finished
+47,1382,"Gilpin, Staci",Staci,Gilpin,F,36,,Duluth,MN,,02:11:39.6,finished
+48,1392,"Praxmarer, John",John,Praxmarer,M,48,,Amherst Junction,WI,,02:12:24.9,finished
+49,1319,"Lowrie, Ron",Ron,Lowrie,M,54,,Minneapolis,MN,,02:12:32.0,finished
+50,1137,"Rudd, Craig",Craig,Rudd,M,40,,Plymouth,MN,,02:12:52.8,finished
+51,1262,"Ping, Megan",Megan,Ping,F,32,,Winona,MN,,02:13:08.9,finished
+52,1379,"Lee, Duane",Duane,Lee,M,55,,Lindstrom,MN,,02:13:23.4,finished
+53,1387,"Isaksen, Borg",Borg,Isaksen,M,36,,Brule,WI,,02:13:28.5,finished
+54,1388,"Kern, Erich",Erich,Kern,M,39,,Roseville,MN,,02:13:50.8,finished
+55,1161,"Bolz, Jason",Jason,Bolz,M,37,,Crystal,MN,,02:14:44.3,finished
+56,1224,"Bart, Brad",Brad,Bart,M,48,,Minneapolis,MN,,02:14:48.5,finished
+57,1063,"Lauritsen, Keith",Keith,Lauritsen,M,51,,Green Bay,WI,,02:14:55.5,finished
+58,1094,"Lob, Patrick",Patrick,Lob,M,,,Hartland,WI,,02:15:10.4,finished
+59,1332,"Herbert, David",David,Herbert,M,53,,Rochester,MN,,02:15:28.2,finished
+60,1032,"McGrath, Christopher",Christopher,McGrath,M,50,,Hayward,WI,,02:15:33.7,finished
+61,1001,"Dowling, Matt",Matt,Dowling,M,44,,Minneapolis,MN,,02:15:34.7,finished
+62,1119,"Glidesleeve, John",John,Glidesleeve,M,35,,Kewakum,WI,,02:15:43.0,finished
+63,1345,"Berntson, Dan",Dan,Berntson,M,58,,Edina,MN,,02:15:43.9,finished
+64,1270,"Estenson, Craig",Craig,Estenson,M,47,,Eagan,MN,,02:15:48.9,finished
+65,1115,"Batdorf, Niles",Niles,Batdorf,M,57,,Duluth,MN,,02:15:51.0,finished
+66,1164,"Carey, Tim",Tim,Carey,M,44,,Madison,WI,,02:15:53.8,finished
+67,1273,"Mundahl, John",John,Mundahl,M,58,,Hayward,WI,,02:16:02.0,finished
+68,1042,"Splittgerber, Jim",Jim,Splittgerber,M,50,,Appleton,WI,,02:16:04.9,finished
+69,1366,"Chu, Gary",Gary,Chu,M,51,,Racine,WI,,02:16:16.8,finished
+70,1391,"Jones, Steve",Steve,Jones,M,46,,Tonka Bay,MN,,02:16:27.3,finished
+71,1242,"Lindquist, Eric",Eric,Lindquist,M,35,,Saint Louis Park,MN,,02:16:31.3,finished
+72,1252,"Sartain, Jeremy",Jeremy,Sartain,M,35,,St Paul,MN,,02:16:37.0,finished
+73,1079,"Geisen, Richard",Richard,Geisen,M,43,,Washburn,WI,,02:16:40.1,finished
+74,1219,"Meyer, Dan",Dan,Meyer,M,59,,Lake Elmo,MN,,02:16:43.4,finished
+75,1341,"Longley, Jesse",Jesse,Longley,M,44,,Bloomington,MN,,02:16:47.5,finished
+76,1057,"Halberg, Aaron",Aaron,Halberg,M,35,,Hayward,WI,,02:16:48.8,finished
+77,1376,"Mahlab, Amie",Amie,Mahlab,F,25,,Madison,WI,,02:17:03.4,finished
+78,1145,"Borzecki, Stanley",Stanley,Borzecki,M,51,,Armstrong Creek,WI,,02:17:04.7,finished
+79,1293,"Sands, Steve",Steve,Sands,M,64,,Minnetonka,MN,,02:17:07.9,finished
+80,1214,"Batdorf, Per",Per,Batdorf,M,24,,St Paul,MN,,02:18:08.2,finished
+81,1006,"Becker, Craig",Craig,Becker,M,30,,Ladysmith,WI,,02:18:10.5,finished
+82,1196,"Bramer, Tom",Tom,Bramer,M,49,,Bloomington,MN,,02:18:44.2,finished
+83,1396,"Sams, Doug",Doug,Sams,M,52,,Long Lake,MN,,02:18:51.7,finished
+84,1016,"Lundeen, Frank",Frank,Lundeen,M,30,,Minneapolis,MN,,02:19:03.8,finished
+85,1223,"Johanson, Erik",Erik,Johanson,M,45,,Chanhassen,MN,,02:19:13.4,finished
+86,1326,"Moran, Pete",Pete,Moran,M,40,,Minneapolis,MN,,02:19:50.5,finished
+87,1352,"Olejniczak, Curt",Curt,Olejniczak,M,55,,Park Falls,WI,,02:19:57.8,finished
+88,1203,"Mitchell, Robert",Robert,Mitchell,M,30,,Rochester,MN,,02:20:08.2,finished
+89,1167,"Sween, Jay",Jay,Sween,M,39,,Wausau,WI,,02:20:18.9,finished
+90,1134,"Webster, Jon",Jon,Webster,M,37,,Cottage Grove,MN,,02:20:28.1,finished
+91,1102,"Jurek, Jon",Jon,Jurek,M,45,,Lake Nebagamon,WI,,02:20:30.1,finished
+92,1248,"Godkin, Phil",Phil,Godkin,M,49,,Milwaukee,WI,,02:20:55.8,finished
+93,1301,"Flowers, Kevin",Kevin,Flowers,M,44,,Glen Ellyn,IL,,02:21:12.5,finished
+94,1398,"Bushland, Marty",Marty,Bushland,M,41,,Chippewa Falls,WI,,02:21:13.6,finished
+95,1290,"Bates, Ananda",Ananda,Bates,M,38,,Minneapolis,MN,,02:21:14.5,finished
+96,1334,"Hietpas, Gregg",Gregg,Hietpas,M,39,,Stillwater,MN,,02:21:18.6,finished
+97,1143,"Klos, Steven",Steven,Klos,M,49,,Edina,MN,,02:21:22.1,finished
+98,1018,"Schroeder, Kurt",Kurt,Schroeder,M,53,,LaCrosse,WI,,02:21:44.1,finished
+99,1109,"Robertson, Nick",Nick,Robertson,M,27,,Ashland,WI,,02:21:46.6,finished
+100,1008,"Flood, Chris",Chris,Flood,M,36,,Rochester,MN,,02:21:52.4,finished
+101,1126,"Schoessow, Kevin",Kevin,Schoessow,M,,,Spooner,WI,,02:21:57.1,finished
+102,1311,"Riley, John",John,Riley,M,46,,Cross Plains,WI,,02:22:11.1,finished
+103,1238,"Friedell, Gary",Gary,Friedell,M,50,,Hopkins,MN,,02:22:11.4,finished
+104,1181,"Warren, Andy",Andy,Warren,M,22,,Eau Claire,WI,,02:22:20.2,finished
+105,1322,"Rittenhouse, Brett",Brett,Rittenhouse,M,31,,Green Bay,WI,,02:22:24.9,finished
+106,1247,"Oberton, Will",Will,Oberton,M,51,,Winona,MN,,02:22:28.0,finished
+107,1218,"Hughes, Craig",Craig,Hughes,M,43,,Hancock,MI,,02:22:32.0,finished
+108,1108,"Back, Randy",Randy,Back,M,50,,Superior,WI,,02:22:57.0,finished
+109,1092,"Bergin, Ron",Ron,Bergin,M,57,,Cable,WI,,02:23:07.9,finished
+110,1277,"Lutz, Tom",Tom,Lutz,M,31,,Franklin,Wi,,02:23:12.5,finished
+111,1122,"Lindberg, Jon",Jon,Lindberg,M,48,,Lake Nebagamon,WI,,02:23:16.5,finished
+112,1104,"Marugg, Parrish",Parrish,Marugg,M,47,,Dubuque,IA,,02:23:21.2,finished
+113,1354,"Raymond, Ron",Ron,Raymond,M,46,,Roberts,WI,,02:23:21.9,finished
+114,1151,"Petersson, Gus",Gus,Petersson,M,19,,Brookfield,WI,,02:23:33.6,finished
+115,1340,"Martin, Lynn",Lynn,Martin,M,58,,La Crosse,WI,,02:24:03.6,finished
+116,1356,"Sturgis, Aaron",Aaron,Sturgis,M,31,,Eau Claire,WI,,02:24:23.2,finished
+117,1386,"Putman, Daniel",Daniel,Putman,M,19,,Green Bay,WI,,02:24:28.2,finished
+118,1197,"Kopanda, Bill",Bill,Kopanda,M,58,,Crystal Lake,IL,,02:24:58.7,finished
+119,1087,"Leschisin, Joseph",Joseph,Leschisin,M,39,,Turtle Lake,WI,,02:25:12.4,finished
+120,1069,"Ketterhagen, Daryl",Daryl,Ketterhagen,M,51,,Marshall,WI,,02:25:21.1,finished
+121,1389,"Manz, Cordell",Cordell,Manz,M,39,,Brule,WI,,02:25:30.8,finished
+122,1150,"Rantala, Amy",Amy,Rantala,F,38,,Eau Claire,WI,,02:25:35.6,finished
+123,1342,"Sund, Michael",Michael,Sund,M,50,,Wayzata,MN,,02:26:06.2,finished
+124,1320,"Smith, Kristin",Kristin,Smith,F,46,,Minneapolis,MN,,02:26:09.1,finished
+125,1002,"O'Meara, Matthew",Matthew,O'Meara,M,28,,Eau Claire,WI,,02:26:23.6,finished
+126,1335,"Anderson, Lon",Lon,Anderson,M,49,,Cable,WI,,02:26:32.2,finished
+127,1189,"Pautsch, Greg",Greg,Pautsch,M,57,,Chippewa Falls,WI,,02:26:39.5,finished
+128,1004,"Coors, James",James,Coors,M,60,,Madison,WI,,02:26:52.6,finished
+129,1144,"Gruetzmacher, Tyler",Tyler,Gruetzmacher,M,41,,Barron,WI,,02:26:58.3,finished
+130,1176,"Schroeder, Sue",Sue,Schroeder,F,44,,Minneapolis,MN,,02:27:00.2,finished
+131,1361,"Earl Torniainen, Kitty",Kitty,Earl Torniainen,F,42,,St Paul,MN,,02:27:11.3,finished
+132,1200,"Ludwigson, David",David,Ludwigson,M,54,,Stillwater,MN,,02:27:17.3,finished
+133,1121,"Kangas, Andy",Andy,Kangas,M,53,,Green Bay,WI,,02:27:25.1,finished
+134,1039,"Lindskoog, Mark",Mark,Lindskoog,M,42,,Minneapolis,MN,,02:27:31.1,finished
+135,1375,"Shoberg, Tony",Tony,Shoberg,M,27,,Duluth,MN,,02:27:32.0,finished
+136,1045,"Keller, Dale",Dale,Keller,M,52,,Lakewood,WI,,02:28:00.6,finished
+137,1055,"Manske, Karen",Karen,Manske,F,54,,Lindstrom,MN,,02:28:03.9,finished
+138,1048,"Goyke, Andy",Andy,Goyke,M,44,,Ashland,WI,,02:28:38.5,finished
+139,1308,"Burke, Patrick",Patrick,Burke,M,37,,Milwaukee,WI,,02:28:39.7,finished
+140,1162,"Peterson, David",David,Peterson,M,39,,Minneapolis,MN,,02:28:47.3,finished
+141,1165,"Scheckel, Patrick",Patrick,Scheckel,M,39,,Madison,WI,,02:28:49.8,finished
+142,1059,"Rowley, Greg",Greg,Rowley,M,36,,Rochester,MN,,02:28:52.7,finished
+143,1331,"Hyser, Andrew",Andrew,Hyser,M,34,,Hayward,WI,,02:28:55.4,finished
+144,1201,"Loberger, Wade",Wade,Loberger,M,39,,Oshkosh,WI,,02:28:59.1,finished
+145,1175,"Slavik, Gary",Gary,Slavik,M,57,,Elburn,IL,,02:29:02.2,finished
+146,1089,"Wagner, Michael",Michael,Wagner,M,47,,Winter,WI,,02:29:02.9,finished
+147,1380,"Corby, Sebastian",Sebastian,Corby,M,24,,Madison,WI,,02:29:05.4,finished
+148,1349,"Mollgaard, Rick",Rick,Mollgaard,M,39,,Red Wing,MN,,02:29:20.7,finished
+149,1266,"Torgerson, Barry",Barry,Torgerson,M,63,,Stillwater,MN,,02:29:21.4,finished
+150,1071,"Siagian, Alex",Alex,Siagian,M,40,,St Louis Park,MN,,02:29:38.8,finished
+151,1390,"Olson, Kevin",Kevin,Olson,M,38,,Blaine,MN,,02:29:44.2,finished
+152,1202,"Nordgren, Eric",Eric,Nordgren,M,25,,Cannon Falls,MN,,02:29:49.4,finished
+153,1307,"Tegeder, Jay",Jay,Tegeder,M,52,,Saint Paul,MN,,02:30:49.4,finished
+154,1058,"Halberg, Sarah",Sarah,Halberg,F,36,,Hayward,WI,,02:31:02.7,finished
+155,374,"Duffy, Joe",Joe,Duffy,M,60,,Minneapolis,MN,,02:31:03.6,finished
+156,1280,"Franzen, Greg",Greg,Franzen,M,55,,Plymouth,MN,,02:31:15.4,finished
+157,1357,"Anderson, Fritz",Fritz,Anderson,M,47,,Duluth,MN,,02:31:23.9,finished
+158,1082,"Barry, William",William,Barry,M,62,,Eau Claire,WI,,02:31:48.1,finished
+159,1073,"Kuenzel, Adam",Adam,Kuenzel,M,50,,Minneapolis,MN,,02:32:06.9,finished
+160,1377,"Klassen, David",David,Klassen,M,44,,Boyceville,WI,,02:32:17.4,finished
+161,1298,"King, Michael",Michael,King,M,51,,Madison,WI,,02:32:19.6,finished
+162,1156,"Callahan, Matthew",Matthew,Callahan,M,50,,Minneapolis,MN,,02:32:20.3,finished
+163,1313,"Sonnesyn, Jill",Jill,Sonnesyn,F,45,,Plymouth,MN,,02:32:21.4,finished
+164,1188,"Bednarz, Agatha",Agatha,Bednarz,F,34,,Duluth,MN,,02:32:22.0,finished
+165,1072,"Kaiser, Pat",Pat,Kaiser,M,57,,Drummond,WI,,02:32:36.6,finished
+166,1374,"Shoberg, Chandra",Chandra,Shoberg,F,26,,Duluth,MN,,02:32:50.3,finished
+167,1372,"McClurg, Joram",Joram,McClurg,M,47,,Port Washington,WI,,02:33:10.5,finished
+168,1023,"Rosenberger, David",David,Rosenberger,M,37,,Eleva,WI,,02:33:11.4,finished
+169,1339,"Muszynski, Ken",Ken,Muszynski,M,53,,Palatine,IL,,02:33:37.5,finished
+170,1271,"Craychee, John",John,Craychee,M,58,,Saint Charles,IL,,02:34:07.5,finished
+171,1060,"Bradley, Barbara",Barbara,Bradley,F,52,,Wausau,WI,,02:34:24.3,finished
+172,1085,"Wyland, John",John,Wyland,M,51,,Birchwood,MN,,02:34:57.5,finished
+173,1324,"Barten, John",John,Barten,M,58,,Delano,MN,,02:35:07.1,finished
+174,1330,"Koscik, Ken",Ken,Koscik,M,45,,Madison,WI,,02:35:42.0,finished
+175,251,"Risse, Alexander",Alexander,Risse,M,22,,Brooklyn Park,MN,,02:35:55.3,finished
+176,1338,"Weitz, Tom",Tom,Weitz,M,50,,Dubuque,IA,,02:36:04.1,finished
+177,1303,"Chadwick, John",John,Chadwick,M,45,,La Grange Park,IL,,02:36:06.6,finished
+178,1173,"VanEtten, Sarah",Sarah,VanEtten,F,21,,St Paul,MN,,02:36:46.7,finished
+179,1067,"Carskadon, Christopher",Christopher,Carskadon,M,27,,LaCrosse,WI,,02:36:49.5,finished
+180,1351,"Mikolon, Gary",Gary,Mikolon,M,42,,Chetek,WI,,02:36:50.0,finished
+181,1305,"Simpson, David",David,Simpson,M,42,,Minneapolis,MN,,02:37:01.3,finished
+182,1078,"Stevens, James",James,Stevens,M,58,,Cottage Grove,WI,,02:37:26.6,finished
+183,1213,"Gaumnitz, Eric",Eric,Gaumnitz,M,47,,Madison,WI,,02:37:32.7,finished
+184,1129,"Austin, Chad",Chad,Austin,M,40,,Apple Valley,MN,,02:37:35.0,finished
+185,1381,"Strandemo, Robbi",Robbi,Strandemo,F,25,,Madison,WI,,02:37:35.3,finished
+186,1254,"Kachelmeier, Paul",Paul,Kachelmeier,M,52,,Monona,WI,,02:37:45.9,finished
+187,1187,"Lillie, Nathan",Nathan,Lillie,M,30,,Prairie Farm,WI,,02:37:51.8,finished
+188,1034,"Wilbers, Stephen",Stephen,Wilbers,M,60,,Minneapolis,MN,,02:37:54.9,finished
+189,1221,"Brekke, Kate",Kate,Brekke,F,25,,Stoughton,WI,,02:38:02.8,finished
+190,1296,"Shipkey, Jeff",Jeff,Shipkey,M,38,,Marquette,MI,,02:38:09.4,finished
+191,1080,"Carlson, Charles",Charles,Carlson,M,61,,Rockton,IL,,02:38:12.4,finished
+192,1163,"Holmquist, Keith",Keith,Holmquist,M,50,,Winona,MN,,02:38:18.1,finished
+193,1236,"NEED NAME,",,NEED NAME,M,,,,,,02:38:21.0,finished
+194,1096,"Boldra, James",James,Boldra,M,55,,Menasha,WI,,02:38:24.0,finished
+195,1068,"Rousar, Bill",Bill,Rousar,M,47,,Rice Lake,WI,,02:38:29.3,finished
+196,1344,"Beno, James",James,Beno,M,55,,Green Bay,WI,,02:38:30.1,finished
+197,1234,"Flynn, Larry",Larry,Flynn,M,50,,Spooner,WI,,02:38:33.8,finished
+198,1279,"Black, Andrew",Andrew,Black,M,60,,Barrington,IL,,02:38:43.2,finished
+199,1075,"Anderson, Thomas",Thomas,Anderson,M,56,,St Louis Park,MN,,02:38:51.2,finished
+200,1192,"Martin, David",David,Martin,M,46,,Spooner,WI,,02:39:09.2,finished
+201,1185,"Clements, Scott",Scott,Clements,M,51,,Bloomington,MN,,02:39:23.6,finished
+202,1333,"Buckley, Paul",Paul,Buckley,M,53,,Minneapolis,MN,,02:39:29.4,finished
+203,1183,"Huff, Eric",Eric,Huff,M,35,,Ramsey,MN,,02:39:37.4,finished
+204,1365,"Bowman, Al",Al,Bowman,M,36,,Porterfield,WI,,02:39:38.2,finished
+205,1010,"Luetmer, Marianne",Marianne,Luetmer,F,20,,Rochester,MN,,02:39:52.2,finished
+206,1086,"Steger, Daniel",Daniel,Steger,M,48,,Prior Lake,MN,,02:39:57.5,finished
+207,1021,"Haley, Jim",Jim,Haley,M,58,,Jim Falls,WI,,02:40:07.4,finished
+208,1027,"Kuznia, Ken",Ken,Kuznia,M,48,,Apple Valley,MN,,02:40:12.9,finished
+209,1083,"Manogue, Michael EM",Michael EM,Manogue,M,57,,Dodgeville,WI,,02:42:06.3,finished
+210,1066,"McAdams, Ken",Ken,McAdams,M,58,,Ettrick,WI,,02:42:06.4,finished
+211,1046,"Gray, Jeffery",Jeffery,Gray,M,54,,LaCrosse,WI,,02:42:19.3,finished
+212,1294,"Hotvet, Jeff",Jeff,Hotvet,M,46,,Minnetonka,MN,,02:42:32.8,finished
+213,1210,"Longhini, Ross",Ross,Longhini,M,48,,Frederic,WI,,02:42:42.9,finished
+214,1182,"Manson, Carey",Carey,Manson,M,52,,Mound,MN,,02:42:54.7,finished
+215,1154,"Krumholz, Michael",Michael,Krumholz,M,49,,Minnetonka,MN,,02:43:06.5,finished
+216,1180,"Aas, Peter",Peter,Aas,M,45,,Duluth,MN,,02:43:40.6,finished
+217,1178,"Johnson, Jennifer",Jennifer,Johnson,F,20,,Madison,WI,,02:43:42.1,finished
+218,1207,"Wroblewski, Daniel",Daniel,Wroblewski,M,50,,Whitefish Bay,WI,,02:43:48.9,finished
+219,1283,"Kluz, Terry",Terry,Kluz,M,57,,Schofield,WI,,02:45:00.4,finished
+220,1077,"Cragg, Michael",Michael,Cragg,M,61,,Rice Lake,WI,,02:45:04.1,finished
+221,1264,"Wagener, Sandy",Sandy,Wagener,F,45,,Baraboo,WI,,02:45:05.6,finished
+222,1029,"Dettloff, John",John,Dettloff,M,48,,Hayward,WI,,02:45:06.9,finished
+223,1265,"Wagener, Paul",Paul,Wagener,M,52,,Baraboo,WI,,02:45:08.4,finished
+224,1257,"Borchardt, Randy",Randy,Borchardt,M,58,,Hayward,WI,,02:45:33.9,finished
+225,1117,"LaBerge, Michael",Michael,LaBerge,M,55,,Duluth,MN,,02:45:38.2,finished
+226,1076,"Bennett, Bob",Bob,Bennett,M,39,,Blaine,MN,,02:45:43.3,finished
+227,1253,"Carroll, Andrea",Andrea,Carroll,F,52,,Hayward,WI,,02:45:43.6,finished
+228,1249,"Aas, Josh",Josh,Aas,M,26,,Duluth,MN,,02:45:47.8,finished
+229,1260,"Ellingson, Sonja",Sonja,Ellingson,F,24,,Minneapolis,MN,,02:46:09.4,finished
+230,1261,"Gastineau, Andrew",Andrew,Gastineau,M,26,,Minneapolis,MN,,02:46:09.6,finished
+231,1132,"Sarvela, Robert",Robert,Sarvela,M,47,,Lake Nebagamon,WI,,02:46:21.2,finished
+232,1337,"Stoelinga, Christopher",Christopher,Stoelinga,M,35,,,,,02:46:51.9,finished
+233,1124,"Jenkins, Joe",Joe,Jenkins,M,60,,Cable,WI,,02:47:12.3,finished
+234,1325,"Corcoran, Colleen",Colleen,Corcoran,F,50,,Minneapolis,MN,,02:47:14.7,finished
+235,1025,"Murphy, Chad",Chad,Murphy,M,46,,Prior Lake,MN,,02:47:19.7,finished
+236,1103,"Tessendorf, Tom",Tom,Tessendorf,M,53,,Medford,WI,,02:47:24.1,finished
+237,1184,"Smith, David",David,Smith,M,52,,Antiock,IL,,02:48:04.9,finished
+238,1113,"Larson, Lisa",Lisa,Larson,F,41,,Ashland,WI,,02:48:08.0,finished
+239,1312,"Burns, John",John,Burns,M,55,,South Milwaukee,WI,,02:48:50.4,finished
+240,1393,"Kinart, Todd",Todd,Kinart,M,43,,Appleton,WI,,02:50:07.9,finished
+241,1229,"Conley, Michael",Michael,Conley,M,48,,St Paul,MN,,02:50:17.8,finished
+242,1343,"Statz, Dan",Dan,Statz,M,45,,Green Bay,WI,,02:50:47.6,finished
+243,1166,"Storhoff, Eric",Eric,Storhoff,M,36,,Fridley,MN,,02:51:15.4,finished
+244,1195,"Coon, Christopher",Christopher,Coon,M,28,,Rochester,MN,,02:51:15.9,finished
+245,1373,"Schram, Gary",Gary,Schram,M,49,,Hammond,WI,,02:51:41.2,finished
+246,1315,"Adler, John",John,Adler,M,43,,Hayward,WI,,02:51:42.3,finished
+247,1281,"Gilbertson, Shelly",Shelly,Gilbertson,F,49,,Cottage Grove,WI,,02:51:49.1,finished
+248,1269,"Franson, Marvin",Marvin,Franson,M,60,,Eau Claire,WI,,02:51:56.5,finished
+249,1065,"Syth, Kevin",Kevin,Syth,M,56,,Greenwood,WI,,02:52:09.1,finished
+250,1013,"Wiersma, Kevin",Kevin,Wiersma,M,48,,Wayzata,MN,,02:52:37.5,finished
+251,1304,"Eisenbeis, Hans",Hans,Eisenbeis,M,43,,Minneapolis,MN,,02:52:57.8,finished
+252,1226,"Nyquist, Jered",Jered,Nyquist,M,49,,St Cloud,MN,,02:53:15.0,finished
+253,1198,"DeFord, John",John,DeFord,M,50,,Mequon,WI,,02:54:52.4,finished
+254,1100,"Walk, Emily",Emily,Walk,F,22,,Austin,MN,,02:54:53.6,finished
+255,1049,"Callender, Charles",Charles,Callender,M,50,,Middleton,WI,,02:54:56.3,finished
+256,1136,"Mason, Kevin",Kevin,Mason,M,35,,Chippewa Falls,WI,,02:55:06.2,finished
+257,1288,"Adalbert, Karl",Karl,Adalbert,M,38,,Minneapolis,MN,,02:55:10.7,finished
+258,1501,"Evenson, David",David,Evenson,M,45,,Savage,MN,,02:55:48.3,finished
+259,1090,"Green, Kim",Kim,Green,F,46,,Calumet,MI,,02:55:51.0,finished
+260,1026,"Olson, Kirk",Kirk,Olson,M,22,,Winter,WI,,02:55:54.4,finished
+261,1084,"Welke, Tony",Tony,Welke,M,38,,Chippewa Falls,WI,,02:56:13.4,finished
+262,1155,"Balsiger, Jeffry",Jeffry,Balsiger,M,53,,Jim Falls,WI,,02:56:15.0,finished
+263,1040,"Mahoney, Kevin",Kevin,Mahoney,M,57,,Eau Claire,WI,,02:56:20.5,finished
+264,1259,"Niermann, Kristin",Kristin,Niermann,F,55,,Maple Grove,MN,,02:56:21.2,finished
+265,1222,"Heaslett, Ann",Ann,Heaslett,F,46,,Madison,WI,,02:56:26.4,finished
+266,1037,"Hinde, John",John,Hinde,M,58,,Hillsdale,WI,,02:56:27.8,finished
+267,1232,"Schuller, Kirby",Kirby,Schuller,M,56,,Fox Point,WI,,02:56:29.0,finished
+268,1186,"Modin, Brance",Brance,Modin,M,58,,Cloquet,MN,,02:56:51.0,finished
+269,1148,"Holte, Paul",Paul,Holte,M,57,,Shakopee,MN,,02:56:57.9,finished
+270,1328,"Delaney, Marian",Marian,Delaney,F,44,,Edina,MN,,02:56:58.8,finished
+271,1285,"Omeara, Connor",Connor,Omeara,M,25,,Minneapolis,MN,,02:57:37.5,finished
+272,1112,"Wagner, Steve",Steve,Wagner,M,43,,Chippewa Falls,WI,,02:58:00.2,finished
+273,1191,"Goldberg, Daniel",Daniel,Goldberg,M,51,,Bayside,WI,,02:58:19.6,finished
+274,1383,"Rebne, Leah",Leah,Rebne,F,20,,Park Falls,WI,,02:58:41.0,finished
+275,1385,"LaFrenz, Scott",Scott,LaFrenz,M,36,,Edina,MN,,02:58:54.7,finished
+276,1289,"Kohler, Peggy",Peggy,Kohler,F,46,,Birchwood,WI,,02:59:16.9,finished
+277,1141,"Hansen, Basil",Basil,Hansen,M,50,,Waupaca,WI,,02:59:37.9,finished
+278,1152,"Layde, Patrick",Patrick,Layde,M,41,,Maple Grove,MN,,03:01:05.8,finished
+279,1171,"Jonjak, Benjamin",Benjamin,Jonjak,M,34,,Chippewa Falls,WI,,03:01:24.1,finished
+280,1212,"Kessler, Chuck",Chuck,Kessler,M,64,,Northbrook,IL,,03:01:50.4,finished
+281,1282,"Sturm, Robert",Robert,Sturm,M,62,,Saint Paul,MN,,03:02:10.0,finished
+282,1286,"Johansen, Mary",Mary,Johansen,F,52,,Hayward,WI,,03:02:15.8,finished
+283,1005,"Geiger, Brent",Brent,Geiger,M,26,,Minneapolis,MN,,03:02:15.9,finished
+284,1371,"Muraski, Mark",Mark,Muraski,M,60,,Spooner,WI,,03:02:18.2,finished
+285,1014,"Pollock, Ann",Ann,Pollock,F,59,,Madison,WI,,03:02:37.9,finished
+286,1133,"Bolton, Jim",Jim,Bolton,M,52,,Madison,WI,,03:03:10.8,finished
+287,1358,"Zorn, James",James,Zorn,M,53,,Ashland,WI,,03:03:28.4,finished
+288,1127,"Lund, Kristina",Kristina,Lund,F,61,,St Paul,MN,,03:03:35.8,finished
+289,1267,"Goold, Dana",Dana,Goold,F,36,,Hayward,Wi,,03:04:26.0,finished
+290,249,"Risse, Michael",Michael,Risse,M,53,,Brooklyn Park,MN,,03:05:21.5,finished
+291,1028,"Thornton, Kim",Kim,Thornton,M,60,,Madison,WI,,03:05:34.9,finished
+292,1169,"Weishaar, Jeff",Jeff,Weishaar,M,?,,McHenry,IL,,03:05:43.1,finished
+293,1051,"Weium, Paul",Paul,Weium,M,49,,St Paul,MN,,03:06:21.9,finished
+294,1355,"Benjamin, William",William,Benjamin,M,48,,Edina,MN,,03:06:33.0,finished
+295,1220,"Dudley, Dan",Dan,Dudley,M,57,,Oregon,WI,,03:06:55.8,finished
+296,1397,"Luehr, David",David,Luehr,M,60,,Barnum,MN,,03:07:54.5,finished
+297,1321,"Reddan, Julie",Julie,Reddan,F,43,,Minneapolis,MN,,03:08:14.5,finished
+298,1099,"Welke, Greg",Greg,Welke,M,41,,Chippewa Falls,WI,,03:08:15.0,finished
+299,1216,"Juola, Dave",Dave,Juola,M,43,,St Paul,MN,,03:08:16.3,finished
+300,1211,"Longhini, Vicki",Vicki,Longhini,F,51,,Frederic,WI,,03:09:04.3,finished
+301,1272,"Chodak, Paul",Paul,Chodak,M,57,,Twin Lakes,WI,,03:09:52.3,finished
+302,1368,"Chu, Diane",Diane,Chu,F,49,,Racine,WI,,03:12:07.1,finished
+303,1300,"Kondrasuk, Robert",Robert,Kondrasuk,M,61,,Hudson,WI,,03:12:16.9,finished
+304,1003,"Moyle, Dan",Dan,Moyle,M,48,,Lake Mills,WI,,03:13:39.9,finished
+305,1116,"Batdorf, Patricia",Patricia,Batdorf,F,56,,Duluth,MN,,03:14:47.5,finished
+306,1327,"Devanie, Michael",Michael,Devanie,M,62,,La Crosse,WI,,03:14:49.5,finished
+307,1097,"Boldra, Janine",Janine,Boldra,F,55,,Menasha,WI,,03:14:55.5,finished
+308,1240,"NEED NAME,",,NEED NAME,M,,,,,,03:16:07.0,finished
+309,1120,"Weium, Karen",Karen,Weium,F,51,,St Paul,MN,,03:16:22.9,finished
+310,1237,"NEED NAME,",,NEED NAME,M,,,,,,03:16:54.7,finished
+311,1314,"Reker, Jim",Jim,Reker,M,49,,Hayward,WI,,03:18:29.3,finished
+312,1275,"Dunaway, Thomas",Thomas,Dunaway,M,62,,Golden Valley,MN,,03:18:33.5,finished
+313,1088,"Walk, Bruce",Bruce,Walk,M,53,,Rochester,MN,,03:18:43.9,finished
+314,1394,"Lehr, Randy",Randy,Lehr,M,33,,Minneapolis,MN,,03:19:23.3,finished
+315,1105,"Amley, Chris",Chris,Amley,M,57,,Woodbury,MN,,03:19:26.7,finished
+316,1292,"Abelman, Emily",Emily,Abelman,F,60,,Minneapolis,MN,,03:19:28.1,finished
+317,1064,"Rowley, Amy",Amy,Rowley,F,41,,Rochester,MN,,03:20:51.6,finished
+318,1070,"Rowley, Tom",Tom,Rowley,M,63,,Mounds View,MN,,03:20:58.7,finished
+319,1038,"Anders, Thomas",Thomas,Anders,M,51,,Conrath,WI,,03:21:45.9,finished
+320,1276,"Brown, William",William,Brown,M,52,,Baraboo,WI,,03:22:32.1,finished
+321,1295,"Egnoski , Dale",Dale,Egnoski,M,35,,Oshkosh,WI,,03:23:09.1,finished
+322,1193,"Peters, David",David,Peters,M,35,,Eau Claire,WI,,03:24:31.2,finished
+323,1310,"Carmazon, Steven",Steven,Carmazon,M,56,,Bloomington,MN,,03:25:28.7,finished
+324,1251,"Bauer, Meredith",Meredith,Bauer,F,28,,Vadnais Heights,MN,,03:25:52.8,finished
+325,1284,"Moravchik, Sarah",Sarah,Moravchik,F,31,,Mason,WI,,03:26:02.0,finished
+326,1147,"Psihos, Charlynn",Charlynn,Psihos,F,30,,Minneapolis,MN,,03:27:28.1,finished
+327,1019,"Sakstrup, Carolyn",Carolyn,Sakstrup,F,34,,Minneapolis,MN,,03:27:35.5,finished
+328,1093,"Bergin, Kathy",Kathy,Bergin,F,60,,Cable,WI,,03:27:59.2,finished
+329,1256,"Richardson, Susan",Susan,Richardson,F,60,,Saint Paul,MN,,03:29:14.5,finished
+330,1346,"Hutchison, John",John,Hutchison,M,52,,Elk Mound,WI,,03:29:47.8,finished
+331,1081,"Duffy, Taylor",Taylor,Duffy,F,27,,Janesville,WI,,03:29:55.7,finished
+332,1030,"Dettloff, Brenda",Brenda,Dettloff,F,47,,Hayward,WI,,03:30:02.3,finished
+333,1194,"Peters, Shelly",Shelly,Peters,F,33,,Eau Claire,WI,,03:31:22.4,finished
+334,1053,"Frings, Peggy",Peggy,Frings,F,58,,Ridgeway,WI,,03:31:37.7,finished
+335,1395,"Krohn, Timothy",Timothy,Krohn,M,60,,Cloquet,MN,,03:32:12.9,finished
+336,1318,"Hedman, Marian",Marian,Hedman,F,50,,New Brighten,MN,,03:32:16.9,finished
+337,1246,"Chaney, Connie",Connie,Chaney,F,50,,Hayward,WI,,03:32:18.6,finished
+338,1370,"Sandman, Kirsten",Kirsten,Sandman,F,39,,Cumberland,WI,,03:32:21.3,finished
+339,1369,"Sandman, Todd",Todd,Sandman,M,39,,Cumberland,WI,,03:32:23.0,finished
+340,1336,"Hawkins, Matt",Matt,Hawkins,M,51,,Rochester,MN,,03:32:30.6,finished
+341,1022,"Friestad, Harold",Harold,Friestad,M,70,,Williams Bay,WI,,03:32:48.2,finished
+342,1353,"Struble, Glen",Glen,Struble,M,57,,Reedsburg,WI,,03:34:19.7,finished
+343,1062,"Palecek, Kristin",Kristin,Palecek,F,39,,Butternut,WI,,03:35:03.7,finished
+344,1139,"Grahn, Alan",Alan,Grahn,M,67,,Minneapolis,MN,,03:35:42.0,finished
+345,1091,"Rebne, Wendy",Wendy,Rebne,F,47,,Park Falls,WI,,03:38:25.6,finished
+346,1118,"Medlin, Paul",Paul,Medlin,M,35,,Eden Prairie,MN,,03:38:35.6,finished
+347,1174,"Ferstl, Nicole",Nicole,Ferstl,F,33,,Chicago,IL,,03:40:57.2,finished
+348,1047,"Smith, Charles",Charles,Smith,M,64,,Blair,WI,,03:41:43.9,finished
+349,1098,"Love, Mary",Mary,Love,F,39,,Appleton,WI,,03:41:59.9,finished
+350,1299,"Bauer, Steven",Steven,Bauer,M,50,,Stillwater,MN,,03:42:20.1,finished
+351,1123,"Lindberg, Beth",Beth,Lindberg,F,43,,Lake Nebagamon,WI,,03:43:24.6,finished
+352,1012,"Ruef, Sandy",Sandy,Ruef,F,49,,Cross Plain,WI,,03:43:37.9,finished
+353,1107,"Southworth Bates,",,Southworth Bates,F,55,,Janesville,WI,,03:44:30.0,finished
+354,1157,"Lund, Shawn",Shawn,Lund,M,33,,Ashland,WI,,03:44:41.5,finished
+355,1056,"Wolske, Chuck",Chuck,Wolske,M,57,,Tinley Park,IL,,03:45:35.7,finished
+356,1190,"Keane, Mary",Mary,Keane,F,30,,Edina,MN,,03:47:50.3,finished
+357,1170,"Van Hale, Rachel",Rachel,Van Hale,F,28,,Minneapolis,MN,,03:47:50.3,finished
+358,1359,"Schleppegrell, Steve",Steve,Schleppegrell,M,52,,Rice Lake,WI,,03:48:22.7,finished
+359,1317,"Hill, Jeremy",Jeremy,Hill,M,33,,Hayward,WI,,03:49:03.1,finished
+360,1131,"Sarvela, Pamela",Pamela,Sarvela,F,47,,Lake Nebagamon,WI,,03:51:21.1,finished
+361,1233,"Gorringe, David",David,Gorringe,M,58,,St Paul,MN,,03:59:57.9,finished
+362,1024,"Konieczki, Bill",Bill,Konieczki,M,56,,Stevens Point,WI,,04:02:00.7,finished
+363,1007,"Martell, Heidi",Heidi,Martell,F,49,,Verona,WI,,04:03:35.6,finished
+364,1287,"Edmundson, Randee",Randee,Edmundson,F,56,,Maplewood,MN,,04:07:27.5,finished
+365,1159,"Becker, Jerry",Jerry,Becker,M,63,,Danbury,WI,,04:07:48.7,finished
+366,1111,"Voight, William",William,Voight,M,60,,Hayward,WI,,04:08:20.7,finished
+367,1052,"Bothun, Darald",Darald,Bothun,M,63,,Rochester,MN,,04:13:52.4,finished
+368,1146,"Knapp, Barry",Barry,Knapp,M,62,,Rochester,MN,,04:13:52.8,finished
+369,1228,"Myhre, Karen",Karen,Myhre,F,36,,Eleva,WI,,04:13:54.0,finished
+370,1215,"Bennett, Kathleen",Kathleen,Bennett,F,54,,Minneapolis,MN,,04:20:04.5,finished
+371,1209,"Heifner, Janis",Janis,Heifner,F,53,,Appleton,WI,,04:22:55.6,finished
+372,1258,"Cervenka, Joan",Joan,Cervenka,F,53,,Hayward,WI,,04:28:59.5,finished
+373,1074,"Bauer, William",William,Bauer,M,63,,Cable,WI,,04:34:55.3,finished
+374,1050,"Matchett, Andrew",Andrew,Matchett,M,60,,LaCrosse,WI,,04:37:34.1,finished
+375,1217,"Juola, Patty",Patty,Juola,F,41,,St Paul,MN,,05:12:31.0,finished
+376,1041,"Brown, Susanne",Susanne,Brown,F,52,,Bessemer,MI,,05:19:26.0,finished

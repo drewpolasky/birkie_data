@@ -1,0 +1,63 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,7055,Jesse Coenen,Jesse,Coenen,M,37.0,,Duluth,MN,US,1:11:53.43,finished
+2,7015,Nate Rounds,Nate,Rounds,M,44.0,,Maple Grove,MN,US,1:12:31.77,finished
+3,7020,Noah Rounds,Noah,Rounds,M,42.0,,Apple Valley,MN,US,1:13:24.84,finished
+4,6982,Trent Ping,Trent,Ping,M,35.0,,La Crosse,WI,US,1:14:26.94,finished
+5,7025,Jes Pedersen,Jes,Pedersen,M,24.0,,Duluth,MN,US,1:14:27.59,finished
+6,7045,Martin Bevis,Martin,Bevis,M,38.0,,Duluth,MN,US,1:17:47.83,finished
+7,6952,Terry Tansey,Terry,Tansey,M,,,Hayward,WI,US,1:23:47.94,finished
+8,6932,Norbert Koenigsfeld,Norbert,Koenigsfeld,M,54.0,,Hayward,WI,US,1:25:55.05,finished
+9,6920,Matt Hareldson,Matt,Hareldson,M,37.0,,Minneapolis,MN,US,1:28:37.33,finished
+10,6927,Ted Lystig,Ted,Lystig,M,49.0,,Saint Paul,MN,US,1:31:58.18,finished
+11,6912,Mark Nienstaedt,Mark,Nienstaedt,M,67.0,,Rhinelander,WI,US,1:33:14.27,finished
+12,6926,Rich Hoban,Rich,Hoban,M,61.0,,Stillwater,MN,US,1:34:10.01,finished
+13,7027,Ray Fini,Ray,Fini,M,49.0,,Saint Paul,MN,US,1:36:28.88,finished
+14,6984,Robert Ogren,Robert,Ogren,M,72.0,,Bloomington,MN,US,1:37:05.78,finished
+15,6944,Tom Detzner,Tom,Detzner,M,69.0,,Hayward,WI,US,1:38:22.76,finished
+16,6963,Nicholas Juntunen,Nicholas,Juntunen,M,21.0,,Madison,WI,US,1:39:39.34,finished
+17,6976,Scott Clements,Scott,Clements,M,62.0,,Minneapolis,MN,US,1:40:30.7,finished
+18,6940,Maxim Sokolov,Maxim,Sokolov,M,50.0,,Morton Grove,IL,US,1:40:50.12,finished
+19,7046,Kenneth Koscik,Kenneth,Koscik,M,56.0,,Madison,WI,US,1:42:29.46,finished
+20,7064,Joey Widmer,Joey,Widmer,M,31.0,,Theresa,WI,US,1:42:30.04,finished
+21,6961,Robert Maloney,Robert,Maloney,M,31.0,,Minneapolis,MN,US,1:42:46.69,finished
+22,6957,Andrew Sundet,Andrew,Sundet,M,36.0,,Wayzata,MN,US,1:49:02.52,finished
+23,7036,Todd Stephens,Todd,Stephens,M,53.0,,Rice Lake,WI,US,1:51:00.21,finished
+24,6999,Paul Danczyk,Paul,Danczyk,M,26.0,,Hayward,WI,US,1:51:37.71,finished
+25,7052,Louis Muench,Louis,Muench,M,37.0,,Cumberland,WI,US,1:53:08.67,finished
+26,7048,Thomas Foley,Thomas,Foley,M,60.0,,Saint Paul,MN,US,1:54:40.45,finished
+27,7032,Kim Barrette,Kim,Barrette,M,66.0,,Peshtigo,WI,US,1:55:58.25,finished
+28,6922,BASIL HANSEN,BASIL,HANSEN,M,61.0,,Waupaca,WI,US,1:57:16.02,finished
+29,6929,Harry Maranowicz,Harry,Maranowicz,M,73.0,,Hayward,WI,US,1:57:42.21,finished
+30,6930,Greg Hedin,Greg,Hedin,M,45.0,,Hudson,WI,US,1:58:53.73,finished
+31,7063,Mike McCloskey,Mike,McCloskey,M,61.0,,Minneapolis,MN,US,2:03:42.31,finished
+32,6923,Thomas Nordgren,Thomas,Nordgren,M,60.0,,Pulaski,WI,US,2:04:47.13,finished
+33,6911,Russell Kolstad,Russell,Kolstad,M,71.0,,Waunakee,WI,US,2:44:26.81,finished
+34,6918,Timothy Dahmen,Timothy,Dahmen,M,63.0,,Waunakee,WI,US,2:44:27.03,finished
+1,6989,Jenna Ruzich,Jenna,Ruzich,F,28.0,,Saint Paul,MN,US,1:27:41.17,finished
+2,7030,Lily Engebretson,Lily,Engebretson,F,21.0,,Saint Paul,MN,US,1:27:56.86,finished
+3,7044,Beth Bernhardt,Beth,Bernhardt,F,38.0,,Duluth,MN,US,1:28:05.22,finished
+4,6983,Clara Ping,Clara,Ping,F,34.0,,LA CROSSE,WI,US,1:32:43.42,finished
+5,6968,Kathryn Keller-Miller,Kathryn,Keller-Miller,F,28.0,,Plymouth,MN,US,1:33:44.8,finished
+6,6970,Jennifer Bennett,Jennifer,Bennett,F,46.0,,Minneapolis,MN,US,1:34:07.14,finished
+7,6950,Malwina Caban,Malwina,Caban,F,45.0,,Bloomington,MN,US,1:35:40.95,finished
+8,7021,Beth Ihry,Beth,Ihry,F,51.0,,Edina,MN,US,1:36:06.11,finished
+9,6925,Sandy Schreyer,Sandy,Schreyer,F,55.0,,Saint Paul,MN,US,1:36:35.44,finished
+10,7058,Deborah DeLuca,Deborah,DeLuca,F,61.0,,Duluth,MN,US,1:36:46.11,finished
+11,6980,Franziska Rinkleff,Franziska,Rinkleff,F,15.0,,Rochester,MN,US,1:39:12.82,finished
+12,7004,Zoe Harvieux,Zoe,Harvieux,F,23.0,,Duluth,MN,US,1:40:32.06,finished
+13,6969,Kathleen Miller,Kathleen,Miller,F,61.0,,Minneapolis,MN,US,1:43:18.87,finished
+14,6955,Andrea Carroll,Andrea,Carroll,F,63.0,,Hayward,WI,US,1:43:19.36,finished
+15,7029,Sophie Pfluger,Sophie,Pfluger,F,20.0,,Woodbury,MN,US,1:44:19.1,finished
+16,7059,Christine Larson,Christine,Larson,F,52.0,,Minneapolis,MN,US,1:47:51.78,finished
+17,6941,Tatiana Sokolov,Tatiana,Sokolov,F,45.0,,Morton Grove,IL,US,1:52:58.25,finished
+18,7024,Chris Franken,Chris,Franken,F,62.0,,Edina,MN,US,1:57:32.19,finished
+19,7026,Katy Fini,Katy,Fini,F,45.0,,Saint Paul,MN,US,2:01:52.61,finished
+20,6956,Jennifer Danczyk,Jennifer,Danczyk,F,31.0,,Madison,WI,US,2:03:43.46,finished
+21,7042,Lauren Edmonson,Lauren,Edmonson,F,35.0,,Chicago,IL,US,2:04:26.8,finished
+22,6991,Abigail Turman,Abigail,Turman,F,38.0,,Minneapolis,MN,US,2:07:50.31,finished
+23,6960,Madeline Strachota,Madeline,Strachota,F,30.0,,St. Louis Park,MN,US,2:15:19.87,finished
+24,6995,Kyle Bantz,Kyle,Bantz,F,37.0,,Saint Paul,MN,US,2:19:14.85,finished
+25,7012,Andrea Bidelman,Andrea,Bidelman,F,52.0,,Minneapolis,MN,US,2:24:11.69,finished
+26,6964,Bethany Petersen,Bethany,Petersen,F,38.0,,Hayward,WI,US,2:28:21.24,finished
+27,6917,Barbara Dahmen,Barbara,Dahmen,F,64.0,,Waunakee,WI,US,3:02:29.13,finished
+28,6959,Elizabeth Strachota,Elizabeth,Strachota,F,37.0,,Wayzata,MN,US,3:17:22.38,finished

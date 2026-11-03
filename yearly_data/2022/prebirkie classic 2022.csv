@@ -1,0 +1,24 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,7321,"Shield, Douglas",Douglas,Shield,M,23,Male 20-29,Altoona,WI,,2:39:53,finished
+2,7309,"Smith, Brent",Brent,Smith,M,65,Male 60-69,Carlton,MN,,2:48:13,finished
+3,7206,"Edgerton, Chase",Chase,Edgerton,M,37,Male 30-39,Duluth,MN,,2:56:02,finished
+4,7236,"Von Bauer, Henning",Henning,Von Bauer,M,60,Male 60-69,Madison,WI,,3:10:55,finished
+5,7287,"Rabaey, Sam",Sam,Rabaey,M,19,Male 19 & Under,Collegeville,MN,,3:14:22,finished
+6,7215,"Reker, Zoe",Zoe,Reker,F,29,Female 20-29,Minneapolis,MN,,3:14:22,finished
+7,7313,"Phernetton, Michael",Michael,Phernetton,M,46,Male 40-49,Hudson,WI,,3:20:15,finished
+8,6796,"Weissman, Jon",Jon,Weissman,M,59,Male 50-59,Saint Paul,MN,,3:20:49,finished
+9,6795,"Schoening, Paul",Paul,Schoening,M,56,Male 50-59,Minneapolis,MN,,3:28:39,finished
+10,7290,"Ross, Luke",Luke,Ross,M,20,Male 20-29,Collegeville,MN,,3:28:40,finished
+11,7258,"Bach, Ulf-Eiel",Ulf-Eiel,Bach,M,60,Male 60-69,Gem Lake,MN,,3:32:01,finished
+12,7286,"Harke, Dan",Dan,Harke,M,37,Male 30-39,Rochester,MN,,3:34:08,finished
+13,7276,"DeLuca, Deborah",Deborah,DeLuca,F,61,Female 60-69,Duluth,MN,,3:50:33,finished
+14,7323,"Goyke, Andrew",Andrew,Goyke,M,56,Male 50-59,Ashland,WI,,3:55:29,finished
+15,7272,"Solheid, Chris",Chris,Solheid,M,47,Male 40-49,Minneapolis,MN,,3:56:52,finished
+16,7219,"Januschka, Mary",Mary,Januschka,F,60,Female 60-69,Cambridge,MN,,4:00:52,finished
+17,6896,"Broghammer, Sarah",Sarah,Broghammer,F,22,Female 20-29,Collegeville,MN,,4:06:03,finished
+18,7237,"Olson, Keith",Keith,Olson,M,59,Male 50-59,Springfield,MN,,4:06:04,finished
+19,7214,"Fitzsimmons, John",John,Fitzsimmons,M,54,Male 50-59,Ellendale,MN,,4:14:30,finished
+20,7230,"Shydlowski, Linda",Linda,Shydlowski,F,,,Winter,WI,,4:14:33,finished
+21,7273,"Gage, Paul",Paul,Gage,M,58,Male 50-59,Edina,MN,,4:15:26,finished
+22,7213,"Fitzsimmons, Becky",Becky,Fitzsimmons,F,49,Female 40-49,Ellendale,MN,,4:23:36,finished
+23,6777,"Levine, Elliott",Elliott,Levine,M,60,Male 60-69,La Crosse,WI,,4:39:17,finished

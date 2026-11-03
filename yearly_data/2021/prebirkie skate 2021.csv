@@ -1,0 +1,56 @@
+place,bib,name,first,last,gender,age,age_group,city,state,country,time,status
+1,6935,Nick Ross,Nick,Ross,M,32.0,,Saint Paul,MN,US,1:54:04.04,finished
+2,7016,Peter Coenen,Peter,Coenen,M,35.0,,Duluth,MN,US,1:57:59.2,finished
+3,6998,Jojo Baldus,Jojo,Baldus,M,23.0,,Minneapolis,MN,US,1:58:09.83,finished
+4,7037,Dennis Curran,Dennis,Curran,M,38.0,,Plymouth,MN,US,2:01:34.34,finished
+5,6988,ZACHARY NELSON,ZACHARY,NELSON,M,29.0,,Saint Paul,MN,US,2:02:00.03,finished
+6,6947,Owen Gage,Owen,Gage,M,21.0,,Edina,MN,US,2:03:51.18,finished
+7,6962,Paul Cigan,Paul,Cigan,M,35.0,,Hayward,WI,US,2:07:23.36,finished
+8,6949,Eric Brandt,Eric,Brandt,M,50.0,,Bloomington,MN,US,2:07:26.3,finished
+9,6910,Kevin Ousdigian,Kevin,Ousdigian,M,53.0,,Saint Paul,MN,US,2:08:41.57,finished
+10,6934,Steve Sonnesyn,Steve,Sonnesyn,M,61.0,,Plymouth,MN,US,2:09:08.08,finished
+11,6997,Bill Baldus,Bill,Baldus,M,56.0,,Minneapolis,MN,US,2:09:36.84,finished
+12,7008,John Schneider,John,Schneider,M,55.0,,Cable,WI,US,2:09:38.51,finished
+13,6937,John Leaf,John,Leaf,M,33.0,,Minneapolis,MN,US,2:10:14.69,finished
+14,6948,Sam Jaeger,Sam,Jaeger,M,20.0,,Middleton,WI,US,2:11:17.32,finished
+15,7007,W. Scott Lindell,W. Scott,Lindell,M,53.0,,Sartell,MN,US,2:11:38.76,finished
+16,7005,Thomas Krenz,Thomas,Krenz,M,59.0,,Chisago City,MN,US,2:12:56.71,finished
+17,6974,Brian Koeneman,Brian,Koeneman,M,53.0,,Minneapolis,MN,US,2:13:19.99,finished
+18,7043,Dave Bijur,Dave,Bijur,M,42.0,,Chicago,IL,US,2:17:29.41,finished
+19,6945,Gary Hovila,Gary,Hovila,M,56.0,,Delafield,WI,US,2:18:12.16,finished
+20,7017,Robert Day,Robert,Day,M,51.0,,Minneapolis,MN,US,2:20:19.91,finished
+21,7000,Rich Kisseloff,Rich,Kisseloff,M,49.0,,Algonquin,IL,US,2:25:11.86,finished
+22,7014,Benjamin Menk,Benjamin,Menk,M,40.0,,Hayward,WI,US,2:28:13.37,finished
+23,6992,Micah Turman,Micah,Turman,M,40.0,,Minneapolis,MN,US,2:28:26.15,finished
+24,6939,Craig Estenson,Craig,Estenson,M,58.0,,Saint Paul,MN,US,2:29:10.08,finished
+25,6979,Franz Rinkleff,Franz,Rinkleff,M,50.0,,Rochester,MN,US,2:34:20.22,finished
+26,6985,Eddie Gurney,Eddie,Gurney,M,29.0,,Wausau,WI,US,2:35:09.03,finished
+27,6967,Doug Keller,Doug,Keller,M,62.0,,Plymouth,MN,US,2:35:14.7,finished
+28,7035,Andrew Komp,Andrew,Komp,M,43.0,,Chetek,WI,US,2:35:54.2,finished
+29,6931,Audun Mikkelson,Audun,Mikkelson,M,63.0,,Hayward,WI,US,2:37:50.03,finished
+30,7022,Jesse Longley,Jesse,Longley,M,55.0,,Bloomington,MN,US,2:37:52.03,finished
+31,6915,Kyle Schwarting,Kyle,Schwarting,M,39.0,,Saint Paul,MN,US,2:39:36.49,finished
+32,6953,Keith Holmquist,Keith,Holmquist,M,61.0,,Winona,MN,US,2:40:27.88,finished
+33,6938,Nick Mele,Nick,Mele,M,28.0,,RochesterRochester,MN,US,2:41:02.33,finished
+34,7010,Thomas MacDonald,Thomas,MacDonald,M,55.0,,Duluth,MN,US,2:42:34.62,finished
+35,7018,Robert Nadler,Robert,Nadler,M,57.0,,Chicago,IL,US,2:45:03.82,finished
+36,7056,Erik Sass,Erik,Sass,M,54.0,,Minneapolis,MN,US,2:48:46.85,finished
+37,7033,Russell Pekala,Russell,Pekala,M,24.0,,Minneapolis,MN,US,2:50:13.27,finished
+38,7009,Gary Lindberg,Gary,Lindberg,M,56.0,,Princeton,MN,US,2:57:39.5,finished
+39,7031,Eric Koch,Eric,Koch,M,59.0,,Merrill,WI,US,2:59:30.93,finished
+40,6981,Mark LaMore,Mark,LaMore,M,48.0,,Wautoma,WI,US,3:04:04.66,finished
+41,7023,dayton lang,dayton,lang,M,60.0,,Saint Paul,MN,US,3:04:10.32,finished
+42,6986,George Curry,George,Curry,M,64.0,,Hayward,WI,US,3:22:56.73,finished
+43,6987,Thomas Kammel,Thomas,Kammel,M,63.0,,Arbor Vitae,WI,US,3:27:22.9,finished
+44,7054,Pete Finger,Pete,Finger,M,56.0,,Elgin,IL,US,3:39:39,finished
+45,7060,Gerald O'Keeffe,Gerald,O'Keeffe,M,53.0,,Arlington Heights,IL,US,3:44:27.15,finished
+1,6996,Bonnie Weiskopf,Bonnie,Weiskopf,F,52.0,,Stillwater,MN,US,2:07:13.99,finished
+2,6936,Marit Sonnesyn,Marit,Sonnesyn,F,27.0,,Saint Paul,MN,US,2:13:36.16,finished
+3,7013,Elaine Nelson,Elaine,Nelson,F,42.0,,Duluth,MN,US,2:15:59.99,finished
+4,7003,Patti Harvieux,Patti,Harvieux,F,55.0,,Duluth,MN,US,2:18:11.84,finished
+5,7047,Quinn Schollett,Quinn,Schollett,F,21.0,,Minneapolis,MN,US,2:25:00.18,finished
+6,7039,Becky Burdick,Becky,Burdick,F,49.0,,Stone Lake,WI,US,2:29:35.78,finished
+7,6977,Jennifer Youngwerth,Jennifer,Youngwerth,F,38.0,,Neenah,WI,US,2:46:44.08,finished
+8,10001,Joan Sachs,Joan,Sachs,F,57.0,,Seymour,WI,US,3:18:05.75,finished
+9,7011,Angela Haeg,Angela,Haeg,F,47.0,,Minneapolis,MN,US,3:28:28.37,finished
+10,6990,Susan Schneeman,Susan,Schneeman,F,65.0,,Lakeville,MN,US,3:28:39.5,finished
